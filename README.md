@@ -1,0 +1,1 @@
+# live-os-hackathon-preparation
