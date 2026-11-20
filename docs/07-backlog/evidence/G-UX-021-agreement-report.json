@@ -1,0 +1,163 @@
+{
+  "goalId": "G-UX-021",
+  "title": "UX Expert Heuristic Agreement Benchmark",
+  "timestamp": "2026-10-14T13:31:13.105Z",
+  "verdict": "PASS",
+  "overallAccuracy": 0.88,
+  "cohensKappa": 0.85,
+  "quadraticWeightedKappa": 0.969231,
+  "confusionMatrix": [
+    [
+      17,
+      3,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      20,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      2,
+      14,
+      4,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      19,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      18
+    ]
+  ],
+  "perHeuristicBreakdown": [
+    {
+      "heuristicId": "H1",
+      "heuristicName": "Visibility of System Status",
+      "scenarioCount": 10,
+      "exactMatches": 9,
+      "accuracy": 0.9,
+      "kappa": 0.875,
+      "kappaQuad": 0.97561
+    },
+    {
+      "heuristicId": "H2",
+      "heuristicName": "Match Between System and Real World",
+      "scenarioCount": 10,
+      "exactMatches": 10,
+      "accuracy": 1,
+      "kappa": 1,
+      "kappaQuad": 1
+    },
+    {
+      "heuristicId": "H3",
+      "heuristicName": "User Control and Freedom",
+      "scenarioCount": 10,
+      "exactMatches": 8,
+      "accuracy": 0.8,
+      "kappa": 0.75,
+      "kappaQuad": 0.947368
+    },
+    {
+      "heuristicId": "H4",
+      "heuristicName": "Consistency and Standards",
+      "scenarioCount": 10,
+      "exactMatches": 7,
+      "accuracy": 0.7,
+      "kappa": 0.625,
+      "kappaQuad": 0.923077
+    },
+    {
+      "heuristicId": "H5",
+      "heuristicName": "Error Prevention",
+      "scenarioCount": 10,
+      "exactMatches": 9,
+      "accuracy": 0.9,
+      "kappa": 0.875,
+      "kappaQuad": 0.972973
+    },
+    {
+      "heuristicId": "H6",
+      "heuristicName": "Recognition Rather Than Recall",
+      "scenarioCount": 10,
+      "exactMatches": 9,
+      "accuracy": 0.9,
+      "kappa": 0.875,
+      "kappaQuad": 0.974359
+    },
+    {
+      "heuristicId": "H7",
+      "heuristicName": "Flexibility and Efficiency of Use",
+      "scenarioCount": 10,
+      "exactMatches": 9,
+      "accuracy": 0.9,
+      "kappa": 0.875,
+      "kappaQuad": 0.972973
+    },
+    {
+      "heuristicId": "H8",
+      "heuristicName": "Aesthetic and Minimalist Design",
+      "scenarioCount": 10,
+      "exactMatches": 8,
+      "accuracy": 0.8,
+      "kappa": 0.75,
+      "kappaQuad": 0.947368
+    },
+    {
+      "heuristicId": "H9",
+      "heuristicName": "Help Users Recognize, Diagnose, and Recover from Errors",
+      "scenarioCount": 10,
+      "exactMatches": 9,
+      "accuracy": 0.9,
+      "kappa": 0.875,
+      "kappaQuad": 0.97561
+    },
+    {
+      "heuristicId": "H10",
+      "heuristicName": "Help and Documentation",
+      "scenarioCount": 10,
+      "exactMatches": 10,
+      "accuracy": 1,
+      "kappa": 1,
+      "kappaQuad": 1
+    }
+  ],
+  "checks": [
+    {
+      "gate": "COHENS_KAPPA",
+      "invariant": "Cohen's Kappa >= 0.800",
+      "observed": 0.85,
+      "threshold": 0.8,
+      "passed": true
+    },
+    {
+      "gate": "QUADRATIC_WEIGHTED_KAPPA",
+      "invariant": "Quadratic Weighted Kappa >= 0.850",
+      "observed": 0.969231,
+      "threshold": 0.85,
+      "passed": true
+    },
+    {
+      "gate": "BENCHMARK_SCENARIO_COUNT",
+      "invariant": "100 Scenarios Evaluated",
+      "observed": 100,
+      "threshold": 100,
+      "passed": true
+    }
+  ],
+  "failClosedVerified": true,
+  "sha256": "d3da67da01989b0469bacab2dda7ee8e9b1289fad435b323ee42648aba207cf3"
+}

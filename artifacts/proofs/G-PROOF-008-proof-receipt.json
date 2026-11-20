@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-008",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-008-INV-001",
+      "statement": "Automated AST mutation testing harness injects synthetic mutation operators across relational, arithmetic, boundary, logical, and return nullification sites, kills mutants via test oracles, and enforces minimum kill score >= 85%.",
+      "verification_command": "node scripts/harness/mutation-testing-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ast-mutator.mjs",
+      "sha256": "a49f918bb7c4b0b38b187bb155467d6d2e54b3f3c86bcbbbd4a0e7a95d83a23c"
+    },
+    {
+      "path": "scripts/harness/mutation-testing-harness.mjs",
+      "sha256": "936f775d6f6f0fa92faa5d66738eb89c20c83ca60a19eb06ce7fdc6cea3a3431"
+    }
+  ],
+  "mutation_evidence": {
+    "target": "scripts/lib/ast-mutator.mjs (Reference Kernel)",
+    "total_mutants": 30,
+    "mutants_killed": 28,
+    "mutants_survived": 2,
+    "timeouts": 0,
+    "mutation_score_percent": 93.33,
+    "threshold_percent": 85,
+    "gate_passed": true,
+    "categories_evaluated": [
+      "relational",
+      "arithmetic",
+      "boundary",
+      "logical",
+      "return"
+    ]
+  },
+  "certification": "PASS",
+  "generated_at": "2026-10-14T13:34:01.237Z"
+}

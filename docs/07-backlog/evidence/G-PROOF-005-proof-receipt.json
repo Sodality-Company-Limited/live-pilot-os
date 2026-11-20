@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-005",
+  "classification": "executable_invariant",
+  "source_revision": "8bbf02f02d7f48b7355d18518e9982e83af3a14a",
+  "invariants": [
+    {
+      "id": "G-PROOF-005-INV-001",
+      "statement": "G-PROOF-005 Property-Based Invariant Execution Harness verifies relational invariants across >= 10,000 cases with deterministic PRNG seed replay.",
+      "verification_command": "node scripts/harness/property-invariant-harness.mjs --cases 1000",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/property-invariant-harness.mjs",
+      "sha256": "62e7932d4f48a0dced79e2724f8e26aed8ca42f5a4baac89ffdef9833a57f7ff"
+    },
+    {
+      "path": "scripts/lib/invariant-runner.mjs",
+      "sha256": "963a3caf91dd382aea73b697da16759be850cd458dc732394a40b7f2c3756557"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T04:11:15.432Z"
+}

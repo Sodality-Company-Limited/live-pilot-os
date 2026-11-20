@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-009",
+  "classification": "executable_invariant",
+  "source_revision": "cf60bd550feeeeb22646e59d740d5bda471c6d73",
+  "invariants": [
+    {
+      "id": "G-AG-009-INV-001",
+      "statement": "Streaming provider sessions are aborted promptly when incremental token updates breach declared budget limits.",
+      "verification_command": "node --test scripts/agents/test/provider-session-harness.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/provider-session-harness.mjs",
+      "sha256": "304a4a3d7f59b48c400e5cc730df8ea4ff47bbe2e37b4d9eb77cdc967f107474"
+    },
+    {
+      "path": "scripts/agents/test/provider-session-harness.test.mjs",
+      "sha256": "2aa00ccc459a9d0e6ca1c9af64a89b89f8a3e0c4be7e1945a0716af616e7554e"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:41:00.000Z"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-026",
+  "generated_at": "2026-10-14T12:00:54.618Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-026-INV-001",
+      "statement": "Merkle decision ledger streams 50 blocks with continuous SHA-256 chaining, verifies Merkle root, and detects tampering fail-closed.",
+      "verification_command": "node scripts/harness/merkle-decision-ledger-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-026-INV-002",
+      "statement": "Merkle decision ledger Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-merkle-decision-ledger.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-026-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-026",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/merkle-decision-ledger.mjs",
+      "sha256": "b669f92b54d699d3a213ed536ff0a6c1cc507fdce6ed3f45abc3258126a1f31f"
+    },
+    {
+      "path": "tests/unit/test-merkle-decision-ledger.mjs",
+      "sha256": "369f077534737cd4f6ca8ef01e18a7c0c56365ac3f40e482bd64685c0042aabd"
+    },
+    {
+      "path": "scripts/harness/merkle-decision-ledger-harness.mjs",
+      "sha256": "b75842cc1f8375709b4037462565da9c985b16815b58d088d3c810d59fdd4c77"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-026.md",
+      "sha256": "b5c8bbad22810fe342ce9df3df58276ca5f09ab0963745adefca5bd104be9778"
+    }
+  ],
+  "certification": "PASS"
+}

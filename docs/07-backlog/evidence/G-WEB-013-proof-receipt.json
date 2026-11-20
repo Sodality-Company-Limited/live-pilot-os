@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-013",
+  "artifact_id": "ART-DETERMINISTIC-VISUAL-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "certification": "PASS",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "deterministic_visual_audit": {
+    "locked_dimensions_count": 15,
+    "locked_dimensions_verified": true,
+    "device_scale_factor": 1,
+    "timezone": "UTC",
+    "locale": "en-US",
+    "font_antialiasing": "subpixel",
+    "animation_clock_frozen": true,
+    "transitions_zeroed": true,
+    "acceptance_layers_count": 8,
+    "all_layers_passed": true,
+    "bitwise_capture_determinism_verified": true,
+    "capture_variance": 0,
+    "pixel_diff_ratio_ceiling": 0.005,
+    "layout_shift": 0,
+    "horizontal_overflow": false,
+    "zero_mock_enforced": true
+  },
+  "invariants": [
+    {
+      "id": "013-INV-001",
+      "statement": "Deterministic Visual Execution Environment satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/visual-regression-harness.mjs --verify-determinism",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/deterministic-visual-env.mjs",
+      "sha256": "8c56317be965957b310e54efadf9d517b0326597ab7bd030913a6969c43d491a"
+    },
+    {
+      "path": "scripts/harness/visual-regression-harness.mjs",
+      "sha256": "5d855fe63bcbca17428e818edbfbdfabe81f5b2cc19e8d2f3ac56452dbb9a051"
+    },
+    {
+      "path": "artifacts/visual/deterministic-env-spec.json",
+      "sha256": "3dd42aeaab0c49499bdab4b88f7ddf28e125d3ed1bde8a819490f2517ab31496"
+    },
+    {
+      "path": "tests/unit/test-deterministic-visual-env.mjs",
+      "sha256": "15c43c71e247da152565d2a72ae4575f520cac85d4ab2a94ca28e54006e7fc1b"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-013.md",
+      "sha256": "5916f9de02154e86abbcc782b357deba624e86402c648b38920f8984bf581a04"
+    }
+  ],
+  "generated_at": "2026-10-03T21:29:30.000Z"
+}

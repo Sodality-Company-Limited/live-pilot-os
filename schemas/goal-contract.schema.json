@@ -1,0 +1,477 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soda.dev/schemas/goal-contract.schema.json",
+  "title": "Soda OS Goal Verification Contract Schema",
+  "description": "Formal verification goal contract schema and profile extension framework uniting universal invariants, proof levels, and modular verification profiles.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "goal_id",
+    "invariants",
+    "proof_level",
+    "profiles",
+    "fail_closed"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version of the goal verification contract (e.g. 3 for Goal Contract v3)"
+    },
+    "goal_id": {
+      "type": "string",
+      "pattern": "^(G-[A-Z0-9]+-[0-9]{3}|G-[0-9]{3}|G-xxx)$",
+      "description": "Canonical Soda OS Goal Identifier"
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "description": "List of machine-verifiable domain, algebraic, or behavioral invariants",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Unique identifier for this invariant within the goal"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Unambiguous formal or behavioral statement of the invariant"
+          },
+          "kind": {
+            "type": "string",
+            "description": "Class or category of invariant (e.g. conservation, monotonicity, idempotency, boundedness, termination, reachability)"
+          },
+          "formal_specification": {
+            "type": ["string", "object"],
+            "description": "Optional mathematical, TLA+, or code specification of the invariant"
+          },
+          "verification_command": {
+            "type": "string",
+            "description": "Executable shell command or test script that verifies this invariant"
+          },
+          "passed": {
+            "type": "boolean",
+            "description": "Indicates whether the invariant verification passed"
+          },
+          "exit_code": {
+            "type": "integer",
+            "description": "Exit code of the invariant verification command (must be 0 on pass)"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "proof_level": {
+      "type": "string",
+      "enum": ["L0", "L1", "L2", "L3", "L4"],
+      "description": "Epistemic proof level: L0 (informal), L1 (formal proof), L2 (executable property invariant), L3 (statistical evidence), L4 (production telemetry)"
+    },
+    "profiles": {
+      "description": "Active verification profiles, specified either as an array of profile identifiers or as a configuration mapping of profile names to profile definitions",
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "property_invariant",
+              "stateful_model",
+              "adversarial_boundary",
+              "mutation_testing",
+              "epistemic_classification",
+              "counterexample",
+              "concurrency_schedule"
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "$ref": "#/$defs/profile_configs_object"
+        }
+      ]
+    },
+    "profile_configs": {
+      "description": "Optional explicit mapping of active profile names to their respective configurations when profiles is specified as an array",
+      "$ref": "#/$defs/profile_configs_object"
+    },
+    "fail_closed": {
+      "type": "boolean",
+      "description": "Fail-closed enforcement flag: when true, any verification failure, ambiguous state, or missing proof blocks promotion and receipt issuance"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "feature",
+        "design",
+        "api",
+        "migration",
+        "qa",
+        "chore",
+        "bugfix",
+        "refactor",
+        "architecture",
+        "governance",
+        "release",
+        "security",
+        "operations"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "planned",
+        "ready",
+        "in_progress",
+        "review",
+        "blocked",
+        "approved",
+        "done"
+      ]
+    },
+    "atomicity": {
+      "type": "object",
+      "properties": {
+        "outcome_count": { "type": "integer", "minimum": 1 },
+        "primary_outcome": { "type": "string" },
+        "secondary_outcomes": { "type": "array", "items": { "type": "string" } },
+        "split_candidates": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" }
+      }
+    },
+    "approver": {
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "reasons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "reversibility": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string", "enum": ["reversible", "partially_reversible", "irreversible"] }
+      }
+    },
+    "external_dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "orchestration": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string" },
+        "subagents": { "type": "array" },
+        "isolation_barriers": { "type": "object" },
+        "disjoint_touch_map": { "type": "boolean" }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "spec": { "type": "string" },
+        "implementation": { "type": "string" },
+        "verification": { "type": "string" },
+        "evidence": { "type": "string" },
+        "review": { "type": "string" },
+        "release": { "type": "string" },
+        "learning": { "type": "string" }
+      }
+    },
+    "mathematical_proven_governance": {
+      "type": "object",
+      "description": "Formal mathematical verification and invariant governance across the 6 operational domains",
+      "$ref": "#/$defs/mathematical_proven_governance"
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "mathematical_proven_governance": {
+      "type": "object",
+      "description": "Configuration across the 6 operational domains of mathematical proven governance",
+      "properties": {
+        "invariants_and_system_laws": {
+          "type": "object",
+          "properties": {
+            "system_invariants": { "type": "array" },
+            "conservation_laws": { "type": "array" },
+            "monotonicity_invariants": { "type": "array" },
+            "state_machine_invariants": { "type": "array" },
+            "idempotency_and_reversibility": { "type": "array" },
+            "solvency_and_non_negativity": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        "formal_verification_and_solvers": {
+          "type": "object",
+          "properties": {
+            "deductive_proof": { "type": "string" },
+            "smt_sat_solvers": { "type": "array" },
+            "bounded_model_checking": { "type": "object" },
+            "symbolic_execution": { "type": "string" },
+            "counterexample_trace_capture": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        },
+        "harness_engineering": {
+          "type": "object",
+          "properties": {
+            "verification_harness_path": { "type": "string" },
+            "symbolic_allocation": { "type": "array" },
+            "preconditions": { "type": "array" },
+            "stubbing_models": { "type": "array" },
+            "shadow_reference_model": { "type": "string" },
+            "input_shrinking": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        },
+        "adversarial_modeling": {
+          "type": "object",
+          "properties": {
+            "adversarial_suites": { "type": "array" },
+            "aliasing_collision_checks": { "type": "boolean" },
+            "arithmetic_extremes": { "type": "array" },
+            "precision_dust_exploitation_defense": { "type": "boolean" },
+            "out_of_order_replay_defense": { "type": "boolean" },
+            "atomicity_rollback_guarantees": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        },
+        "concurrency_and_memory_models": {
+          "type": "object",
+          "properties": {
+            "aba_mitigation": { "type": "string" },
+            "compare_and_swap_cas": { "type": "boolean" },
+            "use_after_free_uaf_prevention": { "type": "string" },
+            "mutual_exclusion": { "type": "boolean" },
+            "memory_orderings": { "type": "array" },
+            "schedule_sequentialization": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        },
+        "testing_paradigms_and_tooling": {
+          "type": "object",
+          "properties": {
+            "property_based_testing": { "type": "object" },
+            "design_by_contract": { "type": "object" },
+            "stateful_model_based_testing": { "type": ["boolean", "object"] },
+            "mutation_testing": { "type": "object" },
+            "code_coverage": { "type": "object" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "profile_configs_object": {
+      "type": "object",
+      "properties": {
+        "property_invariant": { "$ref": "#/$defs/property_invariant" },
+        "stateful_model": { "$ref": "#/$defs/stateful_model" },
+        "adversarial_boundary": { "$ref": "#/$defs/adversarial_boundary" },
+        "mutation_testing": { "$ref": "#/$defs/mutation_testing" },
+        "epistemic_classification": { "$ref": "#/$defs/epistemic_classification" },
+        "counterexample": { "$ref": "#/$defs/counterexample" },
+        "concurrency_schedule": { "$ref": "#/$defs/concurrency_schedule" }
+      },
+      "additionalProperties": false
+    },
+    "property_invariant": {
+      "type": "object",
+      "description": "Property invariant profile: generative property-based testing and algebraic invariant verification",
+      "required": ["generators", "iterations", "laws", "shrinking"],
+      "properties": {
+        "generators": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "List of generator functions or strategies producing test input domains"
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 10000,
+          "description": "Number of generative fuzzing iterations (must be >= 10,000)"
+        },
+        "laws": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Algebraic laws asserted (e.g. conservation, monotonicity, idempotency)"
+        },
+        "shrinking": {
+          "type": "boolean",
+          "description": "Whether counterexample shrinking is enabled on assertion failure"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stateful_model": {
+      "type": "object",
+      "description": "Stateful model profile: state machine model checking and lockstep transition equivalence",
+      "required": ["model_ref", "commands", "lockstep", "trace_invariants"],
+      "properties": {
+        "model_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Reference or path to the authoritative reference state machine model"
+        },
+        "commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Discrete state transition actions or command sequences exercised"
+        },
+        "lockstep": {
+          "type": "boolean",
+          "description": "Whether system state is verified in lockstep against reference model after every command"
+        },
+        "trace_invariants": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Invariants that must hold across all execution traces"
+        }
+      },
+      "additionalProperties": false
+    },
+    "adversarial_boundary": {
+      "type": "object",
+      "description": "Adversarial boundary profile: boundary conditions, extremal values, and malicious payloads",
+      "required": ["extremes", "types", "zero_tolerance", "payload_vectors"],
+      "properties": {
+        "extremes": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Boundary values evaluated (e.g. MAX_INT, MIN_INT, NaN, empty buffers, Unicode overflows)"
+        },
+        "types": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Data types subjected to adversarial testing"
+        },
+        "zero_tolerance": {
+          "type": "boolean",
+          "description": "Zero tolerance flag: any unhandled exception or unparsed payload fails verification"
+        },
+        "payload_vectors": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Concrete adversarial or fuzzing payload vectors"
+        }
+      },
+      "additionalProperties": false
+    },
+    "mutation_testing": {
+      "type": "object",
+      "description": "Mutation testing profile: synthetic defect injection and test oracle strength verification",
+      "required": ["mutation_operators", "kill_threshold", "timeout_ms"],
+      "properties": {
+        "mutation_operators": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Syntactic mutation operators applied (e.g. AOR, ROR, COR, LCR, statement deletion)"
+        },
+        "kill_threshold": {
+          "type": "number",
+          "anyOf": [
+            { "minimum": 85, "maximum": 100 },
+            { "minimum": 0.85, "maximum": 1.0 }
+          ],
+          "description": "Minimum percentage or fraction of mutants that must be killed by the test suite (>= 85% or >= 0.85)"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Timeout in milliseconds allocated per mutant test run"
+        }
+      },
+      "additionalProperties": false
+    },
+    "epistemic_classification": {
+      "type": "object",
+      "description": "Epistemic classification profile: verification claims, explicit assumptions, and abstraction boundaries",
+      "required": ["claimed_level", "assumptions", "abstraction_disclosures"],
+      "properties": {
+        "claimed_level": {
+          "type": "string",
+          "enum": ["L0", "L1", "L2", "L3", "L4"],
+          "description": "Epistemic verification level claimed for this goal"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Axiomatic assumptions or environmental preconditions required for the claim"
+        },
+        "abstraction_disclosures": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Explicit disclosures of simplified models, hardware idealizations, or unmodeled noise"
+        }
+      },
+      "additionalProperties": false
+    },
+    "counterexample": {
+      "type": "object",
+      "description": "Counterexample profile: deterministic minimizer, PRNG seed reproduction, and structured trace capture",
+      "required": ["minimizer_enabled", "seed", "schema_format"],
+      "properties": {
+        "minimizer_enabled": {
+          "type": "boolean",
+          "description": "Whether automated delta-debugging or shrinking is applied to counterexamples"
+        },
+        "seed": {
+          "type": ["integer", "string"],
+          "description": "PRNG seed used to deterministically reproduce the test run or counterexample"
+        },
+        "schema_format": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Data serialization format for persisted counterexample artifacts (e.g. json, trace, yaml)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "concurrency_schedule": {
+      "type": "object",
+      "description": "Concurrency schedule profile: race condition detection, thread interleavings, and distributed fencing",
+      "required": ["interleavings", "races_tested", "fencing_token"],
+      "properties": {
+        "interleavings": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of distinct thread/task execution schedules explored"
+        },
+        "races_tested": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Names of concurrent race conditions or interleaving scenarios evaluated"
+        },
+        "fencing_token": {
+          "type": "boolean",
+          "description": "Whether monotonic fencing tokens are asserted to prevent stale distributed writes"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-015",
+  "generated_at": "2026-10-14T07:55:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-015-INV-001",
+      "statement": "SFT pipeline achieves >= 98.0% JSON schema conformance over multimodal UI scene graphs and 12-persona trajectories.",
+      "verification_command": "node scripts/harness/ux-sft-pipeline-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-015-INV-002",
+      "statement": "SFT pipeline unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-sft-pipeline.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-015-INV-003",
+      "statement": "Python SFT trainer module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_sft_trainer.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-015-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-015",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/training/sft_trainer.py",
+      "sha256": "df7ee64a721487e9b68f5e745e7da854723140af7e2d1920a2424f35b34dd7f4"
+    },
+    {
+      "path": "scripts/lib/ux-sft-pipeline.mjs",
+      "sha256": "fa3b67cade1196b6c8a0e3dbfe499b258e9073217613c7247060b89b80f2b304"
+    },
+    {
+      "path": "tests/unit/test-ux-sft-pipeline.mjs",
+      "sha256": "16b584c7760c615c660ff200a8f7a8b21b79d88013d8ac6f63485d6496fce65f"
+    },
+    {
+      "path": "tests/ml/test_sft_trainer.py",
+      "sha256": "4e5d468b9a9a8ddb8ad0aefa0cc3295d03638d45a8f18f3953ba2e8c757610d1"
+    },
+    {
+      "path": "scripts/harness/ux-sft-pipeline-harness.mjs",
+      "sha256": "6500b880247355338494e009c08119cbecba9f2b2c419dc3bacfff71825ef6c2"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-015.md",
+      "sha256": "9a0d30a04801a28b5b0707f0b9824aaa49f4b41a2391707a09ae4bb3593a9cd9"
+    }
+  ],
+  "certification": "PASS"
+}

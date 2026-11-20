@@ -1,0 +1,33 @@
+{
+  "dataset_name": "Stage 6 Adversarial Dark-Pattern & Justified Deferral Curriculum",
+  "total_scenarios": 800,
+  "outcomes": {
+    "REJECT_AS_UNSAFE": 400,
+    "DEFER": 400
+  },
+  "dark_patterns_evaluated": {
+    "confirmshaming": 29,
+    "sneak_into_basket": 29,
+    "fake_urgency": 29,
+    "fake_countdown": 29,
+    "hidden_costs": 29,
+    "drip_pricing": 29,
+    "disguised_ads": 29,
+    "forced_continuity": 29,
+    "roach_motel": 28,
+    "privacy_zuckering": 28,
+    "misdirection": 28,
+    "price_comparison_prevention": 28,
+    "bait_and_switch": 28,
+    "social_proof_fabrication": 28
+  },
+  "all_14_dark_patterns_covered": true,
+  "deferral_categories_evaluated": {
+    "low_visual_clarity": 80,
+    "ambiguous_prompt": 80,
+    "severe_occlusion": 80,
+    "conflicting_requirements": 80,
+    "underspecified_context": 80
+  },
+  "generated_at": "2026-10-14T06:09:42.376Z"
+}

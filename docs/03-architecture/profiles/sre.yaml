@@ -1,0 +1,34 @@
+# Soda OS Goal Profile Schema: SRE & Observability Profile
+# Profile ID: sre
+# Description: Applied to operational telemetry, SLA latency/availability budgets, alerting, and incident response.
+
+profile:
+  id: sre
+  name: "Site Reliability Engineering & Observability Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: service_level_objectives
+    description: "Quantitative availability, error budget, and latency thresholds (p50, p95, p99)."
+    type: table
+    columns:
+      - "Metric Name"
+      - "Target SLA"
+      - "Breach Action"
+
+  - id: telemetry_contract
+    description: "OpenTelemetry metric counters, structured log formats, and distributed trace spans."
+    type: markdown_section
+    required_elements:
+      - "Metric names"
+      - "Structured log fields"
+      - "Distributed tracing"
+
+  - id: alert_thresholds
+    description: "Alert triggers, paging rules, and runbook links."
+    type: markdown_section
+    required_elements:
+      - "Warning threshold"
+      - "Critical paging threshold"
+      - "Runbook link"

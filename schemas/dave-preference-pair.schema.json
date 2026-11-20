@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DavePreferencePairRecord",
+  "description": "Schema contract for contrastive RLCD preference pairs generated from CLI agent trajectories.",
+  "type": "object",
+  "required": [
+    "pair_id",
+    "prompt",
+    "chosen",
+    "rejected",
+    "metadata"
+  ],
+  "properties": {
+    "pair_id": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "chosen": {
+      "type": "object",
+      "required": ["action", "reward", "passed"],
+      "properties": {
+        "action": { "type": "string" },
+        "reward": { "type": "number", "minimum": -1.0, "maximum": 1.0 },
+        "passed": { "type": "boolean" },
+        "status": { "type": "string" },
+        "session_key": { "type": "string" }
+      }
+    },
+    "rejected": {
+      "type": "object",
+      "required": ["action", "reward", "passed"],
+      "properties": {
+        "action": { "type": "string" },
+        "reward": { "type": "number", "minimum": -1.0, "maximum": 1.0 },
+        "passed": { "type": "boolean" },
+        "status": { "type": "string" },
+        "session_key": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["goal_id", "delta_reward", "margin_valid"],
+      "properties": {
+        "goal_id": { "type": "string" },
+        "persona": { "type": "string" },
+        "provider": { "type": "string" },
+        "delta_reward": { "type": "number", "minimum": 0.0 },
+        "margin_valid": { "type": "boolean" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-007",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-007-INV-001",
+      "statement": "Adversarial boundary harness verifies fail-closed rejection across arithmetic extremes, identity aliasing, zero divisors, non-canonical floats, and preserves strict integer conservation with zero float drift across 10,000 dust iterations.",
+      "verification_command": "node scripts/harness/adversarial-boundary-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/adversarial-probe-generator.mjs",
+      "sha256": "1ae55e6d24e5de4b87470891b265790b8c60ff10e3f9fe03eb3e0eeb7d076cf8"
+    },
+    {
+      "path": "scripts/harness/adversarial-boundary-harness.mjs",
+      "sha256": "55c444519d43190e9a4da9f8db5af2270652afa6e88f56b88ebe653875a10772"
+    }
+  ],
+  "adversarial_boundary_evidence": {
+    "seed": 42,
+    "dust_iterations_verified": 100,
+    "dust_drift_minor_units": "0",
+    "suites_passed": 7,
+    "suites_total": 7,
+    "all_probes_passed": true
+  },
+  "certification": "PASS",
+  "generated_at": "2026-10-14T13:34:00.208Z"
+}

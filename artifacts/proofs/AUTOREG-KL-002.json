@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-005",
+  "goal_id": "G-ML-005",
+  "invariant": "AUTOREG-KL-002",
+  "invariant_id": "AUTOREG-KL-002",
+  "classification": "statistical_guarantee",
+  "passed": true,
+  "command": "python3 scripts/harness/property-tests/test-autoregressive-preservation.py",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/_archived/G-ML-005.md": "c80f27576885e86b57a8706641b048a61e94ce3cc336a111530e9f8254412ada",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-11T00:33:27.252Z"
+}

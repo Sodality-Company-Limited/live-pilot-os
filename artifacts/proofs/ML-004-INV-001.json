@@ -1,0 +1,16 @@
+{
+  "receipt_version": "1.0.0",
+  "goal_id": "G-ML-004",
+  "artifact_id": "G-ML-004-proof-receipt-v1",
+  "invariant_id": "ML-004-INV-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/confidence-calibration-harness.mjs",
+  "exit_code": 0,
+  "sample_count": 5000,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-ML-004.md": "2961e31510ad833e1d7cd6857763421019a1999dbb408fc6ce64911d96bb6dc5"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-29T01:02:15.502Z"
+}

@@ -1,0 +1,34 @@
+# Soda OS Goal Profile Schema: Backend Architecture Profile
+# Profile ID: backend
+# Description: Applied to microservices, business domain logic, and financial ledger services.
+
+profile:
+  id: backend
+  name: "Backend Service & Hexagonal Architecture Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: hexagonal_ports
+    description: "Driving inbound ports and driven outbound ports with concrete adapter locations."
+    type: markdown_table
+    columns:
+      - "Port Direction"
+      - "Interface Name"
+      - "Protocol / Transport"
+      - "Concrete Adapter Location"
+
+  - id: transactional_integrity
+    description: "Saga compensations, distributed locks, idempotency keys, and rollback steps."
+    type: markdown_section
+    required_elements:
+      - "Idempotency key contract"
+      - "Saga compensation steps"
+      - "Isolation level"
+
+  - id: arithmetic_invariants
+    description: "Guarantees on multi-currency ISO 4217 integer arithmetic parameterized by minor-unit exponent (e.g. JPY e=0, USD/THB e=2, BHD e=3), zero floating point math, and double-entry balance."
+    type: markdown_section
+    required_elements:
+      - "Zero floating point math on money"
+      - "Double-entry zero-sum balance"

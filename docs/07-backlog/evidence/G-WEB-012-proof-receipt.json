@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-012",
+  "generated_at": "2026-10-03T21:20:00.000Z",
+  "artifact_id": "ART-RLCD-TRAINING-DATASET-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "certification": "PASS",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "rlcd_export_audit": {
+    "records_exported": 25,
+    "train_split": 20,
+    "validation_split": 3,
+    "test_split": 2,
+    "harnesses_verified": 9,
+    "all_harnesses_passed": true,
+    "scoring_rule": "strictly_proper_logarithmic",
+    "asymmetric_penalty_multiplier": 10.0,
+    "overconfidence_penalty_applied": true,
+    "zero_mock_enforced": true
+  },
+  "invariants": [
+    {
+      "id": "012-INV-001",
+      "statement": "Production Readiness and Learning satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/dave-cli.mjs export-rlcd-data --output artifacts/rlcd/train_dataset.jsonl",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-engine.mjs",
+      "sha256": "6bb960e8a35ca8415b64d57c4521037e1de9914a91921c609400ce153fe44c2b"
+    },
+    {
+      "path": "scripts/lib/dave-cli.mjs",
+      "sha256": "3c4fe8911cfa31890745ea96f2ffdf1f3f7e610a1276b72c4a25f9e2d85cc8a7"
+    },
+    {
+      "path": "artifacts/rlcd/train_dataset.jsonl",
+      "sha256": "e2dfddce2d0e0bc5f3eafa96f48b542f66f6769084bc527800d2a6e331dcb9cc"
+    },
+    {
+      "path": ".agents/audit/decisions.jsonl",
+      "sha256": "3f4d6fbae8c2aa11e266ffc2eca7bbb9b0b6f94238fbc8ecccf668b4b46061b4"
+    },
+    {
+      "path": "tests/unit/test-dave-production-readiness.mjs",
+      "sha256": "932e403aa1c36a2df6d2ca0c0257c98956570d20f7971eca244c31b16b827789"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-012.md",
+      "sha256": "b9981acb385c949eb2312d5e0f2fadf300d19467cf84d368496c3331b40cd462"
+    }
+  ]
+}

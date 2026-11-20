@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-009",
+  "generated_at": "2026-10-11T07:38:03.094Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CALIB-METRIC-001",
+      "claim": "ECE and Brier scores are strictly bounded within [0.0, 1.0] with zero sample leakage across histogram bins",
+      "statement": "ECE and Brier scores are strictly bounded within [0.0, 1.0] with zero sample leakage across histogram bins",
+      "verification_command": "node scripts/harness/property-tests/test-calibration-metrics.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "CALIB-STAT-002",
+      "claim": "Wilson 95% score confidence intervals achieve valid coverage with lower bound >= 0.80 for 20/20 successes",
+      "statement": "Wilson 95% score confidence intervals achieve valid coverage with lower bound >= 0.80 for 20/20 successes",
+      "verification_command": "node scripts/harness/property-tests/test-calibration-metrics.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-009-INV-003",
+      "claim": "10-bin calibration evaluator computes ECE <= 0.040 and Brier score <= 0.080 on held-out test predictions",
+      "statement": "10-bin calibration evaluator computes ECE <= 0.040 and Brier score <= 0.080 on held-out test predictions",
+      "verification_command": "pytest tests/ml/test_calibration_metrics.py -k test_sla_enforcement",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-009-INV-004",
+      "claim": "High-confidence error rate (c >= 0.80 and incorrect) is strictly <= 1.0% with fail-closed SLA verification",
+      "statement": "High-confidence error rate (c >= 0.80 and incorrect) is strictly <= 1.0% with fail-closed SLA verification",
+      "verification_command": "pytest tests/ml/test_calibration_metrics.py",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "hcer_safety_rate",
+    "population": "calibrated_episode_trials",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9568233464896543,
+      "upper": 1,
+      "center": 0.9784116732448271,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "code/ml/eval/calibration_eval.py": "8315184440f5db120982ceb621d5c70c820fd6fdf7920021fc730c0263eee372",
+    "tests/ml/test_calibration_metrics.py": "3be55c3fcc5eb8f52552676552c5215e74fdb3d908fb14ab622ea57cb82835e3",
+    "docs/07-backlog/goals/_archived/G-ML-009.md": "98973e0329cd5d02496d477201e2216f9701d26929169796daa34bb0542a5658",
+    "docs/02-product/acceptance/G-ML-009.md": "03c8ce53325fc82f061ce3f987fa77ee64f4eff53c4bcc909ac84ed554b5a60d",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-009.md": "e779d62d1c53b7497733601a1bd990c339c9627aaaad4555de09a4d16d8bb10c",
+    "scripts/agentic/g-ml-009-5why-socratic-engine.mjs": "18967c67183be781992f1d0e9ec581d213f5fd6aaf3089238b8aa42a3f7244c7"
+  },
+  "certification": "PASS"
+}

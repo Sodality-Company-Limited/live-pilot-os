@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-012",
+  "generated_at": "2026-10-14T06:58:30.643Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-012-INV-001",
+      "statement": "Stage 4 multi-agent trajectories generates 2,500 deliberation traces across all 12 personas with token budgets and exit code 0.",
+      "verification_command": "node scripts/harness/persona-trajectory-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-012-INV-002",
+      "statement": "Persona trajectory unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-persona-trajectory.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-012-INV-003",
+      "statement": "Python curriculum trajectories module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_trajectories.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-012-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-012",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/persona-trajectory-builder.mjs",
+      "sha256": "1b0383447931457856e0b1873019badd958902750c7da5d9e4a29abf9c7cb8e6"
+    },
+    {
+      "path": "code/ml/src/curriculum/persona_trajectories.py",
+      "sha256": "c0b011ceba6ff0870ad900fbecf6fdd96930d38f48f99f04ca7cde209405e171"
+    },
+    {
+      "path": "artifacts/curriculum/stage4_trajectories/manifest.json",
+      "sha256": "5e5c3ee378a740252636f39b2952916a75c1ee961dc15c1cce1acbb06f604492"
+    },
+    {
+      "path": "tests/unit/test-persona-trajectory.mjs",
+      "sha256": "f988b2e1a206cf9c0b086caf63933f8fcd414bcd1cc4f91dce62a2e3e1f327eb"
+    },
+    {
+      "path": "scripts/harness/persona-trajectory-harness.mjs",
+      "sha256": "178680bbbe73cd02f7ad5ed0691a54912add70a5c7b7f9c7eaf2ab0d305f60ba"
+    },
+    {
+      "path": "tests/ml/test_curriculum_trajectories.py",
+      "sha256": "490fe0bfda198e77fd661cca3e86104a4876c6bae4523530f68688af71823ace"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-012.md",
+      "sha256": "20e580afc3d6953b3a761f549bb8d3c001ca2a4dbfacc3d77938b485cf3e4902"
+    }
+  ],
+  "certification": "PASS"
+}

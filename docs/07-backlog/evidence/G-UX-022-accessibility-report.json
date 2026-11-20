@@ -1,0 +1,138 @@
+{
+  "goalId": "G-UX-022",
+  "title": "Automated WCAG 2.2 AAA Contrast & Keyboard Safety Gate",
+  "timestamp": "2026-10-14T13:31:13.145Z",
+  "verdict": "PASS",
+  "contrastPairsCount": 10,
+  "contrastViolationsCount": 0,
+  "contrastResults": [
+    {
+      "id": "body-primary-slate",
+      "fg": "#0f172a",
+      "bg": "#ffffff",
+      "type": "normal_text",
+      "ratio": 17.8526,
+      "threshold": 7,
+      "passed": true
+    },
+    {
+      "id": "body-secondary-slate",
+      "fg": "#1e293b",
+      "bg": "#ffffff",
+      "type": "normal_text",
+      "ratio": 14.6286,
+      "threshold": 7,
+      "passed": true
+    },
+    {
+      "id": "dark-surface-text",
+      "fg": "#f8fafc",
+      "bg": "#0f172a",
+      "type": "normal_text",
+      "ratio": 17.063,
+      "threshold": 7,
+      "passed": true
+    },
+    {
+      "id": "heading-hero-1",
+      "fg": "#334155",
+      "bg": "#ffffff",
+      "type": "large_text",
+      "ratio": 10.3547,
+      "threshold": 4.5,
+      "passed": true
+    },
+    {
+      "id": "heading-section",
+      "fg": "#475569",
+      "bg": "#ffffff",
+      "type": "large_text",
+      "ratio": 7.5777,
+      "threshold": 4.5,
+      "passed": true
+    },
+    {
+      "id": "button-primary-label",
+      "fg": "#ffffff",
+      "bg": "#3730a3",
+      "type": "normal_text",
+      "ratio": 9.9333,
+      "threshold": 7,
+      "passed": true
+    },
+    {
+      "id": "button-emerald-label",
+      "fg": "#ffffff",
+      "bg": "#065f46",
+      "type": "normal_text",
+      "ratio": 7.6837,
+      "threshold": 7,
+      "passed": true
+    },
+    {
+      "id": "ui-input-border",
+      "fg": "#475569",
+      "bg": "#ffffff",
+      "type": "ui_component",
+      "ratio": 7.5777,
+      "threshold": 3,
+      "passed": true
+    },
+    {
+      "id": "ui-checkbox-checked",
+      "fg": "#ffffff",
+      "bg": "#4338ca",
+      "type": "ui_component",
+      "ratio": 7.9031,
+      "threshold": 3,
+      "passed": true
+    },
+    {
+      "id": "ui-focus-ring",
+      "fg": "#312e81",
+      "bg": "#ffffff",
+      "type": "ui_component",
+      "ratio": 11.4231,
+      "threshold": 3,
+      "passed": true
+    }
+  ],
+  "keyboardReport": {
+    "passed": true,
+    "verdict": "PASS_KEYBOARD_SAFETY",
+    "totalElements": 8,
+    "focusableCount": 8,
+    "violationsCount": 0,
+    "violations": [],
+    "warnings": []
+  },
+  "checks": [
+    {
+      "gate": "WCAG_AAA_CONTRAST",
+      "invariant": "100% of visual pairs meet WCAG 2.2 AAA ratios (7:1 normal, 4.5:1 large, 3:1 UI)",
+      "observedViolations": 0,
+      "totalPairs": 10,
+      "passed": true
+    },
+    {
+      "gate": "ZERO_KEYBOARD_TRAPS",
+      "invariant": "Zero keyboard traps and 100% accessible escape paths (Criterion 2.1.2)",
+      "observedViolations": 0,
+      "passed": true
+    },
+    {
+      "gate": "TABINDEX_INTEGRITY",
+      "invariant": "Zero positive tabindex anti-patterns",
+      "observedViolations": 0,
+      "passed": true
+    },
+    {
+      "gate": "ACCESSIBLE_NAMES_100_PERCENT",
+      "invariant": "100% interactive elements possess valid accessible names",
+      "observedViolations": 0,
+      "passed": true
+    }
+  ],
+  "failClosedVerified": true,
+  "sha256": "f06df75c146f9b1a0f4dc215362df5c2ecc19dd8b75bcf42498f63162fb0e589"
+}

@@ -1,0 +1,338 @@
+{
+  "matrix_id": "CMX-F531511B3E7C",
+  "goal_id": "G-DAVE-003",
+  "timestamp": "2026-10-10T09:06:52.365Z",
+  "conflicts": [
+    {
+      "conflict_id": "CNF-CONTRAST_RATIO-0102",
+      "property": "contrast_ratio",
+      "category": "accessibility_override",
+      "domains": [
+        "ux_ui",
+        "accessibility"
+      ],
+      "severity": "critical",
+      "status": "resolved",
+      "winning_proposal": {
+        "expert_id": "exp-a11y-01",
+        "domain": "accessibility",
+        "property": "contrast_ratio",
+        "proposed_value": 4.5,
+        "evidence": [
+          "standards/wcag-2.2-aa.md"
+        ],
+        "references": [],
+        "confidence": 0.99,
+        "risk": "high",
+        "rationale": "WCAG 2.2 AA mandatory contrast 4.5:1 for standard body text",
+        "priority_tier": 2,
+        "priority_score": 85,
+        "raw_decision": null
+      },
+      "rejected_proposals": [
+        {
+          "expert_id": "exp-ux-01",
+          "domain": "ux_ui",
+          "property": "contrast_ratio",
+          "proposed_value": 3.2,
+          "rejection_reason": "Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'contrast_ratio'. Technical rationale: WCAG 2.2 AA mandatory contrast 4.5:1 for standard body text",
+          "evidence": [
+            "docs/03-architecture/design-tokens.md"
+          ],
+          "confidence": 0.9,
+          "risk": "medium"
+        }
+      ],
+      "applied_rule": "hierarchy_accessibility_over_ux_ui",
+      "resolution_rationale": "Resolved automatically: accessibility holds Tier 2 precedence over ux_ui (Tier 3)."
+    },
+    {
+      "conflict_id": "CNF-TOUCH_TARGET_SIZE-0304",
+      "property": "touch_target_size",
+      "category": "accessibility_override",
+      "domains": [
+        "ux_ui",
+        "accessibility"
+      ],
+      "severity": "high",
+      "status": "resolved",
+      "winning_proposal": {
+        "expert_id": "exp-a11y-02",
+        "domain": "accessibility",
+        "property": "touch_target_size",
+        "proposed_value": 44,
+        "evidence": [
+          "standards/wcag-target-size.md"
+        ],
+        "references": [],
+        "confidence": 0.98,
+        "risk": "medium",
+        "rationale": "WCAG 2.5.5 touch target minimum 44x44px",
+        "priority_tier": 2,
+        "priority_score": 85,
+        "raw_decision": null
+      },
+      "rejected_proposals": [
+        {
+          "expert_id": "exp-ux-02",
+          "domain": "ux_ui",
+          "property": "touch_target_size",
+          "proposed_value": 32,
+          "rejection_reason": "Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'touch_target_size'. Technical rationale: WCAG 2.5.5 touch target minimum 44x44px",
+          "evidence": [
+            "tokens/compact-table.css"
+          ],
+          "confidence": 0.88,
+          "risk": "low"
+        }
+      ],
+      "applied_rule": "hierarchy_accessibility_over_ux_ui",
+      "resolution_rationale": "Resolved automatically: accessibility holds Tier 2 precedence over ux_ui (Tier 3)."
+    },
+    {
+      "conflict_id": "CNF-SESSION_ENCRYPTION-0506",
+      "property": "session_encryption",
+      "category": "security_enforcement",
+      "domains": [
+        "cost",
+        "security"
+      ],
+      "severity": "critical",
+      "status": "resolved",
+      "winning_proposal": {
+        "expert_id": "exp-sec-01",
+        "domain": "security",
+        "property": "session_encryption",
+        "proposed_value": true,
+        "evidence": [
+          "security/soc2-cc6.1.md"
+        ],
+        "references": [],
+        "confidence": 1,
+        "risk": "high",
+        "rationale": "Mandatory zero-trust AES-256 session token encryption at rest",
+        "priority_tier": 1,
+        "priority_score": 100,
+        "raw_decision": null
+      },
+      "rejected_proposals": [
+        {
+          "expert_id": "exp-perf-01",
+          "domain": "cost",
+          "property": "session_encryption",
+          "proposed_value": false,
+          "rejection_reason": "Overridden by Security hierarchy tier (Tier 1 vs Tier 4): SECURITY constraints strictly supersede COST proposal for 'session_encryption'. Technical rationale: Mandatory zero-trust AES-256 session token encryption at rest",
+          "evidence": [
+            "benchmarks/redis-throughput.md"
+          ],
+          "confidence": 0.91,
+          "risk": "medium"
+        }
+      ],
+      "applied_rule": "hierarchy_security_over_cost",
+      "resolution_rationale": "Resolved automatically: security holds Tier 1 precedence over cost (Tier 4)."
+    },
+    {
+      "conflict_id": "CNF-DATA_PROTOCOL-0708",
+      "property": "data_protocol",
+      "category": "backend_api_vs_frontend",
+      "domains": [
+        "backend_api",
+        "frontend"
+      ],
+      "severity": "medium",
+      "status": "deadlocked",
+      "proposals": [
+        {
+          "expert_id": "exp-be-01",
+          "domain": "backend_api",
+          "property": "data_protocol",
+          "proposed_value": "grpc_protobuf",
+          "evidence": [
+            "specs/grpc-schema.proto"
+          ],
+          "references": [],
+          "confidence": 0.88,
+          "risk": "medium",
+          "rationale": "Binary Protobuf streams for low-latency cluster messaging",
+          "priority_tier": 3,
+          "priority_score": 70,
+          "raw_decision": null
+        },
+        {
+          "expert_id": "exp-fe-01",
+          "domain": "frontend",
+          "property": "data_protocol",
+          "proposed_value": "graphql_apollo",
+          "evidence": [
+            "specs/client-queries.graphql"
+          ],
+          "references": [],
+          "confidence": 0.88,
+          "risk": "medium",
+          "rationale": "Declarative GraphQL query fetching for client view compositions",
+          "priority_tier": 3,
+          "priority_score": 55,
+          "raw_decision": null
+        }
+      ],
+      "deadlock_reason": "Equal priority tier between 'backend_api' and 'frontend' without dominant authoritative evidence or tie-breaker."
+    }
+  ],
+  "synthesized_decisions": [
+    {
+      "decision_id": "DEC-DATABASE-RLS_GEO_SHARDING",
+      "domain": "database",
+      "property": "rls_geo_sharding",
+      "value": "th_bkk_01",
+      "confidence": 0.96,
+      "risk": "low",
+      "evidence": [
+        "db/migrations/20261003_rls.sql"
+      ],
+      "references": [],
+      "alternatives_rejected": [],
+      "status": "accepted"
+    },
+    {
+      "decision_id": "DEC-ACCESSIBILITY-CONTRAST_RATIO",
+      "domain": "accessibility",
+      "property": "contrast_ratio",
+      "value": 4.5,
+      "confidence": 0.99,
+      "risk": "high",
+      "evidence": [
+        "standards/wcag-2.2-aa.md"
+      ],
+      "references": [],
+      "alternatives_rejected": [
+        "Rejected ux_ui value '3.2': Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'contrast_ratio'. Technical rationale: WCAG 2.2 AA mandatory contrast 4.5:1 for standard body text"
+      ],
+      "status": "accepted"
+    },
+    {
+      "decision_id": "DEC-ACCESSIBILITY-TOUCH_TARGET_SIZE",
+      "domain": "accessibility",
+      "property": "touch_target_size",
+      "value": 44,
+      "confidence": 0.98,
+      "risk": "medium",
+      "evidence": [
+        "standards/wcag-target-size.md"
+      ],
+      "references": [],
+      "alternatives_rejected": [
+        "Rejected ux_ui value '32': Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'touch_target_size'. Technical rationale: WCAG 2.5.5 touch target minimum 44x44px"
+      ],
+      "status": "accepted"
+    },
+    {
+      "decision_id": "DEC-SECURITY-SESSION_ENCRYPTION",
+      "domain": "security",
+      "property": "session_encryption",
+      "value": true,
+      "confidence": 1,
+      "risk": "high",
+      "evidence": [
+        "security/soc2-cc6.1.md"
+      ],
+      "references": [],
+      "alternatives_rejected": [
+        "Rejected cost value 'false': Overridden by Security hierarchy tier (Tier 1 vs Tier 4): SECURITY constraints strictly supersede COST proposal for 'session_encryption'. Technical rationale: Mandatory zero-trust AES-256 session token encryption at rest"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "rejected_alternatives": [
+    {
+      "expert_id": "exp-ux-01",
+      "domain": "ux_ui",
+      "property": "contrast_ratio",
+      "proposed_value": 3.2,
+      "rejection_reason": "Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'contrast_ratio'. Technical rationale: WCAG 2.2 AA mandatory contrast 4.5:1 for standard body text",
+      "evidence": [
+        "docs/03-architecture/design-tokens.md"
+      ],
+      "confidence": 0.9,
+      "risk": "medium"
+    },
+    {
+      "expert_id": "exp-ux-02",
+      "domain": "ux_ui",
+      "property": "touch_target_size",
+      "proposed_value": 32,
+      "rejection_reason": "Overridden by Accessibility hierarchy tier (Tier 2 vs Tier 3): ACCESSIBILITY constraints strictly supersede UX_UI proposal for 'touch_target_size'. Technical rationale: WCAG 2.5.5 touch target minimum 44x44px",
+      "evidence": [
+        "tokens/compact-table.css"
+      ],
+      "confidence": 0.88,
+      "risk": "low"
+    },
+    {
+      "expert_id": "exp-perf-01",
+      "domain": "cost",
+      "property": "session_encryption",
+      "proposed_value": false,
+      "rejection_reason": "Overridden by Security hierarchy tier (Tier 1 vs Tier 4): SECURITY constraints strictly supersede COST proposal for 'session_encryption'. Technical rationale: Mandatory zero-trust AES-256 session token encryption at rest",
+      "evidence": [
+        "benchmarks/redis-throughput.md"
+      ],
+      "confidence": 0.91,
+      "risk": "medium"
+    }
+  ],
+  "deadlocks": [
+    {
+      "conflict_id": "CNF-DATA_PROTOCOL-0708",
+      "property": "data_protocol",
+      "category": "backend_api_vs_frontend",
+      "domains": [
+        "backend_api",
+        "frontend"
+      ],
+      "severity": "medium",
+      "status": "deadlocked",
+      "proposals": [
+        {
+          "expert_id": "exp-be-01",
+          "domain": "backend_api",
+          "property": "data_protocol",
+          "proposed_value": "grpc_protobuf",
+          "evidence": [
+            "specs/grpc-schema.proto"
+          ],
+          "references": [],
+          "confidence": 0.88,
+          "risk": "medium",
+          "rationale": "Binary Protobuf streams for low-latency cluster messaging",
+          "priority_tier": 3,
+          "priority_score": 70,
+          "raw_decision": null
+        },
+        {
+          "expert_id": "exp-fe-01",
+          "domain": "frontend",
+          "property": "data_protocol",
+          "proposed_value": "graphql_apollo",
+          "evidence": [
+            "specs/client-queries.graphql"
+          ],
+          "references": [],
+          "confidence": 0.88,
+          "risk": "medium",
+          "rationale": "Declarative GraphQL query fetching for client view compositions",
+          "priority_tier": 3,
+          "priority_score": 55,
+          "raw_decision": null
+        }
+      ],
+      "deadlock_reason": "Equal priority tier between 'backend_api' and 'frontend' without dominant authoritative evidence or tie-breaker."
+    }
+  ],
+  "escalation": {
+    "requires_human_review": true,
+    "route": "human_review",
+    "execution_permission": "blocked_until_approved",
+    "review_packet": "================================================================================\nDAVE CONFLICT RESOLUTION REVIEW PACKET: G-DAVE-003\nGenerated At: 2026-10-10T09:06:52.365Z\nDeadlocked Collisions: 1\nRouting: ROUTE_TO_HUMAN_REVIEW (Fail-Closed)\nEXECUTION PERMISSION: BLOCKED UNTIL APPROVED\n================================================================================\n\n--------------------------------------------------------------------------------\nCONFLICT #1: [CNF-DATA_PROTOCOL-0708] Property: 'data_protocol'\nAffected Domains: backend_api vs frontend\nSeverity: MEDIUM\nDeadlock Rationale: Equal priority tier between 'backend_api' and 'frontend' without dominant authoritative evidence or tie-breaker.\n\nPROPOSAL A:\n  - Expert: exp-be-01 (backend_api)\n  - Proposed Value: \"grpc_protobuf\"\n  - Calibrated Confidence: 0.8800\n  - Risk Level: MEDIUM\n  - Technical Rationale: Binary Protobuf streams for low-latency cluster messaging\n  - Evidence: specs/grpc-schema.proto\n\nPROPOSAL B:\n  - Expert: exp-fe-01 (frontend)\n  - Proposed Value: \"graphql_apollo\"\n  - Calibrated Confidence: 0.8800\n  - Risk Level: MEDIUM\n  - Technical Rationale: Declarative GraphQL query fetching for client view compositions\n  - Evidence: specs/client-queries.graphql\n\nHUMAN ADJUDICATION REQUIRED:\n  [ ] 1. Approve Proposal A (backend_api: \"grpc_protobuf\")\n  [ ] 2. Approve Proposal B (frontend: \"graphql_apollo\")\n  [ ] 3. Synthesize custom compromise (specify below)\n  [ ] 4. Reject both proposals and trigger replanning\n--------------------------------------------------------------------------------\n\n================================================================================\nCRITICAL CONSTITUTIONAL INVARIANT:\nAutonomous execution is hard-locked. No mutation or deployment will occur\nuntil human review signature is recorded in .agents/audit/decisions.jsonl.\n================================================================================"
+  }
+}

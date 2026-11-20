@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-014",
+  "generated_at": "2026-10-14T06:58:30.667Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-014-INV-001",
+      "statement": "Stage 6 adversarial curriculum generates 800 red-team scenarios and regex PII sanitizer passes with exit code 0.",
+      "verification_command": "node scripts/harness/dark-pattern-curriculum-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-014-INV-002",
+      "statement": "Adversarial curriculum and PII sanitizer unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-dark-pattern-curriculum.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-014-INV-003",
+      "statement": "Python curriculum adversarial and PII sanitizer module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_adversarial.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-014-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-014",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dark-pattern-curriculum.mjs",
+      "sha256": "b7d54702d97e2cf3bb72b46183a8af6f6a088656da22976127e7afea73de72bf"
+    },
+    {
+      "path": "code/ml/src/curriculum/redteam_pii_sanitizer.py",
+      "sha256": "a923ea30953008ce308f6266fedd9af8c92a78574073712918b39a38f58903ad"
+    },
+    {
+      "path": "artifacts/curriculum/stage6_adversarial/manifest.json",
+      "sha256": "fe5f23ecf8c3f3c202554551a8dd1aa07fd397ec0c7cb7b8b549bdda2a2d9e2c"
+    },
+    {
+      "path": "tests/unit/test-dark-pattern-curriculum.mjs",
+      "sha256": "4a8495dac56427218ed667ae66df9a87f8309de30d9d5aaa3228d811ac6b8b42"
+    },
+    {
+      "path": "scripts/harness/dark-pattern-curriculum-harness.mjs",
+      "sha256": "2b0e41497c0035674ce962a768a63e62f4bca1c9231562bce0c6515a1f637025"
+    },
+    {
+      "path": "tests/ml/test_curriculum_adversarial.py",
+      "sha256": "43223275c1ca98f1ef56531f0af594f4e87d05eac52dba7675a84a69cbb6722b"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-014.md",
+      "sha256": "a8e336fb586c7c102984e85b64a76a4719096d863322dbb7889ed65ef98575c0"
+    }
+  ],
+  "certification": "PASS"
+}

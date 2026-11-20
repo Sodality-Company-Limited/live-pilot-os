@@ -1,0 +1,642 @@
+{
+  "schema_version": "1.0.0",
+  "goal_id": "G-WEB-015",
+  "artifact_id": "ART-KEYBOARD-NAVIGATION-REPORT",
+  "generated_at": "2026-10-03T21:50:00.000Z",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "certification": "PASS",
+  "keyboard_traversal": {
+    "passed": true,
+    "status": "PASSED",
+    "total_interactive_elements": 16,
+    "tab_order_verified": true,
+    "reverse_tab_order_verified": true,
+    "focus_ring_coverage_ratio": 1,
+    "missing_focus_indicators": 0,
+    "skipped_tab_indices": 0,
+    "steps": [
+      {
+        "step": 1,
+        "key": "Tab",
+        "active_element_id": "cmd-skip-link",
+        "component": "CommandRail",
+        "selector": "a.skip-to-content",
+        "role": "link",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 2,
+        "key": "Tab",
+        "active_element_id": "cmd-logo-home",
+        "component": "CommandRail",
+        "selector": "a.brand-home",
+        "role": "link",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 3,
+        "key": "Tab",
+        "active_element_id": "cmd-search-input",
+        "component": "CommandRail",
+        "selector": "input#command-search-input",
+        "role": "searchbox",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 4,
+        "key": "Tab",
+        "active_element_id": "cmd-tab-all",
+        "component": "CommandRail",
+        "selector": "button#tab-filter-all",
+        "role": "tab",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 5,
+        "key": "Tab",
+        "active_element_id": "cmd-tab-frontend",
+        "component": "CommandRail",
+        "selector": "button#tab-filter-frontend",
+        "role": "tab",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 6,
+        "key": "Tab",
+        "active_element_id": "cmd-health-badge",
+        "component": "CommandRail",
+        "selector": "button#system-health-trigger",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 7,
+        "key": "Tab",
+        "active_element_id": "canvas-active-card",
+        "component": "DecisionCanvas",
+        "selector": "article#decision-card-active",
+        "role": "article",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 8,
+        "key": "Tab",
+        "active_element_id": "btn-approve-decision",
+        "component": "DecisionCanvas",
+        "selector": "button#btn-approve",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 9,
+        "key": "Tab",
+        "active_element_id": "btn-reject-decision",
+        "component": "DecisionCanvas",
+        "selector": "button#btn-reject",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 10,
+        "key": "Tab",
+        "active_element_id": "btn-defer-decision",
+        "component": "DecisionCanvas",
+        "selector": "button#btn-defer",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 11,
+        "key": "Tab",
+        "active_element_id": "btn-open-review-modal",
+        "component": "DecisionCanvas",
+        "selector": "button#btn-trigger-review",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 12,
+        "key": "Tab",
+        "active_element_id": "btn-toggle-evidence-panel",
+        "component": "EvidencePanel",
+        "selector": "button#btn-evidence-toggle",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 13,
+        "key": "Tab",
+        "active_element_id": "tab-evidence-proofs",
+        "component": "EvidencePanel",
+        "selector": "button#tab-proofs",
+        "role": "tab",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 14,
+        "key": "Tab",
+        "active_element_id": "tab-evidence-refs",
+        "component": "EvidencePanel",
+        "selector": "button#tab-references",
+        "role": "tab",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 15,
+        "key": "Tab",
+        "active_element_id": "btn-verify-hash-integrity",
+        "component": "EvidencePanel",
+        "selector": "button#btn-verify-hash",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      },
+      {
+        "step": 16,
+        "key": "Tab",
+        "active_element_id": "btn-copy-evidence-json",
+        "component": "EvidencePanel",
+        "selector": "button#btn-copy-json",
+        "role": "button",
+        "tab_index": 0,
+        "focus_ring_width": 2,
+        "focus_ring_offset": 2,
+        "focus_visible": true
+      }
+    ],
+    "reverse_steps_count": 16
+  },
+  "state_transitions": {
+    "passed": true,
+    "status": "PASSED",
+    "components_tested": [
+      "CommandRail",
+      "DecisionCanvas",
+      "EvidencePanel",
+      "ReviewModal"
+    ],
+    "states_tested": [
+      "default",
+      "hover",
+      "focus",
+      "active",
+      "loading",
+      "disabled",
+      "error"
+    ],
+    "total_transitions_evaluated": 28,
+    "layout_shift_observed": 0,
+    "layout_shift_ceiling": 0,
+    "clipping_detected": false,
+    "violations_count": 0,
+    "issues": [],
+    "transitions": [
+      {
+        "component": "CommandRail",
+        "from_state": "default",
+        "to_state": "default",
+        "transition_index": 1,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "default",
+        "to_state": "hover",
+        "transition_index": 2,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "hover",
+        "to_state": "focus",
+        "transition_index": 3,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "focus",
+        "to_state": "active",
+        "transition_index": 4,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "active",
+        "to_state": "loading",
+        "transition_index": 5,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "loading",
+        "to_state": "disabled",
+        "transition_index": 6,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "CommandRail",
+        "from_state": "disabled",
+        "to_state": "error",
+        "transition_index": 7,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "default",
+        "to_state": "default",
+        "transition_index": 1,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "default",
+        "to_state": "hover",
+        "transition_index": 2,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "hover",
+        "to_state": "focus",
+        "transition_index": 3,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "focus",
+        "to_state": "active",
+        "transition_index": 4,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "active",
+        "to_state": "loading",
+        "transition_index": 5,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "loading",
+        "to_state": "disabled",
+        "transition_index": 6,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "DecisionCanvas",
+        "from_state": "disabled",
+        "to_state": "error",
+        "transition_index": 7,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "default",
+        "to_state": "default",
+        "transition_index": 1,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "default",
+        "to_state": "hover",
+        "transition_index": 2,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "hover",
+        "to_state": "focus",
+        "transition_index": 3,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "focus",
+        "to_state": "active",
+        "transition_index": 4,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "active",
+        "to_state": "loading",
+        "transition_index": 5,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "loading",
+        "to_state": "disabled",
+        "transition_index": 6,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "EvidencePanel",
+        "from_state": "disabled",
+        "to_state": "error",
+        "transition_index": 7,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "default",
+        "to_state": "default",
+        "transition_index": 1,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "default",
+        "to_state": "hover",
+        "transition_index": 2,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "hover",
+        "to_state": "focus",
+        "transition_index": 3,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "focus",
+        "to_state": "active",
+        "transition_index": 4,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "active",
+        "to_state": "loading",
+        "transition_index": 5,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "loading",
+        "to_state": "disabled",
+        "transition_index": 6,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      },
+      {
+        "component": "ReviewModal",
+        "from_state": "disabled",
+        "to_state": "error",
+        "transition_index": 7,
+        "layout_shift": 0,
+        "text_clipping": false,
+        "styling_valid": true
+      }
+    ]
+  },
+  "focus_trapping": {
+    "passed": true,
+    "status": "PASSED",
+    "modals_tested": [
+      "ReviewModal"
+    ],
+    "modal_elements_count": 7,
+    "focus_contained": true,
+    "forward_wrap_verified": true,
+    "reverse_wrap_verified": true,
+    "escape_dismissal_verified": true,
+    "restoration_element": "btn-open-review-modal",
+    "focus_restored": true,
+    "focus_escapes_detected": 0,
+    "trap_steps": [
+      {
+        "action": "modal_open",
+        "active_element": "modal-close-btn",
+        "expected_element": "modal-close-btn",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-conflict-opt-1",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-conflict-opt-2",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-diff-slider",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-justification-input",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-submit-btn",
+        "contained": true
+      },
+      {
+        "action": "press_tab",
+        "active_element": "modal-cancel-btn",
+        "contained": true
+      },
+      {
+        "action": "press_tab_at_end_wrap",
+        "active_element": "modal-close-btn",
+        "expected_element": "modal-close-btn",
+        "contained": true,
+        "forward_wrap": true
+      },
+      {
+        "action": "press_shift_tab_at_start_wrap",
+        "active_element": "modal-cancel-btn",
+        "expected_element": "modal-cancel-btn",
+        "contained": true,
+        "reverse_wrap": true
+      },
+      {
+        "action": "press_escape_close",
+        "modal_closed": true,
+        "restored_element": "btn-open-review-modal",
+        "focus_restored": true
+      }
+    ],
+    "aria_live_announcements": {
+      "regions_monitored": 4,
+      "total_announcements": 4,
+      "polite_announcements": 3,
+      "assertive_announcements": 1,
+      "unannounced_state_changes": 0,
+      "announcements": [
+        {
+          "region_id": "live-status-command-rail",
+          "mode": "polite",
+          "message": "Workspace loaded: DAVE Decision Governance Platform ready.",
+          "delivered": true,
+          "timestamp": "2026-10-03T21:40:00.000Z"
+        },
+        {
+          "region_id": "live-status-decision-canvas",
+          "mode": "polite",
+          "message": "Decision DAVE-FE-0001 active: confidence 0.9400, risk medium.",
+          "delivered": true,
+          "timestamp": "2026-10-03T21:40:01.000Z"
+        },
+        {
+          "region_id": "live-alert-error-boundary",
+          "mode": "assertive",
+          "message": "Network alert: Local daemon latency spike detected. Retry ready (Shift+R).",
+          "delivered": true,
+          "timestamp": "2026-10-03T21:40:02.000Z"
+        },
+        {
+          "region_id": "live-status-review-modal",
+          "mode": "polite",
+          "message": "Review dialogue opened for DAVE-FE-0001. Conflict resolution matrix displayed.",
+          "delivered": true,
+          "timestamp": "2026-10-03T21:40:03.000Z"
+        }
+      ],
+      "conformance_passed": true
+    }
+  },
+  "aria_live_announcements": {
+    "regions_monitored": 4,
+    "total_announcements": 4,
+    "polite_announcements": 3,
+    "assertive_announcements": 1,
+    "unannounced_state_changes": 0,
+    "announcements": [
+      {
+        "region_id": "live-status-command-rail",
+        "mode": "polite",
+        "message": "Workspace loaded: DAVE Decision Governance Platform ready.",
+        "delivered": true,
+        "timestamp": "2026-10-03T21:40:00.000Z"
+      },
+      {
+        "region_id": "live-status-decision-canvas",
+        "mode": "polite",
+        "message": "Decision DAVE-FE-0001 active: confidence 0.9400, risk medium.",
+        "delivered": true,
+        "timestamp": "2026-10-03T21:40:01.000Z"
+      },
+      {
+        "region_id": "live-alert-error-boundary",
+        "mode": "assertive",
+        "message": "Network alert: Local daemon latency spike detected. Retry ready (Shift+R).",
+        "delivered": true,
+        "timestamp": "2026-10-03T21:40:02.000Z"
+      },
+      {
+        "region_id": "live-status-review-modal",
+        "mode": "polite",
+        "message": "Review dialogue opened for DAVE-FE-0001. Conflict resolution matrix displayed.",
+        "delivered": true,
+        "timestamp": "2026-10-03T21:40:03.000Z"
+      }
+    ],
+    "conformance_passed": true
+  }
+}

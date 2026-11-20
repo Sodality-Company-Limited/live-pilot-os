@@ -1,0 +1,21 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-027",
+  "goal_id": "G-ML-027",
+  "metric": "moe_routing_accuracy",
+  "accuracy": 1,
+  "top2_accuracy": 1,
+  "p95_latency_ms": 0.1082,
+  "mean_latency_ms": 0.0651,
+  "p99_latency_ms": 0.2105,
+  "total_samples": 200,
+  "correct_count": 200,
+  "auxiliary_load_balancing_loss": 1,
+  "starvation_detected": false,
+  "token_expenditure": 0,
+  "verified": true,
+  "classification": "executable_invariant",
+  "invariant_id": "G-ML-027-INV-001",
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-03T11:38:23.315Z"
+}

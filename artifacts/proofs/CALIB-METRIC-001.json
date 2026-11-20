@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-009",
+  "goal_id": "G-ML-009",
+  "invariant": "CALIB-METRIC-001",
+  "invariant_id": "CALIB-METRIC-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/property-tests/test-calibration-metrics.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 502,
+  "source_hashes": {
+    "docs/07-backlog/goals/_archived/G-ML-009.md": "98973e0329cd5d02496d477201e2216f9701d26929169796daa34bb0542a5658",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-11T00:37:20.309Z"
+}

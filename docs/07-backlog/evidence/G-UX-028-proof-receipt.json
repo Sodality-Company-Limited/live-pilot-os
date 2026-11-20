@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-028",
+  "generated_at": "2026-10-14T12:00:54.618Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-028-INV-001",
+      "statement": "Ecosystem parity harness synchronizes all 54 downstream repositories with 0 errors and verifies 100% bitwise parity.",
+      "verification_command": "node scripts/harness/ecosystem-parity-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-028-INV-002",
+      "statement": "Ecosystem sync UX Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-sync-ecosystem-ux.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-028-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-028",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/goals/sync-ecosystem.js",
+      "sha256": "04278e4d84dd82a5d26727b405721ac0d09694bffb1e938c1f429564675d0c73"
+    },
+    {
+      "path": "cli.js",
+      "sha256": "cdfaa1b447e7b03c0fe6b27b6c3554f49a9cc3c299c8b3ba8b21a8ba5a582587"
+    },
+    {
+      "path": "tests/unit/test-sync-ecosystem-ux.mjs",
+      "sha256": "c0a201329b10aefacfd557f77f219ff14fa4ebefa986c101a95f44ff517b7cb1"
+    },
+    {
+      "path": "scripts/harness/ecosystem-parity-harness.mjs",
+      "sha256": "4c846e70157ad70b023364586f3e7fdce610a35564a1db329fb76c0212d86721"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-028.md",
+      "sha256": "ae33456817b46efe497b0e3c5972dceb3f25a2e99c07cf49eac15980cf514980"
+    }
+  ],
+  "certification": "PASS"
+}

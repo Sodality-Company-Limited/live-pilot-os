@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-045",
+  "generated_at": "2026-10-18T23:21:02.000Z",
+  "source_revision": "5a3403fd70f21d840ab3ef101ed8791b370d95cc",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-045-001",
+      "claim": "Evaluating identical test fixtures with identical random seeds produces bitwise identical pass counts, pass@k metrics, and failure traces.",
+      "statement": "Empirical evaluation determinism holds.",
+      "verification_command": "node --test tests/lib/empirical-eval-runner.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-045-002",
+      "claim": "All pass rates and evaluation scores are computed in exact integer basis points in [0, 10000] with zero floats.",
+      "statement": "Integer basis point bounds invariant verified.",
+      "verification_command": "node --test tests/lib/empirical-eval-runner.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/empirical-eval-runner.mjs": "8bdd681ec2d4cea0011c1f30a2e83b0b87a718ce460a7ef36bdf8bd2a0bfa827",
+    "template/scripts/lib/empirical-eval-runner.mjs": "8bdd681ec2d4cea0011c1f30a2e83b0b87a718ce460a7ef36bdf8bd2a0bfa827",
+    ".agents/skills/soda-empirical-eval-runner/SKILL.md": "2a443ac51226b22d14f258d509874eea79bf18f08785f904515ef01f56e09381",
+    "template/.agents/skills/soda-empirical-eval-runner/SKILL.md": "2a443ac51226b22d14f258d509874eea79bf18f08785f904515ef01f56e09381",
+    "tests/lib/empirical-eval-runner.test.mjs": "3a46bf608956b252e4d8567c90897c997d7d6c1253cb5068bee7c538118aa824"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/empirical-eval-runner.mjs",
+      "sha256": "8bdd681ec2d4cea0011c1f30a2e83b0b87a718ce460a7ef36bdf8bd2a0bfa827"
+    },
+    {
+      "path": "template/scripts/lib/empirical-eval-runner.mjs",
+      "sha256": "8bdd681ec2d4cea0011c1f30a2e83b0b87a718ce460a7ef36bdf8bd2a0bfa827"
+    },
+    {
+      "path": ".agents/skills/soda-empirical-eval-runner/SKILL.md",
+      "sha256": "2a443ac51226b22d14f258d509874eea79bf18f08785f904515ef01f56e09381"
+    },
+    {
+      "path": "template/.agents/skills/soda-empirical-eval-runner/SKILL.md",
+      "sha256": "2a443ac51226b22d14f258d509874eea79bf18f08785f904515ef01f56e09381"
+    },
+    {
+      "path": "tests/lib/empirical-eval-runner.test.mjs",
+      "sha256": "3a46bf608956b252e4d8567c90897c997d7d6c1253cb5068bee7c538118aa824"
+    }
+  ],
+  "certification": "PASS"
+}

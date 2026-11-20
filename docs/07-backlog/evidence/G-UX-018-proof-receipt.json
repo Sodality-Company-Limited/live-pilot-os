@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-018",
+  "generated_at": "2026-10-14T07:55:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-018-INV-001",
+      "statement": "LoRA adapter registry verifies zero-init B=0 across 12 personas, executes Linear/TIES/DARE merges, and meets sub-50ms swapping latency SLA.",
+      "verification_command": "node scripts/harness/lora-adapter-registry-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-018-INV-002",
+      "statement": "LoRA adapter registry unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-lora-adapter-registry.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-018-INV-003",
+      "statement": "Python LoRA merger module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_lora_merger.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-018-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-018",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/training/lora_merger.py",
+      "sha256": "2958d7a155a16a255a662b1463656848527662ca475eaa81696671b874fe3d09"
+    },
+    {
+      "path": "scripts/lib/lora-adapter-registry.mjs",
+      "sha256": "a71f77debaa21e48938e5a39252916b6968ddd1e722339d27025e9e1eeaf3234"
+    },
+    {
+      "path": "tests/unit/test-lora-adapter-registry.mjs",
+      "sha256": "4b52bb87fbd544f341f1d068c29479e0ac243b14925a005a20cdd22de4565955"
+    },
+    {
+      "path": "tests/ml/test_lora_merger.py",
+      "sha256": "87bf2e72391c14ba379c8e303f6d029fe9f184e209eaa399aeafc6d7514812e8"
+    },
+    {
+      "path": "scripts/harness/lora-adapter-registry-harness.mjs",
+      "sha256": "52ef0ac8318d012467f43ee99ecb84681e87bc644d9e4f7e42bb6c5214644126"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-018.md",
+      "sha256": "e4099f6815435c4d8048b225d7635cc55c523ce5f61113fb42935cb2cc2bae28"
+    }
+  ],
+  "certification": "PASS"
+}

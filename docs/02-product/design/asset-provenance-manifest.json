@@ -1,0 +1,253 @@
+{
+  "$schema": "https://soda-os.dev/schemas/asset-provenance-manifest.v1.json",
+  "schema_version": "asset_provenance_manifest_v1",
+  "goal_id": "G-WEB-010",
+  "generated_at": "2026-10-03T20:10:00.000Z",
+  "commit": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "total_assets": 7,
+  "summary": {
+    "visual_count": 4,
+    "audio_count": 2,
+    "reference_count": 1,
+    "max_visual_size_bytes": 1478,
+    "max_audio_duration_ms": 250,
+    "unlicensed_count": 0
+  },
+  "assets": [
+    {
+      "asset_id": "AST-VIS-001",
+      "name": "soda-logo.svg",
+      "path": "public/assets/soda-logo.svg",
+      "type": "visual",
+      "format": "svg",
+      "size_bytes": 452,
+      "sha256": "sha256:66257a62c5c52b82db3a97e3a619d65457144d75b91dabff33fa022d0b0c1c4a",
+      "dimensions": {
+        "width": 120,
+        "height": 32,
+        "viewBox": "0 0 120 32",
+        "aspect_ratio": "3.75:1"
+      },
+      "accessibility": {
+        "title": "Soda OS Brand Logo",
+        "desc": "Official logomark and wordmark of Soda OS",
+        "role": "img",
+        "aria_label": "Soda OS Logo"
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "design_system_core",
+        "creator": "Soda OS Design Systems Guild",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-VIS-002",
+      "name": "verified-badge.svg",
+      "path": "public/assets/verified-badge.svg",
+      "type": "visual",
+      "format": "svg",
+      "size_bytes": 449,
+      "sha256": "sha256:6d0055daa3068937decb76b52769af03220746417a9f02676f3b680b905d588b",
+      "dimensions": {
+        "width": 24,
+        "height": 24,
+        "viewBox": "0 0 24 24",
+        "aspect_ratio": "1:1"
+      },
+      "accessibility": {
+        "title": "DAVE Verified Invariant Badge",
+        "desc": "Cryptographically verified invariant marker",
+        "role": "img",
+        "aria_label": "Verified Invariant Badge"
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "design_system_core",
+        "creator": "Soda OS Design Systems Guild",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-VIS-003",
+      "name": "status-indicator.svg",
+      "path": "public/assets/status-indicator.svg",
+      "type": "visual",
+      "format": "svg",
+      "size_bytes": 396,
+      "sha256": "sha256:89b956c00ebcad54c506109f924febc6853d7f0214ef073e99796fdea87cc3d2",
+      "dimensions": {
+        "width": 16,
+        "height": 16,
+        "viewBox": "0 0 16 16",
+        "aspect_ratio": "1:1"
+      },
+      "accessibility": {
+        "title": "Operational Status Indicator",
+        "desc": "Green pulse indicator representing 100% operational system status",
+        "role": "img",
+        "aria_label": "Operational Status Indicator"
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "design_system_core",
+        "creator": "Soda OS Design Systems Guild",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-VIS-004",
+      "name": "decision-canvas-preview.webp",
+      "path": "public/assets/decision-canvas-preview.webp",
+      "type": "visual",
+      "format": "webp",
+      "size_bytes": 1478,
+      "sha256": "sha256:fe0510ff141507235f411400f1c05dc3af88f09f58746045ab5a91f213bd3565",
+      "dimensions": {
+        "width": 640,
+        "height": 400,
+        "aspect_ratio": "1.6:1"
+      },
+      "accessibility": {
+        "title": "Decision Canvas Preview",
+        "desc": "Mockup preview of the DAVE Decision Canvas workspace layout",
+        "role": "img",
+        "aria_label": "Decision Canvas Preview"
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "dave_exact_design",
+        "creator": "DAVE Frontend Team",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-AUD-001",
+      "name": "chime-complete.wav",
+      "path": "public/audio/chime-complete.wav",
+      "type": "audio",
+      "format": "wav",
+      "size_bytes": 22094,
+      "sha256": "sha256:11b6f833f5fd89c96df1fa253d2ff0c8cf35b2bee3e20da0e570d24df98f14d1",
+      "acoustics": {
+        "duration_ms": 250,
+        "sample_rate": 44100,
+        "channels": 1,
+        "bit_depth": 16,
+        "peak_amplitude": 0.587,
+        "rms_dbfs": -18.13,
+        "lufs_target": -16.0,
+        "digital_clipping": false
+      },
+      "accessibility": {
+        "earcon_purpose": "task_completion_feedback",
+        "mute_alternative": "visual_toast_or_status_indicator",
+        "mute_controllable": true
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "soda_sound_audio_branding",
+        "creator": "Soda OS Audio Engineering Guild",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-AUD-002",
+      "name": "toggle-click.wav",
+      "path": "public/audio/toggle-click.wav",
+      "type": "audio",
+      "format": "wav",
+      "size_bytes": 7100,
+      "sha256": "sha256:bbc4395d11fdf7b3711431fd77a2dbc8a344e3796712b3aa09312194a98b66ca",
+      "acoustics": {
+        "duration_ms": 80,
+        "sample_rate": 44100,
+        "channels": 1,
+        "bit_depth": 16,
+        "peak_amplitude": 0.450,
+        "rms_dbfs": -18.52,
+        "lufs_target": -18.0,
+        "digital_clipping": false
+      },
+      "accessibility": {
+        "earcon_purpose": "critical_toggle_feedback",
+        "mute_alternative": "visual_focus_ring_or_color_shift",
+        "mute_controllable": true
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "soda_sound_audio_branding",
+        "creator": "Soda OS Audio Engineering Guild",
+        "authority_verification_date": "2026-10-03"
+      }
+    },
+    {
+      "asset_id": "AST-REF-001",
+      "name": "REF-0001.png",
+      "path": "data/references/REF-0001.png",
+      "type": "reference_image",
+      "format": "png",
+      "size_bytes": 5940,
+      "sha256": "sha256:d7146fad2c9c3a601f8160ae2c8072285d2e41c22a39a226ee78a24e5c59cbb8",
+      "dimensions": {
+        "width": 1440,
+        "height": 900,
+        "device_pixel_ratio": 1.0,
+        "aspect_ratio": "16:10"
+      },
+      "accessibility": {
+        "title": "DAVE Desktop Reference Mockup",
+        "role": "img",
+        "aria_label": "Design reference mockup"
+      },
+      "license": {
+        "authority": "Sodality Company Limited",
+        "license_type": "Proprietary Commercial",
+        "commercial_use": true,
+        "attribution_required": false,
+        "verified": true
+      },
+      "provenance": {
+        "source": "human_uploaded",
+        "authority": "approved_design_reference",
+        "authority_verification_date": "2026-10-03"
+      }
+    }
+  ]
+}

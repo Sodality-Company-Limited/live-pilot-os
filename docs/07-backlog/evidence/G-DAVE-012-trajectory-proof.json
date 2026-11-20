@@ -1,0 +1,11 @@
+{
+  "goal_id": "G-DAVE-012",
+  "extracted_records_count": 200,
+  "wins_count": 100,
+  "losses_count": 100,
+  "output_file": "data/rlcd/trajectories.jsonl",
+  "output_file_exists": true,
+  "causality_enforced": true,
+  "min_hold_time_ns": 5000000000,
+  "timestamp_utc": "2026-10-09T08:09:00Z"
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-002",
+  "classification": "statistical_claim",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-002-INV-001",
+      "statement": "DAVE Statistical Evidence and Calibration Claims satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "STAT-G-PROOF-002-001",
+      "statement": "Expected Calibration Error bounded under 95% bootstrap confidence interval below safety threshold 0.08.",
+      "verification_command": "node scripts/harness/statistical-evidence-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/statistical-evidence-engine.mjs",
+      "sha256": "f8f68eba7c5518de335214d032f54e27430de884c5572a57263086348d3ca865"
+    },
+    {
+      "path": "scripts/harness/statistical-evidence-harness.mjs",
+      "sha256": "8a26f715e1b188637a784830a1236b558116b2f05765f78670e59f2ef3bc2b2f"
+    },
+    {
+      "path": "scripts/harness/confidence-calibration-harness.mjs",
+      "sha256": "9f3d8663ee2a1b1ea7ff9649571796eb63e36e651732cd72ce187ef99ff3d1e4"
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "expected_calibration_error",
+    "sample_count": 100,
+    "observed_ece": 0.0352,
+    "ece_95_upper_bound": 0.0487,
+    "ece_ci_range": [
+      0.0244,
+      0.0487
+    ],
+    "observed_mce": 0.4,
+    "observed_brier": 0.005282,
+    "safety_tolerance": 0.08,
+    "bootstrap_iterations": 1000,
+    "random_seed": 42,
+    "reliability_diagram": {
+      "bins_count": 10,
+      "bin_weights": [
+        0,
+        0,
+        0.01,
+        0,
+        0.01,
+        0,
+        0.01,
+        0.01,
+        0.01,
+        0.95
+      ],
+      "coordinates": [
+        {
+          "binIndex": 0,
+          "lowerEdge": 0,
+          "upperEdge": 0.1,
+          "binCenter": 0.05,
+          "sampleCount": 0,
+          "weight": 0,
+          "meanConfidence": 0.05,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0,
+          "underconfident": false,
+          "overconfident": false
+        },
+        {
+          "binIndex": 1,
+          "lowerEdge": 0.1,
+          "upperEdge": 0.2,
+          "binCenter": 0.15,
+          "sampleCount": 0,
+          "weight": 0,
+          "meanConfidence": 0.15,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0,
+          "underconfident": false,
+          "overconfident": false
+        },
+        {
+          "binIndex": 2,
+          "lowerEdge": 0.2,
+          "upperEdge": 0.3,
+          "binCenter": 0.25,
+          "sampleCount": 1,
+          "weight": 0.01,
+          "meanConfidence": 0.2,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0.2,
+          "underconfident": false,
+          "overconfident": true
+        },
+        {
+          "binIndex": 3,
+          "lowerEdge": 0.3,
+          "upperEdge": 0.4,
+          "binCenter": 0.35,
+          "sampleCount": 0,
+          "weight": 0,
+          "meanConfidence": 0.35,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0,
+          "underconfident": false,
+          "overconfident": false
+        },
+        {
+          "binIndex": 4,
+          "lowerEdge": 0.4,
+          "upperEdge": 0.5,
+          "binCenter": 0.45,
+          "sampleCount": 1,
+          "weight": 0.01,
+          "meanConfidence": 0.4,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0.4,
+          "underconfident": false,
+          "overconfident": true
+        },
+        {
+          "binIndex": 5,
+          "lowerEdge": 0.5,
+          "upperEdge": 0.6,
+          "binCenter": 0.55,
+          "sampleCount": 0,
+          "weight": 0,
+          "meanConfidence": 0.55,
+          "empiricalAccuracy": 0,
+          "calibrationGap": 0,
+          "underconfident": false,
+          "overconfident": false
+        },
+        {
+          "binIndex": 6,
+          "lowerEdge": 0.6,
+          "upperEdge": 0.7,
+          "binCenter": 0.65,
+          "sampleCount": 1,
+          "weight": 0.01,
+          "meanConfidence": 0.6,
+          "empiricalAccuracy": 1,
+          "calibrationGap": 0.4,
+          "underconfident": true,
+          "overconfident": false
+        },
+        {
+          "binIndex": 7,
+          "lowerEdge": 0.7,
+          "upperEdge": 0.8,
+          "binCenter": 0.75,
+          "sampleCount": 1,
+          "weight": 0.01,
+          "meanConfidence": 0.7,
+          "empiricalAccuracy": 1,
+          "calibrationGap": 0.30000000000000004,
+          "underconfident": true,
+          "overconfident": false
+        },
+        {
+          "binIndex": 8,
+          "lowerEdge": 0.8,
+          "upperEdge": 0.9,
+          "binCenter": 0.85,
+          "sampleCount": 1,
+          "weight": 0.01,
+          "meanConfidence": 0.85,
+          "empiricalAccuracy": 1,
+          "calibrationGap": 0.15000000000000002,
+          "underconfident": true,
+          "overconfident": false
+        },
+        {
+          "binIndex": 9,
+          "lowerEdge": 0.9,
+          "upperEdge": 1,
+          "binCenter": 0.95,
+          "sampleCount": 95,
+          "weight": 0.95,
+          "meanConfidence": 0.9782105263157896,
+          "empiricalAccuracy": 1,
+          "calibrationGap": 0.02178947368421036,
+          "underconfident": true,
+          "overconfident": false
+        }
+      ]
+    },
+    "audit_ledger_entry": {
+      "id": "LEDGER-CAL-2",
+      "sha256": "1314e7ba975731bc09625ea2f568512302a02c94a0573a9ea94acd2a80fde12a"
+    }
+  },
+  "certification": "PASS",
+  "generated_at": "2026-10-14T13:33:57.301Z"
+}

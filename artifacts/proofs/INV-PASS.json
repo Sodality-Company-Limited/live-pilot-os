@@ -1,0 +1,18 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-SAMPLE-001",
+  "goal_id": "G-SAMPLE-001",
+  "invariant": "INV-PASS",
+  "invariant_id": "INV-PASS",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node -e \"process.exit(0)\"",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 10,
+  "source_hashes": {
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T16:15:22.771Z"
+}

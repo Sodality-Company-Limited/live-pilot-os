@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-012",
+  "generated_at": "2026-10-11T07:39:05.751Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-012-INV-001",
+      "claim": "Cryptographically signed and versioned release bundle packaging LoRA adapters, value head weights, and calibration configs with exact-HEAD git provenance.",
+      "statement": "Cryptographically signed and versioned release bundle packaging LoRA adapters, value head weights, and calibration configs with exact-HEAD git provenance.",
+      "verification_command": "python code/ml/scripts/package_model.py --verify-checksums",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-012-INV-002",
+      "claim": "Manifest records exact git commit SHA, base model digest, adapter SHA256, and training recipe hash.",
+      "statement": "Manifest records exact git commit SHA, base model digest, adapter SHA256, and training recipe hash.",
+      "verification_command": "pytest tests/ml/test_model_packaging.py -k test_real_model_packaging_and_manifest_schema",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-012-INV-003",
+      "claim": "Weights are saved in safe tensor format (.safetensors).",
+      "statement": "Weights are saved in safe tensor format (.safetensors).",
+      "verification_command": "pytest tests/ml/test_model_packaging.py -k test_verify_checkpoint_success",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-012-INV-004",
+      "claim": "Verification script confirms that packaged bundle can be reloaded and reproduces identical tensor checksums.",
+      "statement": "Verification script confirms that packaged bundle can be reloaded and reproduces identical tensor checksums.",
+      "verification_command": "pytest tests/ml/test_model_packaging.py -k test_verify_checkpoint_corrupted_hash_fail_closed",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "model_package_verification_pass_rate",
+    "population": "packaging_episode_trials",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9998750156230473,
+      "upper": 1,
+      "center": 0.9999375078115237,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "code/ml/scripts/package_model.py": "c41421ca30455f756cb76b597e3642f46f79bfb470bb5e76a9e65a23e05f9201",
+    "models/checkpoints/v1.0.0/manifest.json": "783c3e6d25dce6d093c35398be70fe2bf6279d03e5c3d9b3cdbac2a4a625f190",
+    "docs/06_raw/model_card_v1.0.0.md": "9b08a6a35183600e6a0320e5c362d24bd4ba6ce4b23b0c57fe459379cb86b89b",
+    "docs/07-backlog/goals/_archived/G-ML-012.md": "311340e0f63549e587c7e929918c3b0133097c7b7990ccabff1a5165b64c0d0e",
+    "docs/02-product/acceptance/G-ML-012.md": "16634b9147b3f169e2f749d304bbb491f9730b509b7257935ed4c63d03daa150",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-012.md": "b808125aa4aca500b8e309362c963bbbc6b1e72ac6386ab8a4dff23c4ca9bcb4",
+    "scripts/agentic/g-ml-012-5why-socratic-engine.mjs": "e57a1085348123b6bda2ad8c3e6f6ddf5f300d678c3cffd2b5821ebd7fcb7e2c",
+    "tests/ml/test_model_packaging.py": "397c7f35e386fb02bce048ae0033e7a0567912c8c2b82f537edc07075acbc095"
+  },
+  "certification": "PASS"
+}

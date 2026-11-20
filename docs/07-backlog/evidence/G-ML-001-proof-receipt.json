@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-001",
+  "generated_at": "2026-10-11T07:31:32.269Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-001-INV-001",
+      "claim": "Validated decision-record JSON Schema and extraction pipeline producing golden trajectory datasets with calibrated confidence fields.",
+      "statement": "Validated decision-record JSON Schema and extraction pipeline producing golden trajectory datasets with calibrated confidence fields.",
+      "verification_command": "pytest tests/ml/test_decision_schema.py",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/schemas/decision_record.json",
+      "sha256": "5cc32458fe098b610058eeb455b0d41dd23b8633ede98cd2dc78a19806a6ad8e"
+    },
+    {
+      "path": "code/ml/src/dataset/schema.py",
+      "sha256": "bec0a5c00aaa826fe6abf4e17b4c9657a262557b88569210f67eb0d048b041d1"
+    },
+    {
+      "path": "tests/ml/test_decision_schema.py",
+      "sha256": "95498b8c42f9fe22bc258a28d47631f19ca2878048de8796f3de4723d6a024d3"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-001.md",
+      "sha256": "ea3e8f00bbddcee0ce2ae59885e477ebdc64a8d1afe2dbfd3bfaf11134f3839d"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-001.md",
+      "sha256": "1682d15cce43b84388e427da7a995bcede04af5322494e92d7c396117ea2f4ab"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-001.md",
+      "sha256": "70334cb57ad68a7270220d4d9fa993184cd489863977d9d545150d116b1abe57"
+    },
+    {
+      "path": "scripts/agentic/g-ml-001-5why-socratic-engine.mjs",
+      "sha256": "5c73df08aaf78872d4c7529e665e29949445ed5ef8db9a836a53a346ccd1abd6"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-001-5why-socratic-engine.mjs",
+      "sha256": "5c73df08aaf78872d4c7529e665e29949445ed5ef8db9a836a53a346ccd1abd6"
+    }
+  ],
+  "certification": "PASS"
+}
