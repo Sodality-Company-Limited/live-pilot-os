@@ -16,6 +16,16 @@
 - [LivePilot OS Features — Core Summary](./live-pilot-os-core-features.md)
 - [LivePilot OS Sub-features — Quick Reference](./live-pilot-os-sub-features.md)
 - [LivePilot OS — Business Model Canvas](./live-pilot-os-business-model-canvas.md)
+- [Information Architecture and UX Flow — G-UX-041](../ux/G-UX-041.md)
+- [UI Specification — G-UX-041](../../02-product/design/G-UX-041.md)
+- [Live OS Design Token Proposal](../ux/live-os-design-tokens.md)
+- [Runtime Design Tokens](../../../src/tokens.css)
+
+### UX and visual-design authority
+
+The G-UX-041 UX flow is the reference for Host/Live Ops roles, information hierarchy, shared-session behavior, screen states, and responsive behavior. Its UI specification defines screen and component behavior. The token proposal defines semantic intent; `src/tokens.css` is the canonical value source used by the UI.
+
+**Approval status:** The UX flow, UI specification, and token proposal are drafts pending Product/Design approval. Keep them as proposals until approval is recorded; do not treat a draft as a frozen implementation contract.
 
 ## Authority and status
 
