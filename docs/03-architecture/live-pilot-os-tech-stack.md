@@ -1,0 +1,265 @@
+# LivePilot OS — Production Technology Stack
+
+> **Status:** Proposed production baseline
+>
+> This stack is derived from the LivePilot OS deep context: low-latency live telemetry,
+> evidence-grounded host guidance, deterministic margin protection, cross-channel inventory
+> reservation, idempotent platform actions, approval control, Emergency Pause, and append-only
+> decision auditability.
+
+## 1. Technology decision summary
+
+| Concern | Recommended choice | Why it fits LivePilot OS |
+|---|---|---|
+| Operator and host UI | **Next.js App Router + TypeScript** | One production web surface for the Operator Console, Streamer Co-pilot HUD, onboarding, and audit views. Use server rendering for secure reads and client components only for live interaction. |
+| Public API boundary | **KrakenD API Gateway** | Stateless edge gateway for OIDC/JWT validation, rate limits, aggregation, contract versioning, and routing to internal services. It must not contain margin or inventory business rules. |
+| Domain and policy services | **Rust** with Axum, Tokio, SQLx, and typed domain modules | Strong fit for deterministic financial arithmetic, high-concurrency event handling, explicit error paths, and low-latency services. |
+| Internal synchronous calls | **gRPC + Protobuf** | Typed, low-overhead service-to-service calls for policy checks, catalog reads, inventory reservations, and adapter commands. |
+| External/client API | **HTTPS REST + OpenAPI** | Stable consumer contract for the Next.js app, partner integrations, and operational tooling. |
+| Live UI updates | **SSE first; WebSocket only where bidirectional control is required** | SSE is simpler for one-way telemetry, alerts, audit entries, and co-pilot suggestions. Use WebSocket for operator control or platform sessions that genuinely need bidirectional traffic. |
+| Event backbone | **NATS JetStream** | Low-latency subjects with durable streams, replay, at-least-once delivery, pull consumers, and horizontally scalable worker groups. |
+| Durable workflows | **Temporal** with dedicated workflow workers | Use for flash-voucher lifecycles, reservation expiry, approval waits, retries, compensation, and platform reconciliation—not for every telemetry message. |
+| Primary database | **PostgreSQL** | Transactional source of truth for organizations, workspaces, campaigns, catalog facts, money policies, inventory reservations, approvals, and audit indexes. |
+| Cache and ephemeral coordination | **Redis** | Cache, short-lived deduplication windows, rate limits, and UI presence. Never make Redis the authoritative money or inventory ledger. |
+| Audit/event archive | **PostgreSQL append-only tables + S3-compatible object storage** | Queryable decision history plus immutable raw payloads, evidence bundles, and replay fixtures. |
+| Search/analytics | **PostgreSQL first; ClickHouse/OpenSearch later** | Avoid premature infrastructure. Add an analytical store only when audit/query volume or time-series exploration justifies it. |
+| Identity | **OIDC provider** + gateway validation + service-level authorization | Organization/workspace roles, operator approval permissions, and service-to-service identity without embedding auth logic in every UI route. |
+| Observability | **OpenTelemetry**, Prometheus, Grafana, centralized logs, trace backend | Correlate live event, policy verdict, worker execution, platform adapter call, and operator decision with one trace ID. |
+| Runtime | **Containers on Kubernetes** with Helm/Argo CD or an equivalent GitOps runtime | Separate API, event, workflow, and adapter scaling; support rolling deploys, health checks, graceful shutdown, and isolation of platform credentials. |
+
+## 2. Recommended service topology
+
+```text
+                                    ┌────────────────────────┐
+                                    │  Shopee / TikTok /      │
+                                    │  Lazada platform APIs   │
+                                    └────────────┬───────────┘
+                                                 │ webhooks / commands
+┌──────────────────┐    HTTPS/SSE/WS    ┌────────▼─────────┐
+│ Next.js surfaces │◄──────────────────►│ KrakenD Gateway  │
+│ Operator + Host  │                    │ auth/rate/route  │
+└────────┬─────────┘                    └────────┬─────────┘
+         │                                        │ REST/gRPC
+         ▼                                        ▼
+┌────────────────────────────────────────────────────────────┐
+│ Rust application services                                  │
+│ tenant • catalog • telemetry • policy • inventory • audit  │
+└───────────────┬──────────────────────────────┬─────────────┘
+                │                               │
+                │ NATS subjects                │ SQL transactions
+                ▼                               ▼
+       ┌─────────────────┐              ┌────────────────────┐
+       │ NATS JetStream  │              │ PostgreSQL          │
+       │ events + queues │              │ source of truth     │
+       └──────┬──────────┘              └────────────────────┘
+              │
+     ┌────────▼─────────┐       ┌─────────────────────────────┐
+     │ Rust event       │       │ Temporal workflows          │
+     │ workers          │       │ voucher / approval / retry   │
+     │ classify/project │       │ and compensation workers     │
+     └────────┬─────────┘       └──────────────┬──────────────┘
+              │                                │
+              └───────────────┬────────────────┘
+                              ▼
+                    ┌─────────────────────┐
+                    │ Platform adapters   │
+                    │ isolated credentials│
+                    └─────────────────────┘
+```
+
+## 3. Microservice boundaries
+
+Start with independently deployable modules and extract a separate service only when its
+scaling, security, ownership, or failure boundary is real. Do not create a network hop for
+every noun.
+
+| Service | Owns | Must not own |
+|---|---|---|
+| **Identity & Tenant Service** | Organizations, workspaces, roles, membership, tenant isolation | Product or promotion rules |
+| **Live Session Service** | Campaign/live-room/session lifecycle, host presence, channel bindings | Margin calculation or raw platform credentials |
+| **Catalog Service** | Approved product facts, SKU/variant state, claim registry, catalog version | AI-generated facts or unverified claims |
+| **Telemetry Ingestion Service** | Webhook/chat/order ingestion, normalization, deduplication, event publication | Final promotion decisions |
+| **Intent & Risk Service** | Intent classification, question clustering, spam/off-platform risk signals | Direct platform mutations |
+| **Co-pilot Service** | Glanceable suggestions, answer drafts, host approval UX state | Unverified catalog answers or financial verdicts |
+| **Margin Policy Service** | Integer minor-unit margin computation, fee/COGS rules, floor verdicts | UI state or platform API retries |
+| **Inventory Service** | Atomic reservations, release/commit, cross-channel stock view | AI ranking or voucher copy |
+| **Promotion Service** | Voucher/pin proposals and promotion state machine | Bypassing margin or inventory gates |
+| **Approval & Control Service** | Approval mode, Emergency Pause, operator decisions, kill switches | Recomputing domain facts |
+| **Execution Orchestrator** | Durable workflow state, retries, timeouts, compensation, reconciliation | Source-of-truth financial state |
+| **Platform Adapter Services** | Shopee/TikTok/Lazada protocol translation, webhook verification, idempotency keys | Shared cross-platform policy decisions |
+| **Audit Service** | Decision trace, actor, input hash, policy verdict, execution outcome | Mutable business state without an owning service |
+
+### Service boundary rule
+
+`Margin Policy`, `Inventory`, `Approval & Control`, and `Audit` are consequential boundaries.
+Any action that changes money, stock, promotion state, or external platform state must pass
+through their explicit ports and emit a traceable decision event.
+
+## 4. Event, worker, job, and workflow model
+
+### 4.1 Events — facts that happened
+
+Use immutable CloudEvents-like envelopes on NATS subjects. Examples:
+
+```text
+live.chat.received
+telemetry.intent.detected
+telemetry.risk.detected
+catalog.fact.versioned
+copilot.suggestion.created
+promotion.proposed
+margin.verdict.recorded
+inventory.reservation.created
+approval.decision.recorded
+platform.action.requested
+platform.action.completed
+platform.action.failed
+audit.decision.appended
+```
+
+Every event should carry at least:
+
+```json
+{
+  "event_id": "evt_01...",
+  "event_type": "inventory.reservation.created",
+  "occurred_at": "2026-11-20T00:00:00Z",
+  "tenant_id": "org_01",
+  "workspace_id": "ws_01",
+  "session_id": "session_01",
+  "correlation_id": "trace_01",
+  "causation_id": "evt_00",
+  "schema_version": 1,
+  "producer": "inventory-service",
+  "data": {}
+}
+```
+
+### 4.2 Workers — long-running consumers
+
+Workers consume durable JetStream pull consumers and acknowledge only after the side effect
+and idempotency record are committed. Recommended worker groups:
+
+- `telemetry-normalizer`: validates, deduplicates, and publishes normalized signals.
+- `intent-classifier`: batches bounded chat windows for classification.
+- `risk-screening`: evaluates moderation and off-platform risk.
+- `projection-worker`: builds dashboard/read models from immutable events.
+- `adapter-dispatcher`: sends bounded commands to marketplace adapters.
+- `reconciliation-worker`: compares requested, accepted, and observed platform state.
+- `audit-indexer`: writes searchable audit projections without mutating the original receipt.
+
+### 4.3 Jobs — bounded asynchronous tasks
+
+Use jobs for finite work that can be retried independently:
+
+- expire an uncompleted inventory reservation;
+- close an exhausted or expired voucher;
+- refresh a catalog snapshot;
+- replay a failed adapter command with the same idempotency key;
+- rebuild a read model from a known event range;
+- generate an evidence bundle for an audit or support case.
+
+### 4.4 Workflows — durable multi-step business processes
+
+Use Temporal workflows when the process has timers, human approval, retries, compensation,
+or external state reconciliation:
+
+```text
+PromotionWorkflow
+  → evaluate margin
+  → reserve inventory
+  → await approval / policy mode
+  → issue platform voucher
+  → observe platform acknowledgement
+  → commit or release reservation
+  → append audit receipt
+```
+
+The workflow orchestrates; the Rust domain services remain authoritative for calculations and
+transactions. Temporal activities must call those services rather than reimplement policies.
+
+## 5. Data and consistency rules
+
+| Data | Store | Consistency rule |
+|---|---|---|
+| Money, fees, COGS, margin | PostgreSQL `BIGINT` minor units + ISO currency/scale | No floating-point financial arithmetic; cross-currency operations require an explicit FX rate. |
+| Inventory reservation | PostgreSQL transaction and row/version locks | Reservation, floor verdict, and state transition are atomic and idempotent. |
+| Event durability | NATS JetStream + PostgreSQL outbox | Publish after the owning transaction commits; never rely on an in-memory event only. |
+| Short cache / rate limit | Redis | Evictable and reconstructable; never authoritative. |
+| Raw evidence / payload | S3-compatible object storage | Content-addressed or hash-bound, encrypted, retention-controlled. |
+| Read models | PostgreSQL projections initially | Rebuildable from events; no read model becomes the domain source of truth. |
+
+## 6. API and contract standards
+
+- External API: OpenAPI 3.1, JSON Schema, explicit error envelope, idempotency key for every
+  consequential mutation, and `correlation_id` propagation.
+- Internal API: Protobuf/gRPC for synchronous service calls; versioned messages and backward
+  compatible field evolution.
+- Events: schema registry or checked-in JSON Schema/Protobuf definitions; consumers must tolerate
+  additive fields and reject incompatible versions explicitly.
+- Platform adapters: one adapter contract, one implementation per platform; credentials and
+  platform-specific quirks never leak into the domain core.
+
+## 7. Production NFR baseline
+
+These are initial budgets to verify with load tests, not claims of achieved performance:
+
+| Path | Target |
+|---|---|
+| Operator read / catalog lookup | p95 < 150 ms excluding third-party calls |
+| Margin verdict | p95 < 50 ms from service receipt |
+| Chat-to-signal publication | p95 < 1 s under target load |
+| Co-pilot suggestion delivery | p95 < 3 s, matching the glanceable host interaction model |
+| Reservation decision | p95 < 150 ms and strictly serialized per SKU/variant key |
+| External adapter command | Timeout and retry policy per platform; never retry without idempotency key |
+| Availability | 99.95% for gateway and core control plane; degraded read-only mode during adapter outage |
+| Recovery | RPO ≤ 1 minute for event/data stores; RTO defined per deployment tier and tested quarterly |
+
+## 8. Security and operational guardrails
+
+- Terminate public TLS at the load balancer or gateway; use mTLS or workload identity internally.
+- Store marketplace credentials in a managed secret store; adapters receive least-privilege,
+  short-lived credentials where the platform supports them.
+- Enforce tenant/workspace authorization in the service layer, not only in Next.js or KrakenD.
+- Redact COGS, supplier data, tokens, and customer PII from logs and model prompts.
+- Emergency Pause must be a control-plane write with an auditable actor, timestamp, reason,
+  and fast propagation to promotion and adapter workers.
+- Every worker has bounded concurrency, retry policy, dead-letter handling, graceful shutdown,
+  and a replay procedure.
+
+## 9. What not to do
+
+- Do not put margin, inventory, or approval logic in Next.js Server Actions or KrakenD plugins.
+- Do not use Redis as the inventory ledger or as the only job queue.
+- Do not use Kafka, ClickHouse, service mesh, or a dozen microservices on day one without a
+  measured need; NATS + PostgreSQL + a small set of Rust services is the baseline.
+- Do not make every event synchronous or require every consumer to be online for a live signal.
+- Do not let an LLM directly issue platform mutations; the path must be proposal → deterministic
+  policy verdict → approval/control → idempotent adapter command.
+
+## 10. Delivery sequence
+
+1. **Foundation:** Next.js, KrakenD, one Rust API, PostgreSQL, OIDC, OpenTelemetry.
+2. **Live loop:** NATS JetStream, telemetry ingestion, intent/risk workers, SSE co-pilot feed.
+3. **Guardrails:** Margin Policy, Inventory, Approval & Control, audit receipts, Emergency Pause.
+4. **Execution:** Promotion service, platform adapter boundary, idempotent dispatcher, reconciliation.
+5. **Durability:** Temporal workflows for voucher expiry, approval waits, retries, and compensation.
+6. **Scale-out:** Split services by measured load and failure boundary; add analytical/search stores only
+   when production telemetry proves the need.
+
+## Related source of truth
+
+- [LivePilot OS Deep Context](./live-pilot-os-deep-context.md)
+- [Architecture Overview](./overview.md)
+- [API source of truth](./api/README.md)
+- [Data source of truth](./data/README.md)
+
+## References
+
+- [Next.js deployment](https://nextjs.org/docs/app/getting-started/deploying)
+- [Next.js self-hosting](https://nextjs.org/docs/app/guides/self-hosting)
+- [KrakenD documentation](https://www.krakend.io/docs/)
+- [NATS JetStream](https://docs.nats.io/concepts/jetstream)
+- [NATS pull consumers](https://docs.nats.io/learn/jetstream/pull-consumers)
+- [Temporal documentation](https://docs.temporal.io/)
+- [OpenTelemetry documentation](https://opentelemetry.io/docs/)
