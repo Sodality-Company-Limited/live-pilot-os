@@ -15,7 +15,7 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | PAY | [queues/PAY.md](queues/PAY.md) | Active queue |
 | PROOF | [queues/PROOF.md](queues/PROOF.md) | DAVE Mathematical Invariant & Assurance Proofs |
 | SEC | [queues/SEC.md](queues/SEC.md) | DAVE Multimodal Security & Privacy Controls |
-| TEMPLATE | [queues/TEMPLATE.md](queues/TEMPLATE.md) | TEMPLATE |
+| TEMPLATE | [queues/TEMPLATE.md](queues/TEMPLATE.md) | Active queue |
 | UX | [queues/UX.md](queues/UX.md) | Multimodal UX/UI Design Decision Layer |
 | WEB | [queues/WEB.md](queues/WEB.md) | DAVE Exact Web Application Pipeline |
 

@@ -19,6 +19,11 @@ This document groups LivePilot OS sub-features so they align with the four core 
 
 ## 1. Live Chat & Telemetry Understanding
 
+**BDD contract:** [Feature 01 — Real-Time Chat and Purchase-Signal Analysis](../02-product/bdd/feature-01-live-chat-telemetry.md)<br>
+**BRD:** [Feature 01 BRD — Real-Time Chat and Purchase-Signal Analysis](../02-product/brd/feature-01-live-chat-purchase-signal-analysis.md)<br>
+This contract maps the three sub-features below to behavior scenarios and the supporting
+purchase-signal, reliability, integration, and audit flows.
+
 ### Goal
 
 Receive chat and sales signals, then convert them into structured events that other systems can consume.
@@ -105,6 +110,10 @@ product.interest.updated
 
 ## 2. Streamer Co-pilot HUD
 
+**BDD contract:** [Feature 02 — Host Screen Assistant (Streamer Co-pilot HUD)](../02-product/bdd/feature-02-streamer-copilot-hud.md)<br>
+**BRD:** [Feature 02 BRD — Host Screen Assistant (Streamer Co-pilot HUD)](../02-product/brd/feature-02-host-screen-assistant.md)<br>
+This contract maps AI guidance, catalog-grounded Q&A, host alerts, and host approval behavior.
+
 ### Goal
 
 Help the host sell more effectively by displaying short, concise, evidence-based recommendations without rewriting the entire script.
@@ -187,6 +196,10 @@ copilot.answer.dismissed
 ---
 
 ## 3. StreamPilot Agent
+
+**BDD contract:** [Feature 03 — Store Management and Back-Office Profit Protection](../02-product/bdd/feature-03-streampilot-agent.md)<br>
+**BRD:** [Feature 03 BRD — Store Management and Back-Office Profit Protection](../02-product/brd/feature-03-store-management-profit-protection.md)<br>
+This contract maps product pinning, voucher, margin, inventory, scenario, workflow, and audit behavior.
 
 ### Goal
 
@@ -310,6 +323,10 @@ scenario.triggered
 ---
 
 ## 4. Compliance & Operator Control
+
+**BDD contract:** [Feature 04 — Risk Screening and Emergency Operator Control](../02-product/bdd/feature-04-risk-operator-control.md)<br>
+**BRD:** [Feature 04 BRD — Risk Screening and Emergency Operator Control](../02-product/brd/feature-04-risk-screening-operator-control.md)<br>
+This contract maps action logging, approval modes, Emergency Pause, moderation escalation, adapter safety, and execution audit.
 
 ### Goal
 
@@ -457,4 +474,4 @@ Choose one demo flow that covers all four features:
 
 ---
 
-[Back to LivePilot OS Source of Truth Index](./live-pilot-os-index.md)
+[Back to LivePilot OS Deep Context](./live-pilot-os-deep-context.md)
