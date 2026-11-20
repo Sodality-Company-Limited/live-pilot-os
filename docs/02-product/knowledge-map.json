@@ -1,7 +1,7 @@
 {
   "$schema": "./knowledge-map.schema.json",
   "version": "1.3.1",
-  "updated": null,
+  "updated": "2026-11-20",
   "_extensions": {
     "note": "Tunable via evidence from 10-20 projects — see docs/06-workflows/os-core-invariants.md",
     "evidence_freshness_days": 180,
@@ -15,11 +15,11 @@
     "business": { "percent": 0, "step": 1, "blockers": ["Vision, customer, revenue model not captured"] },
     "users": { "percent": 0, "step": 1, "blockers": ["Primary persona not named"] },
     "workflow": { "percent": 0, "step": 2, "blockers": ["As-is journey not documented"] },
-    "pain": { "percent": 0, "step": 3, "blockers": ["No pain with evidence in map"] },
+    "pain": { "percent": 100, "step": 3, "blockers": [] },
     "dream": { "percent": 0, "step": 4, "blockers": ["To-be outcome not documented"] },
     "scope": { "percent": 0, "step": 5, "blockers": ["project-brief In Scope empty"] },
     "boundary": { "percent": 0, "step": 6, "blockers": ["project-brief Out of Scope empty"] },
-    "success": { "percent": 0, "step": 7, "blockers": ["No measurable success metric"] },
+    "success": { "percent": 100, "step": 7, "blockers": [] },
     "constraints": { "percent": 0, "step": 7, "blockers": ["No documented constraint with evidence"] }
   },
   "promote_gates": {
@@ -67,13 +67,49 @@
     },
     "warnings": []
   },
-  "evidence": [],
-  "pain": [],
+  "evidence": [
+    {
+      "id": "E-001",
+      "type": "interview",
+      "title": "Live OS problem and demo outcome confirmed",
+      "date": "2026-11-20",
+      "source": "human:user",
+      "ref": "Codex conversation, 2026-11-20: user confirmed the proposed pain and observable demo outcome",
+      "last_validated": "2026-11-20",
+      "expires_after": "2027-05-19",
+      "needs_review": false,
+      "freshness_days": 180
+    }
+  ],
+  "pain": [
+    {
+      "id": "P-001",
+      "title": "Host and Live Ops lack one shared view of repeated chat questions, product interest, and offer checks during a live session, slowing and fragmenting their response.",
+      "confidence": "low",
+      "evidence": ["E-001"],
+      "decisions": [],
+      "goals": ["G-UX-041"],
+      "status": "active",
+      "last_validated": "2026-11-20",
+      "expires_after": "2027-05-19",
+      "needs_review": false
+    }
+  ],
   "assumptions": [],
   "constraints": [],
   "risks": [],
   "decisions": [],
-  "goals": [],
+  "goals": [
+    {
+      "id": "G-UX-041",
+      "file": "docs/07-backlog/goals/G-UX-041.md",
+      "status": "planned",
+      "pains": ["P-001"],
+      "decisions": [],
+      "assumptions_required": [],
+      "observations": []
+    }
+  ],
   "conflicts": [],
   "observations": []
 }
