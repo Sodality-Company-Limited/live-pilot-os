@@ -12,6 +12,22 @@ Project-local instructions define scope and product intent, but cannot override 
 governance constraints. Missing or contradictory governance context is a fail-closed condition:
 pause and report it before changing code.
 
+## Canonical navigation
+
+Use the following references to load the smallest correct context for a task:
+
+| Reference | Link |
+|-----------|------|
+| Local Soda skills | [skills/](skills/) |
+| Skills catalog and versions | [../docs/04-agents/skills-library.md](../docs/04-agents/skills-library.md) |
+| Persona catalog | [../docs/04-agents/personas/README.md](../docs/04-agents/personas/README.md) |
+| Agent roles and execution assets | [../docs/04-agents/](../docs/04-agents/) |
+| Stack and system boundaries | [../docs/03-architecture/overview.md](../docs/03-architecture/overview.md) |
+
+Before implementation, read the applicable skill from [skills/](skills/), select exactly one
+persona from the [persona catalog](../docs/04-agents/personas/README.md), and ground the work
+in the [architecture overview](../docs/03-architecture/overview.md).
+
 This document establishes the **Global Engineering Constitution**, **Anti-Hallucination Multimodal Socratic Clarification Protocol**, and **Multi-Round File-Based State Machine (Async Q&A via Markdown)** across all repositories and workspaces.
 
 ### Single-persona subagent invariant

@@ -1,6 +1,6 @@
 # Project brief — LivePilot OS
 
-> **Status:** Draft derived from `docs/03-architecture/source-of-truth/`; Product approval and customer validation are pending.
+> **Status:** Draft derived from `docs/03-architecture/`; Product approval and customer validation are pending.
 
 ## Vision
 
@@ -32,7 +32,7 @@ Primary users (proposed): live-stream Hosts and Live Ops staff working for live-
 
 ## Hackathon demonstration outcome
 
-Demonstrate one traceable scenario from chat intent to Host cue, product-action proposal, margin decision, operator-visible log, and emergency pause. See the [Requirements Baseline](../03-architecture/source-of-truth/live-pilot-os-requirements.md) and [Feature Map](../03-architecture/source-of-truth/live-pilot-os-feature-map.md#hackathon-mvp-to-demonstrate).
+Demonstrate one traceable scenario from chat intent to Host cue, product-action proposal, margin decision, operator-visible log, and emergency pause. See the [Requirements Baseline](../03-architecture/live-pilot-os-requirements.md) and [Feature Map](../03-architecture/live-pilot-os-feature-map.md#hackathon-mvp-to-demonstrate).
 
 ## Success measures
 
@@ -65,4 +65,4 @@ No numeric target is approved yet. Candidate demo measures to confirm:
 - [assumptions.md](assumptions.md)
 - [../03-architecture/overview.md](../03-architecture/overview.md)
 - [../06-workflows/knowledge-loop.md](../06-workflows/knowledge-loop.md)
-- [Business Case](../03-architecture/source-of-truth/live-pilot-os-business-case.md) — hypotheses and evidence required
+- [Business Case](../03-architecture/live-pilot-os-business-case.md) — hypotheses and evidence required

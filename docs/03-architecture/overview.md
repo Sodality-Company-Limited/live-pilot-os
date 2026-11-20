@@ -37,4 +37,4 @@
 
 - [folder-structure.md](folder-structure.md)
 - [../02-product/project-brief.md](../02-product/project-brief.md)
-- [LivePilot OS Source of Truth](source-of-truth/live-pilot-os-index.md)
+- [LivePilot OS Deep Context](live-pilot-os-deep-context.md)

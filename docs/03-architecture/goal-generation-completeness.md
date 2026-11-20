@@ -37,4 +37,4 @@
 |---|---|---|---|---|
 | `REQ-LP-001` | MVP / deferred / out | `G-...` | `AC-...` | covered / gap |
 
-Before a Goal becomes `ready`, this table must have no in-scope `gap`, and the Goal must pass the standard Soda checks in [goal-spec-guide.md](../../06-workflows/goal-spec-guide.md) and [knowledge-governance.md](../../06-workflows/knowledge-governance.md).
+Before a Goal becomes `ready`, this table must have no in-scope `gap`, and the Goal must pass the standard Soda checks in [goal-spec-guide.md](../06-workflows/goal-spec-guide.md) and [knowledge-governance.md](../06-workflows/knowledge-governance.md).

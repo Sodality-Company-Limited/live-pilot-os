@@ -36,6 +36,19 @@ Context + Skill + Goal + Governance + Approval + Audit
 | **Specs** | `docs/02-product/`, `docs/03-architecture/` | Read links in the active goal |
 | **API / data** | `docs/03-architecture/api/`, `data/` | Update contracts when goal changes APIs or domain rules |
 
+## Agent reference map
+
+Use these canonical references when selecting a skill, persona, role, or architecture context:
+
+| Reference | Link |
+|-----------|------|
+| Soda skills (local playbooks) | [.agents/skills/](.agents/skills/) |
+| Skills catalog and versions | [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md) |
+| Persona catalog | [docs/04-agents/personas/README.md](docs/04-agents/personas/README.md) |
+| Agent roles and responsibilities | [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md) |
+| Agent documentation hub | [docs/04-agents/](docs/04-agents/) |
+| Stack and system boundaries | [docs/03-architecture/overview.md](docs/03-architecture/overview.md) |
+
 **Goal status:** `draft` / `planned` = spec only (autonomously promoted to `ready` -> `in_progress` on `execute <GOAL_ID>` or swarming) · `ready` = may pick · `in_progress` · `review` · `blocked` · `approved` · `done`  
 (Canonical terms: [design-spec.md](docs/03-architecture/design-spec.md) §8 — collaboration phase ≠ goal status.)
 
@@ -171,7 +184,7 @@ Details: [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md)
 - **Touch map only** — no repo-wide changes outside goal scope.
 - **Spec stability** — do not guess; Intent is WHAT/WHY; **`analyze G-xxx`** before first execute.
 - **Semantic goal generation** — Codex, Claude, Antigravity, and other agents must ground every generated goal section in project evidence. Structural template conformance alone is insufficient; generic template examples, irrelevant stack assumptions, placeholder work steps, and invented commands must be removed.
-- **Goal completeness** — for LivePilot OS, generated goals must cite `REQ-LP-NNN` from [the requirements baseline](docs/03-architecture/source-of-truth/live-pilot-os-requirements.md) and pass [the completeness contract](docs/03-architecture/source-of-truth/goal-generation-completeness.md) before `ready`.
+- **Goal completeness** — for LivePilot OS, generated goals must cite `REQ-LP-NNN` from [the requirements baseline](docs/03-architecture/live-pilot-os-requirements.md) and pass [the completeness contract](docs/03-architecture/goal-generation-completeness.md) before `ready`.
 - **Provider parity** — Codex, Claude, and Antigravity must use the same `soda-goal-generation` skill and the same repository-grounded context. Goal quality must not vary by model; provider-specific goal shortcuts are forbidden.
 - **Context authority** — For deep-context requests, Antigravity is the designated context and goal-generation authority. Codex and Claude must consume Antigravity’s generated context and canonical goal artifacts for execution; they must not independently reinterpret goal intent, scope, dependencies, touch maps, or acceptance criteria.
 - **Antigravity generation gate (Goal Drafting Only — Not Execution Gate)** — Deep-context goal generation requires a persisted, source-cited Antigravity context artifact containing derived intent, atomic outcomes, repository evidence, and validation evidence. If it is absent, stale, or inconsistent during goal drafting, Codex and Claude fail closed and request a fresh Antigravity context pass. This gate applies ONLY to authoring new goals from scratch; during active goal execution (`execute G-xxx`), Codex and Claude MUST NOT invoke this gate or claim the goal card is "semantically incomplete" to refuse closure when implementation and tests pass 100% green. The agent autonomously updates the card and archives it.
