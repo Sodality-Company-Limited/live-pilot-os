@@ -1,9 +1,75 @@
 openapi: 3.1.0
 info:
-  title: Soda OS Multi-Node Core API Contract
+  title: LivePilot OS Core API Contract
   version: 1.0.0
-  description: Enterprise canonical contract governing UI Portal <-> BFF <-> KrakenD <-> Core Microservices
+  description: >-
+    Canonical HTTP contract for the LivePilot OS boundary:
+    Next.js Frontend <-> Next.js BFF <-> CORE BFF <-> Core Microservices.
+    Domain rules remain owned by the responsible microservice; this document defines
+    transport schemas, auth, correlation, idempotency, and public error semantics.
+tags:
+  - name: Live Sessions
+  - name: Promotions
 paths:
+  /v1/live-sessions/{session_id}/overview:
+    get:
+      tags: [Live Sessions]
+      summary: Get the host and operator overview for a live session
+      operationId: getLiveSessionOverview
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Live session overview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSessionOverview'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/Internal'
+
+  /v1/live-sessions/{session_id}/promotions:
+    post:
+      tags: [Promotions]
+      summary: Propose a promotion for policy evaluation and controlled execution
+      operationId: proposePromotion
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionProposalRequest'
+      responses:
+        '202':
+          description: Proposal accepted for policy evaluation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromotionProposalResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/PolicyRejected'
+        '500':
+          $ref: '#/components/responses/Internal'
+
   /v1/tenant/billing:
     get:
       summary: Fetch tenant billing state
@@ -28,7 +94,153 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    CorrelationId:
+      name: X-Correlation-Id
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 8
   schemas:
+    LiveSessionOverview:
+      type: object
+      required: [session_id, status, top_products, host_alerts, copilot]
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+          enum: [scheduled, live, ended, paused]
+        top_products:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopProduct'
+        host_alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostAlert'
+        copilot:
+          $ref: '#/components/schemas/CopilotSuggestion'
+      additionalProperties: false
+    TopProduct:
+      type: object
+      required: [product_id, name, interest_count, stock_status]
+      properties:
+        product_id:
+          type: string
+        name:
+          type: string
+        interest_count:
+          type: integer
+          minimum: 0
+        stock_status:
+          type: string
+          enum: [available, low, out_of_stock, unknown]
+      additionalProperties: false
+    HostAlert:
+      type: object
+      required: [alert_id, severity, message]
+      properties:
+        alert_id:
+          type: string
+        severity:
+          type: string
+          enum: [info, warning, high, critical]
+        message:
+          type: string
+      additionalProperties: false
+    CopilotSuggestion:
+      type: object
+      required: [suggestion_id, text, status]
+      properties:
+        suggestion_id:
+          type: string
+        text:
+          type: string
+        status:
+          type: string
+          enum: [pending, approved, edited, dismissed]
+      additionalProperties: false
+    PromotionProposalRequest:
+      type: object
+      required: [product_id, promotion_type, discount_percent, claim_limit]
+      properties:
+        product_id:
+          type: string
+        promotion_type:
+          type: string
+          enum: [FLASH_VOUCHER, PRODUCT_PIN]
+        discount_percent:
+          type: integer
+          minimum: 0
+          maximum: 100
+        claim_limit:
+          type: integer
+          minimum: 1
+      additionalProperties: false
+    PromotionProposalResponse:
+      type: object
+      required: [promotion_id, status, margin, inventory, next_action]
+      properties:
+        promotion_id:
+          type: string
+        status:
+          type: string
+          enum: [PENDING_POLICY, PENDING_APPROVAL, APPROVED, REJECTED, EXECUTED]
+        margin:
+          $ref: '#/components/schemas/MarginResult'
+        inventory:
+          $ref: '#/components/schemas/InventoryReservationResult'
+        next_action:
+          type: string
+      additionalProperties: false
+    MarginResult:
+      type: object
+      required: [result, calculated_margin_bps, minimum_margin_bps]
+      properties:
+        result:
+          type: string
+          enum: [APPROVED, NEEDS_APPROVAL, REJECTED]
+        calculated_margin_bps:
+          type: integer
+        minimum_margin_bps:
+          type: integer
+        policy_version:
+          type: string
+      additionalProperties: false
+    InventoryReservationResult:
+      type: object
+      required: [reservation_id, status, quantity]
+      properties:
+        reservation_id:
+          type: string
+        status:
+          type: string
+          enum: [RESERVED, RELEASED, COMMITTED, FAILED]
+        quantity:
+          type: integer
+          minimum: 0
+      additionalProperties: false
     SodaMultiNodeContract:
       type: object
       required:
@@ -93,3 +305,40 @@ components:
           items:
             $ref: '#/components/schemas/InvalidParam'
       additionalProperties: false
+  responses:
+    ValidationError:
+      description: Request validation failed
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Unauthorized:
+      description: Authentication is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    NotFound:
+      description: Resource was not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Conflict:
+      description: Idempotency or state conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    PolicyRejected:
+      description: Domain policy rejected the proposal
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Internal:
+      description: Unexpected internal error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
