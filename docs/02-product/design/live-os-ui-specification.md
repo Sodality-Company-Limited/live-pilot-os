@@ -1,7 +1,7 @@
-# G-UX-041 — Live OS UI specification
+# Live OS UI specification
 
 **Status:** Draft · requires product/design approval before implementation<br>
-**UX flow:** [G-UX-041](../../03-architecture/ux/G-UX-041.md)<br>
+**UX flow:** [Live OS UX flow](../../03-architecture/ux/live-os-ux-flow.md)<br>
 **Pain:** P-001 · **Evidence:** E-001
 
 ## Host page

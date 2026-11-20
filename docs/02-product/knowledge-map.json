@@ -88,7 +88,7 @@
       "confidence": "low",
       "evidence": ["E-001"],
       "decisions": [],
-      "goals": ["G-UX-041"],
+      "goals": [],
       "status": "active",
       "last_validated": "2026-11-20",
       "expires_after": "2027-05-19",
@@ -99,17 +99,7 @@
   "constraints": [],
   "risks": [],
   "decisions": [],
-  "goals": [
-    {
-      "id": "G-UX-041",
-      "file": "docs/07-backlog/goals/G-UX-041.md",
-      "status": "planned",
-      "pains": ["P-001"],
-      "decisions": [],
-      "assumptions_required": [],
-      "observations": []
-    }
-  ],
+  "goals": [],
   "conflicts": [],
   "observations": []
 }

@@ -25,12 +25,12 @@
 
 ### UX and visual design sources
 
-- [Information Architecture and UX Flow — G-UX-041](./ux/G-UX-041.md)
-- [UI Specification — G-UX-041](../02-product/design/G-UX-041.md)
+- [Live OS Information Architecture and UX Flow](./ux/live-os-ux-flow.md)
+- [Live OS UI Specification](../02-product/design/live-os-ui-specification.md)
 - [Live OS Design Token Proposal](./ux/live-os-design-tokens.md)
 - [Runtime Design Tokens](../../src/tokens.css)
 
-> **Approval status:** G-UX-041's UX flow, UI specification, and token proposal are drafts pending Product/Design approval. Treat them as the current proposal, not a frozen implementation contract.
+> **Approval status:** The UX flow, UI specification, and token proposal are drafts pending Product/Design approval. Treat them as references, not a frozen implementation contract.
 
 ## Deep-context operating model
 
@@ -145,7 +145,7 @@ When documents conflict, resolve them in this order:
 4. The detailed feature map and core-feature specification.
 5. The sub-feature quick reference and Business Model Canvas (hypotheses only).
 
-For UX-specific questions, use the G-UX-041 flow for roles, information hierarchy, shared-session behavior, screen states, and responsive behavior; use its UI specification for component behavior; use `src/tokens.css` for actual token values. The token proposal documents intent. Any mismatch between the approved design and CSS must be resolved and recorded before implementation proceeds.
+For UX-specific questions, use the Live OS UX flow for roles, information hierarchy, shared-session behavior, screen states, and responsive behavior; use the UI specification for component behavior; use `src/tokens.css` for actual token values. The token proposal documents intent. Any mismatch between the reviewed design and CSS should be resolved before implementation.
 
 Unresolved product or architecture intent must be recorded as an assumption or decision;
 agents must not silently invent a new platform contract, financial rule, or workflow state.

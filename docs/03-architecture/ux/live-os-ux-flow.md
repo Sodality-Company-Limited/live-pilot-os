@@ -1,8 +1,7 @@
-# G-UX-041 — Live OS information architecture and UX flow
+# Live OS information architecture and UX flow
 
 **Status:** Design draft · awaiting product/design approval<br>
 **Pain:** [P-001](../../02-product/knowledge-map.json) · **Evidence:** E-001<br>
-**Goal:** [G-UX-041](../../07-backlog/goals/G-UX-041.md)
 
 **User & job:** Host needs to understand audience interest and respond while presenting; Live Ops needs to monitor the same session and assess offers.<br>
 **Success:** In one demo scenario, a chat message becomes an audience topic and product signal, Live Ops makes an offer decision, and the corresponding Host cue appears in the shared session.<br>
@@ -50,4 +49,4 @@ DOM, screen-reader, and keyboard order: session header → live stage/chat → a
 
 ## Gate
 
-This draft is ready for product/design review. Do not promote the goal to `ready` or build UI until the UI spec and token proposal are approved and Soda OS traceability/coverage checks pass.
+This is an unapproved design draft. Treat it as a reference until Product/Design reviews it.

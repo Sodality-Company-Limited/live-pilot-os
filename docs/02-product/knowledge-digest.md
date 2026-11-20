@@ -83,8 +83,8 @@ Sync with `knowledge-map.json` → `conflicts[]` (`CF-xxx`). **Open conflict blo
 
 | Category | ID | Insight | Evidence | Confidence | Step | Promoted to |
 |----------|-----|---------|----------|------------|------|-------------|
-| Pain | P-001 | Host and Live Ops lack a shared view of chat questions, product interest, and offer checks during a live session. | E-001 | low | 3 | G-UX-041 |
-| Success | — | Demo shows chat → audience topic/product signal → Live Ops offer decision → corresponding Host cue in one shared scenario. | E-001 | low | 7 | G-UX-041 |
+| Pain | P-001 | Host and Live Ops lack a shared view of chat questions, product interest, and offer checks during a live session. | E-001 | low | 3 | — |
+| Success | — | Demo shows chat → audience topic/product signal → Live Ops offer decision → corresponding Host cue in one shared scenario. | E-001 | low | 7 | — |
 
 Start: **`discover`** — [knowledge-loop.md](../06-workflows/knowledge-loop.md)
 
