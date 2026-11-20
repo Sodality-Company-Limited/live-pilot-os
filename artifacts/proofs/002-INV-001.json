@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-WEB-002",
+  "goal_id": "G-WEB-002",
+  "invariant": "002-INV-001",
+  "invariant_id": "002-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/token-guardrail-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-WEB-002.md": "836289719823a7aa3ed120fac007271e7a2a58504ad795097a337e7cb891e3a5",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T10:01:35.066Z"
+}

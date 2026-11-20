@@ -1,0 +1,25 @@
+# Soda OS Goal Profile Schema: Migration Profile
+# Profile ID: migration
+# Description: Applied to zero-downtime data migrations, schema backfills, and legacy deprecation.
+
+profile:
+  id: migration
+  name: "Zero-Downtime Data Migration Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: migration_strategy
+    description: "Expand-and-contract or dual-write strategy specification."
+    type: markdown_section
+    required_elements:
+      - "Dual-write strategy"
+      - "Backfill batching"
+      - "Cutover trigger"
+
+  - id: parity_verification
+    description: "Checksum or differential consistency validation comparing source and target states."
+    type: markdown_section
+    required_elements:
+      - "Consistency oracle"
+      - "Verification query or tool"

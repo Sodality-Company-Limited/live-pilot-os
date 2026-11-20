@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-009",
+  "generated_at": "2026-10-14T06:18:02.302Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-009-INV-001",
+      "statement": "Stage 1 UI taxonomy codifies exactly 32 canonical classes across 6 categories and Draft 2020-12 schema validation passes with exit code 0.",
+      "verification_command": "node scripts/harness/ui-taxonomy-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-009-INV-002",
+      "statement": "UI taxonomy unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ui-taxonomy.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-009-INV-003",
+      "statement": "Python curriculum taxonomy module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_taxonomy.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-009-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-009",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "schemas/ui-taxonomy.schema.json",
+      "sha256": "9c7ba60b77ec3564b28f75b3c5afa823a5afacc6991bf5fb35544442c2e78421"
+    },
+    {
+      "path": "scripts/lib/ui-taxonomy.mjs",
+      "sha256": "d47642511f59b7fa725c74ca51b4037f76eda96c413584dda14303a24bb21174"
+    },
+    {
+      "path": "code/ml/src/curriculum/taxonomy.py",
+      "sha256": "05096da8597a96c62435ae915b6808884b69e100c3cd4e335a82947dca3e816a"
+    },
+    {
+      "path": "tests/unit/test-ui-taxonomy.mjs",
+      "sha256": "4f76ee3a6447f39d54e5eed962c403320049d84dbf75d419e94652280f40fa73"
+    },
+    {
+      "path": "scripts/harness/ui-taxonomy-harness.mjs",
+      "sha256": "c0bd2932c174e06578bdfb84fffaefe47945eed15194a37f89852eb735cdbb42"
+    },
+    {
+      "path": "tests/ml/test_curriculum_taxonomy.py",
+      "sha256": "9e7e4c528019dee97a5a580eaf3a4a1c46f462193ac715b3fc61de2bfa961478"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-009.md",
+      "sha256": "62066f6a204bf7fbf4c754fd1ba0476ed7d380acb0bab0af89723a91938407ab"
+    }
+  ],
+  "certification": "PASS"
+}

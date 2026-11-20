@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-020",
+  "generated_at": "2026-10-15T01:38:19.248Z",
+  "source_revision": "6884e3e43797ecdca0ec51a93fb9b11472029764",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-020-INV-001",
+      "claim": "Automated CI test harness and workflow gate blocking pull requests or goal completion if calibration metrics or routing accuracy breach established SLAs.",
+      "statement": "Automated CI test harness and workflow gate blocking pull requests or goal completion if calibration metrics or routing accuracy breach established SLAs.",
+      "verification_command": "node scripts/ci/ci-calibration-gate.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-020-INV-002",
+      "claim": "Unit test suite verifying exit code 0 on compliant suites, exit code 1 on SLA breaches, and routing invariant enforcement.",
+      "statement": "Unit test suite verifying exit code 0 on compliant suites, exit code 1 on SLA breaches, and routing invariant enforcement.",
+      "verification_command": "node tests/unit/test-ci-calibration-gate.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-020-INV-003",
+      "claim": "GitHub Actions workflow .github/workflows/calibration-gate.yml triggering blocking CI check on pull requests and pushes.",
+      "statement": "GitHub Actions workflow .github/workflows/calibration-gate.yml triggering blocking CI check on pull requests and pushes.",
+      "verification_command": "node -e \"require('fs').readFileSync('.github/workflows/calibration-gate.yml')\"",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "ci_calibration_gate_verification_accuracy",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "successes": 20,
+      "total": 20,
+      "sampleProportion": 1,
+      "center": 0.9194,
+      "lower": 0.8389,
+      "upper": 1,
+      "confidenceLevel": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/ci/ci-calibration-gate.mjs": "3de7d2c9917cbadaad5b7c68f7556fa1ce364aed6dcb282d6d33ff119319369e",
+    "template/scripts/ci/ci-calibration-gate.mjs": "3de7d2c9917cbadaad5b7c68f7556fa1ce364aed6dcb282d6d33ff119319369e",
+    ".github/workflows/calibration-gate.yml": "51552b027ab1151b0955ea27f095c178b3aa92eeb898f04fdd6b66ad6b55daf1",
+    "template/.github/workflows/calibration-gate.yml": "51552b027ab1151b0955ea27f095c178b3aa92eeb898f04fdd6b66ad6b55daf1",
+    "tests/unit/test-ci-calibration-gate.mjs": "5fbfe3ee909c620420ee944624d5e5ad79053ca67214168541a85adc8122c1c3",
+    "template/tests/unit/test-ci-calibration-gate.mjs": "5fbfe3ee909c620420ee944624d5e5ad79053ca67214168541a85adc8122c1c3",
+    "docs/07-backlog/goals/G-ML-020.md": "f341a18d0c2956880a4f6c55490f01476a31a21af9a65153534bf69edcfb42bc",
+    "docs/02-product/acceptance/G-ML-020.md": "5fa33c52b4f64f26ffca646d6b8a77fae6e1a4c3888a044e0d1956aef62f11ca",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-020.md": "877bb9244b9a13821bf3b06acbf65feb7c0fe0029e0c0d7882fa635a18edc684",
+    "scripts/agentic/g-ml-020-5why-socratic-engine.mjs": "5568b41f225f911bcda30fb827fa6534c86f58f1fd7e4a2216b769c5a672dacc"
+  },
+  "evaluation": {
+    "blocker": {
+      "id": "BLOCKER-ML-020-01",
+      "goal": "G-ML-020",
+      "title": "Absence of Automated CI Calibration Gatekeeper, Machine-Readable Quality Policy Enforcer, and Blocking Workflow Check",
+      "root_cause": "Prior to G-ML-020, CI/CD pipelines lacked automated enforcement of calibration bounds (ECE <= 0.040, Brier <= 0.080, HCER <= 0.010) and autonomous routing security invariants, allowing degraded models and unverified high-risk executions to merge without verification.",
+      "impact": "Autonomous agents operated without automated CI quality guardrails, risking catastrophic production failures from overconfident models and unverified high-risk tool actions.",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    "episodes_evaluated": 20,
+    "episodes_passed": 20,
+    "mutations_tested": 8,
+    "mutations_killed": 8,
+    "wilson_score": {
+      "successes": 20,
+      "total": 20,
+      "sampleProportion": 1,
+      "center": 0.9194,
+      "lower": 0.8389,
+      "upper": 1,
+      "confidenceLevel": 0.95
+    }
+  },
+  "certification": "PASS"
+}

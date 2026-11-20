@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-011",
+  "artifact_id": "ART-HUMAN-REVIEW-PACKET-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "review_packet_audit": {
+    "goals_aggregated": [
+      "G-WEB-001"
+    ],
+    "decisions_ingested": 2,
+    "calibrated_confidence": 0.92,
+    "risk_level": "medium",
+    "visual_diff_ratio": 0.0018,
+    "max_threshold": 0.005,
+    "zero_layout_shift": true,
+    "zero_overflow": true,
+    "zero_cot_opacity": true,
+    "human_review_logged": true
+  },
+  "invariants": [
+    {
+      "id": "011-INV-001",
+      "statement": "Human Review Packet satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/dave-cli.mjs show-review-packet G-WEB-001",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-engine.mjs",
+      "sha256": "6bb960e8a35ca8415b64d57c4521037e1de9914a91921c609400ce153fe44c2b"
+    },
+    {
+      "path": "scripts/lib/dave-cli.mjs",
+      "sha256": "3c4fe8911cfa31890745ea96f2ffdf1f3f7e610a1276b72c4a25f9e2d85cc8a7"
+    },
+    {
+      "path": "artifacts/review/DAVE-REVIEW-PACKET.md",
+      "sha256": "37a53b92b560abe6b1e882246b73f2cee244c3a4ec60f6d8e73c1c9122f5e897"
+    },
+    {
+      "path": ".agents/audit/decisions.jsonl",
+      "sha256": "3f4d6fbae8c2aa11e266ffc2eca7bbb9b0b6f94238fbc8ecccf668b4b46061b4"
+    },
+    {
+      "path": "tests/unit/test-dave-hitl-review.mjs",
+      "sha256": "48df93f2692b1652c05c0e49450388dbe97520725798e43512e035e289c39073"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-011.md",
+      "sha256": "cef3e8ad9bc88cd05a3e5765005f056c031730ba27217b3d373842d42fe23348"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-03T20:55:00.000Z"
+}

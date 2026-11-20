@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-CORE-003",
+  "goal_id": "G-CORE-003",
+  "invariant": "CORE-003-INV-001",
+  "invariant_id": "CORE-003-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/goal-template-conformance-harness.mjs G-CORE-003",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/_archived/G-CORE-003.md": "f983e55a42cb7a27f2eef76686528b6fcfa5a02e789be04a4a65d3c96b17bac1",
+    "scripts/lib/confidence-calibration.mjs": "5b9794905026e9d6d7718ba57a9cc2cea554744519f11389adcff61d4f5282d1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-29T05:57:06.670Z"
+}

@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Soda OS Multi-Node Core API Contract
+  version: 1.0.0
+  description: Enterprise canonical contract governing UI Portal <-> BFF <-> KrakenD <-> Core Microservices
+paths:
+  /v1/tenant/billing:
+    get:
+      summary: Fetch tenant billing state
+      operationId: getTenantBilling
+      parameters:
+        - name: tenant_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tenant billing state successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SodaMultiNodeContract'
+        '404':
+          description: Tenant billing record not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    SodaMultiNodeContract:
+      type: object
+      required:
+        - id
+        - tenant_id
+        - base_currency
+        - amount_minor
+        - scale
+        - status
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        base_currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        amount_minor:
+          type: string
+          pattern: '^-?[0-9]+$'
+        scale:
+          type: integer
+          minimum: 0
+          maximum: 4
+        status:
+          type: string
+          enum: [draft, pending, active, completed, failed]
+      additionalProperties: false
+    InvalidParam:
+      type: object
+      required:
+        - name
+        - reason
+      properties:
+        name:
+          type: string
+        reason:
+          type: string
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+        - instance
+        - invalid_params
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+        invalid_params:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidParam'
+      additionalProperties: false

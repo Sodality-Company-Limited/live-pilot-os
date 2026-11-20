@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-004",
+  "generated_at": "2026-10-14T04:58:27.083Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-004-INV-001",
+      "statement": "Multi-persona collision detection, 4-tier precedence commutativity, and deadlock review packet generator satisfy all harness checks with zero mocks and exit code 0.",
+      "verification_command": "node scripts/harness/ux-conflict-resolver-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-004-INV-002",
+      "statement": "UX Multi-Persona Conflict Resolver unit test suite passes 19/19 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-conflict-resolver.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-004-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-004",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-conflict-resolver.mjs",
+      "sha256": "a9a8d4fd486715171bcb1a7acf8691513e95a9ed4c65acc42948486b9ed6d9b8"
+    },
+    {
+      "path": "tests/unit/test-ux-conflict-resolver.mjs",
+      "sha256": "5dedcc8a786dc8d1c5fdece712e572992538a125320657c6e126effeb8bd8eca"
+    },
+    {
+      "path": "scripts/harness/ux-conflict-resolver-harness.mjs",
+      "sha256": "8765aced4eae8a64ad4ca953c0f1a7f9146287c54e94a8ee2dc67ea83d596f4e"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-004.md",
+      "sha256": "0e41afd9fa90333fe154339be279356069c843e19678b2bd819b8b4aafd509e7"
+    }
+  ],
+  "certification": "PASS"
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-024",
+  "generated_at": "2026-10-10T18:51:07.887Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-024-INV-001",
+      "claim": "Comprehensive operational documentation, architectural decision records, model governance runbooks, and troubleshooting guides for calibrated agent execution.",
+      "statement": "Comprehensive operational documentation, architectural decision records, model governance runbooks, and troubleshooting guides for calibrated agent execution.",
+      "verification_command": "node tests/unit/test-operational-runbook.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-024-INV-002",
+      "claim": "Architecture guide defines explicit mathematical formulations for RLCD loss, 10-bin ECE, quadratic Brier score, and HCER.",
+      "statement": "Architecture guide defines explicit mathematical formulations for RLCD loss, 10-bin ECE, quadratic Brier score, and HCER.",
+      "verification_command": "node tests/unit/test-operational-runbook.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-024-INV-003",
+      "claim": "ADR-004 establishes accepted architectural decision record for calibrated confidence routing and circuit breaker fallback.",
+      "statement": "ADR-004 establishes accepted architectural decision record for calibrated confidence routing and circuit breaker fallback.",
+      "verification_command": "node tests/unit/test-operational-runbook.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-024-INV-004",
+      "claim": "Operator runbook provides actionable playbooks for CI gate failure, online drift alerts, circuit breaker recovery, and ledger audits.",
+      "statement": "Operator runbook provides actionable playbooks for CI gate failure, online drift alerts, circuit breaker recovery, and ledger audits.",
+      "verification_command": "node tests/unit/test-operational-runbook.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "documentation_and_runbook_completeness",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.8389,
+      "upper": 1,
+      "center": 0.9194,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "docs/03-architecture/confidence-aware-execution.md": "0a0a1e5ec9729fe32b80243b5a6dbd56248962050fe58b86a1d6256c6131666a",
+    "docs/05-decisions/ADR-004-calibrated-confidence-routing.md": "1dea9724969b9be6d570a2e983ef6d5116bb5ad62116a20a86807c20640949e9",
+    "docs/06-workflows/confidence-aware-execution.md": "ded35c956e9fb8602f8170974722f43ee53f9feaf406e8350d71fe7d7b692e6c",
+    "template/docs/06-workflows/confidence-aware-execution.md": "ded35c956e9fb8602f8170974722f43ee53f9feaf406e8350d71fe7d7b692e6c",
+    "tests/unit/test-operational-runbook.mjs": "9580cc22e154b262024c35bcbf5b134ee49c4d62b8a10e07bb97f9ee3fff5671",
+    "template/tests/unit/test-operational-runbook.mjs": "9580cc22e154b262024c35bcbf5b134ee49c4d62b8a10e07bb97f9ee3fff5671",
+    "docs/02-product/acceptance/G-ML-024.md": "1cd19951484b85f672440f0ef6944a63251f5e7d234ea378b0778f65b058c59b",
+    "template/docs/02-product/acceptance/G-ML-024.md": "1cd19951484b85f672440f0ef6944a63251f5e7d234ea378b0778f65b058c59b",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-024.md": "44546d7923b5df60c104b2946d188351179b176b458a6ece94ffc1dbecdeaf5c",
+    "template/docs/07-backlog/clarifications/CLARIFICATION-G-ML-024.md": "44546d7923b5df60c104b2946d188351179b176b458a6ece94ffc1dbecdeaf5c",
+    "scripts/agentic/g-ml-024-5why-socratic-engine.mjs": "3ce07f8007f6576e03132ceeaebe211bcc5f42b27d1815e6f7a9fd5ac4b2379d",
+    "template/scripts/agentic/g-ml-024-5why-socratic-engine.mjs": "3ce07f8007f6576e03132ceeaebe211bcc5f42b27d1815e6f7a9fd5ac4b2379d",
+    "docs/06_raw/20261002_150000_g_ml_024_baseline_replication_blocker.md": "b2be15a9be263ba922a2d2fb6cc1fd042b65046d1a6479295c74736fad6446c4",
+    "template/docs/06_raw/20261002_150000_g_ml_024_baseline_replication_blocker.md": "b2be15a9be263ba922a2d2fb6cc1fd042b65046d1a6479295c74736fad6446c4",
+    "docs/06_raw/20261002_150500_g_ml_024_5why_socratic_dialectic.md": "55e7d35304b5080dc8a8e0280ea85400f55c48a664bde698af96968500703134",
+    "template/docs/06_raw/20261002_150500_g_ml_024_5why_socratic_dialectic.md": "55e7d35304b5080dc8a8e0280ea85400f55c48a664bde698af96968500703134"
+  },
+  "source_files": [
+    {
+      "path": "docs/03-architecture/confidence-aware-execution.md",
+      "sha256": "0a0a1e5ec9729fe32b80243b5a6dbd56248962050fe58b86a1d6256c6131666a"
+    },
+    {
+      "path": "docs/05-decisions/ADR-004-calibrated-confidence-routing.md",
+      "sha256": "1dea9724969b9be6d570a2e983ef6d5116bb5ad62116a20a86807c20640949e9"
+    },
+    {
+      "path": "docs/06-workflows/confidence-aware-execution.md",
+      "sha256": "ded35c956e9fb8602f8170974722f43ee53f9feaf406e8350d71fe7d7b692e6c"
+    },
+    {
+      "path": "template/docs/06-workflows/confidence-aware-execution.md",
+      "sha256": "ded35c956e9fb8602f8170974722f43ee53f9feaf406e8350d71fe7d7b692e6c"
+    },
+    {
+      "path": "tests/unit/test-operational-runbook.mjs",
+      "sha256": "9580cc22e154b262024c35bcbf5b134ee49c4d62b8a10e07bb97f9ee3fff5671"
+    },
+    {
+      "path": "template/tests/unit/test-operational-runbook.mjs",
+      "sha256": "9580cc22e154b262024c35bcbf5b134ee49c4d62b8a10e07bb97f9ee3fff5671"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-024.md",
+      "sha256": "1cd19951484b85f672440f0ef6944a63251f5e7d234ea378b0778f65b058c59b"
+    },
+    {
+      "path": "template/docs/02-product/acceptance/G-ML-024.md",
+      "sha256": "1cd19951484b85f672440f0ef6944a63251f5e7d234ea378b0778f65b058c59b"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-024.md",
+      "sha256": "44546d7923b5df60c104b2946d188351179b176b458a6ece94ffc1dbecdeaf5c"
+    },
+    {
+      "path": "template/docs/07-backlog/clarifications/CLARIFICATION-G-ML-024.md",
+      "sha256": "44546d7923b5df60c104b2946d188351179b176b458a6ece94ffc1dbecdeaf5c"
+    },
+    {
+      "path": "scripts/agentic/g-ml-024-5why-socratic-engine.mjs",
+      "sha256": "3ce07f8007f6576e03132ceeaebe211bcc5f42b27d1815e6f7a9fd5ac4b2379d"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-024-5why-socratic-engine.mjs",
+      "sha256": "3ce07f8007f6576e03132ceeaebe211bcc5f42b27d1815e6f7a9fd5ac4b2379d"
+    },
+    {
+      "path": "docs/06_raw/20261002_150000_g_ml_024_baseline_replication_blocker.md",
+      "sha256": "b2be15a9be263ba922a2d2fb6cc1fd042b65046d1a6479295c74736fad6446c4"
+    },
+    {
+      "path": "template/docs/06_raw/20261002_150000_g_ml_024_baseline_replication_blocker.md",
+      "sha256": "b2be15a9be263ba922a2d2fb6cc1fd042b65046d1a6479295c74736fad6446c4"
+    },
+    {
+      "path": "docs/06_raw/20261002_150500_g_ml_024_5why_socratic_dialectic.md",
+      "sha256": "55e7d35304b5080dc8a8e0280ea85400f55c48a664bde698af96968500703134"
+    },
+    {
+      "path": "template/docs/06_raw/20261002_150500_g_ml_024_5why_socratic_dialectic.md",
+      "sha256": "55e7d35304b5080dc8a8e0280ea85400f55c48a664bde698af96968500703134"
+    }
+  ],
+  "certification": "PASS"
+}

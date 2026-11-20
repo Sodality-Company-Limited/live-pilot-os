@@ -1,0 +1,21 @@
+version: 1
+goal_id: G-ML-008
+calibrated_at: '2026-09-30T10:30:00+00:00'
+tau_low: 0.65
+tau_high: 0.85
+cost_matrix:
+  false_accept_cost: 10.0
+  false_deferral_cost: 1.0
+  proceed_cost: 0.0
+  verify_cost: 0.2
+  defer_cost: 1.0
+  human_review_cost: 2.0
+constraints:
+  max_false_accept_rate: 0.01
+  max_false_deferral_rate: 0.05
+  high_risk_confidence_guard: 0.85
+action_policies:
+- proceed
+- verify
+- defer
+- human_review

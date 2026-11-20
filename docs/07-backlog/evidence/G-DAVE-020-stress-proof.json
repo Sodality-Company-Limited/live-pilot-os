@@ -1,0 +1,86 @@
+{
+  "goal_id": "G-DAVE-020",
+  "git_head_sha": "23dfd6c3c028a8b7420e4680f204ee054ae8dc7d",
+  "timestamp_utc": "2026-10-11T06:11:58Z",
+  "stress_evaluation": {
+    "max_allowed_drawdown_pct": 5.0,
+    "worst_drawdown_pct": 1.391,
+    "all_drawdowns_contained": true,
+    "total_liquidation_calls": 0,
+    "zero_liquidations_certified": true,
+    "max_cvar_99_pct": 0.1249
+  },
+  "episodes": {
+    "MARCH_2020_COVID_CRASH": {
+      "episode": "MARCH_2020_COVID_CRASH",
+      "ticks_evaluated": 1440,
+      "net_return_pct": 0.541,
+      "max_drawdown_pct": 0.223,
+      "var_99_pct": 0.017,
+      "cvar_99_pct": 0.0189,
+      "liquidation_margin_calls": 0,
+      "circuit_breaker_trips": 0,
+      "orders_dispatched": 1,
+      "orders_vetoed": 0,
+      "drawdown_contained": true,
+      "zero_liquidations_preserved": true
+    },
+    "MAY_2021_LIQUIDATION_CASCADE": {
+      "episode": "MAY_2021_LIQUIDATION_CASCADE",
+      "ticks_evaluated": 1440,
+      "net_return_pct": 1.33,
+      "max_drawdown_pct": 1.391,
+      "var_99_pct": 0.0872,
+      "cvar_99_pct": 0.0991,
+      "liquidation_margin_calls": 0,
+      "circuit_breaker_trips": 0,
+      "orders_dispatched": 1,
+      "orders_vetoed": 0,
+      "drawdown_contained": true,
+      "zero_liquidations_preserved": true
+    },
+    "NOV_2022_FTX_CRASH": {
+      "episode": "NOV_2022_FTX_CRASH",
+      "ticks_evaluated": 1440,
+      "net_return_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "var_99_pct": 0.0,
+      "cvar_99_pct": 0.0,
+      "liquidation_margin_calls": 0,
+      "circuit_breaker_trips": 0,
+      "orders_dispatched": 0,
+      "orders_vetoed": 0,
+      "drawdown_contained": true,
+      "zero_liquidations_preserved": true
+    },
+    "YEAR_2023_SIDEWAYS_CHOP": {
+      "episode": "YEAR_2023_SIDEWAYS_CHOP",
+      "ticks_evaluated": 1440,
+      "net_return_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "var_99_pct": 0.0,
+      "cvar_99_pct": 0.0,
+      "liquidation_margin_calls": 0,
+      "circuit_breaker_trips": 0,
+      "orders_dispatched": 0,
+      "orders_vetoed": 0,
+      "drawdown_contained": true,
+      "zero_liquidations_preserved": true
+    },
+    "YEAR_2024_BULL_EXPANSION": {
+      "episode": "YEAR_2024_BULL_EXPANSION",
+      "ticks_evaluated": 1440,
+      "net_return_pct": 5.524,
+      "max_drawdown_pct": 1.287,
+      "var_99_pct": 0.1113,
+      "cvar_99_pct": 0.1249,
+      "liquidation_margin_calls": 0,
+      "circuit_breaker_trips": 0,
+      "orders_dispatched": 1,
+      "orders_vetoed": 0,
+      "drawdown_contained": true,
+      "zero_liquidations_preserved": true
+    }
+  },
+  "exit_code": 0
+}

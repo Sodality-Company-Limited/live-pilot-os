@@ -1,0 +1,44 @@
+{
+  "decision_id": "DAVE-FE-0002",
+  "decision_type": "frontend_implementation",
+  "goal_id": "G-WEB-005",
+  "decision": {
+    "summary": "Component-First Implementation specification under DAVE governance strictly binding CommandRail, DecisionCanvas, and EvidencePanel to approved design tokens with zero raw hex codes and zero CLS layout reservations",
+    "primary_action": "implement_workspace_components",
+    "components": [
+      "code/src/components/CommandRail.tsx",
+      "code/src/components/DecisionCanvas.tsx",
+      "code/src/components/EvidencePanel.tsx"
+    ],
+    "fixtures": "code/src/components/fixtures/workspaceFixtures.ts",
+    "token_bindings": "Strictly bound to code/src/tokens/index.css with zero raw hex values and zero arbitrary spacing brackets",
+    "state_matrix": "Full deterministic coverage of Empty, Loading, Partial, Full, and Error states per component"
+  },
+  "confidence": 0.96,
+  "risk": "low",
+  "evidence": [
+    "code/src/components/CommandRail.tsx",
+    "code/src/components/DecisionCanvas.tsx",
+    "code/src/components/EvidencePanel.tsx",
+    "code/src/components/fixtures/workspaceFixtures.ts"
+  ],
+  "references": [
+    "REF-0001",
+    "REF-0005"
+  ],
+  "assumptions": [
+    "Target viewport is locked at 1440x900 desktop @ 1.0 DPR with Inter font",
+    "Zero expected cumulative layout shift (CLS = 0) via explicit skeleton height reservations",
+    "Zero raw hex colors or unapproved spacing values"
+  ],
+  "alternatives_rejected": [
+    "Ad-hoc freeform implementation without reference citations rejected due to visual drift risks",
+    "Inline style hex values rejected due to violation of ADR-005 token guardrails",
+    "Unbounded dynamic height skeletons rejected due to layout shift risks"
+  ],
+  "verification": [
+    "scripts/harness/token-guardrail-harness.mjs",
+    "tests/unit/test-workspace-components.mjs"
+  ],
+  "human_action": "none"
+}

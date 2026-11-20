@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-009",
+  "artifact_id": "ART-MOTION-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "status": "PASSED",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "motion_metrics": {
+    "max_transition_duration_ms": 300,
+    "max_duration_ceiling_satisfied": true,
+    "layout_thrashing_properties_prohibited": [
+      "top",
+      "left",
+      "right",
+      "bottom",
+      "width",
+      "height",
+      "margin",
+      "padding"
+    ],
+    "keyframes_audited": 5,
+    "gpu_accelerated_properties_enforced": [
+      "transform",
+      "opacity"
+    ],
+    "prefers_reduced_motion_override_active": true,
+    "fps_budget": "60fps_hardware_accelerated"
+  },
+  "invariants": [
+    {
+      "id": "009-INV-001",
+      "statement": "Motion and Interaction Fidelity satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/motion-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/src/styles/motion.css",
+      "sha256": "0d66bca6bfb0e1ce5f8c8658ae972d436e2b3d6dbb6394b5b731ab71321c9a2d"
+    },
+    {
+      "path": "scripts/harness/motion-harness.mjs",
+      "sha256": "64088f833362d9021c16831d95c40abc1c5f3601ca986b3e6309565c93face4b"
+    },
+    {
+      "path": "code/src/tokens/index.css",
+      "sha256": "e8652aa197d23393342196f83c573aee1f142179ebc73577615406c2150e2b7c"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-14T13:33:56.940Z"
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-003",
+  "generated_at": "2026-10-11T07:32:09.628Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-003-INV-001",
+      "claim": "Reproducible evaluation benchmark comparing Qwen3-8B and Gemma 4 on raw autoregressive accuracy, perplexity, and baseline calibration error.",
+      "statement": "Reproducible evaluation benchmark comparing Qwen3-8B and Gemma 4 on raw autoregressive accuracy, perplexity, and baseline calibration error.",
+      "verification_command": "pytest tests/ml/test_baseline_eval.py",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/benchmarks/baseline_eval.py",
+      "sha256": "ef686ee80e56c9aa550f50bc7af569013178e650eb3f0948c44415e806796f6d"
+    },
+    {
+      "path": "code/ml/configs/candidates.yaml",
+      "sha256": "74e574a42960d02de64f446246e60c08982cebe46c4248dbfc9c0e5e5d8dd35b"
+    },
+    {
+      "path": "tests/ml/test_baseline_eval.py",
+      "sha256": "b6557b07e6b1d451335230f22cc750b947b8e0c9a961569a8b9bbe839096fc1e"
+    },
+    {
+      "path": "artifacts/benchmarks/baseline_scorecard.json",
+      "sha256": "53b3354c0a042771035d0b0f70fefe41835eac9f39888cb3caa321a8bfb9fc58"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-003.md",
+      "sha256": "b159876564774187edbb7715553ac3b55afbb6c89e2185da925b82ecdedccb3e"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-003.md",
+      "sha256": "9149122a0aefe20f98cf7288f3ae96cd327ede4faba8bac9eedd2e799067b9b0"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-003.md",
+      "sha256": "9e5a536508559307ea9d2fb0c50322703c3fdbb9d3d149b8bc2378cd2bf038fc"
+    },
+    {
+      "path": "scripts/agentic/g-ml-003-5why-socratic-engine.mjs",
+      "sha256": "ac283bdeaf0685ae003e55754245a644bbde139eb60cf80b557f047f5f28957f"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-003-5why-socratic-engine.mjs",
+      "sha256": "ac283bdeaf0685ae003e55754245a644bbde139eb60cf80b557f047f5f28957f"
+    }
+  ],
+  "certification": "PASS"
+}

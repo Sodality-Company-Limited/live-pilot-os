@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-CORE-009",
+  "goal_id": "G-CORE-009",
+  "invariant": "CORE-009-INV-001",
+  "invariant_id": "CORE-009-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/artifact-provenance-harness.mjs docs/07-backlog/goals/G-CORE-009.md",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-CORE-009.md": "d85a30f110c458dd9b815ac62ad31c71771bcdc2be18bfcc2cb0372100aad358",
+    "scripts/lib/confidence-calibration.mjs": "5b9794905026e9d6d7718ba57a9cc2cea554744519f11389adcff61d4f5282d1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-29T14:52:53.190Z"
+}

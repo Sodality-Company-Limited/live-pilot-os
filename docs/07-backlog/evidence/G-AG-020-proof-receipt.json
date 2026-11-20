@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-020",
+  "classification": "executable_invariant",
+  "source_revision": "550bf01f64e872fd1daf3751bfc762dc9615157f",
+  "invariants": [
+    {
+      "id": "G-AG-020-INV-001",
+      "statement": "Coordinator-to-subagent dispatch lifecycle coordinates input packet, session preparation, budget gate, and telemetry binding, transitioning only executable goals to dispatched state.",
+      "verification_command": "node --test scripts/agents/test/provider-adapter-contract.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/provider-adapter-contract.mjs",
+      "sha256": "b41a34c2dc3e2e2456631a86443563408b2f2fada5dbf7e16baf618841da1367"
+    },
+    {
+      "path": "scripts/agents/test/provider-adapter-contract.test.mjs",
+      "sha256": "695f45ac671dc4c14bb23f47dbfb3fcb0511fbdd04a6df52c1de1538c88313fe"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:57:00.000Z"
+}

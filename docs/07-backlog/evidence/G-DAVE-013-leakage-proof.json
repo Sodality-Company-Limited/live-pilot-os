@@ -1,0 +1,11 @@
+{
+  "goal_id": "G-DAVE-013",
+  "train_records_count": 160,
+  "validation_records_count": 11,
+  "embargo_buffer_minutes": 60.0,
+  "train_sha256": "6899596401062ab8ced7cac7e7271cecfee82d21930329b4143d23aa1a787e09",
+  "validation_sha256": "5264fee4c85aa3451385cb5d68b8b6816b63da93198f735817414b88e75a5c73",
+  "leakage_scan_passed": true,
+  "artifacts_verified": true,
+  "timestamp_utc": "2026-10-09T08:10:00Z"
+}

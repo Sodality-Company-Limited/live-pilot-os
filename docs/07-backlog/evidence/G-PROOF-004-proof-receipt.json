@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-004",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-004-INV-001",
+      "statement": "Touch Map Analyzer and Collision Gate satisfies strict pairwise set disjointness TouchMap(Gi) ∩ TouchMap(Gj) = ∅ with zero mocks, passing all 32 unit tests and active goal scans with exit code 0.",
+      "verification_command": "node scripts/harness/touch-map-collision-gate.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/touch-map-analyzer.mjs",
+      "sha256": "02a830cb2e33f1879d2608d186894f59815cc68b37e249d59cc30db7e18e263b"
+    },
+    {
+      "path": "scripts/harness/touch-map-collision-gate.mjs",
+      "sha256": "ff43549c279de7c96f735c7292ae9e5d698ed7b8b8210116fbb58eef025fde5a"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T17:10:00.000Z"
+}

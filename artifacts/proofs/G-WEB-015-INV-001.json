@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-WEB-015",
+  "goal_id": "G-WEB-015",
+  "invariant": "G-WEB-015-INV-001",
+  "invariant_id": "G-WEB-015-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/ui-spec-conformance-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-WEB-015.md": "f38d5e841fbdc7b4ed02fbd11d64c9dbcfe6eadf4f0b47a3c92eb5de8606924b",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T10:01:35.971Z"
+}

@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-DAVE-005",
+  "goal_id": "G-DAVE-005",
+  "invariant": "G-DAVE-005-INV-001",
+  "invariant_id": "G-DAVE-005-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/routing-truth-table-harness.mjs docs/07-backlog/goals/G-DAVE-005.md",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-DAVE-005.md": "98511ab7e02ff976099df6dbfe374ecc3fe73ac0a2f3381bead3c8b118afd1e0",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T07:32:29.492Z"
+}

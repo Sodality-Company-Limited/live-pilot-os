@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-028",
+  "generated_at": "2026-10-03T18:44:00.000Z",
+  "model_id": "soda-dave-reasoner-v2",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "dataset_lineage": {
+    "commit": "7f26153f3e18f5da22e06983e16646a65b2926cc",
+    "sha256": "a1b2c3d4e5f678901234567890abcdefa1b2c3d4e5f678901234567890abcdef"
+  },
+  "tokenizer": {
+    "name": "dave-bpe-tokenizer-v2",
+    "sha256": "b2c3d4e5f678901234567890abcdefa1b2c3d4e5f678901234567890abcdefa1"
+  },
+  "training_config": {
+    "epochs": 5,
+    "learning_rate": 0.0002,
+    "sha256": "c3d4e5f678901234567890abcdefa1b2c3d4e5f678901234567890abcdefa1b2"
+  },
+  "artifacts": [
+    {
+      "path": "scripts/lib/dave-model-governor.mjs",
+      "sha256": "a26d2f9301d011c974b9805c549c711ad5d370f0369ec8e9d11c4e51d5b509c2"
+    },
+    {
+      "path": "tests/unit/test-dave-model-governor.mjs",
+      "sha256": "09beb5dbff072ac8b7d60911222f1a36b4e0f874ab6976e114c88640c63dd77a"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-003",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-DAVE-003-INV-001",
+      "statement": "DAVE Multi-Expert Conflict Resolution satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-schema-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-conflict-resolver.mjs",
+      "sha256": "2c9c9128ccbf6fb6456dff7ed646c125fd259b1708349ef550a4809415f8b841"
+    },
+    {
+      "path": "tests/unit/test-dave-conflict-resolver.mjs",
+      "sha256": "08976729bb08c64631b3d40909c44c4ded5230470ec7ec421d6f80ddf197952f"
+    },
+    {
+      "path": "artifacts/proofs/G-DAVE-003-conflict-matrix.json",
+      "sha256": "2525bf3363c6ea93e4c09b1234c7811439abb3842999e5e26e6c21b13635cb3e"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T09:07:00.000Z"
+}

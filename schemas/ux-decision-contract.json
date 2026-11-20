@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soda.dev/schemas/ux-decision-contract.schema.json",
+  "title": "Soda OS UX/UI Design Decision Contract Schema",
+  "description": "Canonical schema governing multimodal UX/UI design decisions, scene graph bindings, 12-persona debates, token maps, 5-state component matrices, and cryptographic receipts.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "decision_id",
+    "goal_id",
+    "timestamp",
+    "lifecycle_state",
+    "decision",
+    "confidence",
+    "confidence_calibrated",
+    "risk_level",
+    "evidence",
+    "references",
+    "personas_involved",
+    "state_matrix",
+    "viewport_contract",
+    "verification_plan"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version indicator (1 for canonical v1)"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^UX-DEC-[0-9]{4}-[0-9]{3,}$",
+      "description": "Unique deterministic identifier for the UX decision (e.g. UX-DEC-0001-001)"
+    },
+    "goal_id": {
+      "type": "string",
+      "pattern": "^(G-[A-Z0-9]+-[0-9]{3}|G-[0-9]{3}|G-xxx)$",
+      "description": "Canonical Soda OS Goal Identifier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 UTC timestamp when decision was emitted"
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "OBSERVE",
+        "PERCEIVE",
+        "CRITIQUE_WCAG",
+        "CRITIQUE_HEURISTICS",
+        "DEBATE",
+        "RESOLVE_COLLISION",
+        "EVALUATE_CONFIDENCE",
+        "EMIT_DECISION",
+        "DEFER",
+        "REJECT_AS_UNSAFE"
+      ],
+      "description": "Current state in the 10-state decision lifecycle"
+    },
+    "execution_policy": {
+      "type": "string",
+      "enum": [
+        "autonomous_execute",
+        "defer_to_human",
+        "verify_required",
+        "fail_closed_blocked"
+      ],
+      "description": "Execution authorization policy derived from confidence and risk"
+    },
+    "decision": {
+      "type": "object",
+      "required": ["summary", "category", "touch_map", "tokens_applied"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Concise architectural, visual, or interaction choice summary"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "layout",
+            "typography",
+            "color_theme",
+            "navigation",
+            "motion_microinteraction",
+            "component_state",
+            "form_input",
+            "feedback_modal",
+            "accessibility_remediation",
+            "i18n_localization",
+            "ethical_guardrail"
+          ]
+        },
+        "touch_map": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Disjoint file touch map for code modification"
+        },
+        "tokens_applied": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Map of semantic roles to registered token variables"
+        }
+      },
+      "additionalProperties": false
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Calibrated confidence score strictly in [0.0, 1.0]"
+    },
+    "confidence_calibrated": {
+      "type": "boolean",
+      "const": true,
+      "description": "Asserts score is derived from proper scoring rules / RLCD value head"
+    },
+    "scoring_rule": {
+      "type": "object",
+      "properties": {
+        "brier_loss": { "type": "number", "minimum": 0.0 },
+        "proper_log_score": { "type": "number" },
+        "overconfidence_penalty": { "type": "number", "minimum": 0.0 },
+        "doubt_reward": { "type": "number", "minimum": 0.0 },
+        "ece_rolling": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      },
+      "additionalProperties": false
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Quantitative operational risk level"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Array of physical file paths or token locators on disk"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["reference_id", "content_hash", "uri"],
+        "properties": {
+          "reference_id": { "type": "string", "pattern": "^REF-[0-9]{4}$" },
+          "content_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "uri": { "type": "string" },
+          "authority": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "personas_involved": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "design_systems_lead",
+          "accessibility_auditor",
+          "interaction_choreographer",
+          "visual_balance_density",
+          "typography_scale_architect",
+          "motion_haptics_engineer",
+          "ergonomics_cognitive_critic",
+          "color_contrast_specialist",
+          "enterprise_info_architect",
+          "dark_pattern_ethics_watchdog",
+          "microcopy_tone_specialist",
+          "i18n_multilocale_stylist"
+        ]
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["persona", "property", "proposed_value", "rationale", "confidence"],
+        "properties": {
+          "persona": { "type": "string" },
+          "property": { "type": "string" },
+          "proposed_value": {},
+          "rationale": { "type": "string" },
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "veto_asserted": { "type": "boolean" },
+          "veto_reason": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "state_matrix": {
+      "type": "object",
+      "required": ["empty", "loading", "partial", "full", "error"],
+      "properties": {
+        "empty": { "type": "object", "description": "Specification for empty state" },
+        "loading": { "type": "object", "description": "Specification for skeleton loading state" },
+        "partial": { "type": "object", "description": "Specification for partial data state" },
+        "full": { "type": "object", "description": "Specification for full/success state" },
+        "error": { "type": "object", "description": "Specification for error recovery state" }
+      },
+      "additionalProperties": false
+    },
+    "viewport_contract": {
+      "type": "object",
+      "required": ["viewports", "max_overflow_px", "cls_score"],
+      "properties": {
+        "viewports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "width", "height"],
+            "properties": {
+              "name": { "type": "string" },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "max_overflow_px": { "type": "integer", "const": 0 },
+        "cls_score": { "type": "number", "maximum": 0.0 }
+      },
+      "additionalProperties": false
+    },
+    "conflicts_detected": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["persona_pair", "property", "resolution_applied", "winning_persona", "severity"],
+        "properties": {
+          "persona_pair": { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 2 },
+          "property": { "type": "string" },
+          "values_in_conflict": { "type": "array" },
+          "resolution_applied": { "type": "string" },
+          "winning_persona": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "alternatives_rejected": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["alternative", "rejection_reason"],
+        "properties": {
+          "alternative": { "type": "string" },
+          "rejection_reason": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "verification_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Executable test harnesses or invariant verification commands"
+    },
+    "ledger_record": {
+      "type": "object",
+      "required": ["prev_hash", "record_hash", "sequence_id"],
+      "properties": {
+        "prev_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "record_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "sequence_id": { "type": "integer", "minimum": 0 },
+        "merkle_root": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

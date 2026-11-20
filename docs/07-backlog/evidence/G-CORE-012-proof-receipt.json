@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-012",
+  "generated_at": "2026-10-11T07:31:21.365Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-012-INV-001",
+      "claim": "New Proof, ML, Runtime-Governance, and Observability Skills satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "statement": "New Proof, ML, Runtime-Governance, and Observability Skills satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node cli.js upgrade --report",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": ".agents/skills/soda-proof-assurance/SKILL.md",
+      "sha256": "22afcaad5272883a3ef6c0bcabd86279845793272f9ab6ca284a623f8c86d364"
+    },
+    {
+      "path": ".agents/skills/soda-statistical-evidence/SKILL.md",
+      "sha256": "9a499525638138f9e4e6529ce8094257d4b5d6a9d2e9ba72b4414e2fa1292271"
+    },
+    {
+      "path": ".agents/skills/soda-model-training/SKILL.md",
+      "sha256": "328c6f073d3304f59a589b1626a45bd8dd0f28d101d2809ba9194b17e5f39cc4"
+    },
+    {
+      "path": ".agents/skills/soda-agent-runtime-governance/SKILL.md",
+      "sha256": "9851339449e15d1f483662917613f05e2ae58784dc7845c0808a723fc3dd961d"
+    },
+    {
+      "path": ".agents/skills/soda-model-provenance/SKILL.md",
+      "sha256": "cf35fc351bcbc889da9b6c7570951d69da6c6bd3d2d03ebf6487295982855671"
+    },
+    {
+      "path": ".agents/skills/soda-agent-observability/SKILL.md",
+      "sha256": "fed919e64aa9a827573aa1092771ecd3b0d67f46f173ff602e5869743175f5af"
+    },
+    {
+      "path": ".agents/skills/soda-resource-budgeting/SKILL.md",
+      "sha256": "9cb6791ea23c92d8dc37964e92bb20a846eeaacc0fa174117d053667e5b6f7a7"
+    },
+    {
+      "path": "template/framework-manifest.yml",
+      "sha256": "271c009591754708e005ba2a6f5d166059fe85b3bb50c4afb1b5498a7d124860"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-CORE-012.md",
+      "sha256": "8ab512140d05ca7730752d682e5810a17baba75def0177666f5c0e8dd5eeebef"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-CORE-012.md",
+      "sha256": "b86eec92e03fb2579484483ecbe70556ebbb75b4be8e0c3419ca1c977ad5234a"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-CORE-012.md",
+      "sha256": "86917653e9a2d83395150cfa330abba9f1027d29ca2bb70f2438aabbcee7f13a"
+    },
+    {
+      "path": "scripts/agentic/g-core-012-5why-socratic-engine.mjs",
+      "sha256": "ce357c10a5a27aafedf946fe09e1abe0626523f66fe25adecd3887f3631bb542"
+    },
+    {
+      "path": "template/scripts/agentic/g-core-012-5why-socratic-engine.mjs",
+      "sha256": "ce357c10a5a27aafedf946fe09e1abe0626523f66fe25adecd3887f3631bb542"
+    }
+  ],
+  "certification": "PASS"
+}

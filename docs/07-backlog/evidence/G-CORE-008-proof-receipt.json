@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-008",
+  "generated_at": "2026-09-29T21:30:00.000Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-008-INV-001",
+      "statement": "Failure, Rollback, and Fail-Closed Harness satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/failure-rollback-harness.mjs docs/07-backlog/goals/G-CORE-008.md",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/failure-rollback-harness.mjs",
+      "sha256": "ba7feeb4ecf20578f0b5f91dfd7b851786ba9b3e1b81b5b3b4c4be2fc2cde033"
+    },
+    {
+      "path": "scripts/harness/routing-truth-table-harness.mjs",
+      "sha256": "67fb1aa74646ddccad4efd08cc87ed90b89213cda796e14803859854f1a5833a"
+    },
+    {
+      "path": "docs/03-architecture/agent-runtime-governance.md",
+      "sha256": "27c03f09c7a1ff6c924276ce6a01d0bf4f8343ee511cf101ee36de94e7d1b48e"
+    },
+    {
+      "path": ".agents/rules/agent-runtime-fail-closed.md",
+      "sha256": "24b325742fee6f7f820cd60c539b0ced685f5eedaaf10112717421a126f98761"
+    }
+  ],
+  "certification": "PASS"
+}

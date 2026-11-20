@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-002",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "002-INV-001",
+      "statement": "Design Tokens and Theme Contract satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/token-guardrail-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/03-architecture/design-tokens.md",
+      "sha256": "bca4d865ffd62e088d076c8122e9358b93b5a71cf2f1f66a4aa8e4eea315e53a"
+    },
+    {
+      "path": "code/src/tokens/index.css",
+      "sha256": "e8652aa197d23393342196f83c573aee1f142179ebc73577615406c2150e2b7c"
+    },
+    {
+      "path": "scripts/harness/token-guardrail-harness.mjs",
+      "sha256": "b234636aaae986628a72c97a98a13596d2777c67175cae7bb1c9f38143b4f48a"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-11T06:54:10.106Z"
+}

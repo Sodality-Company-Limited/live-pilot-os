@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-011",
+  "classification": "executable_invariant",
+  "source_revision": "2e04de11196ec921d454ec6ac9913abed5967bab",
+  "invariants": [
+    {
+      "id": "G-AG-011-INV-001",
+      "statement": "Oversized and expired telemetry files are pruned deterministically from telemetry directories without leaking unredacted traces.",
+      "verification_command": "node --test scripts/agents/test/telemetry-retention.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/telemetry-retention.mjs",
+      "sha256": "862d9c5b2b1065c87fd68fb63ea2e939085484fc10e976b48f894744a330d035"
+    },
+    {
+      "path": "scripts/agents/test/telemetry-retention.test.mjs",
+      "sha256": "f107328d4f7855a6cd518849fee7af2ce3761a8a21c8fefb5445f3f34d2ba6e5"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:41:00.000Z"
+}

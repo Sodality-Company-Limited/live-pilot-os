@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-027",
+  "generated_at": "2026-10-14T12:00:54.618Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "statistical_evidence",
+  "invariants": [
+    {
+      "id": "UX-027-INV-001",
+      "statement": "Streaming UX calibration drift monitor tracks 10-bin ECE <= 0.050, Brier <= 0.150, HCER <= 0.020, and trips circuit breaker fail-closed.",
+      "verification_command": "node scripts/harness/ux-telemetry-drift-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-027-INV-002",
+      "statement": "Streaming UX calibration drift monitor Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-telemetry-monitor.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-027-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-027",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-calibration-drift-monitor.mjs",
+      "sha256": "e09cba4111afacbc67be210b5e557f99ed1679cf7b23f0658b761f3a881736d8"
+    },
+    {
+      "path": "tests/unit/test-ux-telemetry-monitor.mjs",
+      "sha256": "c3aeb3686e7204d54c25d3171d1b7b2c3cba337c9184cdb9d31ef856f8a6a9da"
+    },
+    {
+      "path": "scripts/harness/ux-telemetry-drift-harness.mjs",
+      "sha256": "ba749a3c5506b90003a793f3412e7bf11fc36dae76855cda78faeb87ecd9fec5"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-027.md",
+      "sha256": "edcf29a9b089f7f03f8b727e083a2d5a9a532c27028b14e7eb94065a1441cb06"
+    }
+  ],
+  "certification": "PASS"
+}

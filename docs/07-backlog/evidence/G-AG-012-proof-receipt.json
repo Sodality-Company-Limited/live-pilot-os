@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-012",
+  "classification": "executable_invariant",
+  "source_revision": "2421be57b645d9d7d08086c9ccaa9fbf054f9c21",
+  "invariants": [
+    {
+      "id": "G-AG-012-INV-001",
+      "statement": "Mid-session token accumulation is tracked incrementally and execution is halted when cumulative tokens breach declared limits.",
+      "verification_command": "node --test scripts/agents/test/token-budget-tracker.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/token-budget-tracker.mjs",
+      "sha256": "68685990ea30f02585fd46dfe5bbe8d11e7e4cad65bfb4c580fc1896561f068a"
+    },
+    {
+      "path": "scripts/agents/test/token-budget-tracker.test.mjs",
+      "sha256": "d426e98ab7d06cd2732cd9d7bd235fed24402daf1ee9be8bcee5b404a48c50b3"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:39:00.000Z"
+}

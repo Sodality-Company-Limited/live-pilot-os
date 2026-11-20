@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SodaSubagentHandoffPayload",
+  "description": "Standardized, machine-readable subagent handoff emitted across all CLI providers.",
+  "type": "object",
+  "required": [
+    "status",
+    "provider",
+    "goalId",
+    "role",
+    "persona",
+    "changedFiles",
+    "inputTokens",
+    "outputTokens",
+    "summary"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["complete", "blocked", "needs-review", "idle", "rejected"]
+    },
+    "provider": {
+      "type": "string"
+    },
+    "goalId": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "persona": {
+      "type": "string"
+    },
+    "sessionKey": {
+      "type": ["string", "null"]
+    },
+    "promptHash": {
+      "type": ["string", "null"]
+    },
+    "changedFiles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "inputTokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "outputTokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "summary": {
+      "type": "string"
+    },
+    "stderr": {
+      "type": "string"
+    },
+    "exitCode": {
+      "type": ["integer", "null"]
+    }
+  },
+  "additionalProperties": false
+}

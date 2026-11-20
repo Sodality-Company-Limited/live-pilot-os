@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-015",
+  "artifact_id": "ART-KEYBOARD-NAVIGATION-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "certification": "PASS",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "interaction_verification_audit": {
+    "total_interactive_elements": 16,
+    "tab_order_verified": true,
+    "reverse_tab_order_verified": true,
+    "focus_ring_coverage_ratio": 1.0,
+    "missing_focus_indicators": 0,
+    "skipped_tab_indices": 0,
+    "states_tested_count": 7,
+    "components_tested_count": 4,
+    "total_transitions_evaluated": 28,
+    "observed_layout_shift": 0,
+    "layout_shift_ceiling": 0.0000,
+    "clipping_detected": false,
+    "modals_tested": [
+      "ReviewModal"
+    ],
+    "focus_contained": true,
+    "forward_wrap_verified": true,
+    "reverse_wrap_verified": true,
+    "escape_dismissal_verified": true,
+    "focus_restoration_verified": true,
+    "aria_live_announcements_delivered": 4,
+    "unannounced_updates_detected": 0,
+    "zero_mock_enforced": true
+  },
+  "invariants": [
+    {
+      "id": "015-INV-001",
+      "statement": "Interaction-State and Keyboard Path Verification satisfies all keyboard navigation, focus trap, state transition, and ARIA live invariants with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/interaction-path-verifier.mjs verify-focus-traps",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/interaction-path-verifier.mjs",
+      "sha256": "409a046562a068fd8752e506bf1445686ee076fa2b5e0a637b3c1b553c728caf"
+    },
+    {
+      "path": "tests/unit/test-interaction-path-verifier.mjs",
+      "sha256": "988fd8b8083947852b0dcbd8ffd4d09da87455f6ff52bc68929e648909be4135"
+    },
+    {
+      "path": "artifacts/visual/keyboard-navigation-report.json",
+      "sha256": "063f2c356711c63e7234810f9955735bd5a784033be1d35e44f995f9dfb8c509"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-015.md",
+      "sha256": "d058a51aaeec61942e6ecefd0cc58cb0a47dfd4a7765b9441836dfce061a7780"
+    }
+  ],
+  "generated_at": "2026-10-03T21:50:00.000Z"
+}

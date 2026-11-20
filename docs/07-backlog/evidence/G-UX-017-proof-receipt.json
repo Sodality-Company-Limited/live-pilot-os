@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-017",
+  "generated_at": "2026-10-14T07:55:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-017-INV-001",
+      "statement": "CARL loss engine satisfies Brier <= 0.150, ECE <= 5.0%, AUROC >= 0.880, and HCER <= 1.0% with active doubt rewards.",
+      "verification_command": "node scripts/harness/carl-engine-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-017-INV-002",
+      "statement": "CARL engine unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-carl-engine.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-017-INV-003",
+      "statement": "Python CARL loss module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_carl_loss.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-017-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-017",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/training/carl_loss.py",
+      "sha256": "b6b9c8b4d8b72c608363933b5333a5f9dce79e15291c4fb7bfe909739ad94874"
+    },
+    {
+      "path": "scripts/lib/carl-engine.mjs",
+      "sha256": "8601d9afd914ca65bdb99798454cd97477e74b987ec12f31efc39fd43094e4cf"
+    },
+    {
+      "path": "tests/unit/test-carl-engine.mjs",
+      "sha256": "ff4488be504b8a359670a845a3d84fc54b0a750c7a4a98b62edd2dd52e89e877"
+    },
+    {
+      "path": "tests/ml/test_carl_loss.py",
+      "sha256": "909da42ed996fb412969e3df64b53e9e5cff0f7093835c1499aed6d597ad90f0"
+    },
+    {
+      "path": "scripts/harness/carl-engine-harness.mjs",
+      "sha256": "c4986899e9d680848f5c491f0f63d9166a079e7e9e257af294405c052977e339"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-017.md",
+      "sha256": "a6d960afa5a021abee0e926208ed6d2ae3c9f5f87c90f40475f35893aac70d0a"
+    }
+  ],
+  "certification": "PASS"
+}

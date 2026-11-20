@@ -1,0 +1,231 @@
+/**
+ * ════════════════════════════════════════════════════════════════════════════════
+ * ♿ SODA OS ACCESSIBILITY & WCAG 2.2 AA FOUNDATION
+ * ════════════════════════════════════════════════════════════════════════════════
+ * Framework: Soda OS
+ * Epic: WEB (DAVE Exact Web Application Pipeline)
+ * Goal Reference: G-WEB-008 (Accessibility Verification)
+ * Standards Compliance: WCAG 2.2 Level AA
+ *  - Criterion 1.4.3: Contrast (Minimum) >= 4.5:1 (Normal) / >= 3.0:1 (Large/UI)
+ *  - Criterion 2.1.1: Keyboard Traversal (No Keyboard Traps)
+ *  - Criterion 2.4.7: Focus Visible (Distinct Outline Ring + Offset)
+ *  - Criterion 2.4.11: Focus Appearance (Minimum 2px outline, 3:1 contrast)
+ *  - Criterion 2.5.8: Target Size (Minimum 44x44px touch boundaries)
+ *  - Criterion 4.1.2: Name, Role, Value (ARIA Landmarks & Semantics)
+ * Invariants: Zero Mocks, Zero Stubs, Zero Raw Hex Codes, 100% Token Binding.
+ * ════════════════════════════════════════════════════════════════════════════════
+ */
+
+@import '../tokens/index.css';
+
+:root {
+  --color-brand-default: var(--color-brand-primary, var(--color-indigo-500));
+  --color-error: var(--color-feedback-error, var(--color-rose-500));
+}
+
+/* ==========================================================================
+   1. Skip-to-Content Link (WCAG 2.4.1 Bypass Blocks)
+   ========================================================================== */
+.skip-link,
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  z-index: 1000;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-brand-default);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-body, 14px);
+  font-weight: var(--font-semibold, 600);
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+  transition: top var(--duration-fast, 150ms) var(--ease-standard);
+}
+
+.skip-link:focus,
+.skip-to-content:focus {
+  top: var(--space-3);
+  left: var(--space-3);
+  outline: 2px solid var(--color-brand-default);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   2. Screen Reader Only Utility (Visually Hidden, Accessible to AT)
+   ========================================================================== */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+.sr-only-focusable:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: var(--space-2) var(--space-3) !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+/* ==========================================================================
+   3. Visible Focus Indicators (WCAG 2.4.7 & 2.4.11 Focus Appearance)
+   ========================================================================== */
+/* Suppress default browser outline only when focus is via pointer */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High-contrast, unambiguous keyboard focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-brand-default) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--color-brand-subtle) !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible,
+[role="combobox"]:focus-visible,
+[role="link"]:focus-visible,
+[role="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-brand-default) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--color-brand-subtle) !important;
+}
+
+/* ==========================================================================
+   4. Minimum Touch Target Sizing (WCAG 2.2 AA Criterion 2.5.8 Target Size)
+   ========================================================================== */
+button,
+a.action-link,
+[role="button"],
+[role="tab"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  min-height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Compact controls on desktop maintain pointer targets >= 32px with 44px hit-box */
+@media (min-width: 768px) {
+  button.compact,
+  [role="button"].compact {
+    min-height: 32px;
+    min-width: 32px;
+    position: relative;
+  }
+
+  button.compact::after,
+  [role="button"].compact::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    left: -6px;
+    right: -6px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ==========================================================================
+   5. High Contrast & Forced Colors Mode (Windows High Contrast / Assistive)
+   ========================================================================== */
+@media (forced-colors: active) {
+  :focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  [role="button"]:focus-visible,
+  [role="tab"]:focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 3px !important;
+    box-shadow: none !important;
+  }
+
+  .skip-link:focus,
+  .skip-to-content:focus {
+    outline: 3px solid Highlight !important;
+  }
+
+  .brand-pill,
+  [role="status"],
+  [role="alert"] {
+    border: 1px solid ButtonText !important;
+  }
+}
+
+/* ==========================================================================
+   6. Motion Accessibility (WCAG 2.3.3 Animation from Interactions)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   7. Text & Background Contrast Standard Classes (WCAG 1.4.3 >= 4.5:1)
+   ========================================================================== */
+.a11y-text-primary {
+  color: var(--color-text-primary); /* Contrast ratio >= 15.0:1 on bg-base */
+}
+
+.a11y-text-secondary {
+  color: var(--color-text-secondary); /* Contrast ratio >= 9.5:1 on bg-base */
+}
+
+.a11y-text-on-brand {
+  color: var(--color-text-primary);
+  background-color: var(--color-brand-default); /* Contrast ratio >= 4.5:1 */
+}
+
+.a11y-control-border {
+  border-color: var(--color-border-subtle); /* Non-text UI contrast >= 3.0:1 */
+}
+
+/* ==========================================================================
+   8. ARIA Live Regions & Dynamic Announcements (WCAG 4.1.3 Status Messages)
+   ========================================================================== */
+[aria-live="polite"],
+[aria-live="assertive"],
+[role="status"],
+[role="alert"] {
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+}
+
+[role="alert"] {
+  border-left: 4px solid var(--color-error);
+}
+
+[role="status"] {
+  border-left: 4px solid var(--color-brand-default);
+}

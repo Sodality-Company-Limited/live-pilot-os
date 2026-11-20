@@ -1,0 +1,50 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-019",
+  "goal_id": "G-ML-019",
+  "invariant": "ML-019-INV-001",
+  "invariant_id": "ML-019-INV-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/confidence-calibration-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "template/scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "scripts/lib/calibration-monitor.mjs": "276b1cb94c2b7d1dac3f09a7e0cbb220b99b10f9a3673bf95eceed5cd82cc8f8",
+    "template/scripts/lib/calibration-monitor.mjs": "276b1cb94c2b7d1dac3f09a7e0cbb220b99b10f9a3673bf95eceed5cd82cc8f8",
+    "tests/unit/test-calibration-monitor.mjs": "b13c3df7b09f302c95dfa935e0a349c8443ae53c59ff43c7542b1ca1124083a1",
+    "template/tests/unit/test-calibration-monitor.mjs": "b13c3df7b09f302c95dfa935e0a349c8443ae53c59ff43c7542b1ca1124083a1",
+    "docs/07-backlog/goals/G-ML-019.md": "8bd8a984bb53906a607792b371227ddd0f4a7eb65798b630327f4ee33ed28d69",
+    "docs/02-product/acceptance/G-ML-019.md": "f741cd0815ac38babf253ecd8e8ea6000ebf3c7534a76ac3817f57d4ac423773",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-019.md": "f6e36381bf4539832ff9ed74187562fff86b39880bed19aa4c674adfaabce5fd",
+    "scripts/agentic/g-ml-019-5why-socratic-engine.mjs": "0a62a2a0e4ad05641372c0e2e26880f95475ef7a44101900dc13b7851d8d9a5d"
+  },
+  "git_head": "6884e3e43797ecdca0ec51a93fb9b11472029764",
+  "generated_at": "2026-10-15T01:38:18.524Z",
+  "evaluation": {
+    "blocker": {
+      "id": "BLOCKER-ML-019-01",
+      "goal": "G-ML-019",
+      "title": "Absence of Online Calibration Metric Ingestion Service, Rolling Brier Score Monitor, and Distribution Drift Detector",
+      "root_cause": "Prior to G-ML-019, model telemetry lacked streaming ingestion of decision outcomes, 10-bin Expected Calibration Error tracking, FIFO window capacity bounds, and automated threshold alerts for Brier score drift (> 0.12), leaving agents vulnerable to undetected distribution shift.",
+      "impact": "Autonomous agents operated without real-time uncertainty calibration feedback, risking high-confidence execution failures under out-of-distribution shifts.",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    "episodes_evaluated": 20,
+    "episodes_passed": 20,
+    "mutations_tested": 8,
+    "mutations_killed": 8,
+    "wilson_score": {
+      "successes": 20,
+      "total": 20,
+      "sampleProportion": 1,
+      "center": 0.9194,
+      "lower": 0.8389,
+      "upper": 1,
+      "confidenceLevel": 0.95
+    }
+  }
+}

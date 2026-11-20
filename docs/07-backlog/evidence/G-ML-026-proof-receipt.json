@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "receipt_id": "RECEIPT-G-ML-026-1791026410000",
+  "goal_id": "G-ML-026",
+  "generated_at": "2026-10-03T11:20:10.000Z",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "classification": "executable_invariant",
+  "certification": "PASS",
+  "invariants": [
+    {
+      "id": "G-ML-026-INV-001",
+      "claim": "DAVE RLCD Confidence-Calibrated Training Pipeline satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "statement": "DAVE RLCD Confidence-Calibrated Training Pipeline satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 50,
+    "successes": 50,
+    "pass_rate": 1,
+    "split": "test",
+    "baseline": "legacy_framework_baseline",
+    "interval_method": "wilson_score",
+    "confidence_interval": {
+      "lower": 0.9289,
+      "upper": 1,
+      "center": 0.9644,
+      "confidence_level": 0.95
+    }
+  },
+  "training_summary": {
+    "checkpoint_id": "CKPT-DAVE-RLCD-1791623525935",
+    "initial_loss": 6.5573,
+    "final_loss": 5.0656,
+    "checkpoint_ece": 0.0013,
+    "checkpoint_brier": 0,
+    "checkpoint_accuracy": 1,
+    "high_confidence_error_rate": 0,
+    "safety_gate": "APPROVED"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-rlcd-trainer.mjs",
+      "sha256": "3f261ead3ddd202f4a8158782b48ca599847386c7ebcafe9623b9878ea9b9779"
+    },
+    {
+      "path": "tests/unit/test-dave-rlcd-trainer.mjs",
+      "sha256": "d30f61cc05a58cd4ad33c14b5192c5b09118a8d803ac4af4c6f39d8b9effc8e0"
+    },
+    {
+      "path": "artifacts/rlcd/rlcd-training-summary.json",
+      "sha256": "be97bc53c982161037fdeabb6f3de8e90c6bd6e8ebda882bc32246ae6c7daa6f"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-026.md",
+      "sha256": "ed9eddd3ffc91ceebbf4838e4a1d4b607ad0da851bd6758972d7e2d1b759ee93"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-026.md",
+      "sha256": "bcd160c862fd14796d9071e9a086472f19f059e0e05d5ed15febb0b8a6e064ba"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-026.md",
+      "sha256": "da374243d8a7790d59b90c475b1b18f89b794ea495bc58e04307236a5a5181a3"
+    }
+  ],
+  "signature": "81f7d4b4a11f26a79ee083167be92b775432da84a5be715e2194c77093bc14ad"
+}

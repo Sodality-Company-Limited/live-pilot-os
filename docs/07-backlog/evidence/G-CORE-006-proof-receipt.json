@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-006",
+  "generated_at": "2026-09-29T14:00:00.000Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-006-INV-001",
+      "statement": "Mathematical Invariant and Proof-Receipt Harness satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-CORE-006",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/mathematical-invariant-proof-harness.mjs",
+      "sha256": "943c8dd91c33ac925fd089123370e5d276f215bb5f43bc207b6340d10e80f23f"
+    },
+    {
+      "path": "scripts/harness/proof-receipt-validator.mjs",
+      "sha256": "1f7d6e38de40244b3041da5f9009f6868c060d1143851676b8b42a626dd2f6fe"
+    },
+    {
+      "path": "docs/03-architecture/proof-and-evidence.md",
+      "sha256": "e9ee3bf9c84a8b0645b6959b718ba27147b753a3cebcdd9c4ed56142275319a7"
+    },
+    {
+      "path": ".agents/rules/proof-and-evidence.md",
+      "sha256": "20b863266eac43976f3413b2a8ace149b5db3e5d96e726d4e52863b40ca7ecb7"
+    }
+  ],
+  "certification": "PASS"
+}

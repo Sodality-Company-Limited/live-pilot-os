@@ -1,0 +1,65 @@
+# Soda OS Goal Profile Schema: DAVE Exact Design & Decision Governance Profile
+# Profile ID: dave_exact_design
+# Description: Applied to goals executing DAVE System 1 decisions, reference evidence, visual/motion verification, and RLCD training pipelines.
+
+profile:
+  id: dave_exact_design
+  name: "DAVE Exact Design & Decision Governance Profile"
+  version: "1.1.0"
+  mandatory: false
+
+required_sections:
+  - id: dave_decision
+    description: "Typed DAVE decision contract declaring decision_id, decision_type, calibrated confidence, risk, references, routing policy, and fail-closed execution permissions."
+    type: yaml_block
+    schema:
+      decision_id: string # Format: DAVE-[A-Za-z0-9_-]+
+      decision_type: string # One of 17 canonical DAVE types
+      confidence: number # In [0.0, 1.0]
+      risk: string # low | medium | high
+      evidence_verified: boolean
+      route: string # proceed | verify | defer | human_review
+      execution_permission: string # permitted | blocked_until_verified | blocked_until_approved | rejected
+      alternatives: list # rejected alternatives with reasons
+      verification_plan: list # required harness tests
+      human_action: string # none | approve | reject
+      execution_policy: string # fail_closed | do_not_implement_until_approved | autonomous_proceed
+
+  - id: dave_references
+    description: "First-class content-addressed reference citations with verified physical SHA-256 hashes, viewports, and source authorities."
+    type: yaml_list
+    item_schema:
+      reference_id: string # Format: REF-[0-9]{4}
+      type: string # text | image | audio | design_file | code_diff | test_result
+      uri: string
+      content_hash: string # Format: sha256:[a-f0-9]{64}
+      authority: string
+
+  - id: visual_fidelity
+    description: "Bounded visual fidelity thresholds covering pixel diff ratio, layout shift, horizontal overflow, and 8-layer visual acceptance."
+    type: yaml_block
+    schema:
+      thresholds:
+        pixel_diff_ratio: number # Max allowed, e.g. 0.0050 (0.50%)
+        layout_shift: number # Max CLS, e.g. 0
+        horizontal_overflow: boolean # Must be false
+        accessibility: string # e.g. wcag_2_2_aa
+      layers:
+        - "Layer 1: DOM structure"
+        - "Layer 2: layout geometry"
+        - "Layer 3: typography"
+        - "Layer 4: colors and tokens"
+        - "Layer 5: image crop and assets"
+        - "Layer 6: interaction states"
+        - "Layer 7: motion frames"
+        - "Layer 8: accessibility"
+
+  - id: rlcd_trajectory
+    description: "Calibration trajectory logging contract recording empirical outcomes, proper logarithmic scoring, and asymmetric false acceptance penalties to .agents/audit/decisions.jsonl."
+    type: yaml_block
+    schema:
+      ledger: string
+      scoring_rule: string
+      asymmetric_penalty:
+        false_acceptance_multiplier: number
+        false_deferral_multiplier: number

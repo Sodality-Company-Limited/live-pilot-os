@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-008",
+  "classification": "executable_invariant",
+  "source_revision": "3f8e510b09eb887a2d072f1523dd28ac5fa57bc2",
+  "invariants": [
+    {
+      "id": "G-AG-008-INV-001",
+      "statement": "Provider-neutral session contracts are prepared with budget pre-spawn gates and cancellation metadata.",
+      "verification_command": "node --test scripts/agents/test/provider-adapter-contract.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/provider-adapter-contract.mjs",
+      "sha256": "77a6ce53d51b969ee488c983cf9cf500c7724cf1fb82949cae3cc97bb58d61af"
+    },
+    {
+      "path": "scripts/agents/test/provider-adapter-contract.test.mjs",
+      "sha256": "c1aca9e89a7abc5ac02e2039bc9d2a321e2773fbd98824ea197da338f21e08a8"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:38:00.000Z"
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-016",
+  "generated_at": "2026-10-14T07:55:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-016-INV-001",
+      "statement": "DPO pipeline achieves >= 68.0% win-rate on held-out test split pairs over SFT baseline.",
+      "verification_command": "node scripts/harness/ux-dpo-pipeline-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-016-INV-002",
+      "statement": "DPO pipeline unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-dpo-pipeline.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-016-INV-003",
+      "statement": "Python DPO trainer module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_dpo_trainer.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-016-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-016",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/training/dpo_trainer.py",
+      "sha256": "60c43abec54e6c74f5918486920e7c3044cd5c796544ca88057b1032611bfc1a"
+    },
+    {
+      "path": "scripts/lib/ux-dpo-pipeline.mjs",
+      "sha256": "ce1ecc283715eeeec1575bd1f52452b551cb82f4bd9d98257643e8fe64e38f8f"
+    },
+    {
+      "path": "tests/unit/test-ux-dpo-pipeline.mjs",
+      "sha256": "b9247efefa9a0a9c2ead85f39f3f546d204b3123c6e703c84ad10dcb0116a483"
+    },
+    {
+      "path": "tests/ml/test_dpo_trainer.py",
+      "sha256": "43acf374eca48e44411c747041462bcd11330d371bf03b5823d21db132d991b1"
+    },
+    {
+      "path": "scripts/harness/ux-dpo-pipeline-harness.mjs",
+      "sha256": "a44fdfa0b96829a7d193c0e5075106d8f110b61d361d8d0f5d95933b50d9ac51"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-016.md",
+      "sha256": "2bacb8f59c430efd67a542c34c1b3d49352f23354baf593f89157e7e956ba40b"
+    }
+  ],
+  "certification": "PASS"
+}

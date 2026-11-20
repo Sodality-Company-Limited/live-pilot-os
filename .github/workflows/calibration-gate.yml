@@ -1,0 +1,30 @@
+name: Calibration Gate
+
+on:
+  pull_request:
+    branches: [develop, main, master, feature/ML]
+  push:
+    branches: [develop, main, master, feature/ML]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: calibration-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calibration-gate:
+    name: CI Calibration Gate & Quality Policy Enforcement
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run CI Calibration Gate
+        run: node scripts/ci/ci-calibration-gate.mjs --strict

@@ -1,0 +1,70 @@
+schema_version: "1.0.0"
+adapter_id: "gemma4_multimodal_vision_adapter"
+model:
+  base_model_id: "google/gemma-4-9b"
+  architecture: "Gemma4ForCausalLM"
+  context_length: 16384
+  model_dim: 4096
+  vision_dim: 1152
+
+vision_encoder:
+  type: "siglip_vit"
+  tile_size: 448
+  patch_size: 14
+  patch_merge: 2
+  tokens_per_tile: 256
+  max_grid_tiles: 6
+  thumbnail_tiles: 1
+  max_total_tiles: 7
+  max_vision_tokens: 1792
+  token_budget_percentage_max: 15.0
+
+letterboxing:
+  background_color:
+    r: 15
+    g: 23
+    b: 42
+    hex: "#0f172a"
+    tailwind: "slate-900"
+  interpolation: "bicubic"
+  preserve_aspect_ratio: true
+
+canonical_viewports:
+  desktop:
+    width: 1440
+    height: 900
+    grid_cols: 3
+    grid_rows: 2
+    aspect_ratio: 1.600
+  tablet:
+    width: 1024
+    height: 768
+    grid_cols: 2
+    grid_rows: 2
+    aspect_ratio: 1.333
+  mobile:
+    width: 390
+    height: 844
+    grid_cols: 1
+    grid_rows: 2
+    aspect_ratio: 0.462
+
+projector:
+  type: "mlp_2layer"
+  input_dim: 1152
+  intermediate_dim: 4096
+  output_dim: 4096
+  activation: "gelu"
+  layer_norm: true
+  dropout: 0.0
+
+normalization:
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+
+prompt_template:
+  user_start: "<start_of_turn>user\n"
+  image_prefix: "<image>"
+  image_suffix: "</image>\n"
+  user_end: "<end_of_turn>\n"
+  model_start: "<start_of_turn>model\n"

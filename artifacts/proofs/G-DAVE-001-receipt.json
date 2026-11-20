@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-001",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-DAVE-001-INV-001",
+      "statement": "DAVE SYSTEM 1 Decision Orchestrator satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-schema-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-engine.mjs",
+      "sha256": "6bb960e8a35ca8415b64d57c4521037e1de9914a91921c609400ce153fe44c2b"
+    },
+    {
+      "path": "scripts/lib/dave-cli.mjs",
+      "sha256": "3c4fe8911cfa31890745ea96f2ffdf1f3f7e610a1276b72c4a25f9e2d85cc8a7"
+    },
+    {
+      "path": "tests/unit/test-dave-engine.mjs",
+      "sha256": "d21fbf492d78076a9d1e369f1352188bf784b353efbf3630bbed067e08852fcc"
+    },
+    {
+      "path": ".agents/audit/decisions.jsonl",
+      "sha256": "3f4d6fbae8c2aa11e266ffc2eca7bbb9b0b6f94238fbc8ecccf668b4b46061b4"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T07:44:23.464Z"
+}

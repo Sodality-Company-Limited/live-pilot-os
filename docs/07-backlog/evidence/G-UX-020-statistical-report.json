@@ -1,0 +1,193 @@
+{
+  "goalId": "G-UX-020",
+  "title": "Statistical Calibration Verification Harness",
+  "timestamp": "2026-10-14T13:31:13.057Z",
+  "verdict": "PASS",
+  "metrics": {
+    "sampleCount": 1000,
+    "binsCount": 10,
+    "ece": 0.029508,
+    "mce": 0.040109,
+    "brier": 0.068733,
+    "auroc": 0.935453,
+    "highConfidenceErrorRate": 0.004286,
+    "highConfidenceCount": 700,
+    "highConfidenceErrors": 3,
+    "bins": [
+      {
+        "binIndex": 1,
+        "lowerEdge": 0.1,
+        "upperEdge": 0.2,
+        "binCenter": 0.15,
+        "sampleCount": 20,
+        "weight": 0.02,
+        "meanConfidence": 0.150865,
+        "empiricalAccuracy": 0.15,
+        "calibrationGap": 0.000865,
+        "underconfident": false,
+        "overconfident": true
+      },
+      {
+        "binIndex": 2,
+        "lowerEdge": 0.2,
+        "upperEdge": 0.3,
+        "binCenter": 0.25,
+        "sampleCount": 25,
+        "weight": 0.025,
+        "meanConfidence": 0.25828,
+        "empiricalAccuracy": 0.24,
+        "calibrationGap": 0.01828,
+        "underconfident": false,
+        "overconfident": true
+      },
+      {
+        "binIndex": 3,
+        "lowerEdge": 0.3,
+        "upperEdge": 0.4,
+        "binCenter": 0.35,
+        "sampleCount": 35,
+        "weight": 0.035,
+        "meanConfidence": 0.347926,
+        "empiricalAccuracy": 0.342857,
+        "calibrationGap": 0.005069,
+        "underconfident": false,
+        "overconfident": true
+      },
+      {
+        "binIndex": 4,
+        "lowerEdge": 0.4,
+        "upperEdge": 0.5,
+        "binCenter": 0.45,
+        "sampleCount": 40,
+        "weight": 0.04,
+        "meanConfidence": 0.44414,
+        "empiricalAccuracy": 0.45,
+        "calibrationGap": 0.00586,
+        "underconfident": true,
+        "overconfident": false
+      },
+      {
+        "binIndex": 5,
+        "lowerEdge": 0.5,
+        "upperEdge": 0.6,
+        "binCenter": 0.55,
+        "sampleCount": 50,
+        "weight": 0.05,
+        "meanConfidence": 0.551416,
+        "empiricalAccuracy": 0.56,
+        "calibrationGap": 0.008584,
+        "underconfident": true,
+        "overconfident": false
+      },
+      {
+        "binIndex": 6,
+        "lowerEdge": 0.6,
+        "upperEdge": 0.7,
+        "binCenter": 0.65,
+        "sampleCount": 60,
+        "weight": 0.06,
+        "meanConfidence": 0.648763,
+        "empiricalAccuracy": 0.65,
+        "calibrationGap": 0.001237,
+        "underconfident": true,
+        "overconfident": false
+      },
+      {
+        "binIndex": 7,
+        "lowerEdge": 0.7,
+        "upperEdge": 0.8,
+        "binCenter": 0.75,
+        "sampleCount": 70,
+        "weight": 0.07,
+        "meanConfidence": 0.729181,
+        "empiricalAccuracy": 0.728571,
+        "calibrationGap": 0.00061,
+        "underconfident": false,
+        "overconfident": true
+      },
+      {
+        "binIndex": 9,
+        "lowerEdge": 0.9,
+        "upperEdge": 1,
+        "binCenter": 0.95,
+        "sampleCount": 700,
+        "weight": 0.7,
+        "meanConfidence": 0.955605,
+        "empiricalAccuracy": 0.995714,
+        "calibrationGap": 0.040109,
+        "underconfident": true,
+        "overconfident": false
+      }
+    ]
+  },
+  "bootstrap": {
+    "ece": {
+      "observed": 0.029508,
+      "mean": 0.044492,
+      "stdErr": 0.005061,
+      "ciLower": 0.034914,
+      "ciUpper": 0.054486
+    },
+    "brier": {
+      "observed": 0.068733,
+      "mean": 0.06869,
+      "stdErr": 0.0044,
+      "ciLower": 0.060852,
+      "ciUpper": 0.077619
+    },
+    "auroc": {
+      "observed": 0.935453,
+      "mean": 0.935548,
+      "stdErr": 0.009553,
+      "ciLower": 0.916217,
+      "ciUpper": 0.95279
+    },
+    "hcer": {
+      "observed": 0.004286,
+      "mean": 0.004329,
+      "stdErr": 0.002438,
+      "ciLower": 0,
+      "ciUpper": 0.009943
+    }
+  },
+  "checks": [
+    {
+      "gate": "ECE_BOUND",
+      "invariant": "ECE <= 0.050",
+      "observed": 0.029508,
+      "threshold": 0.05,
+      "passed": true
+    },
+    {
+      "gate": "BRIER_BOUND",
+      "invariant": "Brier <= 0.150",
+      "observed": 0.068733,
+      "threshold": 0.15,
+      "passed": true
+    },
+    {
+      "gate": "AUROC_BOUND",
+      "invariant": "AUROC >= 0.880",
+      "observed": 0.935453,
+      "threshold": 0.88,
+      "passed": true
+    },
+    {
+      "gate": "HCER_BOUND",
+      "invariant": "HCER (c >= 0.80) <= 0.010",
+      "observed": 0.004286,
+      "threshold": 0.01,
+      "passed": true
+    },
+    {
+      "gate": "BOOTSTRAP_ECE_CI",
+      "invariant": "ECE 95% CI Upper <= 0.055",
+      "observed": 0.054486,
+      "threshold": 0.055,
+      "passed": true
+    }
+  ],
+  "empiricalPValue": 0.145854,
+  "failClosedVerified": true,
+  "sha256": "1c79dea5ad1273681095e14d7faf0a7c7c7e526b6d21ea17515111389478a6a8"
+}
