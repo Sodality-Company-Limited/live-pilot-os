@@ -1,0 +1,19 @@
+schema_version: "1"
+status: canonical_target
+owner: design-system-and-frontend
+component_record_required:
+  - component_id
+  - owner
+  - purpose
+  - variants
+  - states
+  - accessibility
+  - localization_keys
+  - responsive_behavior
+  - api_or_event_dependencies
+  - test_ids
+rules:
+  - components use semantic design tokens and approved variants
+  - raw colors, arbitrary spacing, and unapproved visual states are forbidden
+  - deprecated components require successor and migration evidence
+  - component APIs remain backward-compatible within a release

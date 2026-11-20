@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LivePilot TDD Evidence Receipt",
+  "type": "object",
+  "required": ["receipt_id", "tdd_id", "commit_sha", "initial_failure", "commands", "final_status"],
+  "properties": {
+    "receipt_id": {"type":"string"},
+    "tdd_id": {"type":"string", "pattern":"^TDD-LP-[0-9]{3,}$"},
+    "commit_sha": {"type":"string", "minLength":7},
+    "sot_hashes": {"type":"object", "additionalProperties":{"type":"string"}},
+    "initial_failure": {"type":"object", "required":["command","exit_code"], "properties":{"command":{"type":"string"},"exit_code":{"type":"integer"}}},
+    "commands": {"type":"array", "items":{"type":"object", "required":["command","exit_code"], "properties":{"command":{"type":"string"},"exit_code":{"type":"integer"}}}},
+    "coverage": {"type":"object"},
+    "mutation": {"type":"object"},
+    "waivers": {"type":"array", "items":{"type":"string"}},
+    "final_status": {"type":"string", "enum":["PASS","PASS-SIMULATED","BLOCKED","FAIL"]}
+  },
+  "additionalProperties": false
+}

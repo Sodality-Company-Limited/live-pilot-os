@@ -1,5 +1,6 @@
 ---
 name: soda-worktree-prune
+version: "1.0.0"
 description: Safely inspects, unmounts, and garbage-collects inactive subagent Git worktrees with fail-closed dirty worktree preservation.
 ---
 

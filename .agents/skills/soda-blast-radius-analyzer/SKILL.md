@@ -1,5 +1,6 @@
 ---
 name: soda-blast-radius-analyzer
+version: "1.0.0"
 description: Traces AST import/export graphs, calculates transitive blast radius sets, and enforces touch map boundary isolation.
 ---
 

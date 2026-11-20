@@ -1,5 +1,6 @@
 ---
 name: soda-autopilot-runner
+version: "1.0.0"
 description: Autonomous fleet supervisor and bounded execution loop controller. Coordinates continuous backlog queue draining, sequential goal execution, bounded retry budgets, and fail-closed halt triggers.
 ---
 

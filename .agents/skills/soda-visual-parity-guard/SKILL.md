@@ -1,5 +1,6 @@
 ---
 name: soda-visual-parity-guard
+version: "1.0.0"
 description: Perceptual pixel diff engine and visual regression guard. Compares baseline and candidate pixel buffers, computes exact integer basis-point mismatch ratios, and enforces strict tolerance bounds.
 ---
 

@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "name": "Soda OS Multi-Node Gateway",
+  "port": 8080,
+  "endpoints": [
+    {
+      "endpoint": "/v1/tenant/billing",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/v1/tenant/billing",
+          "encoding": "json",
+          "host": ["http://bff-core-api:8080"],
+          "allow": ["id", "tenant_id", "base_currency", "amount_minor", "scale", "status"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 ---
 name: soda-multiphase-planner
+version: "1.0.0"
 description: Multi-phase DAG plan compiler and acyclicity gate. Validates topological phase sequencing, enforces zero dependency cycles, and verifies touch map disjointness across parallel phases.
 ---
 

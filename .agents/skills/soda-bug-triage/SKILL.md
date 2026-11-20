@@ -1,5 +1,6 @@
 ---
 name: soda-bug-triage
+version: "1.0.0"
 description: Diagnose and fix bounded software bugs using minimal error context, scoped file inspection, and limited verification. Use for bug reports, failing tests, runtime errors, and noisy logs.
 ---
 

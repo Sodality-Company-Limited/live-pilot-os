@@ -1,5 +1,6 @@
 ---
 name: soda-thirdparty-api-resilience
+version: "1.0.0"
 description: Universal Enterprise Third-Party API Rate Limiting, Outbound Governance, Tiered Caching, Outbox Workers, Preemptive Schedulers, Circuit Breakers, and Resilient RFC 6585 Error Translation across AI, Payments, Messaging, Cloud, and Commerce APIs
 ---
 

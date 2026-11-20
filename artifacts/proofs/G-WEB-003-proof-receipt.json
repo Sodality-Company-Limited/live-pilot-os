@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal_id": "G-WEB-003",
   "classification": "executable_invariant",
-  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
+  "source_revision": "3680a239afcb9d39939034a14eca6394b4fc9a09",
   "invariants": [
     {
       "id": "003-INV-001",
@@ -19,5 +19,5 @@
     }
   ],
   "certification": "PASS",
-  "generated_at": "2026-11-20T07:52:01.007Z"
+  "generated_at": "2026-11-20T14:33:19.724Z"
 }

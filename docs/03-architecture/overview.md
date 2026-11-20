@@ -1,10 +1,83 @@
 # LivePilot OS — Architecture Overview
 
-> **Status:** Proposed microservice architecture. The Hackathon uses simulated
-> telemetry and platform adapters; production platform integrations require approved
-> adapter contracts, permissions, and operational validation.
+> **Status:** Canonical architecture synthesis and cross-boundary SOT for the LivePilot OS hackathon.
+> **Parent Authority:** [live-pilot-os-deep-context.md](live-pilot-os-deep-context.md)
+> **Requirements SOT:** [live-pilot-os-requirements.md](live-pilot-os-requirements.md)
+> **Domain & Event SOT:** [live-pilot-os-domain-model.md](live-pilot-os-domain-model.md)
+> **API Contracts SOT:** [api/README.md](api/README.md)
+> **Integration Boundaries:** [live-pilot-os-integration-boundaries.md](live-pilot-os-integration-boundaries.md)
+> **Flow SOT:** [source-of-truth-flows/live-session-control-sot.md](source-of-truth-flows/live-session-control-sot.md)
+> **Technical Specifications SOT:** [technical-specifications-sot.md](technical-specifications-sot.md)
+> **Localization SOT:** [localization-sot.md](localization-sot.md)
+> **Route Prefixing SOT:** [api/route-prefixing-and-boundary-invariant.md](api/route-prefixing-and-boundary-invariant.md)
+> **API SOT Generation Set:** [api/README.md](api/README.md)
+> **UX/UI SOT Index:** [ux/README.md](ux/README.md)
+> **Software Quality SOT:** [software-quality-sot.md](software-quality-sot.md)
+> **Testing SOT:** [testing-sot.md](testing-sot.md)
+> **Testing/TDD SOT Index:** [testing/README.md](testing/README.md)
+> **Deployment/Runtime SOT:** [deployment/README.md](deployment/README.md)
+> **Configuration/Policy SOT:** [configuration/README.md](configuration/README.md)
 
-## System purpose
+> **Realtime Job System:** The preemptive job, scheduling, and message-queue
+> authority is defined in [technical-specifications-sot.md](technical-specifications-sot.md) §6.
+
+This document is the architecture synthesis. It owns cross-boundary topology,
+service ownership, runtime flow, and non-negotiable safety laws; it does not replace
+the field-level authority of versioned API, event, or data schemas. The
+Hackathon may use simulated telemetry and platform adapters, but it must preserve
+these contracts and visibly distinguish simulated, sandbox, and confirmed behavior.
+
+## Machine-readable contract coverage
+
+The contract inventory is maintained through [api/README.md](api/README.md),
+[`api/openapi.yaml`](api/openapi.yaml), versioned event schemas, and the domain
+model. Each contract must have one named owner, an immutable revision or schema
+hash, producer/consumer references, and an executable verification command.
+Existing contracts are reused when their operation and semantic invariants match;
+missing shapes remain explicit gaps and must not be fabricated from route names.
+
+## Architecture authority hierarchy
+
+```text
+Product scope
+  → requirements and acceptance intent
+    → architecture synthesis (this document)
+      → domain / integration / technology contracts
+        → API, event, and data schemas
+          → service implementations and platform adapters
+```
+
+Each layer may refine the layer below it, but may not silently override a higher
+layer. A lower-level implementation conflict is a contract gap, not permission to
+invent behavior.
+
+### Hierarchy ownership matrix
+
+| Layer | Owns | Does not override |
+|---|---|---|
+| Product scope | Goals, user outcomes, non-goals | Domain or transport implementation details |
+| Architecture synthesis | Cross-boundary topology, safety laws, capability-to-service decomposition | Product scope or field-level schema definitions |
+| Domain contracts | Entities, state transitions, events, business invariants | UI presentation or platform protocol quirks |
+| Integration contracts | Adapter capabilities, authentication, retries, external mappings | Core margin, inventory, or approval policy |
+| API / event / data schemas | Wire fields, types, versions, persistence constraints | Higher-level safety laws and product intent |
+| Services and adapters | Executable behavior within the approved contracts | Any higher-level authority |
+
+## Error Semantics & Problem Details SOT
+
+Browser-facing errors use stable problem-details semantics, deterministic domain
+codes, correlation IDs, and explicit retry behavior. Error definitions belong in
+the API contract layer and must not be invented independently by a UI or adapter.
+
+### Contract status legend
+
+| Label | Meaning | Change rule |
+|---|---|---|
+| **SOT** | Authoritative source for the named concern | Update the owning source first |
+| **FROZEN TARGET** | Required contract for the current hackathon scope | Change only through an explicit decision record |
+| **Initial target** | Measurable goal that is not yet production evidence | Verify with tests or load experiments before claiming success |
+| **Simulated** | Deterministic demonstration behavior | Must remain visibly distinct from sandbox or production |
+
+## 🏛️ 1. Mission & Architectural Philosophy
 
 LivePilot OS is a real-time, policy-governed live-commerce operating system. It
 coordinates Host guidance, Live Ops controls, bounded store actions, and traceable
@@ -20,7 +93,17 @@ observe → classify → recommend → verify policy
 The system must preserve the relationship between the source signal, AI proposal,
 deterministic policy decision, human approval, platform result, and audit record.
 
-## System context
+### Core Architectural Laws
+
+1. **Source-to-audit causality:** Every consequential result preserves the chain from source signal → AI proposal → policy verdict → approval → platform result → audit receipt.
+2. **Policy authority:** JEV produces structured recommendations only. Margin, inventory, approval, execution, and audit services make consequential decisions.
+3. **Zero-float money:** Financial values use integer minor units with explicit ISO 4217 currency and scale.
+4. **Server-authoritative scope:** Session, actor, role, and tenant context are enforced server-side; browser state is untrusted.
+5. **Idempotent mutation:** Every consequential mutation has an idempotency key and reconciliation path for unknown outcomes.
+6. **Adapter isolation:** Platform-specific protocols stay behind an anti-corruption layer and cannot alter domain policy rules.
+7. **Fail-closed safety:** Missing evidence, stale authorization, policy failure, emergency pause, or uncertain external state blocks consequential action.
+
+## 🌐 2. Client Surface Topology
 
 ```text
                          +------------------------------+
@@ -47,7 +130,7 @@ The Host and Operator use the same live session but receive different views,
 permissions, and actions. The browser never calls domain services or marketplace
 platforms directly.
 
-## Microservice topology
+## 🛡️ 3. Six-Node Enterprise Production Invariant [FROZEN TARGET]
 
 ```text
 ┌──────────────────────────────┐
@@ -68,7 +151,12 @@ platforms directly.
 │ Core BFF                      │
 │ screen aggregation/orchestration│
 └──────────────┬───────────────┘
-               │ NATS request/reply/events
+               │ mTLS HTTP/2 or gRPC /internal/v1/*
+┌──────────────▼───────────────┐
+│ Internal KrakenD Mesh        │
+│ private routing + schemas    │
+└──────────────┬───────────────┘
+               │ mTLS service routes / NATS
         ▼           ▼
 ┌────────────────────────────────────────────────────────┐
 │ Domain services                                          │
@@ -79,8 +167,8 @@ platforms directly.
                 │                      │
                 ▼                      ▼
         ┌───────────────┐      ┌────────────────┐
-        │ PostgreSQL    │      │ NATS JetStream │
-        │ service-owned │      │ events/workers │
+        │ PostgreSQL HA │      │ NATS JetStream │
+        │ service-owned │      │ events/jobs/DLQ │
         │ data          │      └───────┬────────┘
         └───────────────┘              ▼
                               ┌─────────────────┐
@@ -106,17 +194,26 @@ rules.
 | Boundary | Owns | Must not do |
 |---|---|---|
 | UI → Portal BFF | UI session, DTO, validation, and presentation contract | Authorize by browser state or call domain services directly |
-| Portal BFF → KrakenD | Versioned public REST contract | Contain domain policy or financial rules |
-| KrakenD → Core BFF | Authenticated routing and versioned REST contract | Reimplement domain rules |
-| Core BFF → domain services | Screen aggregation and use-case orchestration | Reimplement catalog, margin, inventory, approval, or audit rules |
-| Core BFF/service → service | Versioned NATS request/reply and JetStream events | Read another service's database |
+| Portal BFF → KrakenD | Versioned public `/v1/*` REST contract | Contain domain policy or financial rules |
+| KrakenD → Core BFF | Authenticated `/v1/*` routing and versioned REST contract | Reimplement domain rules |
+| Core BFF → Internal KrakenD | mTLS HTTP/2 or gRPC `/internal/v1/*` contract | Expose private routes publicly or connect directly to PostgreSQL |
+| Internal KrakenD → domain services | Private schema routing and service identity | Reimplement domain rules |
+| Core BFF/service → service | NATS request/reply, JetStream events, and durable jobs | Read another service's database |
 | Service → platform adapter | Isolated protocol translation and idempotent execution | Leak platform-specific rules into the domain core |
 
-## Bounded contexts and service ownership
+## 🏗️ 4. Decoupled Backend Services Fleet
 
-The system uses four product capabilities implemented as independently deployable
-service boundaries. Services may initially share a repository, but they retain
-separate ownership, contracts, persistence boundaries, and failure behavior.
+The product hierarchy is **product capabilities → bounded services → adapters**.
+The four product capabilities are logical groupings; the services below are the
+independently deployable boundaries. Services may initially share a repository, but
+they retain separate ownership, contracts, persistence boundaries, and failure behavior.
+
+| Product capability | Services |
+|---|---|
+| **Session & live context** | `session-service`, `catalog-service` |
+| **Signals & decisioning** | `telemetry-service`, `intent-risk-service`, `decision-engine-service`, `copilot-service` |
+| **Policy & commerce controls** | `margin-policy-service`, `inventory-service`, `promotion-service` |
+| **Approval, execution & evidence** | `approval-control-service`, `execution-service`, `platform-adapter-service`, `audit-service` |
 
 | Service | Bounded responsibility | Authoritative data |
 |---|---|---|
@@ -139,7 +236,33 @@ Consequential boundaries are `margin-policy-service`, `inventory-service`,
 that changes money, stock, promotion state, or external platform state must pass
 through their explicit contracts.
 
-## Command, event, and action flow
+### Canonical Service Hierarchy
+
+```text
+Product capability
+  → bounded service
+    → versioned contract
+      → service-owned persistence
+        → platform adapter (when external)
+```
+
+### Decision-Control Hierarchy
+
+```text
+Source signal
+  → evidence-grounded recommendation
+    → deterministic policy verdict
+      → human or explicitly authorized approval
+        → durable execution command
+          → platform result / unknown outcome
+            → reconciliation
+              → immutable audit receipt
+```
+
+No layer may skip the policy verdict, approval requirement, or reconciliation step
+for a consequential action. A recommendation is never itself an execution command.
+
+## ⚡ 5. Event Mesh & Command Flow [FROZEN TARGET]
 
 Events describe facts that happened. Commands request a bounded action. JEV output
 is a structured recommendation, never a platform command.
@@ -223,7 +346,7 @@ NATS JetStream provides durable event delivery and replay. Consumers must be
 idempotent and acknowledge only after their state transition or side effect is
 durably recorded.
 
-## Hexagonal service architecture
+## 🧱 6. Hexagonal Service Architecture
 
 Each domain service follows ports and adapters:
 
@@ -245,7 +368,7 @@ The domain core must not import web frameworks, database clients, marketplace SD
 or message-broker implementations. Infrastructure dependencies are injected through
 ports owned by the domain/application layer.
 
-## Data ownership and consistency
+## 🔐 7. Data, Security & Consistency Laws [FROZEN TARGET]
 
 | Data | Store | Rule |
 |---|---|---|
@@ -259,7 +382,7 @@ ports owned by the domain/application layer.
 Services must not share tables as an implicit API. Cross-service reads use explicit
 NATS request/reply queries or rebuildable event-driven projections.
 
-## Safety and security invariants
+### Safety Invariants
 
 1. Product Q&A uses approved catalog facts only; unknown or medical claims are
    escalated rather than guessed.
@@ -281,7 +404,7 @@ NATS request/reply queries or rebuildable event-driven projections.
 10. Session authorization is enforced in the service layer, not only at the gateway
     or UI.
 
-## API and communication standards
+## 🔌 8. API & Communication Standards
 
 - Browser-facing APIs use HTTPS REST, OpenAPI 3.1, JSON Schema, stable problem-details
   errors, and versioned routes.
@@ -294,7 +417,7 @@ NATS request/reply queries or rebuildable event-driven projections.
 - Additive fields remain backward compatible; incompatible changes require a new major
   contract version.
 
-## Non-functional baseline
+## 📊 9. Observability, Audit & Non-Functional Baseline
 
 These are initial targets to verify with automated tests and load experiments; they are
 not claims of achieved production performance.
@@ -309,7 +432,7 @@ not claims of achieved production performance.
 | Gateway and control-plane availability | 99.95% target |
 | Data/event recovery | RPO ≤ 1 minute; RTO defined per deployment tier |
 
-## Hackathon and production evolution
+## 🧪 10. Hackathon-to-Production Evolution
 
 The Hackathon may use seeded chat, simulated telemetry, a simulated platform adapter,
 and a reduced deployment footprint. It must preserve the production contracts and the
@@ -329,7 +452,38 @@ Do not put margin, inventory, approval, or platform mutations in Next.js Server
 Actions, KrakenD plugins, or LLM prompts. Do not add infrastructure such as Kafka,
 ClickHouse, or a service mesh without measured operational need.
 
-## Related architecture documents
+## 🔗 11. Key Reference & Governance Links
+
+### Source-of-Truth Precedence
+
+When documents disagree, use this order of authority:
+
+1. `project-brief.md` — product scope and non-goals.
+2. `live-pilot-os-requirements.md` — requirements and traceability IDs.
+3. `live-pilot-os-domain-model.md` — domain vocabulary, entities, and events.
+4. `live-pilot-os-integration-boundaries.md` — external adapter contracts.
+5. `api/README.md` and linked schemas — wire-level contract details.
+6. `live-pilot-os-tech-stack.md` — deployment and technology choices.
+7. This document — cross-boundary synthesis and safety invariants.
+
+Specificity wins within the owning layer: a domain schema owns its fields, an
+integration contract owns adapter behavior, and this overview owns cross-boundary
+invariants. A lower layer must raise a contradiction instead of silently changing
+an invariant owned above it. No code-first implementation, test fixture, or route
+name may become the SOT by accident.
+
+If the conflict affects a consequential action, record `[NEEDS CLARIFICATION]` and
+do not invent a new contract.
+
+### Required Architecture Verification Gates
+
+Before a consequential goal is marked ready, verify:
+
+1. The affected service, API/event contract, persistence owner, and adapter boundary are named.
+2. The flow includes authorization, idempotency, policy evaluation, failure behavior, reconciliation, and audit evidence.
+3. Money and inventory paths use the data invariants in section 7.
+4. Simulated, sandbox, and production behavior are separately represented in tests and operator-visible status.
+5. Any unresolved cross-document contradiction is recorded as `[NEEDS CLARIFICATION]` rather than silently resolved.
 
 - [Project brief](../02-product/project-brief.md)
 - [LivePilot OS deep context](live-pilot-os-deep-context.md)
@@ -338,5 +492,12 @@ ClickHouse, or a service mesh without measured operational need.
 - [Domain and event model](live-pilot-os-domain-model.md)
 - [Integration boundaries](live-pilot-os-integration-boundaries.md)
 - [Production technology stack](live-pilot-os-tech-stack.md)
+- [Enterprise technical specifications SOT](technical-specifications-sot.md)
 - [API contracts](api/README.md)
+- [Live session control flow SOT](source-of-truth-flows/live-session-control-sot.md)
+- [Contract coverage registry](contracts/flows/coverage.yaml)
+- [F01 telemetry flow index](source-of-truth-flows/features/F01-live-chat-telemetry/index.md)
+- [F02 host co-pilot flow index](source-of-truth-flows/features/F02-host-screen-assistant/index.md)
+- [F03 profit-protection flow index](source-of-truth-flows/features/F03-streampilot-agent/index.md)
+- [F04 operator-control flow index](source-of-truth-flows/features/F04-risk-operator-control/index.md)
 - [Folder structure](folder-structure.md)

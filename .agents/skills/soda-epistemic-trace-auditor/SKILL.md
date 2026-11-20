@@ -1,5 +1,6 @@
 ---
 name: soda-epistemic-trace-auditor
+version: "1.0.0"
 description: Reasoning transparency, epistemic trace auditor, and claim citation validator. Audits agent thinking blocks, validates hypothesis-evidence grounding, enforces Article III structured explanations, and emits cryptographic epistemic receipts.
 ---
 
