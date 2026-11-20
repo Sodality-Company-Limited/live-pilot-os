@@ -1,8 +1,8 @@
-# Live OS design tokens — G-UX-041 proposal
+# Live OS design tokens
 
 **Status:** Draft · single dark theme.<br>
 **Source of truth:** [`src/tokens.css`](../../../src/tokens.css)<br>
-**Parent design:** [G-UX-041 UX flow](G-UX-041.md) · [UI spec](../../02-product/design/G-UX-041.md)
+**Design references:** [Live OS UX flow](live-os-ux-flow.md) · [UI specification](../../02-product/design/live-os-ui-specification.md)
 
 This is a Live OS product layer. It preserves the existing Soda OS token contract and its global reference; it does not replace `docs/03-architecture/design-tokens.md`. Live OS intentionally uses one warm dark theme, with Shopee orange as its accent.
 
