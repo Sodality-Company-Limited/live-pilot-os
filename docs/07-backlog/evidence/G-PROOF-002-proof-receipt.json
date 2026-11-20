@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal_id": "G-PROOF-002",
   "classification": "statistical_claim",
-  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "invariants": [
     {
       "id": "G-PROOF-002-INV-001",
@@ -196,9 +196,9 @@
     },
     "audit_ledger_entry": {
       "id": "LEDGER-CAL-2",
-      "sha256": "1314e7ba975731bc09625ea2f568512302a02c94a0573a9ea94acd2a80fde12a"
+      "sha256": "aec9dc6645dfd32b95075b8098db7afb4652268d8b1dea8be28f81692260866f"
     }
   },
   "certification": "PASS",
-  "generated_at": "2026-10-14T13:33:57.301Z"
+  "generated_at": "2026-11-20T07:52:00.273Z"
 }

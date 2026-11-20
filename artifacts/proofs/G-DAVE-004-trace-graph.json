@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0.0",
-  "merkle_root": "c3678bb3ee01194e8f706eb0728b6885dfa2abddf24e2a020814f4585aca8059",
-  "generated_at": "2026-10-10T08:04:56.972Z",
+  "merkle_root": "6323e0b45de815f304e5a315309726e5fa26349c7b5840ac4c82ece3178509bb",
+  "generated_at": "2026-11-20T07:51:22.533Z",
   "node_count": 6,
   "edge_count": 5,
   "nodes": {
-    "dave:node:sha256:798ed1d4f2dffff99b29bbaa721aa287f7a59a28f66eb5611648234607d1ee64": {
+    "dave:node:sha256:9d1655f494e01e9b5a4892c3888b87c230cf3ef443387a39ccf7e9ffc96ca1b4": {
       "reference_id": "REF-0001",
       "type": "image",
       "uri": "data/references/REF-0001.png",
-      "content_hash": "sha256:d7146fad2c9c3a601f8160ae2c8072285d2e41c22a39a226ee78a24e5c59cbb8",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "purpose": "canonical_visual_and_architecture_reference",
       "authority": "approved_design_reference",
       "metadata": {
@@ -20,12 +20,12 @@
         }
       },
       "node_type": "reference",
-      "id": "dave:node:sha256:798ed1d4f2dffff99b29bbaa721aa287f7a59a28f66eb5611648234607d1ee64",
+      "id": "dave:node:sha256:9d1655f494e01e9b5a4892c3888b87c230cf3ef443387a39ccf7e9ffc96ca1b4",
       "parent_ids": [],
       "child_ids": [
-        "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564"
+        "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7"
       ],
-      "created_at": "2026-10-10T08:04:56.967Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     },
     "dave:node:sha256:9db56f70478ad9fa968749d2b16759430a17e12ca160ba6f24d1c20f5ed4516f": {
       "reference_id": "REF-0004",
@@ -38,11 +38,11 @@
       "id": "dave:node:sha256:9db56f70478ad9fa968749d2b16759430a17e12ca160ba6f24d1c20f5ed4516f",
       "parent_ids": [],
       "child_ids": [
-        "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564"
+        "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7"
       ],
-      "created_at": "2026-10-10T08:04:56.968Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     },
-    "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564": {
+    "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7": {
       "decision_id": "DAVE-PLAT-0004",
       "decision_type": "data_schema",
       "goal_id": "G-DAVE-004",
@@ -71,18 +71,18 @@
       ],
       "human_action": "approve",
       "parent_ids": [
-        "dave:node:sha256:798ed1d4f2dffff99b29bbaa721aa287f7a59a28f66eb5611648234607d1ee64",
+        "dave:node:sha256:9d1655f494e01e9b5a4892c3888b87c230cf3ef443387a39ccf7e9ffc96ca1b4",
         "dave:node:sha256:9db56f70478ad9fa968749d2b16759430a17e12ca160ba6f24d1c20f5ed4516f"
       ],
       "node_type": "decision",
-      "id": "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564",
+      "id": "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7",
       "child_ids": [
-        "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955"
+        "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f"
       ],
-      "created_at": "2026-10-10T08:04:56.970Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     },
-    "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955": {
-      "commit_hash": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+    "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f": {
+      "commit_hash": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
       "branch": "feature/DAVE",
       "files_changed": [
         {
@@ -102,19 +102,19 @@
           "status": "added"
         }
       ],
-      "description": "Realize G-DAVE-004 content-addressed evidence graph with zero mocks under git HEAD c960e7d8fb2daa110feaead40f33b785c7e345bd",
+      "description": "Realize G-DAVE-004 content-addressed evidence graph with zero mocks under git HEAD 9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
       "goal_id": "G-DAVE-004",
       "parent_ids": [
-        "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564"
+        "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7"
       ],
       "node_type": "implementation",
-      "id": "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955",
+      "id": "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f",
       "child_ids": [
-        "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257"
+        "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d"
       ],
-      "created_at": "2026-10-10T08:04:56.970Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     },
-    "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257": {
+    "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d": {
       "receipt_id": "G-DAVE-004-INV-001",
       "receipt_schema": "invariant_proof_v1",
       "harness": "node scripts/harness/dave-decision-trace-harness.mjs",
@@ -126,53 +126,53 @@
         "query_latency_ms": 0.65
       },
       "parent_ids": [
-        "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955"
+        "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f"
       ],
       "node_type": "verification",
-      "id": "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257",
+      "id": "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d",
       "child_ids": [
-        "dave:node:sha256:72bd40b2280954266b7bcd415714f73bb5371d09cf4773dcbf6fc9360bc9b554"
+        "dave:node:sha256:88255c372432a6f5ae56fba4957b93a0ea67e9d515e3df8b4e4d1de5b40d4dd6"
       ],
-      "created_at": "2026-10-10T08:04:56.970Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     },
-    "dave:node:sha256:72bd40b2280954266b7bcd415714f73bb5371d09cf4773dcbf6fc9360bc9b554": {
+    "dave:node:sha256:88255c372432a6f5ae56fba4957b93a0ea67e9d515e3df8b4e4d1de5b40d4dd6": {
       "action": "approve",
       "actor": "system-architect",
       "rationale": "Certified 100% causal connectivity and sub-5ms query performance for G-DAVE-004",
       "signature": "ed25519:verified_governance_signoff",
       "parent_ids": [
-        "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257"
+        "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d"
       ],
       "node_type": "approval",
-      "id": "dave:node:sha256:72bd40b2280954266b7bcd415714f73bb5371d09cf4773dcbf6fc9360bc9b554",
+      "id": "dave:node:sha256:88255c372432a6f5ae56fba4957b93a0ea67e9d515e3df8b4e4d1de5b40d4dd6",
       "child_ids": [],
-      "created_at": "2026-10-10T08:04:56.970Z"
+      "created_at": "2026-11-20T07:51:22.531Z"
     }
   },
   "edges": [
     {
-      "from": "dave:node:sha256:798ed1d4f2dffff99b29bbaa721aa287f7a59a28f66eb5611648234607d1ee64",
-      "to": "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564",
+      "from": "dave:node:sha256:9d1655f494e01e9b5a4892c3888b87c230cf3ef443387a39ccf7e9ffc96ca1b4",
+      "to": "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7",
       "type": "grounds"
     },
     {
       "from": "dave:node:sha256:9db56f70478ad9fa968749d2b16759430a17e12ca160ba6f24d1c20f5ed4516f",
-      "to": "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564",
+      "to": "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7",
       "type": "grounds"
     },
     {
-      "from": "dave:node:sha256:f4f14098f26c30a28bc6b992874a763d2e3f653e82d1686ad62df946cd688564",
-      "to": "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955",
+      "from": "dave:node:sha256:ffd67c3970c46035f25bb1d2a90b5c5d48d7ceb81217bb151d9e904b0559fea7",
+      "to": "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f",
       "type": "implements"
     },
     {
-      "from": "dave:node:sha256:7d48c37d9bc6752218e14a6e3803946562ccf790fe9c903301f7ad4cb142e955",
-      "to": "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257",
+      "from": "dave:node:sha256:56724e89fc24124657c921e25111156ed121816e4c0bbb4a9fe85d8e2bb7705f",
+      "to": "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d",
       "type": "verifies"
     },
     {
-      "from": "dave:node:sha256:b6547b68d353b3fbe9ee6e99f157215726ed25f4102322e7bbe6c91740f41257",
-      "to": "dave:node:sha256:72bd40b2280954266b7bcd415714f73bb5371d09cf4773dcbf6fc9360bc9b554",
+      "from": "dave:node:sha256:59fef9436527b5b6af012d67f4b369e8ce293c71a4e72b030318822b03bf049d",
+      "to": "dave:node:sha256:88255c372432a6f5ae56fba4957b93a0ea67e9d515e3df8b4e4d1de5b40d4dd6",
       "type": "approves"
     }
   ]

@@ -3,7 +3,7 @@
   "goal_id": "G-WEB-009",
   "artifact_id": "ART-MOTION-RECEIPT",
   "classification": "executable_invariant",
-  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "status": "PASSED",
   "violations": {
     "critical": 0,
@@ -24,7 +24,7 @@
       "margin",
       "padding"
     ],
-    "keyframes_audited": 10,
+    "keyframes_audited": 5,
     "gpu_accelerated_properties_enforced": [
       "transform",
       "opacity"
@@ -43,18 +43,10 @@
   ],
   "source_files": [
     {
-      "path": "code/src/styles/motion.css",
-      "sha256": "0d66bca6bfb0e1ce5f8c8658ae972d436e2b3d6dbb6394b5b731ab71321c9a2d"
-    },
-    {
       "path": "scripts/harness/motion-harness.mjs",
       "sha256": "64088f833362d9021c16831d95c40abc1c5f3601ca986b3e6309565c93face4b"
-    },
-    {
-      "path": "code/src/tokens/index.css",
-      "sha256": "e8652aa197d23393342196f83c573aee1f142179ebc73577615406c2150e2b7c"
     }
   ],
   "certification": "PASS",
-  "generated_at": "2026-10-11T06:54:09.821Z"
+  "generated_at": "2026-11-20T07:51:59.488Z"
 }

@@ -3,7 +3,7 @@
   "goal_id": "G-WEB-015",
   "artifact_id": "ART-KEYBOARD-NAVIGATION-REPORT",
   "generated_at": "2026-10-03T21:50:00.000Z",
-  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "status": "PASSED",
   "certification": "PASS",
   "keyboard_traversal": {

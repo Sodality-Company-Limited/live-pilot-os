@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal_id": "G-WEB-003",
   "classification": "executable_invariant",
-  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "invariants": [
     {
       "id": "003-INV-001",
@@ -14,22 +14,10 @@
   ],
   "source_files": [
     {
-      "path": "docs/02-product/design/component-inventory.md",
-      "sha256": "531d97e63363e63ee36ae283f85bbba0dc742e5fa5d9d538af42c573404927e9"
-    },
-    {
-      "path": "docs/02-product/design/component-states.md",
-      "sha256": "8b66eb18b63f901b97a7c0a433554cf070b63097de76f92b03b4036adf0169b0"
-    },
-    {
-      "path": "docs/02-product/design/ui-spec.json",
-      "sha256": "44258d3ecde384839188faa70fc1d9145b751d79617a0208eb07241db6128c38"
-    },
-    {
       "path": "scripts/harness/ui-spec-conformance-harness.mjs",
       "sha256": "fc26d1adf1a7fb1b30182fd6b771e68b3d92979b2beec9a2b86d67d4fba24512"
     }
   ],
   "certification": "PASS",
-  "generated_at": "2026-10-11T06:54:10.169Z"
+  "generated_at": "2026-11-20T07:52:01.007Z"
 }

@@ -3,7 +3,7 @@
   "goal_id": "G-WEB-010",
   "artifact_id": "ART-ASSET-PROVENANCE-RECEIPT",
   "classification": "executable_invariant",
-  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "status": "PASSED",
   "violations": {
     "critical": 0,
@@ -66,5 +66,5 @@
     }
   ],
   "certification": "PASS",
-  "generated_at": "2026-10-14T13:33:56.102Z"
+  "generated_at": "2026-11-20T07:51:57.818Z"
 }
