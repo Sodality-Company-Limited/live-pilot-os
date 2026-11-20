@@ -61,6 +61,7 @@
 | [04-agents/bundle-profiles/](04-agents/bundle-profiles/README.md) | Compile presets (backend-api, qa) |
 | [03-architecture/working-memory.md](03-architecture/working-memory.md) | Runtime state — continue without full bundle |
 | [03-architecture/overview.md](03-architecture/overview.md) | System context |
+| [03-architecture/source-of-truth/live-pilot-os-index.md](03-architecture/source-of-truth/live-pilot-os-index.md) | LivePilot OS canonical product, requirements, domain, and integration sources |
 | [03-architecture/folder-structure.md](03-architecture/folder-structure.md) | Code layout |
 | [03-architecture/api/README.md](03-architecture/api/README.md) | API contracts |
 | [03-architecture/data/README.md](03-architecture/data/README.md) | Business rules |
