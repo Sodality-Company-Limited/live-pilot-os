@@ -24,6 +24,21 @@
 - [LivePilot OS — Business Model Canvas](./live-pilot-os-business-model-canvas.md)
 - [LivePilot OS — Production Technology Stack](./live-pilot-os-tech-stack.md)
 - [LivePilot OS — Executive Briefing Notes](./live-pilot-os-briefing-notes-product-domain-lead-bd-manager.md)
+- [Product Brief](../02-product/project-brief.md)
+- [Requirements Baseline (`REQ-LP-NNN`)](./live-pilot-os-requirements.md)
+- [Business Case](./live-pilot-os-business-case.md)
+- [Domain and Event Model](./live-pilot-os-domain-model.md)
+- [Integration Boundaries](./live-pilot-os-integration-boundaries.md)
+- [Goal Generation Completeness Contract](./goal-generation-completeness.md)
+
+### UX and visual design sources
+
+- [Information Architecture and UX Flow — G-UX-041](./ux/G-UX-041.md)
+- [UI Specification — G-UX-041](../02-product/design/G-UX-041.md)
+- [Live OS Design Token Proposal](./ux/live-os-design-tokens.md)
+- [Runtime Design Tokens](../../src/tokens.css)
+
+> **Approval status:** G-UX-041's UX flow, UI specification, and token proposal are drafts pending Product/Design approval. Treat them as the current proposal, not a frozen implementation contract.
 
 ## Deep-context operating model
 
@@ -132,10 +147,13 @@ owning microservice. No LLM or frontend route may issue a platform mutation dire
 
 When documents conflict, resolve them in this order:
 
-1. Approved architecture decisions and explicit acceptance contracts.
-2. This deep-context entry point for the canonical LivePilot OS model.
-3. The detailed feature map and core-feature specification.
-4. The sub-feature quick reference and business-model canvas.
+1. Approved decisions and explicit acceptance contracts.
+2. The Requirements Baseline for canonical requirement IDs and proposed scope; its current entries remain draft until Product approval.
+3. This deep-context entry point for LivePilot OS invariants and contract boundaries.
+4. The detailed feature map and core-feature specification.
+5. The sub-feature quick reference and Business Model Canvas (hypotheses only).
+
+For UX-specific questions, use the G-UX-041 flow for roles, information hierarchy, shared-session behavior, screen states, and responsive behavior; use its UI specification for component behavior; use `src/tokens.css` for actual token values. The token proposal documents intent. Any mismatch between the approved design and CSS must be resolved and recorded before implementation proceeds.
 
 Unresolved product or architecture intent must be recorded as an assumption or decision;
 agents must not silently invent a new platform contract, financial rule, or workflow state.

@@ -7,6 +7,14 @@
 > reservation, idempotent platform actions, approval control, Emergency Pause, and append-only
 > decision auditability.
 
+## Hackathon UI direction confirmed by the project owner
+
+- Use the latest stable Next.js version available when implementation starts.
+- Use Motion for React (Framer Motion) for purposeful UI motion.
+- Keep one warm dark theme with Shopee orange as the accent.
+- Treat video, chat, product activity, and offer outcomes as simulated in the Hackathon UI; do not claim a live platform integration.
+- Backend, persistence, authentication, and production deployment choices remain proposed or undecided below; this Hackathon direction does not approve them.
+
 ## 1. Technology decision summary
 
 | Concern | Recommended choice | Why it fits LivePilot OS |

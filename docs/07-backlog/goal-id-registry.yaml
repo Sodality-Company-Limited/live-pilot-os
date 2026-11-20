@@ -30,7 +30,7 @@ epics:
     reserved: []
   UX:
     name: Multimodal UX/UI Design Decision Layer
-    next_seq: 29
+    next_seq: 43
     reserved: []
   WEB:
     name: DAVE Exact Web Application Pipeline
