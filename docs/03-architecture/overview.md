@@ -160,17 +160,16 @@ chat.received
   → audit receipt
 ```
 
-The Hackathon demonstration follows this trace:
+The currently selected Hackathon demonstration follows the [requirements baseline](live-pilot-os-requirements.md) and [project brief](../02-product/project-brief.md):
 
 ```text
-Chat asks for shade 02
-  → classify product interest
-  → update product signal
-  → show Host cue
-  → propose SKU pinning
-  → reject below-floor offer
-  → append decision trace
-  → activate Emergency Pause
+Mock shampoo live and chat
+  → group promotion questions and calculate two-minute audience interest
+  → show Host product details, metrics, and talking points
+  → AI proposes a discount; deterministic margin policy checks the 10% floor
+  → Live Ops approves or rejects
+  → on approval, simulate coupon, stock reservation, viewer banner, and countdown
+  → on rejection, show not-approved status and end without an alternative offer
 ```
 
 ### Event subjects

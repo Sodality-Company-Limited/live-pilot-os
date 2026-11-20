@@ -16,7 +16,7 @@ Build a simulated live-shopping control room with separate Host and Live Ops vie
 
 - AI groups similar chat messages and estimates product-promotion interest as unique interested viewers divided by average concurrent viewers in a rolling two-minute window.
 - The Host sees the interest topics, audience and product metrics, product details, and concise talking points that the Host can phrase independently.
-- AI recommends a demand-appropriate discount using product economics. If the recommendation would put margin below 10%, it lowers the discount until the floor is met. Live Ops sees the original and adjusted discounts, both margin values, and why the adjustment was made.
+- AI recommends a demand-appropriate discount using product economics. A deterministic margin policy lowers the proposed discount if needed to meet the 10% floor. Live Ops sees the original and adjusted discounts, both margin values, and why the adjustment was made.
 - Live Ops approves or rejects the recommendation. Approval immediately simulates issuing the promotion. Rejection shows the Host a not-approved status and, if supplied, the reason; the flow ends without issuing another offer.
 - After approval, viewers see a mock promotion banner with the product, discount, and price after discount. The coupon expires when the mock live ends. The mock session reserves stock when the coupon is released and returns unpurchased reserved stock at expiry.
 - The demo has no live-platform connection. Video, chat, coupon issuance, stock reservation, and countdown are simulated.
@@ -43,7 +43,7 @@ The Hackathon demo defines these as product roles. It does not validate the comm
 1. A mock live session shows a vertical video, viewer chat, and audience count.
 2. AI groups repeated product and promotion questions. The interest ratio uses unique interested viewers in the rolling two-minute window divided by average concurrent viewers in the same window.
 3. The Host sees the saved interest topics, product metrics (interested viewers, clicks, add-to-cart, price, and stock), and product details (name, size, selling points, usage, price, and stock). AI provides short talking points, not a ready-to-say script.
-4. AI proposes a discount. Margin is calculated as `(net sales after discount − product cost − platform fees) ÷ net sales after discount`. If needed, AI lowers the original discount to preserve the 10% minimum margin.
+4. AI proposes a discount. Margin is calculated as `(net sales after discount − product cost − platform fees) ÷ net sales after discount`. A deterministic margin policy lowers the proposed discount if needed to preserve the 10% minimum margin.
 5. Live Ops reviews the original and adjusted discount, the margin for both, and the adjustment reason.
 6. If Live Ops approves, the demo simulates issuing a coupon, reserves mock stock, updates the Host status, and shows viewers a banner with the product, discount, discounted price, and countdown. The coupon expires when the mock live ends; unpurchased reserved stock returns to the mock inventory.
 7. If Live Ops rejects, the Host sees “ไม่อนุมัติ” and the optional rejection reason. No coupon is issued and AI does not generate an alternative.
@@ -66,6 +66,16 @@ These values are fictional demo data, not real product, audience, platform, or f
 
 The sample 15% recommendation is specific to this fixture; it is not a fixed discount rule.
 
+## Requirement traceability
+
+| Brief outcome | Canonical requirement |
+|---|---|
+| Two-minute intent grouping and audience-interest ratio | [REQ-LP-001](../03-architecture/live-pilot-os-requirements.md) |
+| Host metrics, product details, and talking points | [REQ-LP-003](../03-architecture/live-pilot-os-requirements.md), [REQ-LP-004](../03-architecture/live-pilot-os-requirements.md), [REQ-LP-016](../03-architecture/live-pilot-os-requirements.md) |
+| Margin calculation, 10% floor, discount adjustment | [REQ-LP-009](../03-architecture/live-pilot-os-requirements.md) |
+| Live Ops approval/rejection and resulting Host status | [REQ-LP-013](../03-architecture/live-pilot-os-requirements.md) |
+| Mock coupon, countdown, and stock reservation | [REQ-LP-008](../03-architecture/live-pilot-os-requirements.md), [REQ-LP-010](../03-architecture/live-pilot-os-requirements.md), [REQ-LP-015](../03-architecture/live-pilot-os-requirements.md) |
+
 ## Demo success
 
 The demo is successful when the audience can follow one complete scenario from repeated chat questions to the audience-interest ratio, Host cue, margin-checked promotion, Live Ops decision, and the resulting Host/viewer status. All simulated actions must be visibly presented as mock behavior.
@@ -82,5 +92,6 @@ No numeric target is approved for chat-intent accuracy, AI confidence, or Host-s
 ## Related
 
 - [Knowledge map](knowledge-map.json) · [Knowledge digest](knowledge-digest.md) · [Assumptions](assumptions.md)
+- [Architecture overview](../03-architecture/overview.md) · [Canonical requirements baseline](../03-architecture/live-pilot-os-requirements.md) · [Feature map](../03-architecture/live-pilot-os-feature-map.md) · [Integration boundaries](../03-architecture/live-pilot-os-integration-boundaries.md)
 - [LivePilot OS core features](../03-architecture/live-pilot-os-core-features.md)
 - [Knowledge governance](../06-workflows/knowledge-governance.md)

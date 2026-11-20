@@ -1,5 +1,7 @@
 # LivePilot OS - Executive Briefing Notes
 
+> **Scope note (2026-11-20):** This is an earlier pitch/preparation draft and contains scenarios, figures, and production claims that were not selected in discovery. For the current Hackathon demo, use the [Project Brief](../02-product/project-brief.md) and [Requirements Baseline](live-pilot-os-requirements.md) as authority: fictional shampoo, 10% margin floor, deterministic discount adjustment, Live Ops approval, and simulated-only actions. Serum/bundle examples, 22% floor, autonomous actions, and the three-scenario pitch below are not the selected demo.
+
 **Target Role:** Business Development Manager - Product & Domain Lead  
 **Team:** Sodality  
 **Event:** Sea x OpenAI Regional Codex Hackathon Thailand  
