@@ -2,6 +2,11 @@
 
 > Compact reference list derived from the detailed feature map.
 
+> **Feature 01 BDD:** [Real-Time Chat and Purchase-Signal Analysis](../02-product/bdd/feature-01-live-chat-telemetry.md)
+> **Feature 02 BDD:** [Host Screen Assistant (Streamer Co-pilot HUD)](../02-product/bdd/feature-02-streamer-copilot-hud.md)
+> **Feature 03 BDD:** [Store Management and Back-Office Profit Protection](../02-product/bdd/feature-03-streampilot-agent.md)
+> **Feature 04 BDD:** [Risk Screening and Emergency Operator Control](../02-product/bdd/feature-04-risk-operator-control.md)
+
 ## 1. Live Chat Understanding AI
 
 Read the chat in real time and classify intents such as:
