@@ -7,6 +7,14 @@
 
 - [Architecture Overview](./overview.md)
 - [OpenAPI contract](./api/openapi.yaml)
+- [Feature 01 BDD contract](../02-product/bdd/feature-01-live-chat-telemetry.md)
+- [Feature 01 BRD](../02-product/brd/feature-01-live-chat-purchase-signal-analysis.md)
+- [Feature 02 BDD contract](../02-product/bdd/feature-02-streamer-copilot-hud.md)
+- [Feature 02 BRD](../02-product/brd/feature-02-host-screen-assistant.md)
+- [Feature 03 BDD contract](../02-product/bdd/feature-03-streampilot-agent.md)
+- [Feature 03 BRD](../02-product/brd/feature-03-store-management-profit-protection.md)
+- [Feature 04 BDD contract](../02-product/bdd/feature-04-risk-operator-control.md)
+- [Feature 04 BRD](../02-product/brd/feature-04-risk-screening-operator-control.md)
 
 ## Canonical source documents
 
