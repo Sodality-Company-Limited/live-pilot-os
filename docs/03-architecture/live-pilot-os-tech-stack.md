@@ -20,18 +20,19 @@
 | Concern | Recommended choice | Why it fits LivePilot OS |
 |---|---|---|
 | Operator and host UI | **Next.js App Router + TypeScript** | One production web surface for the Operator Console, Streamer Co-pilot HUD, onboarding, and audit views. Use server rendering for secure reads and client components only for live interaction. |
+| Agentic decision layer | **LivePilot Decision Engine + JEV System One model via TypeSafe AI** | Converts typed intent/risk signals into structured, evidence-linked recommendations. JEV is a model provider inside the Decision Engine, not an authorization or execution authority. |
 | Public API boundary | **KrakenD API Gateway** | Stateless edge gateway for OIDC/JWT validation, rate limits, aggregation, contract versioning, and routing to internal services. It must not contain margin or inventory business rules. |
 | Domain and policy services | **Rust** with Axum, Tokio, SQLx, and typed domain modules | Strong fit for deterministic financial arithmetic, high-concurrency event handling, explicit error paths, and low-latency services. |
-| Internal synchronous calls | **gRPC + Protobuf** | Typed, low-overhead service-to-service calls for policy checks, catalog reads, inventory reservations, and adapter commands. |
+| Internal service communication | **NATS request/reply + JetStream** | Versioned service commands, queries, immutable events, durable consumers, replay, and at-least-once delivery. |
 | External/client API | **HTTPS REST + OpenAPI** | Stable consumer contract for the Next.js app, partner integrations, and operational tooling. |
 | Live UI updates | **SSE first; WebSocket only where bidirectional control is required** | SSE is simpler for one-way telemetry, alerts, audit entries, and co-pilot suggestions. Use WebSocket for operator control or platform sessions that genuinely need bidirectional traffic. |
 | Event backbone | **NATS JetStream** | Low-latency subjects with durable streams, replay, at-least-once delivery, pull consumers, and horizontally scalable worker groups. |
 | Durable workflows | **Temporal** with dedicated workflow workers | Use for flash-voucher lifecycles, reservation expiry, approval waits, retries, compensation, and platform reconciliation—not for every telemetry message. |
-| Primary database | **PostgreSQL** | Transactional source of truth for organizations, workspaces, campaigns, catalog facts, money policies, inventory reservations, approvals, and audit indexes. |
+| Primary database | **PostgreSQL** | Transactional source of truth for live sessions, catalog facts, money policies, inventory reservations, approvals, and audit indexes. |
 | Cache and ephemeral coordination | **Redis** | Cache, short-lived deduplication windows, rate limits, and UI presence. Never make Redis the authoritative money or inventory ledger. |
 | Audit/event archive | **PostgreSQL append-only tables + S3-compatible object storage** | Queryable decision history plus immutable raw payloads, evidence bundles, and replay fixtures. |
 | Search/analytics | **PostgreSQL first; ClickHouse/OpenSearch later** | Avoid premature infrastructure. Add an analytical store only when audit/query volume or time-series exploration justifies it. |
-| Identity | **OIDC provider** + gateway validation + service-level authorization | Organization/workspace roles, operator approval permissions, and service-to-service identity without embedding auth logic in every UI route. |
+| Identity | **OIDC provider** + gateway validation + session-scoped service authorization | Host, operator, moderator, and service identities without embedding authorization logic in every UI route. |
 | Observability | **OpenTelemetry**, Prometheus, Grafana, centralized logs, trace backend | Correlate live event, policy verdict, worker execution, platform adapter call, and operator decision with one trace ID. |
 | Runtime | **Containers on Kubernetes** with Helm/Argo CD or an equivalent GitOps runtime | Separate API, event, workflow, and adapter scaling; support rolling deploys, health checks, graceful shutdown, and isolation of platform credentials. |
 
@@ -44,14 +45,28 @@
                                     └────────────┬───────────┘
                                                  │ webhooks / commands
 ┌──────────────────┐    HTTPS/SSE/WS    ┌────────▼─────────┐
-│ Next.js surfaces │◄──────────────────►│ KrakenD Gateway  │
-│ Operator + Host  │                    │ auth/rate/route  │
+│ Next.js surfaces │◄──────────────────►│ Portal BFF       │
+│ Operator + Host  │                    │ UI contract      │
 └────────┬─────────┘                    └────────┬─────────┘
-         │                                        │ REST/gRPC
-         ▼                                        ▼
+         │ HTTPS                                  │ REST
+         └──────────────────────┬─────────────────┘
+                                ▼
+                       ┌────────▼─────────┐
+                       │ KrakenD Gateway  │
+                       │ auth/rate/route  │
+                       └────────┬─────────┘
+                                │ REST
+                                ▼
+                       ┌────────▼─────────┐
+                       │ Core BFF          │
+                       │ orchestration     │
+                       └────────┬─────────┘
+                                │ NATS
+                                ▼
 ┌────────────────────────────────────────────────────────────┐
 │ Rust application services                                  │
-│ tenant • catalog • telemetry • policy • inventory • audit  │
+│ session • catalog • telemetry • decision • policy        │
+│ inventory • promotion • execution • audit                │
 └───────────────┬──────────────────────────────┬─────────────┘
                 │                               │
                 │ NATS subjects                │ SQL transactions
@@ -83,11 +98,12 @@ every noun.
 
 | Service | Owns | Must not own |
 |---|---|---|
-| **Identity & Tenant Service** | Organizations, workspaces, roles, membership, tenant isolation | Product or promotion rules |
-| **Live Session Service** | Campaign/live-room/session lifecycle, host presence, channel bindings | Margin calculation or raw platform credentials |
+| **Identity & Session Access Service** | Authenticated Host, Operator, Moderator, and service identities; session-scoped permissions | Product, margin, or promotion rules |
+| **Live Session Service** | Live-room/session lifecycle, host presence, session roles, channel bindings | Margin calculation or raw platform credentials |
 | **Catalog Service** | Approved product facts, SKU/variant state, claim registry, catalog version | AI-generated facts or unverified claims |
 | **Telemetry Ingestion Service** | Webhook/chat/order ingestion, normalization, deduplication, event publication | Final promotion decisions |
 | **Intent & Risk Service** | Intent classification, question clustering, spam/off-platform risk signals | Direct platform mutations |
+| **Decision Engine Service** | Evidence/context assembly, JEV invocation, structured decision validation, confidence and recommendation routing | Margin verdicts, inventory mutations, approval bypass, or platform commands |
 | **Co-pilot Service** | Glanceable suggestions, answer drafts, host approval UX state | Unverified catalog answers or financial verdicts |
 | **Margin Policy Service** | Integer minor-unit margin computation, fee/COGS rules, floor verdicts | UI state or platform API retries |
 | **Inventory Service** | Atomic reservations, release/commit, cross-channel stock view | AI ranking or voucher copy |
@@ -115,6 +131,8 @@ telemetry.intent.detected
 telemetry.risk.detected
 catalog.fact.versioned
 copilot.suggestion.created
+decision.proposal.created
+decision.deferred
 promotion.proposed
 margin.verdict.recorded
 inventory.reservation.created
@@ -132,8 +150,6 @@ Every event should carry at least:
   "event_id": "evt_01...",
   "event_type": "inventory.reservation.created",
   "occurred_at": "2026-11-20T00:00:00Z",
-  "tenant_id": "org_01",
-  "workspace_id": "ws_01",
   "session_id": "session_01",
   "correlation_id": "trace_01",
   "causation_id": "evt_00",
@@ -143,6 +159,12 @@ Every event should carry at least:
 }
 ```
 
+Platform adapters implement one canonical contract for `PinProduct`,
+`CreateVoucher`, `ReserveInventory`, `GetOrderStatus`, and `ReceiveChatEvent`.
+Platform-specific SDKs, permissions, payloads, and status codes remain inside the
+adapter Anti-Corruption Layer. Unsupported capabilities return a typed result;
+unknown external outcomes are reconciled before retry.
+
 ### 4.2 Workers — long-running consumers
 
 Workers consume durable JetStream pull consumers and acknowledge only after the side effect
@@ -151,6 +173,8 @@ and idempotency record are committed. Recommended worker groups:
 - `telemetry-normalizer`: validates, deduplicates, and publishes normalized signals.
 - `intent-classifier`: batches bounded chat windows for classification.
 - `risk-screening`: evaluates moderation and off-platform risk.
+- `decision-engine`: assembles bounded context, invokes JEV, validates the structured decision,
+  and routes recommendations or deferrals.
 - `projection-worker`: builds dashboard/read models from immutable events.
 - `adapter-dispatcher`: sends bounded commands to marketplace adapters.
 - `reconciliation-worker`: compares requested, accepted, and observed platform state.
@@ -201,8 +225,8 @@ transactions. Temporal activities must call those services rather than reimpleme
 
 - External API: OpenAPI 3.1, JSON Schema, explicit error envelope, idempotency key for every
   consequential mutation, and `correlation_id` propagation.
-- Internal API: Protobuf/gRPC for synchronous service calls; versioned messages and backward
-  compatible field evolution.
+- Internal API: versioned NATS request/reply for commands and queries; JetStream messages
+  for immutable facts, durable delivery, replay, and backward-compatible evolution.
 - Events: schema registry or checked-in JSON Schema/Protobuf definitions; consumers must tolerate
   additive fields and reject incompatible versions explicitly.
 - Platform adapters: one adapter contract, one implementation per platform; credentials and
@@ -228,7 +252,7 @@ These are initial budgets to verify with load tests, not claims of achieved perf
 - Terminate public TLS at the load balancer or gateway; use mTLS or workload identity internally.
 - Store marketplace credentials in a managed secret store; adapters receive least-privilege,
   short-lived credentials where the platform supports them.
-- Enforce tenant/workspace authorization in the service layer, not only in Next.js or KrakenD.
+- Enforce session authorization in the service layer, not only in Next.js or KrakenD.
 - Redact COGS, supplier data, tokens, and customer PII from logs and model prompts.
 - Emergency Pause must be a control-plane write with an auditable actor, timestamp, reason,
   and fast propagation to promotion and adapter workers.
@@ -242,13 +266,15 @@ These are initial budgets to verify with load tests, not claims of achieved perf
 - Do not use Kafka, ClickHouse, service mesh, or a dozen microservices on day one without a
   measured need; NATS + PostgreSQL + a small set of Rust services is the baseline.
 - Do not make every event synchronous or require every consumer to be online for a live signal.
-- Do not let an LLM directly issue platform mutations; the path must be proposal → deterministic
-  policy verdict → approval/control → idempotent adapter command.
+- Do not let JEV or any LLM directly issue platform mutations; the path must be
+  structured proposal → deterministic policy verdict → approval/control → idempotent
+  adapter command. JEV output is advisory until policy and approval gates accept it.
 
 ## 10. Delivery sequence
 
 1. **Foundation:** Next.js, KrakenD, one Rust API, PostgreSQL, OIDC, OpenTelemetry.
-2. **Live loop:** NATS JetStream, telemetry ingestion, intent/risk workers, SSE co-pilot feed.
+2. **Live loop:** NATS JetStream, telemetry ingestion, intent/risk workers, Decision Engine with
+   JEV adapter, and SSE co-pilot feed.
 3. **Guardrails:** Margin Policy, Inventory, Approval & Control, audit receipts, Emergency Pause.
 4. **Execution:** Promotion service, platform adapter boundary, idempotent dispatcher, reconciliation.
 5. **Durability:** Temporal workflows for voucher expiry, approval waits, retries, and compensation.
