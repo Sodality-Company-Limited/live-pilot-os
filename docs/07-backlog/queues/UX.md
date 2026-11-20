@@ -11,7 +11,7 @@
 
 | Goal | Title | Status | Depends On | File |
 |------|-------|--------|------------|------|
-| *(none)* | — | — | — | — |
+| G-UX-041 | Live OS Host and Live Ops design | planned | — | [`goals/G-UX-041.md`](../goals/G-UX-041.md) |
 
 ## Archived
 

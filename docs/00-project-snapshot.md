@@ -11,7 +11,7 @@
 
 | ID | Status | Summary |
 |----|--------|---------|
-| *(none)* | — | — |
+| [`G-UX-041`](07-backlog/goals/G-UX-041.md) | `planned` | Live OS Host and Live Ops design |
 
 ## Constraints
 

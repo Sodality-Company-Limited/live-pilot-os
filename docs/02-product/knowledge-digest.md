@@ -29,15 +29,15 @@ Every row links to **Evidence** (`E-xxx`) — answer *"สรุปจากอ�
 
 | Area | % | Blockers |
 |------|---|----------|
-| Business | 0 | — |
-| Users | 0 | — |
-| Workflow | 0 | — |
-| Pain | 0 | — |
-| Dream | 0 | — |
-| Scope | 0 | — |
-| Boundary | 0 | — |
-| Success | 0 | — |
-| Constraints | 0 | — |
+| Business | 0 | Vision, customers, and revenue model not captured |
+| Users | 0 | Primary persona details not captured |
+| Workflow | 0 | Current workflow and handoffs not documented |
+| Pain | 100 | — |
+| Dream | 0 | Future-state journey not captured |
+| Scope | 0 | Project brief scope is empty |
+| Boundary | 0 | Project brief out-of-scope is empty |
+| Success | 100 | — |
+| Constraints | 0 | Product constraints not recorded in the knowledge map |
 
 Command agent: **`coverage`**
 
@@ -57,7 +57,7 @@ Sync with `knowledge-map.json` → `conflicts[]` (`CF-xxx`). **Open conflict blo
 
 | ID | Type | Title | Date | Source |
 |----|------|-------|------|--------|
-| *(none)* | — | — | — | — |
+| [E-001](knowledge-map.json) | interview | Live OS problem and demo outcome confirmed | 2026-11-20 | human:user |
 
 ---
 
@@ -68,7 +68,7 @@ Sync with `knowledge-map.json` → `conflicts[]` (`CF-xxx`). **Open conflict blo
 ```markdown
 ### YYYY-MM-DD — {topic or step range}
 
-**Evidence created:** E-001 (interview, human:PO)
+**Evidence created:** E-001 (interview, human:user)
 
 | Category | ID | Insight | Evidence | Confidence | Step | Promoted to |
 |----------|-----|---------|----------|------------|------|-------------|
@@ -77,7 +77,14 @@ Sync with `knowledge-map.json` → `conflicts[]` (`CF-xxx`). **Open conflict blo
 
 ---
 
-### *(no sessions yet)*
+### 2026-11-20 — Live OS pain and success
+
+**Evidence created:** E-001 (interview, human:PO)
+
+| Category | ID | Insight | Evidence | Confidence | Step | Promoted to |
+|----------|-----|---------|----------|------------|------|-------------|
+| Pain | P-001 | Host and Live Ops lack a shared view of chat questions, product interest, and offer checks during a live session. | E-001 | low | 3 | G-UX-041 |
+| Success | — | Demo shows chat → audience topic/product signal → Live Ops offer decision → corresponding Host cue in one shared scenario. | E-001 | low | 7 | G-UX-041 |
 
 Start: **`discover`** — [knowledge-loop.md](../06-workflows/knowledge-loop.md)
 
