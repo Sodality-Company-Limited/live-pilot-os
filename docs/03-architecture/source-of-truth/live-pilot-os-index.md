@@ -9,3 +9,4 @@
 - [LivePilot OS Features — Core Summary](./live-pilot-os-core-features.md)
 - [LivePilot OS Sub-features — Quick Reference](./live-pilot-os-sub-features.md)
 - [LivePilot OS — Business Model Canvas](./live-pilot-os-business-model-canvas.md)
+- [LivePilot OS — Production Technology Stack](./live-pilot-os-tech-stack.md)
