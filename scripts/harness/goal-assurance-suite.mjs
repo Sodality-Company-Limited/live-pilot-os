@@ -127,14 +127,45 @@ export async function assureGoal(filePath, options = {}) {
   const invariants = extractInvariantsFromGoal(filePath);
   let mathPassed = true;
   let invariantResults = [];
+  const isDraftOrPlanned = contractRes.contract && (contractRes.contract.status === 'draft' || contractRes.contract.status === 'planned');
+
   if (invariants.length > 0) {
-    const mathReport = await executeGoalInvariants({
-      goalId: goalFilename,
-      invariants,
-      goalPath: filePath
-    });
-    mathPassed = mathReport.overall_passed;
-    invariantResults = mathReport.results;
+    if (isDraftOrPlanned) {
+      // In draft or planned stage, validate invariant schema conformance without executing unauthored code
+      const { validateInvariantSchema } = await import('./mathematical-invariant-proof-harness.mjs');
+      const schemaErrors = [];
+      for (const inv of invariants) {
+        const schemaRes = validateInvariantSchema(inv);
+        if (!schemaRes.valid) {
+          schemaErrors.push(`[${inv.id || 'UNKNOWN'}] ${schemaRes.errors.join('; ')}`);
+        }
+        invariantResults.push({
+          id: inv.id,
+          type: inv.type,
+          claim: inv.claim,
+          passed: schemaRes.valid,
+          schemaValidated: true,
+          executionDeferred: true
+        });
+      }
+      mathPassed = schemaErrors.length === 0;
+      if (!mathPassed) {
+        results.layers.layer8_mathematical_proof = {
+          passed: false,
+          invariantsCount: invariants.length,
+          errors: schemaErrors,
+          results: invariantResults
+        };
+      }
+    } else {
+      const mathReport = await executeGoalInvariants({
+        goalId: goalFilename,
+        invariants,
+        goalPath: filePath
+      });
+      mathPassed = mathReport.overall_passed;
+      invariantResults = mathReport.results;
+    }
   }
   results.layers.layer8_mathematical_proof = {
     passed: mathPassed,

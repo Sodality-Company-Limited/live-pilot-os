@@ -38,6 +38,7 @@ placeholders_global:
   - components_repository_url
   - app_store_url
   - production_url
+  - app_preview_url
   - product_owner_name
   - test_case_sheet_link
   - project_tool_url

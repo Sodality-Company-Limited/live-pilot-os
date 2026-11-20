@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Core
 
-- Read `AGENTS.md`, [governance.md](governance.md), [goal-execution.md](goal-execution.md), and the active goal file `docs/07-backlog/goals/G-PAY-001.md` (legacy `G-001.md`; index: `docs/07-backlog/goals.md`) before coding. IDs: [goal-id.md](../../docs/06-workflows/goal-id.md).
+- Read `AGENTS.md`, the selected goal card, and only the rules and skill required by the
+  goal's risk and touch map. Do not load the entire rule catalog by default. IDs:
+  [goal-id.md](../../docs/06-workflows/goal-id.md).
 - Respect `project-brief.md` (In / Out Scope) — do not build out-of-scope features without a new goal.
 - **Autonomous Goal Execution** — execute `ready` or `in_progress` goals. When commanded with `execute <GOAL_ID>` or swarming on an unblocked `draft`/`planned` goal with complete specs, autonomously advance to `ready` -> `in_progress` per [governance.md](governance.md) and provision `feature/<GOAL_ID>` without stalling.
 - **Spec stability** — [goal-spec-guide.md](../../docs/06-workflows/goal-spec-guide.md): no guess (`clarify`); Intent ≠ How; **`analyze G-xxx`** before first execute.

@@ -9,6 +9,7 @@ alwaysApply: true
 - Product discovery → `soda-discovery`; learning → `soda-learning-loop`; follow [knowledge-governance.md](../../docs/06-workflows/knowledge-governance.md).
 - Autonomous Socratic Discovery Loops (Product Scope -> IA Tree -> Atomic UI Hierarchy) → `soda-agentic-discovery` skill + `.agents/rules/agentic-discovery-loops.md`. Execute 3 progressive loops (Q1-Q6) for deep architectural and UI alignment before goal authoring.
 - Tests → `soda-testing` skill + goal test plan. Browser/E2E MCP only if the Test plan names it — [external-tools.md](../../docs/06-workflows/external-tools.md).
+- ISO 29110 → consumer MCPs named in `work-products/_meta/mcp-register.yaml`: ClickUp, Google Drive, Google Docs, Figma, Chrome. `iso generate` is read/snapshot; Drive/Docs/ClickUp writes only on `iso publish`. Screenshots: `iso screenshots`. OS does not ship the servers.
 - UI/UX goals (**`Kind: design`** / **`Profile: designer`** / screen, flow, component) → auto-run `soda-design` in PLAN: produce UX flow + UI spec, human-approve before build; see [design-loop.md](../../docs/06-workflows/design-loop.md). Design-file MCP (Figma, …) is **consumer-optional** and read-only unless **In** says otherwise.
 - API work → read `soda-rest-api` skill; update `docs/03-architecture/api/`.
 - Before closing a goal → `soda-code-review` checklist.

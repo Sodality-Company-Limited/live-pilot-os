@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal_id": "G-PROOF-008",
   "classification": "executable_invariant",
-  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
   "invariants": [
     {
       "id": "G-PROOF-008-INV-001",
@@ -40,5 +40,5 @@
     ]
   },
   "certification": "PASS",
-  "generated_at": "2026-10-14T13:34:01.237Z"
+  "generated_at": "2026-11-20T07:52:04.940Z"
 }

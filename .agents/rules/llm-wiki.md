@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+description: Optional knowledge export for high-value, audit, architecture, security, incident, or deployment work
 ---
 
 # LLM Wiki Specification & Operating Protocol
@@ -26,7 +26,8 @@ The LLM Wiki sits between raw engineering activities and active execution:
 
 ## 2. Ingestion & Export Protocol for Antigravity
 
-Whenever Antigravity completes a task, refactors code, synthesizes a Liquid-EBM-JEPA architecture, or executes curiosity learning:
+When the goal explicitly requires knowledge export, or when the work is architecture,
+security, incident, deployment, compliance, or a high-value reusable discovery:
 
 1. **Export Raw Documentation**:
    - Write a detailed Markdown technical report into `<repo_root>/docs/06_raw/<date_timestamp>_<topic>.md`.
@@ -39,6 +40,9 @@ Whenever Antigravity completes a task, refactors code, synthesizes a Liquid-EBM-
 
 ## 3. Querying & Synthesis Guidelines
 
-- **Zero Memory Loss**: Antigravity must never rediscover knowledge from scratch. Always check `docs/06_raw/index.md` and related raw markdown files before conducting redundant research.
+- For ordinary bug fixes and small scoped tasks, do not load or update the wiki. Use the
+  concise handoff instead.
+- **Zero Memory Loss**: For opted-in wiki work, check `docs/06_raw/index.md` and related
+  raw markdown files before conducting redundant research.
 - **Bi-Directional Code & Wiki Linking**: All raw docs must include clickable links to active source code lines using the `file://` scheme (e.g. `[factory.rs](file:///absolute/path/to/factory.rs#L10-L45)`).
 - **Compounding Artifacts**: High-value answers, comparative benchmarks, and bug root-cause analyses synthesized during user sessions MUST be persisted back into `docs/06_raw/` so future sessions benefit immediately.

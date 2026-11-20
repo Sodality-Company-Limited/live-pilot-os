@@ -220,6 +220,9 @@ create_if_missing:
   - work-products/_meta/req-register.yaml
   - work-products/_meta/work-product-status.yaml
   - work-products/_meta/links-register.yaml
+  - work-products/_meta/screenshot-register.yaml
+  - work-products/_meta/mcp-register.yaml
+  - work-products/_assets/screens/README.md
 
 # Phase 2: AI semantic merge (soda-upgrade-os skill) — never blind overwrite
 merge:
@@ -307,6 +310,7 @@ never_touch:
   - work-products/07_Operations/**
   - work-products/08_Repository/**
   - work-products/09_Deliverables/**
+  - work-products/_assets/screens/**
 
 # Drift checks run by soda-os upgrade --report
 drift_checks:

@@ -101,7 +101,7 @@
 | [08-iso29110/template-manifest.yaml](08-iso29110/template-manifest.yaml) | WP registry & generation order |
 | [08-iso29110/templates/](08-iso29110/templates/) | `*.template.md` work-product templates |
 | [../work-products/](../work-products/README.md) | Generated WP output + `_meta` |
-| [../.agents/skills/soda-iso29110/SKILL.md](../.agents/skills/soda-iso29110/SKILL.md) | `iso scan` / `iso generate` / `iso validate` |
+| [../.agents/skills/soda-iso29110/SKILL.md](../.agents/skills/soda-iso29110/SKILL.md) | `iso scan` / `iso generate` / `iso screenshots` / `iso publish` / `iso validate` |
 
 ### Decisions
 

@@ -4,7 +4,7 @@
 > Soda OS does **not** ship MCP servers, `mcp.json`, or tool credentials.  
 > Policy: [governance.md](../../.agents/rules/governance.md) § External tools.
 
-Chrome/browser automation, Figma, and similar assistants are **project connectors**. Connect them in the consumer repo. Do not add named servers to soda-os.
+Chrome, Figma, ClickUp, Google Drive, Google Docs, and similar assistants are **project connectors**. Connect them in the consumer repo. Do not add named servers to soda-os.
 
 ```text
 soda-os  →  may the agent call an outside tool on this step?
@@ -22,6 +22,8 @@ All of these must be true (same as other EXECUTE work):
 5. Target is **not production** unless the goal **In** + human explicitly allow it
 
 **PLAN (design):** a read-only design-file tool (e.g. Figma) may run on **`design G-xxx`** / PLAN stages without `เริ่ม step N`, if Notes for AI list it. Still no secrets, no writes to the design file unless **In** says so.
+
+**ISO connectors:** the five MCPs named in `work-products/_meta/mcp-register.yaml` may run on **`iso scan`** / **`iso generate`** / **`iso screenshots`** / **`iso publish`** without `เริ่ม step N`. Default = **read / snapshot**. Drive, Docs, and ClickUp **writes** only on **`iso publish`**. Chrome writes only PNGs under `work-products/_assets/screens/`. See [soda-iso29110](../../.agents/skills/soda-iso29110/SKILL.md).
 
 ## What lives where
 
@@ -59,8 +61,12 @@ All of these must be true (same as other EXECUTE work):
 | Class | Typical step | Default posture |
 |-------|----------------|-----------------|
 | **Browser / E2E** | IMPROVE — Test plan | Staging (or local). Observe then interact. [soda-testing](../../.agents/skills/soda-testing/SKILL.md) |
-| **Design file (Figma, …)** | PLAN — soda-design | **Read** frames/tokens into `docs/`. No publish/comment unless **In** |
-| **PM / tracker** | Sync after human asks | Prefer `soda-os sync-clickup` CLI; MCP is optional extra |
+| **Chrome / ISO screenshots** | `iso screenshots` / `iso generate` WP18… | Staging (or local). Capture into `work-products/_assets/screens/` |
+| **Figma / ISO design** | `iso generate WP16` · PLAN soda-design | **Read** frames into WP16 / `docs/`. No publish/comment unless **In** |
+| **ClickUp / ISO tracker** | `iso generate` WP03/04/07/09 | **Read** list/task URLs. Create CR/task only on `iso publish` |
+| **Google Drive / ISO pack** | `iso publish` | **Read** folder on generate; **upload** 23-pack only on `iso publish` |
+| **Google Docs / ISO formal** | `iso publish` | **Read** on generate; **create/update** WP02/10/13/01 copies only on `iso publish` |
+| **PM / tracker (goals)** | Sync after human asks | Prefer `soda-os sync-clickup` CLI for goal cards |
 | **Other HTTP MCP** | Only if Work step names it | Same gates; write ops need **In** |
 
 Figma (or any design MCP): **connect in the consumer repo**. OS does not need a Figma-specific rule. Put file IDs and “read-only” on the **design goal**. Human still approves the UI spec before `ready`.

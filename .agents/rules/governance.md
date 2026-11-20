@@ -88,9 +88,9 @@ Connectors (browser automation, design-file MCP, extra trackers, …) are **cons
 
 **Agent may call an external tool only when:**
 
-- Goal is `ready` or `in_progress` (PLAN read-only design tools: also on **`design G-xxx`** if Notes for AI list them)
-- Human started the work (**`เริ่ม step N`**, or the design PLAN trigger above)
-- The **current Work step** and/or **Test plan** (or Notes for AI) names the tool, target, and pass/fail
+- Goal is `ready` or `in_progress` (PLAN read-only design tools: also on **`design G-xxx`** if Notes for AI list them; ISO connectors: also on **`iso scan`** / **`iso generate`** / **`iso screenshots`** / **`iso publish`** if `mcp-register.yaml` names that MCP)
+- Human started the work (**`เริ่ม step N`**, or the design PLAN / ISO trigger above)
+- The **current Work step** and/or **Test plan** (or Notes for AI, or ISO `mcp_named`) names the tool, target, and pass/fail
 - Code goals: **Spec stability** `analyze` is `done` or `n/a`
 - Target is **not production** unless **In** + human say so
 
@@ -98,7 +98,7 @@ Connectors (browser automation, design-file MCP, extra trackers, …) are **cons
 
 **Forbidden:** invent which MCP to use; pass `.env` secrets as tool args; use a tool to skip `ready` / `analyze` / human `done`; dump tool output as a new OS layer.
 
-If the step needs a tool but none is named → **`clarify G-xxx`**. Do not guess Chrome vs Playwright vs Figma.
+If the step needs a tool but none is named → **`clarify G-xxx`** (ISO: HUMAN gap on `iso scan`). Do not guess ClickUp vs Drive vs Docs vs Figma vs Chrome.
 
 ## Execution boundaries
 

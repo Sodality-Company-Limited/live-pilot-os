@@ -81,6 +81,16 @@ goal_contract:
 ### Antigravity handoff contract
 When this goal is handed to Antigravity, it returns ordered atomic work steps: `### Step N — [Objective]`, Allowed files, Actions, Verification command, Completion gate, Stop condition, Zero-Mock invariant check.
 
+## Quality priority
+
+**Priority:** P1
+
+## Gap analysis
+
+| Gap ID | Priority | Evidence | Owner | Solution | Verification | Status |
+|---|---|---|---|---|---|---|
+| GAP-PAY-001 | P1 | [Identified gap evidence or test failure] | developer | [Concrete architecture/implementation solution] | [Verification command] | open |
+
 ## How
 **Stack / approach:** —
 

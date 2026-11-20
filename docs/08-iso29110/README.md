@@ -9,7 +9,7 @@ Shipped with **soda-os**; landed by `soda-os init` / `upgrade`.
 | [templates/](templates/) | `*.template.md` (docs, link registers, WP14 register, WP20 derived) |
 
 **Output:** [`work-products/`](../../work-products/README.md)  
-**Skill:** [soda-iso29110](../../.agents/skills/soda-iso29110/SKILL.md) (v1.0 — full 23)
+**Skill:** [soda-iso29110](../../.agents/skills/soda-iso29110/SKILL.md) (v1.2 — 23 WPs + five consumer MCPs)
 
 ## Output types
 
@@ -33,6 +33,20 @@ docs/08-iso29110/templates/{folder}/{template_file}
 iso scan
 iso generate wave-a | wave-b | wave-c | wave-d | all
 iso generate WP03   # etc.
+iso screenshots     # Chrome MCP → _assets/screens/
+iso publish         # Drive / Docs / ClickUp writes (human-gated)
 iso validate all
 iso status
 ```
+
+## Consumer MCPs (required for a client-ready pack)
+
+Name them in [`work-products/_meta/mcp-register.yaml`](../../work-products/_meta/mcp-register.yaml). Connect the servers in the **consumer** repo — not here.
+
+| MCP | Used for |
+|-----|----------|
+| ClickUp | WP03 / WP04 / WP07 / WP09 |
+| Google Drive | Delivery folder (upload on `iso publish`) |
+| Google Docs | Formal WP02 / WP10 / WP13 / WP01 (`iso publish`) |
+| Figma | WP16 frames (read-only) |
+| Chrome browser | WP18 screenshots |

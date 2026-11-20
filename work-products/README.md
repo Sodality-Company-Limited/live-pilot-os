@@ -4,7 +4,8 @@ Formal ISO/IEC 29110 work products for **client delivery**.
 
 | Path | Role |
 |------|------|
-| `_meta/` | Context, F/REQ registers, per-WP status |
+| `_meta/` | Context, F/REQ registers, per-WP status, screenshot + **MCP** registers |
+| `_assets/screens/` | App screenshots from Chrome MCP (WP18 …) |
 | `01_Management/` … `09_Deliverables/` | Generated WP `.md` files (skill creates these) |
 
 **SSOT for the team** remains under `docs/` (brief, goals, acceptance).  
@@ -17,6 +18,8 @@ See [soda-iso29110](../.agents/skills/soda-iso29110/SKILL.md):
 ```text
 iso scan
 iso generate wave-a
+iso screenshots
+iso publish
 iso validate
 iso status
 ```

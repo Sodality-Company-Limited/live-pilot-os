@@ -22,8 +22,8 @@
     "docs/07-backlog/clarifications/CLARIFICATION-G-ML-019.md": "f6e36381bf4539832ff9ed74187562fff86b39880bed19aa4c674adfaabce5fd",
     "scripts/agentic/g-ml-019-5why-socratic-engine.mjs": "0a62a2a0e4ad05641372c0e2e26880f95475ef7a44101900dc13b7851d8d9a5d"
   },
-  "git_head": "6884e3e43797ecdca0ec51a93fb9b11472029764",
-  "generated_at": "2026-10-15T01:38:18.524Z",
+  "git_head": "d2dc5a4b36dceba4d3827ca536c9aa4e944e57e8",
+  "generated_at": "2026-10-18T14:54:36.852Z",
   "evaluation": {
     "blocker": {
       "id": "BLOCKER-ML-019-01",

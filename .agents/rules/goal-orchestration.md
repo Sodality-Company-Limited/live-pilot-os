@@ -6,6 +6,15 @@ trigger: always_on
 
 This document defines bounded goal orchestration. It must not create an unattended, continuous execution loop or force unrelated documentation and verification work.
 
+- **Batch execution contract:** When commanded to `execute all goals`, the agent processes eligible goals sequentially in dependency order. It may promote valid `draft` / `planned` goals to `ready`, execute all finite approved steps, run their declared verification, and hand each goal to `review` without asking for confirmation between steps. It stops only for a blocker, unresolved clarification, failed verification, or a protected external boundary.
+- The current execution command authorizes the work (**`execute <GOAL_ID>`**, **`execute all goals`**, **`เริ่ม step N`**, or the design PLAN trigger above).
+- **Forbidden:** invent which MCP to use; pass `.env` secrets as tool args; use a tool to skip required preflight, `analyze`, protected-boundary authorization, or human `done` where required; dump tool output as a new OS layer.
+- Before creating or renaming a `.md` file outside `docs/06_raw/` → read [soda-markdown-placement](../skills/soda-markdown-placement/SKILL.md). One fact, one home. Do not add a second source of truth.
+
+| Status | Autonomous Discovery / Execution | Convergence Gate | ClickUp Sync |
+|---|---|---|---|
+| `draft` / `planned` | AI-to-AI Autonomous Socratic Dialectic Discovery: deconstructs root intent across Architect, Engineer, Critic, and Adversary personas; formulates BDD Given-When-Then specification. | Zero-HITL Socratic Convergence: 0 remaining ambiguities, quantitative SLAs locked. A valid goal may be promoted automatically when explicitly executed. | `TO DO` / `Draft / Backlog` |
+
 ---
 
 ## 1. Bounded Goal Execution & Ephemeral Worker Protocol

@@ -1,0 +1,49 @@
+# ISO 29110 — consumer MCP connectors
+# Fill via `iso scan`. Copy server *names* from the consumer mcp.json / Notes.
+# Soda OS does not ship MCP servers or tokens.
+# Skill: .agents/skills/soda-iso29110/SKILL.md
+
+schema_version: "1"
+
+# Each block: mcp_named empty → iso scan HUMAN gap. Do not guess the server.
+# status: missing | named | waived
+# writes: only when the human said `iso publish` (or the WP In line allows it)
+
+clickup:
+  mcp_named: ""
+  list_or_space_url: ""          # CR / defect / meeting list
+  change_request_url: ""         # WP03
+  correction_register_url: ""    # WP04
+  default_posture: read          # create CR/task only on iso publish + human
+  status: missing
+  used_by: [WP03, WP04, WP07, WP09]
+
+google_drive:
+  mcp_named: ""
+  delivery_folder_id: ""         # client 23-pack folder
+  delivery_folder_url: ""
+  default_posture: read          # upload / share only on iso publish + human
+  status: missing
+  used_by: [WP17, WP12, WP14]
+
+google_docs:
+  mcp_named: ""
+  docs_folder_id: ""             # formal WP copies (Agreement, Plan, …)
+  default_posture: read          # create/update Docs only on iso publish + human
+  status: missing
+  used_by: [WP02, WP10, WP13, WP01]
+
+figma:
+  mcp_named: ""
+  file_id: ""
+  file_url: ""
+  default_posture: read          # never publish/comment unless In says so
+  status: missing
+  used_by: [WP16, WP15]
+
+chrome_browser:
+  mcp_named: ""                  # mirrored to screenshot-register.yaml
+  preview_url: ""                # staging / local — not production
+  default_posture: snapshot      # navigate + screenshot; no prod, no secrets
+  status: missing
+  used_by: [WP18, WP16, WP08, WP06, WP05, WP22, WP01]

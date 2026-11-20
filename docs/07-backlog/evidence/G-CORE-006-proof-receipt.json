@@ -16,7 +16,7 @@
   "source_files": [
     {
       "path": "scripts/harness/mathematical-invariant-proof-harness.mjs",
-      "sha256": "943c8dd91c33ac925fd089123370e5d276f215bb5f43bc207b6340d10e80f23f"
+      "sha256": "78d6adae82885764d0f66d6ddc65775255661becf31a51b8277641e929fc9830"
     },
     {
       "path": "scripts/harness/proof-receipt-validator.mjs",

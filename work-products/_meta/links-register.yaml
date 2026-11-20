@@ -1,4 +1,5 @@
 # External pointers for link-type WPs (mirrors project-context; updated by iso scan / generate)
+# ClickUp MCP name lives in mcp-register.yaml — this file stores the resulting URLs.
 # Skill: .agents/skills/soda-iso29110/SKILL.md
 
 schema_version: "1"

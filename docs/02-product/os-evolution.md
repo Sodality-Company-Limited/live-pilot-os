@@ -89,6 +89,14 @@ Do not name consumer products in this file — use goal IDs and metric deltas on
 
 ---
 
+## v1.24.0 — 2026-09-23
+
+**Shipped:** ISO 29110 wires five **consumer** MCPs (not shipped): ClickUp, Google Drive, Google Docs, Figma, Chrome. Register: `work-products/_meta/mcp-register.yaml`. `iso generate` is read/snapshot; `iso screenshots` captures WP18; `iso publish` writes Drive/Docs/ClickUp.
+
+**Evidence:** a client 23-pack needs tracker URLs, a delivery folder, formal Docs, design frames, and real app shots — markdown templates alone leave those slots empty.
+
+---
+
 ## v1.23.0 — 2026-08-31
 
 **Shipped:** epic-namespaced goal IDs (`G-PAY-001`), `soda-os goal next|reserve`, `goal-id-registry.yaml`, filename = ID. Legacy `G-001` remains valid (epic `CORE`).
@@ -101,6 +109,7 @@ Do not name consumer products in this file — use goal IDs and metric deltas on
 
 | Version | Date | Headline |
 |---------|------|----------|
+| 1.24.0 | 2026-09-23 | ISO MCPs: ClickUp, Drive, Docs, Figma, Chrome |
 | 1.23.0 | 2026-08-31 | Epic-namespaced goal IDs + allocation registry |
 | 1.22.0 | 2026-08-17 | External tools / MCP — consumer connects; OS gates when |
 | 1.21.0 | 2026-08-17 | Spec stability — clarify / spec check / analyze |

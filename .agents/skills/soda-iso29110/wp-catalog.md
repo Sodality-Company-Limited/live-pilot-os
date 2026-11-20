@@ -24,7 +24,7 @@ Manifest: `docs/08-iso29110/template-manifest.yaml`.
 | WP15 | Software Components | **link** | B | `03_Design/Software-Components.template.md` | GitHub components URL |
 | WP16 | Software Design | doc | B | `03_Design/Software-Design.template.md` | … |
 | WP17 | Software Product | doc | C | `09_Deliverables/Software-Product.template.md` | 23-row delivery table |
-| WP18 | Software User Document | doc | C | `07_Operations/Software-User-Document.template.md` | … |
+| WP18 | Software User Document | doc | C | `07_Operations/Software-User-Document.template.md` | **screenshots required** (`iso screenshots`) |
 | WP19 | Test Cases and Procedure | doc | B | `04_Testing/Test-Cases-Procedure.template.md` | TC register |
 | WP20 | Test Report | **derived** | B | `04_Testing/Test-Report.template.md` | Summary + graph from WP19 |
 | WP21 | Traceability Record | doc | B | `02_Requirements/Traceability-Record.template.md` | RTM |

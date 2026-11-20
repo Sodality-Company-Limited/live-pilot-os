@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "goal_id": "G-ML-019",
-  "generated_at": "2026-10-15T01:38:18.525Z",
-  "source_revision": "6884e3e43797ecdca0ec51a93fb9b11472029764",
+  "generated_at": "2026-10-18T14:54:36.852Z",
+  "source_revision": "d2dc5a4b36dceba4d3827ca536c9aa4e944e57e8",
   "classification": "executable_invariant",
   "invariants": [
     {

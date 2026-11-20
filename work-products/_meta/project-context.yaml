@@ -42,6 +42,9 @@ sheet_link: ""
 test_case_sheet_link: ""
 
 production_url: ""
+# Staging or local app for ISO screenshots (WP18/WP16/…). Not production.
+# Named MCP + shot list live in screenshot-register.yaml
+app_preview_url: ""
 app_store_url: ""
 app_package_id: ""
 release_version: ""

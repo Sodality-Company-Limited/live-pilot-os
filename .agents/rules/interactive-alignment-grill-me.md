@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+description: Requirement alignment for ambiguous features and complex architectural changes
 ---
 
 # Autonomous Self-Socratic Interrogation & Zero-HITL Dialectic Alignment Protocol
@@ -10,15 +10,22 @@ This document defines the mandatory protocol for extracting, deconstructing, and
 
 ## 1. Autonomous Self-Socratic Interrogation Principle (Zero-HITL Blocking)
 
-Whenever a new feature, complex architectural change, or broad prompt is initiated:
+Use this protocol only for a new feature, complex architectural change, or broad prompt
+with unresolved product or architecture decisions. Do not use it for a scoped bug fix,
+compiler error, documentation edit, or test repair.
 1. **Never Guess Requirements in Isolation:** The Agent MUST NOT invent ungrounded requirements or produce generic boilerplate.
-2. **AI-to-AI Self-Socratic Dialectic:** Instead of freezing or waiting for human answers, Antigravity autonomously spawns and coordinates internal dialectic personas:
+2. **Bounded analysis:** Prefer one concise analysis pass. Spawn additional personas only
+   when the decision is high-risk and the goal explicitly allows it; never create an
+   open-ended debate or continuation loop.
+3. **AI-to-AI Self-Socratic Dialectic:** When justified, Antigravity may coordinate:
    - **System Architect:** Structures domain models, hexagonal ports, schemas, and typestates.
    - **Concurrency & Performance Engineer:** Establishes lock hierarchies, queuing bounds, backpressure limits, and quantitative latency budgets (SLAs).
    - **Formal Verification & Security Critic:** Enforces Hoare triples, invariant conservation laws, fail-closed boundaries, and cryptographic verification tooling (Kani, SMT/Z3, CrossHair, Miri, Proptest).
    - **QA & Adversary:** Synthesizes negative scenarios, boundary failure conditions, and chaos mutation vectors.
-3. **Autonomous Resolution to Recommended Invariants:** The swarm debates trade-offs, evaluates quantitative bounds, and autonomously selects the **`(Recommended)`** optimal architectural invariant.
-4. **Asynchronous Non-Blocking Human Visibility:** The finalized alignment and rationale are documented in `docs/06_raw/` and `CLARIFICATION-{GOAL-ID}.md` for human audit and post-review, without blocking downstream goal execution.
+4. **Autonomous Resolution to Recommended Invariants:** The bounded analysis evaluates
+   trade-offs and records a recommendation.
+5. **Concise handoff:** Persist alignment artifacts only when the goal requires them. Do
+   not create clarification files or raw reports for routine fixes.
 
 ---
 

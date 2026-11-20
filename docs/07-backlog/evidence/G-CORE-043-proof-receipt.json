@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-043",
+  "generated_at": "2026-10-18T16:43:09.000Z",
+  "source_revision": "ebf9950f33fd6c6f57c080ee7332f558f1282132",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-043-001",
+      "claim": "Conceptual documentation generation is 100% deterministic across identical source code inputs: Extract(S) === Extract(S).",
+      "statement": "Extraction Determinism Invariant holds across repeated executions.",
+      "verification_command": "node --test tests/lib/concept-doc-extractor.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-043-002",
+      "claim": "Every generated concept document includes non-empty mental models, entity definitions, and invariant declarations.",
+      "statement": "Concept Completeness Invariant holds.",
+      "verification_command": "node --test tests/lib/concept-doc-extractor.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/concept-doc-extractor.mjs": "b8fee93b9371a8c4fa3904c6715abe7de7c5407aca666a08d912ec83c9b48b7c",
+    "template/scripts/lib/concept-doc-extractor.mjs": "b8fee93b9371a8c4fa3904c6715abe7de7c5407aca666a08d912ec83c9b48b7c",
+    ".agents/skills/soda-concept-doc-extractor/SKILL.md": "b2c677738c40c1ff49f699dda018f2e6ec3a0481945e7add07d7b831fb2a74a8",
+    "template/.agents/skills/soda-concept-doc-extractor/SKILL.md": "b2c677738c40c1ff49f699dda018f2e6ec3a0481945e7add07d7b831fb2a74a8",
+    "tests/lib/concept-doc-extractor.test.mjs": "5c78015517328d9e4e9447def23d25305df7a419a21838baddf6126c4bf11615"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/concept-doc-extractor.mjs",
+      "sha256": "b8fee93b9371a8c4fa3904c6715abe7de7c5407aca666a08d912ec83c9b48b7c"
+    },
+    {
+      "path": "template/scripts/lib/concept-doc-extractor.mjs",
+      "sha256": "b8fee93b9371a8c4fa3904c6715abe7de7c5407aca666a08d912ec83c9b48b7c"
+    },
+    {
+      "path": ".agents/skills/soda-concept-doc-extractor/SKILL.md",
+      "sha256": "b2c677738c40c1ff49f699dda018f2e6ec3a0481945e7add07d7b831fb2a74a8"
+    },
+    {
+      "path": "template/.agents/skills/soda-concept-doc-extractor/SKILL.md",
+      "sha256": "b2c677738c40c1ff49f699dda018f2e6ec3a0481945e7add07d7b831fb2a74a8"
+    },
+    {
+      "path": "tests/lib/concept-doc-extractor.test.mjs",
+      "sha256": "5c78015517328d9e4e9447def23d25305df7a419a21838baddf6126c4bf11615"
+    }
+  ],
+  "certification": "PASS"
+}

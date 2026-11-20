@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-044",
+  "generated_at": "2026-10-18T23:20:11.000Z",
+  "source_revision": "098221a17a6e1a1d7c90344be8220f90ff8630c8",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-044-001",
+      "claim": "Skill compilation from a declared configuration object is 100% deterministic: Compile(C) === Compile(C).",
+      "statement": "Skill compilation is strictly deterministic across repeated invocations.",
+      "verification_command": "node --test tests/lib/skill-authoring-compiler.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-044-002",
+      "claim": "Every registered skill exists in both .agents/skills/ and template/.agents/skills/ with bitwise byte identity.",
+      "statement": "Dual-touch parity holds with exact bitwise matching.",
+      "verification_command": "node --test tests/lib/skill-authoring-compiler.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/skill-authoring-compiler.mjs": "e10a659748ddbc343e3543fd84604dae9464017bce3ad81d6eb19f38b0406fec",
+    "template/scripts/lib/skill-authoring-compiler.mjs": "e10a659748ddbc343e3543fd84604dae9464017bce3ad81d6eb19f38b0406fec",
+    ".agents/skills/soda-skill-authoring-compiler/SKILL.md": "6cf10f42ebece346aa06ef572da13eca5ab6a91259f5dcd7b91bea690a8d5459",
+    "template/.agents/skills/soda-skill-authoring-compiler/SKILL.md": "6cf10f42ebece346aa06ef572da13eca5ab6a91259f5dcd7b91bea690a8d5459",
+    "tests/lib/skill-authoring-compiler.test.mjs": "9b9eaada9bb344ab73d8fe2c158da58bf1e6ee0567f51d701327077a6cf6fe84"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/skill-authoring-compiler.mjs",
+      "sha256": "e10a659748ddbc343e3543fd84604dae9464017bce3ad81d6eb19f38b0406fec"
+    },
+    {
+      "path": "template/scripts/lib/skill-authoring-compiler.mjs",
+      "sha256": "e10a659748ddbc343e3543fd84604dae9464017bce3ad81d6eb19f38b0406fec"
+    },
+    {
+      "path": ".agents/skills/soda-skill-authoring-compiler/SKILL.md",
+      "sha256": "6cf10f42ebece346aa06ef572da13eca5ab6a91259f5dcd7b91bea690a8d5459"
+    },
+    {
+      "path": "template/.agents/skills/soda-skill-authoring-compiler/SKILL.md",
+      "sha256": "6cf10f42ebece346aa06ef572da13eca5ab6a91259f5dcd7b91bea690a8d5459"
+    },
+    {
+      "path": "tests/lib/skill-authoring-compiler.test.mjs",
+      "sha256": "9b9eaada9bb344ab73d8fe2c158da58bf1e6ee0567f51d701327077a6cf6fe84"
+    }
+  ],
+  "certification": "PASS"
+}

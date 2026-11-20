@@ -225,7 +225,7 @@ npm run build
 | [soda-upgrade-os](.agents/skills/soda-upgrade-os/SKILL.md) | Upgrade OS in existing projects (Phase 2) |
 | [soda-incident-response](.agents/skills/soda-incident-response/SKILL.md) | Incidents |
 | [soda-db-migration](.agents/skills/soda-db-migration/SKILL.md) | Schema migrations |
-| [soda-iso29110](.agents/skills/soda-iso29110/SKILL.md) | `iso scan`, `iso generate all\|wave-a…d\|WPnn`, `iso validate` — all 23 WPs |
+| [soda-iso29110](.agents/skills/soda-iso29110/SKILL.md) | `iso scan`, `iso generate`, `iso screenshots`, `iso publish`, `iso validate` — 23 WPs + five consumer MCPs |
 
 Catalog & versions: [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md)
 
