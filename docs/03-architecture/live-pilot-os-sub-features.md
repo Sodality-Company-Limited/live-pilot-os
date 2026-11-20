@@ -2,6 +2,8 @@
 
 > Compact reference list derived from the detailed feature map.
 
+> For the selected Hackathon demo, follow the [Requirements Baseline](./live-pilot-os-requirements.md) and [Project Brief](../02-product/project-brief.md). Examples in this broader product quick reference, including automatic pinning and illustrative thresholds, are not selected Hackathon behavior where they conflict.
+
 > **Feature 01 BDD:** [Real-Time Chat and Purchase-Signal Analysis](../02-product/bdd/feature-01-live-chat-telemetry.md)
 > **Feature 02 BDD:** [Host Screen Assistant (Streamer Co-pilot HUD)](../02-product/bdd/feature-02-streamer-copilot-hud.md)
 > **Feature 03 BDD:** [Store Management and Back-Office Profit Protection](../02-product/bdd/feature-03-streampilot-agent.md)
@@ -135,7 +137,7 @@ Set automatic rules, for example:
 ```text
 If the same product is asked about more than 5 times → Pin the product + alert the host
 If engagement is above 80% → Open a flash voucher
-If margin is below 22% → Do not issue a discount
+For the selected Hackathon demo, use a 10% margin floor, adjust the candidate discount to meet it, and require Live Ops approval before issue.
 If stock is below 10 units → Alert the host
 ```
 

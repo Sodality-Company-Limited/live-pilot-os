@@ -51,13 +51,10 @@ rules, permissions, or workflow states.
 - [Project Brief](../02-product/project-brief.md)
 - [Core Features](./live-pilot-os-core-features.md)
 - [Sub-features](./live-pilot-os-sub-features.md)
-- [Information Architecture and UX Flow — G-UX-041](./ux/G-UX-041.md)
-- [UI Specification — G-UX-041](../02-product/design/G-UX-041.md)
 - [Live OS Design Token Proposal](./ux/live-os-design-tokens.md)
 - [Runtime Design Tokens](../../src/tokens.css)
 
-> G-UX-041 and its token proposal are drafts pending Product/Design approval.
-> They are proposals, not frozen implementation contracts.
+> The token proposal is a design draft pending Product/Design approval, not a frozen implementation contract. The former G-UX-041/042 goal documents were removed; no UX goal is authorized by this source list.
 
 ## 3. Product operating model
 
@@ -613,22 +610,23 @@ The JEV latency target is a budget to validate, not an achieved performance clai
 
 ## 19. Hackathon cut line
 
-The Hackathon demonstrates one vertical trace:
+The selected Hackathon trace is defined by the [Requirements Baseline](./live-pilot-os-requirements.md) and [Project Brief](../02-product/project-brief.md):
 
 ```text
-Simulated chat
-  → intent classification
-  → JEV structured decision proposal
-  → Host cue
-  → product-pin proposal
-  → below-floor margin rejection
-  → operator-visible audit log
-  → Emergency Pause
+Mock shampoo live and chat
+  → group promotion questions and calculate the two-minute audience-interest ratio
+  → show Host product details, audience metrics, and talking points
+  → AI proposes a discount; deterministic margin policy enforces the 10% floor
+  → policy adjusts the discount if needed and shows original/adjusted evidence to Live Ops
+  → Live Ops approval or rejection
+  → on approval, simulate coupon issue, stock reservation, viewer banner, and countdown to live end
+  → on rejection, show not-approved status and optional reason; end without another offer
 ```
 
-The Hackathon may use seeded events, reduced infrastructure, and a simulated
-platform adapter. It must preserve JEV model/provider metadata, structured output,
-policy gates, idempotency, visible simulation mode, and audit trace.
+Use seeded events, a fictional catalog, mock inventory, and a simulated adapter with
+no live-platform connection. The 3-minute initial timer is a working assumption; the
+coupon expires when the mock live ends. This selected demo does not include product
+pinning, an alternative bundle, or Emergency Pause.
 
 ## 20. Non-goals
 

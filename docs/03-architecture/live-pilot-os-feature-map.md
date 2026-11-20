@@ -4,6 +4,8 @@
 
 This document groups LivePilot OS sub-features so they align with the four core features for Team Sodality's Hackathon.
 
+> **Selected Hackathon flow:** [Requirements Baseline](./live-pilot-os-requirements.md) and [Project Brief](../02-product/project-brief.md) are authoritative for the current demo. Older numeric examples, shade-02/bundle scenarios, autonomous actions, and Emergency Pause below describe broader product concepts; they are not selected requirements for this demo where they conflict with the baseline.
+
 ## Grouping Overview
 
 | Core Feature | Primary Role | Sub-features |
@@ -273,6 +275,14 @@ Example:
 Recommend Duo Glow Set → 47.93% margin
 ```
 
+For the selected Hackathon demo, use the following confirmed policy instead of the illustrative thresholds above:
+
+- Margin floor: 10%.
+- Formula: `(net sales after discount − product cost − platform fees) ÷ net sales after discount`.
+- AI proposes the discount; deterministic margin policy lowers it if needed to meet the 10% floor.
+- Show Live Ops the original and adjusted discount, both margin values, and the adjustment reason. Live Ops approval is required before issuing the mock coupon.
+- If Live Ops rejects the offer, do not issue it or generate an alternative. Show the Host the not-approved status and the optional rejection reason.
+
 #### 3.4 Stock Reservation and Order State
 
 - Reserve stock temporarily when a promotion opens
@@ -292,8 +302,7 @@ Same product asked about >= 5 times
 engagement > 80%
 → Propose a flash voucher
 
-margin < 22%
-→ Do not issue a discount
+For the selected Hackathon flow, use the 10% margin floor, adjust the candidate discount to meet it, and require Live Ops approval before issue.
 
 stock < 10 units
 → Alert the host
@@ -448,20 +457,21 @@ compliance.escalated
    Check policy → log action → retry safely → emergency pause
 ```
 
-## Hackathon MVP to Demonstrate
+## Selected Hackathon demo flow
 
-Choose one demo flow that covers all four features:
+The current discovery selects this simulated shampoo scenario:
 
 ```text
-1. A customer types “Please show shade 02.”
-2. Live Chat Understanding detects PRODUCT_INTEREST.
-3. Co-pilot alerts the host and suggests a talking point.
-4. StreamPilot Agent proposes pinning SKU_02.
-5. The customer requests a 50% discount.
-6. Margin Protection rejects it and proposes Duo Glow Set.
-7. Action Log displays every step.
-8. The operator can press Emergency Pause.
+1. Mock vertical live video and chat show viewers asking about a fictional shampoo promotion.
+2. AI groups similar questions and calculates unique interested viewers / average viewers in a rolling two-minute window.
+3. Host sees the interest log, product metrics and details, and concise talking points to phrase independently.
+4. AI recommends a demand-appropriate discount; deterministic margin policy adjusts it if needed to preserve a 10% floor.
+5. Live Ops reviews the original/adjusted discount, both margins, and the adjustment reason.
+6. Approval simulates coupon issuance, mock stock reservation, Host approval status, and a viewer banner with product, discount, final price, and countdown to the end of the live.
+7. Rejection shows the Host not-approved status and optional reason; no coupon or alternative offer is issued.
 ```
+
+The demo uses no live-platform integration. Coupon, inventory, chat, and countdown behavior are simulated. The 3-minute starting countdown remains a working assumption; see [A-006](../02-product/assumptions.md).
 
 ## Team Ownership
 
