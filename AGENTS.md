@@ -36,6 +36,19 @@ Context + Skill + Goal + Governance + Approval + Audit
 | **Specs** | `docs/02-product/`, `docs/03-architecture/` | Read links in the active goal |
 | **API / data** | `docs/03-architecture/api/`, `data/` | Update contracts when goal changes APIs or domain rules |
 
+## Agent reference map
+
+Use these canonical references when selecting a skill, persona, role, or architecture context:
+
+| Reference | Link |
+|-----------|------|
+| Soda skills (local playbooks) | [.agents/skills/](.agents/skills/) |
+| Skills catalog and versions | [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md) |
+| Persona catalog | [docs/04-agents/personas/README.md](docs/04-agents/personas/README.md) |
+| Agent roles and responsibilities | [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md) |
+| Agent documentation hub | [docs/04-agents/](docs/04-agents/) |
+| Stack and system boundaries | [docs/03-architecture/overview.md](docs/03-architecture/overview.md) |
+
 **Goal status:** `draft` / `planned` = spec only (autonomously promoted to `ready` -> `in_progress` on `execute <GOAL_ID>` or swarming) · `ready` = may pick · `in_progress` · `review` · `blocked` · `approved` · `done`  
 (Canonical terms: [design-spec.md](docs/03-architecture/design-spec.md) §8 — collaboration phase ≠ goal status.)
 
