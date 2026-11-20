@@ -20,9 +20,9 @@ Context + Skill + Goal + Governance + Approval + Audit
 | Layer | Location | Agent job |
 |-------|----------|-----------|
 | **Context** | compiled action bundle | **EXECUTE:** `step-N.md` + `action-step-N.yaml` |
-| **Skill** | `.agents/skills/soda-*/` | Follow task playbook |
+| **Skill** | [.agents/skills/](.agents/skills/) | Follow the matching task playbook |
 | **Goal** | `docs/07-backlog/goals.md`, `docs/02-product/acceptance/` | One `ready` goal per round |
-| **Governance** | `.agents/rules/governance.md`, `security.md` | Hard boundaries |
+| **Governance** | [.agents/rules/](.agents/rules/) | Hard boundaries and persistent constraints |
 | **Approval** | Automated evidence gate | No merge, prod, or `done` without passing validation, security, and release checks |
 | **Audit** | `docs/07-backlog/changelog.md` | Log decisions |
 
@@ -31,10 +31,37 @@ Context + Skill + Goal + Governance + Approval + Audit
 | Layer | Location | Agent job |
 |-------|----------|-----------|
 | **Goals** | `docs/07-backlog/goals.md` + `goals/G-PAY-001.md` (legacy `G-001.md`) | Work on **one** `ready` goal only; archive to `goals/_archived/` on close. Allocate with `soda-os goal next`. |
-| **Rules** | `.agents/rules/` | Always follow |
-| **Skills** | `.agents/skills/soda-*/` | Read when task matches skill description |
-| **Specs** | `docs/02-product/`, `docs/03-architecture/` | Read links in the active goal |
+| **Rules** | [.agents/rules/](.agents/rules/) | Always follow; fail closed on conflicts |
+| **Skills** | [.agents/skills/](.agents/skills/) + [skills-registry.yaml](docs/04-agents/skills-registry.yaml) | Read the matching skill; validate registry before review |
+| **Specs** | [.agents/specs/](.agents/specs/) + `docs/02-product/`, `docs/03-architecture/` | Read the active goal's linked specifications |
+| **Templates** | [.agents/templates/](.agents/templates/) | Use the applicable execution, goal, and evidence template |
 | **API / data** | `docs/03-architecture/api/`, `data/` | Update contracts when goal changes APIs or domain rules |
+| **API SOT generation set** | `docs/03-architecture/api/` | Read the relevant identity, resource, operation, error, mutation, realtime, async, adapter, query, and persistence SOT before generating API specs |
+| **API generation skills** | `.agents/skills/soda-api-spec-generation/`, `.agents/skills/soda-api-sot-traceability/` | Trace BRD/BDD/flows before generating OpenAPI, AsyncAPI, or JSON Schema |
+| **TDD generation skill** | `.agents/skills/soda-tdd-spec-generation/` | Convert approved behavior, contracts, and invariants into test-first specifications |
+| **UX/UI SOT generation set** | `docs/03-architecture/ux/` | Read IA, component, state, binding, responsive, accessibility, content, realtime, testing, observability, and visual authorities before frontend implementation |
+| **Error-code registry** | `docs/03-architecture/api/error-codes.yaml` | Allocate and validate public error codes before exposing errors |
+| **Technical SOT** | `docs/03-architecture/technical-specifications-sot.md` | Treat cross-cutting production constraints as binding |
+| **Quality SOT** | `docs/03-architecture/software-quality-sot.md` | Verify simulated behavior with production-grade quality gates |
+| **Testing SOT** | `docs/03-architecture/testing-sot.md` | Define enterprise test levels, evidence, failure coverage, and release gates |
+| **Testing/TDD SOT index** | `docs/03-architecture/testing/README.md` | Route subagents to test specifications, TDD records, fixtures, invariants, and evidence |
+| **Deployment/runtime SOT** | `docs/03-architecture/deployment/README.md` | Govern local-to-DigitalOcean topology, release, rollback, backup, and recovery |
+| **Configuration/policy SOT** | `docs/03-architecture/configuration/README.md` | Govern environment values, secrets, flags, business policies, precedence, and audit |
+| **Localization SOT** | `docs/03-architecture/localization-sot.md` | Govern locale, translation, RTL, formatting, and accessibility behavior |
+| **Flow SOT** | `docs/03-architecture/contracts/flows/coverage.yaml`, `source-of-truth-flows/` | Preserve feature ownership, schema status, and evidence |
+
+### SOT-aware skill routing
+
+Before selecting or executing a skill, resolve the applicable SOT links from the
+[skill registry](docs/04-agents/skills-registry.yaml). Architecture, API, event,
+data, adapter, deployment, security, reliability, or quality work MUST read the
+[architecture overview](docs/03-architecture/overview.md),
+[technical specifications SOT](docs/03-architecture/technical-specifications-sot.md),
+[software quality SOT](docs/03-architecture/software-quality-sot.md), and for
+locale-aware or user-facing work, the [localization SOT](docs/03-architecture/localization-sot.md), and the
+relevant [API](docs/03-architecture/api/README.md) or
+[flow coverage](docs/03-architecture/contracts/flows/coverage.yaml) authority before
+implementation. A skill may add constraints but cannot override an SOT.
 
 ## Agent reference map
 
@@ -43,11 +70,22 @@ Use these canonical references when selecting a skill, persona, role, or archite
 | Reference | Link |
 |-----------|------|
 | Soda skills (local playbooks) | [.agents/skills/](.agents/skills/) |
-| Skills catalog and versions | [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md) |
-| Persona catalog | [docs/04-agents/personas/README.md](docs/04-agents/personas/README.md) |
-| Agent roles and responsibilities | [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md) |
+| Agent rules | [.agents/rules/](.agents/rules/) |
+| Agent specs | [.agents/specs/](.agents/specs/) |
+| Agent templates | [.agents/templates/](.agents/templates/) |
 | Agent documentation hub | [docs/04-agents/](docs/04-agents/) |
+| Skills catalog and versions | [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md) |
+| Machine-readable skill registry | [docs/04-agents/skills-registry.yaml](docs/04-agents/skills-registry.yaml) |
+| Persona catalog | [docs/04-agents/personas/README.md](docs/04-agents/personas/README.md) |
+| Persona registry implementation | [scripts/agents/lib/persona-registry.mjs](scripts/agents/lib/persona-registry.mjs) |
+| Agent roles and responsibilities | [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md) |
 | Stack and system boundaries | [docs/03-architecture/overview.md](docs/03-architecture/overview.md) |
+| Enterprise technical specifications | [docs/03-architecture/technical-specifications-sot.md](docs/03-architecture/technical-specifications-sot.md) |
+| Software quality contract | [docs/03-architecture/software-quality-sot.md](docs/03-architecture/software-quality-sot.md) |
+| Testing contract | [docs/03-architecture/testing-sot.md](docs/03-architecture/testing-sot.md) |
+| Localization contract | [docs/03-architecture/localization-sot.md](docs/03-architecture/localization-sot.md) |
+| UX/UI SOT index | [docs/03-architecture/ux/README.md](docs/03-architecture/ux/README.md) |
+| SOT coverage registry | [docs/03-architecture/contracts/flows/coverage.yaml](docs/03-architecture/contracts/flows/coverage.yaml) |
 
 **Goal status:** `draft` / `planned` = spec only (autonomously promoted to `ready` -> `in_progress` on `execute <GOAL_ID>` or swarming) · `ready` = may pick · `in_progress` · `review` · `blocked` · `approved` · `done`  
 (Canonical terms: [design-spec.md](docs/03-architecture/design-spec.md) §8 — collaboration phase ≠ goal status.)
@@ -150,6 +188,8 @@ Full project context (bootstrap, discovery, new goal draft) — load in order:
 3. [docs/03-architecture/design-spec.md](docs/03-architecture/design-spec.md) — framework map
 4. [docs/07-backlog/goals.md](docs/07-backlog/goals.md) — pick **one** active goal
 5. [docs/06-workflows/definition-of-done.md](docs/06-workflows/definition-of-done.md)
+6. [docs/03-architecture/technical-specifications-sot.md](docs/03-architecture/technical-specifications-sot.md)
+7. [docs/03-architecture/software-quality-sot.md](docs/03-architecture/software-quality-sot.md)
 
 ## Work loop (every round — PR-First)
 
@@ -185,11 +225,17 @@ Details: [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md)
 - **Spec stability** — do not guess; Intent is WHAT/WHY; **`analyze G-xxx`** before first execute.
 - **Semantic goal generation** — Codex, Claude, Antigravity, and other agents must ground every generated goal section in project evidence. Structural template conformance alone is insufficient; generic template examples, irrelevant stack assumptions, placeholder work steps, and invented commands must be removed.
 - **Goal completeness** — for LivePilot OS, generated goals must cite `REQ-LP-NNN` from [the requirements baseline](docs/03-architecture/live-pilot-os-requirements.md) and pass [the completeness contract](docs/03-architecture/goal-generation-completeness.md) before `ready`.
+- **Technical SOT compliance** — goals affecting architecture, APIs, events, persistence, adapters, deployment, or quality MUST read and remain within [the technical specifications SOT](docs/03-architecture/technical-specifications-sot.md). New contracts must be registered in [coverage.yaml](docs/03-architecture/contracts/flows/coverage.yaml).
+- **Production-grade simulation** — simulated adapters and fixtures MUST use real validation, authorization, lifecycle, idempotency, timeout, unknown-result, reconciliation, audit, and mode-label behavior. Simulation is not permission to bypass production controls.
 - **Provider parity** — Codex, Claude, and Antigravity must use the same `soda-goal-generation` skill and the same repository-grounded context. Goal quality must not vary by model; provider-specific goal shortcuts are forbidden.
 - **Context authority** — For deep-context requests, Antigravity is the designated context and goal-generation authority. Codex and Claude must consume Antigravity’s generated context and canonical goal artifacts for execution; they must not independently reinterpret goal intent, scope, dependencies, touch maps, or acceptance criteria.
 - **Antigravity generation gate (Goal Drafting Only — Not Execution Gate)** — Deep-context goal generation requires a persisted, source-cited Antigravity context artifact containing derived intent, atomic outcomes, repository evidence, and validation evidence. If it is absent, stale, or inconsistent during goal drafting, Codex and Claude fail closed and request a fresh Antigravity context pass. This gate applies ONLY to authoring new goals from scratch; during active goal execution (`execute G-xxx`), Codex and Claude MUST NOT invoke this gate or claim the goal card is "semantically incomplete" to refuse closure when implementation and tests pass 100% green. The agent autonomously updates the card and archives it.
 - **External tools / MCP** — consumer connects; agent calls them only when the goal step names them ([external-tools.md](docs/06-workflows/external-tools.md)).
 - **Tests before goal status `review`** — do not mark complete if tests or analyzer fail.
+- **SOT hierarchy before review** — run `node scripts/architecture/check-sot.mjs`; any missing flow ownership, contract coverage, lifecycle, error/recovery, verification, session scope, idempotency, or audit evidence blocks `review`.
+- **Quality evidence before approval** — run the applicable software-quality scorecard and attach a revision-bound receipt. `PASS-SIMULATED` proves core software behavior only; it never certifies an unavailable external platform.
+- **Skill registry integrity** — every skill must have a valid `SKILL.md` frontmatter (`name`, semver `version`, and `description`), match its directory name, and be linked from the skills catalog. Run `node scripts/agents/check-skill-registry.mjs` before review; failures block review.
+- **SOT-linked skill selection** — architecture-impacting skills must be selected with an explicit SOT touch map; missing or stale SOT links block execution until resolved.
 - **Automated evidence before `done`** — status must reach `approved` only after all required automated gates pass; no human sign-off state is required.
 - **Respect Project Scope** — no out-of-scope features without a new goal row.
 - **Minimize diff** — smallest change that satisfies acceptance criteria.
@@ -212,12 +258,25 @@ Governance overlay — not collaboration phases. See [design-spec.md](docs/03-ar
 # cd code && npm test && npm run lint
 # cd code && dart analyze && flutter test
 # cd code && go test ./... && golangci-lint run
+node scripts/architecture/check-sot.mjs
+node scripts/agents/check-skill-registry.mjs
+node scripts/contract-check/error-code-registry.mjs
+node scripts/api/check-api-sot-traceability.mjs
+node scripts/testing/check-tdd-traceability.mjs
 npm run lint:check
 npm run test
 npm run build
 ```
 
-## Soda standard skills (v1.6.0)
+## Soda standard skills (registry-backed)
+
+The repository currently contains 102 local skills. The complete inventory is
+derived from `.agents/skills/*/SKILL.md`; the machine-readable contract is
+[skills-registry.yaml](docs/04-agents/skills-registry.yaml), and the human catalog is
+[skills-library.md](docs/04-agents/skills-library.md). Do not add a skill only to this
+summary table: add its `SKILL.md`, catalog entry, and registry validation coverage.
+
+Core routing skills:
 
 | Skill | Command triggers |
 |-------|------|

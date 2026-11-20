@@ -1,5 +1,6 @@
 ---
 name: soda-pr-babysit
+version: "1.0.0"
 description: Autonomous PR review comment triage, transient CI failure retry, and merge readiness verification. Use during SHIP phase or when babysitting active PRs to green landing.
 ---
 

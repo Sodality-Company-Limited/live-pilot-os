@@ -237,6 +237,12 @@ components:
         - status
         - detail
         - instance
+        - code
+        - symbol
+        - message_key
+        - request_id
+        - correlation_id
+        - retry_policy
         - invalid_params
       properties:
         type:
@@ -249,6 +255,24 @@ components:
           type: string
         instance:
           type: string
+        code:
+          type: string
+          pattern: '^LP[0-9]{5}$'
+        symbol:
+          type: string
+        message_key:
+          type: string
+        request_id:
+          type: string
+        correlation_id:
+          type: string
+        retry_policy:
+          type: string
+          enum: [never, retry, retry_after, reconcile, request_new_credential]
+        retry_after_seconds:
+          type: integer
+          minimum: 0
+          nullable: true
         invalid_params:
           type: array
           items:

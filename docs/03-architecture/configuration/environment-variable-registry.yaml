@@ -1,0 +1,47 @@
+schema_version: "1"
+status: canonical_template
+owner: platform-engineering
+rules:
+  - required values fail startup with a safe diagnostic
+  - secrets never appear in logs, fixtures, or Git
+  - unknown keys warn in local and fail in staging/production
+  - production changes require approval and an audit receipt
+variables:
+  - key: APP_ENV
+    type: enum
+    allowed: [local, ci, staging, production]
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: PLATFORM_MODE
+    type: enum
+    allowed: [simulated, sandbox, production]
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: DATABASE_URL
+    type: uri
+    required: true
+    secret: true
+    source: secret_manager_or_protected_env
+    reload: restart
+  - key: NATS_URL
+    type: uri
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: REDIS_URL
+    type: uri
+    required: true
+    secret: true
+    source: secret_manager_or_protected_env
+    reload: restart
+  - key: OTEL_EXPORTER_OTLP_ENDPOINT
+    type: uri
+    required: true
+    secret: false
+    source: deployment
+    reload: restart

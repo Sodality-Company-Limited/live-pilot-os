@@ -1,0 +1,19 @@
+schema_version: "1"
+status: canonical_template
+policies:
+  - policy_id: margin.approval_thresholds
+    version: "1.0.0"
+    status: proposed
+    owner: margin-policy-service
+    scope: tenant_workspace_campaign
+    effective_at: "REQUIRED"
+    approval: product-risk-owner
+    rollback: prior_approved_version
+  - policy_id: inventory.reservation_limits
+    version: "1.0.0"
+    status: proposed
+    owner: inventory-service
+    scope: tenant_workspace_campaign
+    effective_at: "REQUIRED"
+    approval: operations-owner
+    rollback: prior_approved_version

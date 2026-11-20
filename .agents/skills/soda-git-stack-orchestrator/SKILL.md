@@ -1,5 +1,6 @@
 ---
 name: soda-git-stack-orchestrator
+version: "1.0.0"
 description: Multi-branch stacked PR planner and rebase cascade coordinator. Plans topological rebase orderings, detects circular dependencies in branch chains, and enforces safe stack traversal.
 ---
 

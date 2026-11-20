@@ -1,5 +1,6 @@
 ---
 name: soda-architectural-arena
+version: "1.0.0"
 description: Conducts rigorous multi-candidate architectural trade-off bake-offs, Pareto frontier evaluation, and cryptographic decision receipts.
 ---
 

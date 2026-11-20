@@ -1,0 +1,32 @@
+schema_version: "1"
+status: canonical
+authority: .agents/skills/*/SKILL.md
+catalog: docs/04-agents/skills-library.md
+agent_entrypoint: AGENTS.md
+validation_command: node scripts/agents/check-skill-registry.mjs
+agent_directories:
+  rules: .agents/rules/
+  skills: .agents/skills/
+  specs: .agents/specs/
+  templates: .agents/templates/
+  documentation: docs/04-agents/
+  persona_catalog: docs/04-agents/personas/
+  persona_registry: scripts/agents/lib/persona-registry.mjs
+sot_links:
+  architecture: docs/03-architecture/overview.md
+  technical_specifications: docs/03-architecture/technical-specifications-sot.md
+  software_quality: docs/03-architecture/software-quality-sot.md
+  testing: docs/03-architecture/testing-sot.md
+  localization: docs/03-architecture/localization-sot.md
+  api_contracts: docs/03-architecture/api/README.md
+  flow_coverage: docs/03-architecture/contracts/flows/coverage.yaml
+  deployment_runtime: docs/03-architecture/deployment/README.md
+  configuration_policy: docs/03-architecture/configuration/README.md
+rules:
+  - every skill directory contains exactly one SKILL.md
+  - every SKILL.md declares name, version, and description frontmatter
+  - frontmatter name matches the directory name
+  - versions use semantic versioning
+  - every skill is discoverable from the catalog or explicitly marked internal
+  - architecture-impacting skills link to the applicable SOT before execution
+  - AGENTS.md must reference the registry and validation command

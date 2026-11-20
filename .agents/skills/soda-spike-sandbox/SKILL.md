@@ -1,5 +1,6 @@
 ---
 name: soda-spike-sandbox
+version: "1.0.0"
 description: Bounded exploratory prototyping and disposable spike sandboxing with mandatory BDD scenario extraction and clean teardown. Use during DEFINE or PLAN phases before locking TDD contracts.
 ---
 

@@ -1,9 +1,15 @@
 # Skills library
 
+> **Registry authority:** [skills-registry.yaml](skills-registry.yaml)
+> **Validation:** `node scripts/agents/check-skill-registry.mjs`
+> **SOT routing:** Architecture, technical, quality, API, and flow authorities are registered in `skills-registry.yaml`.
+
 > **Sodality standard skills** — shipped with every project from **Soda Agent OS**.  
 > Versioned, repeatable procedures for humans and Cursor agents.
 
 Project-specific skills use prefix `{project}-*` and are listed in a separate section below.
+The filesystem inventory is authoritative: every `.agents/skills/*/SKILL.md` must be
+represented by a catalog link and must pass the registry validator.
 
 ## Version convention
 
@@ -107,6 +113,117 @@ Register new skills here and in `AGENTS.md`.
 | soda-deploy-staging | 1.0.0 | 2026-05-24 | Initial ship |
 | soda-incident-response | 1.0.0 | 2026-05-24 | Initial ship |
 | soda-db-migration | 1.0.0 | 2026-05-24 | Initial ship |
+
+## Complete local skill inventory
+
+This inventory is intentionally link-only; descriptions and versions remain in each
+skill's frontmatter and are checked by the registry validator.
+
+ - [soda-accessibility-i18n-localization](../../.agents/skills/soda-accessibility-i18n-localization/SKILL.md)
+ - [soda-api-spec-generation](../../.agents/skills/soda-api-spec-generation/SKILL.md)
+ - [soda-api-sot-traceability](../../.agents/skills/soda-api-sot-traceability/SKILL.md)
+ - [soda-tdd-spec-generation](../../.agents/skills/soda-tdd-spec-generation/SKILL.md)
+ - [soda-agent-observability](../../.agents/skills/soda-agent-observability/SKILL.md)
+ - [soda-agent-runtime-governance](../../.agents/skills/soda-agent-runtime-governance/SKILL.md)
+ - [soda-agentic-discovery](../../.agents/skills/soda-agentic-discovery/SKILL.md)
+ - [soda-anti-slop-review](../../.agents/skills/soda-anti-slop-review/SKILL.md)
+ - [soda-api-gateway-contracts](../../.agents/skills/soda-api-gateway-contracts/SKILL.md)
+ - [soda-archify](../../.agents/skills/soda-archify/SKILL.md)
+ - [soda-architectural-arena](../../.agents/skills/soda-architectural-arena/SKILL.md)
+ - [soda-ast-type-invariants](../../.agents/skills/soda-ast-type-invariants/SKILL.md)
+ - [soda-atomic-unit-scoping](../../.agents/skills/soda-atomic-unit-scoping/SKILL.md)
+ - [soda-audit-soc2-compliance](../../.agents/skills/soda-audit-soc2-compliance/SKILL.md)
+ - [soda-autonomous-diagnostician](../../.agents/skills/soda-autonomous-diagnostician/SKILL.md)
+ - [soda-autopilot-runner](../../.agents/skills/soda-autopilot-runner/SKILL.md)
+ - [soda-blast-radius-analyzer](../../.agents/skills/soda-blast-radius-analyzer/SKILL.md)
+ - [soda-bug-triage](../../.agents/skills/soda-bug-triage/SKILL.md)
+ - [soda-cloud-infra-sre](../../.agents/skills/soda-cloud-infra-sre/SKILL.md)
+ - [soda-code-review](../../.agents/skills/soda-code-review/SKILL.md)
+ - [soda-concept-doc-extractor](../../.agents/skills/soda-concept-doc-extractor/SKILL.md)
+ - [soda-context-investigation](../../.agents/skills/soda-context-investigation/SKILL.md)
+ - [soda-coordinator-agent-spawning](../../.agents/skills/soda-coordinator-agent-spawning/SKILL.md)
+ - [soda-creative-direction](../../.agents/skills/soda-creative-direction/SKILL.md)
+ - [soda-data-residency-confidential](../../.agents/skills/soda-data-residency-confidential/SKILL.md)
+ - [soda-data-visualization](../../.agents/skills/soda-data-visualization/SKILL.md)
+ - [soda-database-architecture](../../.agents/skills/soda-database-architecture/SKILL.md)
+ - [soda-dave-decision-orchestration](../../.agents/skills/soda-dave-decision-orchestration/SKILL.md)
+ - [soda-dave-frontend-implementation](../../.agents/skills/soda-dave-frontend-implementation/SKILL.md)
+ - [soda-dave-game-design](../../.agents/skills/soda-dave-game-design/SKILL.md)
+ - [soda-dave-hitl-review](../../.agents/skills/soda-dave-hitl-review/SKILL.md)
+ - [soda-dave-motion-and-assets](../../.agents/skills/soda-dave-motion-and-assets/SKILL.md)
+ - [soda-dave-reference-packets](../../.agents/skills/soda-dave-reference-packets/SKILL.md)
+ - [soda-dave-visual-fidelity](../../.agents/skills/soda-dave-visual-fidelity/SKILL.md)
+ - [soda-db-migration](../../.agents/skills/soda-db-migration/SKILL.md)
+ - [soda-debug-mantra](../../.agents/skills/soda-debug-mantra/SKILL.md)
+ - [soda-deploy-staging](../../.agents/skills/soda-deploy-staging/SKILL.md)
+ - [soda-design](../../.agents/skills/soda-design/SKILL.md)
+ - [soda-design-system-tokens](../../.agents/skills/soda-design-system-tokens/SKILL.md)
+ - [soda-diagram-design](../../.agents/skills/soda-diagram-design/SKILL.md)
+ - [soda-discovery](../../.agents/skills/soda-discovery/SKILL.md)
+ - [soda-empirical-eval-runner](../../.agents/skills/soda-empirical-eval-runner/SKILL.md)
+ - [soda-enterprise-identity-governance](../../.agents/skills/soda-enterprise-identity-governance/SKILL.md)
+ - [soda-epistemic-trace-auditor](../../.agents/skills/soda-epistemic-trace-auditor/SKILL.md)
+ - [soda-event-driven-architecture](../../.agents/skills/soda-event-driven-architecture/SKILL.md)
+ - [soda-executive-briefing](../../.agents/skills/soda-executive-briefing/SKILL.md)
+ - [soda-figma-opendesign-bridge](../../.agents/skills/soda-figma-opendesign-bridge/SKILL.md)
+ - [soda-gamification-retention](../../.agents/skills/soda-gamification-retention/SKILL.md)
+ - [soda-generative-ai-ui](../../.agents/skills/soda-generative-ai-ui/SKILL.md)
+ - [soda-git-sanity-guard](../../.agents/skills/soda-git-sanity-guard/SKILL.md)
+ - [soda-git-stack-orchestrator](../../.agents/skills/soda-git-stack-orchestrator/SKILL.md)
+ - [soda-goal-execution](../../.agents/skills/soda-goal-execution/SKILL.md)
+ - [soda-goal-generation](../../.agents/skills/soda-goal-generation/SKILL.md)
+ - [soda-goal-workflow](../../.agents/skills/soda-goal-workflow/SKILL.md)
+ - [soda-incident-response](../../.agents/skills/soda-incident-response/SKILL.md)
+ - [soda-information-architecture](../../.agents/skills/soda-information-architecture/SKILL.md)
+ - [soda-intent-playbook-router](../../.agents/skills/soda-intent-playbook-router/SKILL.md)
+ - [soda-iso29110](../../.agents/skills/soda-iso29110/SKILL.md)
+ - [soda-landing-page](../../.agents/skills/soda-landing-page/SKILL.md)
+ - [soda-learning-loop](../../.agents/skills/soda-learning-loop/SKILL.md)
+ - [soda-live-stream-scrubber](../../.agents/skills/soda-live-stream-scrubber/SKILL.md)
+ - [soda-llm-gateway-finops](../../.agents/skills/soda-llm-gateway-finops/SKILL.md)
+ - [soda-metric-hillclimb](../../.agents/skills/soda-metric-hillclimb/SKILL.md)
+ - [soda-micro-frontend-plugins](../../.agents/skills/soda-micro-frontend-plugins/SKILL.md)
+ - [soda-model-pairing-router](../../.agents/skills/soda-model-pairing-router/SKILL.md)
+ - [soda-model-provenance](../../.agents/skills/soda-model-provenance/SKILL.md)
+ - [soda-model-training](../../.agents/skills/soda-model-training/SKILL.md)
+ - [soda-motion-microinteractions](../../.agents/skills/soda-motion-microinteractions/SKILL.md)
+ - [soda-multiphase-planner](../../.agents/skills/soda-multiphase-planner/SKILL.md)
+ - [soda-node-consensus-contracts](../../.agents/skills/soda-node-consensus-contracts/SKILL.md)
+ - [soda-node-contract-invariants](../../.agents/skills/soda-node-contract-invariants/SKILL.md)
+ - [soda-post-mortem](../../.agents/skills/soda-post-mortem/SKILL.md)
+ - [soda-pr-babysit](../../.agents/skills/soda-pr-babysit/SKILL.md)
+ - [soda-pr-noise-resolver](../../.agents/skills/soda-pr-noise-resolver/SKILL.md)
+ - [soda-production-readiness-review](../../.agents/skills/soda-production-readiness-review/SKILL.md)
+ - [soda-proof-assurance](../../.agents/skills/soda-proof-assurance/SKILL.md)
+ - [soda-quality-engineering](../../.agents/skills/soda-quality-engineering/SKILL.md)
+ - [soda-reflection-engine](../../.agents/skills/soda-reflection-engine/SKILL.md)
+ - [soda-release-readiness-verifier](../../.agents/skills/soda-release-readiness-verifier/SKILL.md)
+ - [soda-resource-budgeting](../../.agents/skills/soda-resource-budgeting/SKILL.md)
+ - [soda-rest-api](../../.agents/skills/soda-rest-api/SKILL.md)
+ - [soda-runtime-trace-forensics](../../.agents/skills/soda-runtime-trace-forensics/SKILL.md)
+ - [soda-scrutinize](../../.agents/skills/soda-scrutinize/SKILL.md)
+ - [soda-security-threat-modeling](../../.agents/skills/soda-security-threat-modeling/SKILL.md)
+ - [soda-semantic-refactor-engine](../../.agents/skills/soda-semantic-refactor-engine/SKILL.md)
+ - [soda-session-checkpoint](../../.agents/skills/soda-session-checkpoint/SKILL.md)
+ - [soda-skill-authoring-compiler](../../.agents/skills/soda-skill-authoring-compiler/SKILL.md)
+ - [soda-software-reverse-engineering](../../.agents/skills/soda-software-reverse-engineering/SKILL.md)
+ - [soda-sound-audio-branding](../../.agents/skills/soda-sound-audio-branding/SKILL.md)
+ - [soda-spatial-canvas-3d](../../.agents/skills/soda-spatial-canvas-3d/SKILL.md)
+ - [soda-spike-sandbox](../../.agents/skills/soda-spike-sandbox/SKILL.md)
+ - [soda-state-sync-localfirst](../../.agents/skills/soda-state-sync-localfirst/SKILL.md)
+ - [soda-statistical-evidence](../../.agents/skills/soda-statistical-evidence/SKILL.md)
+ - [soda-subagent-context-harness](../../.agents/skills/soda-subagent-context-harness/SKILL.md)
+ - [soda-subagent-spawning](../../.agents/skills/soda-subagent-spawning/SKILL.md)
+ - [soda-system-architecture](../../.agents/skills/soda-system-architecture/SKILL.md)
+ - [soda-test-harness](../../.agents/skills/soda-test-harness/SKILL.md)
+ - [soda-testing](../../.agents/skills/soda-testing/SKILL.md)
+ - [soda-thirdparty-api-resilience](../../.agents/skills/soda-thirdparty-api-resilience/SKILL.md)
+ - [soda-upgrade-os](../../.agents/skills/soda-upgrade-os/SKILL.md)
+ - [soda-ux-research-heuristics](../../.agents/skills/soda-ux-research-heuristics/SKILL.md)
+ - [soda-visual-parity-guard](../../.agents/skills/soda-visual-parity-guard/SKILL.md)
+ - [soda-web-vitals-performance](../../.agents/skills/soda-web-vitals-performance/SKILL.md)
+ - [soda-worktree-prune](../../.agents/skills/soda-worktree-prune/SKILL.md)
+ - [soda-zero-bug-quality-guarantee](../../.agents/skills/soda-zero-bug-quality-guarantee/SKILL.md)
 
 ## Related
 

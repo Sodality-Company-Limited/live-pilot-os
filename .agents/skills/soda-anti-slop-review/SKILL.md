@@ -1,5 +1,6 @@
 ---
 name: soda-anti-slop-review
+version: "1.0.0"
 description: Radical brevity, zero conversational filler, no redundant code comments, and maintainer-focused diff review. Use before PR creation or during code review.
 ---
 

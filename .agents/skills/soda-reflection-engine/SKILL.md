@@ -1,5 +1,6 @@
 ---
 name: soda-reflection-engine
+version: "1.0.0"
 description: Socratic blindspot scanner and assumption reflection engine. Evaluates diffs and plan declarations against hidden assumptions, edge pathologies, security boundaries, and regression risks.
 ---
 
