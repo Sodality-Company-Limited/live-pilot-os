@@ -334,6 +334,15 @@ evidence metadata, and expose pending, stale, withdrawn, expired, disconnected,
 or blocked states explicitly. Session isolation is enforced server-side, not by
 client route or cache keys alone.
 
+### F02.1 Host Copilot
+
+F02.1-FLOW-001 through F02.1-FLOW-008 reuse the existing overview/SSE surfaces;
+no duplicate public paths are generated. Copilot outputs must carry session
+scope, confidence, freshness, evidence/source revision, policy or catalog
+version, localization state, and explicit blocked/deferred/withdrawn status.
+Generation, priority, evidence, or review failures must never be rendered as
+verified guidance or trigger a consequential action.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
