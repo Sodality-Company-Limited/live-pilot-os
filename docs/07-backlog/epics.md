@@ -14,6 +14,7 @@ Register a slug here **before** `soda-os goal next <EPIC>`. Slug = 2–8 letters
 | ML | Machine Learning & Cognitive Calibration | Autoregressive model training with RLCD calibrated rewards & Soda OS integration |
 | OPS | DAVE Operations & Deployment Governance | Active queue |
 | PAY | PAY | Active queue |
+| PROMO | Promotion Service | Promotion service contract-to-DigitalOcean delivery |
 | PROOF | DAVE Mathematical Invariant & Assurance Proofs | Executable property registry, statistical claims, and cryptographic proof receipts |
 | SEC | DAVE Multimodal Security & Privacy Controls | Active queue |
 | TEMPLATE | TEMPLATE | Active queue |
