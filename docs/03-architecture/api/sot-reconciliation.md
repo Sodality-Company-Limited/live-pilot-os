@@ -252,6 +252,14 @@ identity, severity, session scope, and freshness. `ALERT_POLICY_UNAVAILABLE`,
 `ALERT_DEDUP_CONFLICT`, and stale projection remain explicit failure/deferred
 states rather than silent or duplicate alerts.
 
+### Incremental result: F01.3-FLOW-006
+
+This flow is covered by the existing overview and SSE operations; no new public
+path is added. Projection rebuild is an internal recovery operation over
+immutable source events, producing a new revision and freshness receipt without
+becoming a second writer. `SOURCE_RANGE_INVALID`, `REBUILD_ALREADY_RUNNING`,
+and `SOURCE_EVENT_GAP` remain explicit failure/deferred states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
