@@ -1,0 +1,41 @@
+name: Core BFF CI Gate
+
+on:
+  push:
+    branches: [master, mart]
+    paths:
+      - 'code/apps/core-bff/**'
+      - 'code/apps/services/**'
+      - 'tests/contract/**'
+  pull_request:
+    branches: [master, mart]
+    paths:
+      - 'code/apps/core-bff/**'
+      - 'code/apps/services/**'
+      - 'tests/contract/**'
+
+jobs:
+  verify-core-bff:
+    name: Typecheck, Test, Contract & Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Run Core BFF Unit Tests
+        run: |
+          NODE_ENV=test npx -y tsx --test code/apps/core-bff/test/*.spec.ts
+
+      - name: Run Contract CI Gate
+        run: |
+          node scripts/testing/core-bff-contract-gate.mjs
+
+      - name: Run Container Image Compliance Audit
+        run: |
+          node scripts/ci/build-service-images.mjs

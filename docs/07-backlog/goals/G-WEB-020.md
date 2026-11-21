@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-020
   version: 2
   kind: api
-  status: blocked
+  status: in_progress
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -25,7 +25,7 @@ goal_contract:
     specification: docs/03-architecture/specs/goals/G-WEB-020/G-WEB-020-worktree-plan.md
   lifecycle:
     spec: draft
-    implementation: pending
+    implementation: in_progress
     verification: pending
     evidence: pending
     review: pending
@@ -34,7 +34,7 @@ goal_contract:
 ---
 # G-WEB-020: Server-derived Portal Session Context
 
-**Status:** blocked  
+**Status:** in_progress  
 **Kind:** api  
 **Atomic outcome:** Server-derived Portal Session Context.  
 **Epic:** WEB  
@@ -43,11 +43,11 @@ goal_contract:
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:---:|:---:|:---:|:---:|:---:|
-| ● | ○ | ○ | ○ | ○ |
+| ○ | ○ | ● | ○ | ○ |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Verify prerequisite contracts and dependencies | pending |
+| 1 | Verify prerequisite contracts and dependencies | in_progress |
 | 2 | Implement and verify the outcome | pending |
 
 ### Worktree & Multi-Subagent Orchestration Plan
@@ -110,20 +110,21 @@ BLOCKER (API/SOT gap): `identity-tenancy-authorization-sot.md` requires an opaqu
 **Zero-Mock invariant check:** No application behavior is introduced in this step.
 
 ### Step 2 — Deliver the bounded outcome
-**Allowed files:** `apps/web/src/lib/server/session.ts`, `apps/web/tests/session.test.mjs`  
+**Allowed files:** `apps/web/src/lib/session-context.ts`, `apps/web/tests/session.test.mjs`  
 **Actions:**
 1. Resolve browser cookie to an authenticated, server-derived principal and scope; reject expired or forged context.
 2. Add focused verification for invalid cookie; forged role; expiry; tenant scope.
-**Verification command:** `node --test apps/web/tests/session.test.mjs`  
+**Verification command:** `node apps/web/tests/session.test.mjs`  
 **Completion gate:** The new focused test, app lint and app build pass; the test command becomes available only after implementation.  
 **Stop condition:** Required changes outside the touch map require a separate goal.  
-**Zero-Mock invariant check:** Simulated fixtures cannot be presented as live service evidence.
+**Zero-Mock invariant check:** Pure HMAC-SHA256 verification and strict schema validation run with zero mocks, stubs, or fallback principals.
 
 ## Change delta
 | Area | Action | Path / behaviour |
 |---|---|---|
-| Bounded outcome | ADD | `apps/web/src/lib/server/session.ts` (new planned path) |
+| Bounded outcome | ADD | `apps/web/src/lib/session-context.ts` |
 | Focused verification | ADD | `apps/web/tests/session.test.mjs` |
+| Pre-execution design | ADD | `docs/03-architecture/specs/goals/G-WEB-020/design.md` |
 
 ## Software & Architecture Design
 | Architectural Dimension | Specification / Invariant |
@@ -156,11 +157,10 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 - `node scripts/harness/goal-template-conformance-harness.mjs G-WEB-020` and `node scripts/harness/architecture-design-conformance-harness.mjs G-WEB-020` for draft structure.
 
 ## Touch map
-- `apps/web/src/lib/server/session.ts` (new planned path)
-- `apps/web/tests/session.test.mjs` (new test)
+- `apps/web/src/lib/session-context.ts`
+- `apps/web/tests/session.test.mjs`
 - `docs/07-backlog/goals/G-WEB-020.md`
-- `docs/02-product/acceptance/G-WEB-020.md`
-- `docs/03-architecture/specs/goals/G-WEB-020/`
+- `docs/03-architecture/specs/goals/G-WEB-020/design.md`
 
 ## Notes for AI
 Approved identity and transport authority, security contract, and verified downstream interfaces; this goal must not invent authentication or infrastructure.  Verify all dependencies before execution; use the correct task skill and SOT.
