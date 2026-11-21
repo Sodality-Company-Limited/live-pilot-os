@@ -121,3 +121,11 @@ output is a typed `DISCOUNT_REQUEST` or `VOUCHER_REQUEST` signal and never a
 promotion mutation. Low confidence, catalog uncertainty, and
 `UNSUPPORTED_PROMOTION_TERM` must remain explicit and non-actionable until a
 downstream policy/approval flow handles them.
+
+### Incremental result: F01.1-FLOW-004
+
+No public OpenAPI path is generated for stock/size intent classification. The
+intent-risk and catalog boundaries jointly provide typed `STOCK_QUERY` or
+`SIZE_QUERY` context with SKU confidence. Unresolved SKU, stale catalog facts,
+and low confidence remain explicit non-actionable states; the event schema and
+consumer compatibility contract still require async registration.
