@@ -228,6 +228,14 @@ source revision, freshness, and evidence. `METRIC_DEFINITION_MISSING`,
 `COUNTER_CONFLICT`, and `SOURCE_REVISION_STALE` remain explicit degraded or
 error states rather than silently combined counts.
 
+### Incremental result: F01.3-FLOW-003
+
+This flow is covered by `getLiveSessionOverview`; no new public path is added.
+Sentiment and engagement fields must carry model/language coverage, confidence,
+input window, projection revision, and freshness. `MODEL_UNAVAILABLE`,
+`LANGUAGE_COVERAGE_GAP`, and invalid input windows remain explicit stale or
+deferred states and must not be shown as measured sentiment.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
