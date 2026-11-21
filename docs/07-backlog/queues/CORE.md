@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-083 | feature | draft | DEFINE | G-CORE-082, G-CORE-070, G-CORE-073, G-CORE-076, G-CORE-079 | [`goals/G-CORE-083.md`](../goals/G-CORE-083.md) |
 | G-CORE-084 | feature | draft | DEFINE | G-CORE-082, G-CORE-051 | [`goals/G-CORE-084.md`](../goals/G-CORE-084.md) |
 | G-CORE-085 | feature | draft | DEFINE | G-CORE-082, G-CORE-062 | [`goals/G-CORE-085.md`](../goals/G-CORE-085.md) |
 | G-CORE-086 | feature | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-085 | [`goals/G-CORE-086.md`](../goals/G-CORE-086.md) |
@@ -35,6 +34,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-083 | Wire Core BFF HTTP transport and route registry | 2026-11-21 | [`goals/_archived/G-CORE-083.md`](../goals/_archived/G-CORE-083.md) |
 | G-CORE-082 | Bootstrap Core BFF service runtime | 2026-11-21 | [`goals/_archived/G-CORE-082.md`](../goals/_archived/G-CORE-082.md) |
 | G-CORE-081 | Enforce F05 test-mode and credential isolation | 2026-11-21 | [`goals/_archived/G-CORE-081.md`](../goals/_archived/G-CORE-081.md) |
 | G-CORE-080 | Implement server-managed F05 test sessions | 2026-11-21 | [`goals/_archived/G-CORE-080.md`](../goals/_archived/G-CORE-080.md) |
