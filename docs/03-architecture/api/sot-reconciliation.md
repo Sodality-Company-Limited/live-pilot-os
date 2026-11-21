@@ -620,3 +620,22 @@ The grouped decisions above apply to each detailed flow ID explicitly:
 - `F04.4-FLOW-001`, `F04.4-FLOW-002`, `F04.4-FLOW-003`, `F04.4-FLOW-004`, `F04.4-FLOW-005`, `F04.4-FLOW-006`, `F04.4-FLOW-007`
 - `F04.5-FLOW-001`, `F04.5-FLOW-002`, `F04.5-FLOW-003`, `F04.5-FLOW-004`, `F04.5-FLOW-005`, `F04.5-FLOW-006`, `F04.5-FLOW-007`
 - `F04.6-FLOW-001`, `F04.6-FLOW-002`, `F04.6-FLOW-003`, `F04.6-FLOW-004`, `F04.6-FLOW-005`
+
+### F05.1 Test Authentication and Access Gate
+
+F05.1-FLOW-001 through F05.1-FLOW-004 are the four public authentication
+flows and are represented by the existing `loginTestUser`,
+`getCurrentAuthSession`, and `logoutTestUser` OpenAPI operations. The contract
+is local/simulated only: seeded Argon2id accounts create server-managed,
+revocable sessions and a secure cookie; production mode must reject the test
+adapter. Invalid credentials use a constant-shape response with no account
+enumeration, no session, and no cookie. Session reads derive role/mode from
+server state and ignore browser role/tenant headers. Logout commits revocation
+before clearing the cookie/returning success and is safe to repeat. Passwords,
+hashes, raw tokens, and cookies never enter logs, events, or audit receipts.
+
+### F05 explicit flow coverage
+
+The grouped decision above applies to each detailed flow ID explicitly:
+
+- `F05.1-FLOW-001`, `F05.1-FLOW-002`, `F05.1-FLOW-003`, `F05.1-FLOW-004`

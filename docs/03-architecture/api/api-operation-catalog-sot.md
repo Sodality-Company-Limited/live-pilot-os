@@ -233,6 +233,10 @@ source-fact persistence inside the telemetry owner.
 | `F04.6-FLOW-003` | `getActionLog`, `getPromotion` | Existing action-log/promotion status routes; duplicate proof is internal | `audit-service + promotion-service` | Voucher effect evidence proves one idempotency fingerprint/observed outcome per action; duplicate or conflicting receipts remain detectable and unresolved. |
 | `F04.6-FLOW-004` | `getActionLog` | Existing action-log route; export job is internal | `audit-service` | Evidence export is capability-checked, session-scoped, redacted, integrity-linked, and reports incomplete/unknown records rather than fabricating a complete bundle. |
 | `F04.6-FLOW-005` | `getActionLog`, `getLiveSessionOverview` | Existing action-log/overview projections; rebuild is internal | `audit-service` | Audit projections rebuild deterministically from append-only receipts, preserve revision/checkpoint evidence, and never mutate the source ledger. |
+| `F05.1-FLOW-001` | `loginTestUser` | `POST /v1/auth/login` | `identity/session-access module` | Local/simulated seeded login verifies Argon2id credentials, creates a server-managed session, derives the role, sets a secure cookie, and emits a redacted success receipt. |
+| `F05.1-FLOW-002` | `loginTestUser` | `POST /v1/auth/login` | `identity/session-access module` | Invalid, disabled-mode, and rate-limited login attempts share safe credential/account behavior, create no session, set no cookie, and emit no password/hash/token data. |
+| `F05.1-FLOW-003` | `getCurrentAuthSession` | `GET /v1/auth/session` | `identity/session-access module` | Server resolves the opaque cookie, expiry, idle timeout, revocation, role, mode, and optional scope; browser role/tenant/session headers cannot elevate access. |
+| `F05.1-FLOW-004` | `logoutTestUser` | `POST /v1/auth/logout` | `identity/session-access module` | Logout transactionally revokes the server session, emits a safe revocation receipt, clears the cookie, and is idempotent for repeated logout. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
