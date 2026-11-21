@@ -260,6 +260,13 @@ immutable source events, producing a new revision and freshness receipt without
 becoming a second writer. `SOURCE_RANGE_INVALID`, `REBUILD_ALREADY_RUNNING`,
 and `SOURCE_EVENT_GAP` remain explicit failure/deferred states.
 
+### Incremental result: F01-INTEGRATION-001
+
+No new public OpenAPI path is generated. Safe co-pilot-facing signal delivery is
+internal via `copilot.signal.available.v1`; the public SSE surface may expose
+only the redacted, authorized projection. `CONSUMER_UNAVAILABLE`,
+`DTO_REDACTION_FAILED`, and `SIGNAL_EXPIRED` remain explicit delivery states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
