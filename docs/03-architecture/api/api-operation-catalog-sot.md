@@ -84,6 +84,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.P-FLOW-004` | None by design | `purchase.signal.updated.v1` | `purchase-projection` | Cart-to-checkout conversion is a derived, windowed metric exposing numerator, denominator, window, projection revision, and freshness without changing source counts. |
 | `F01.P-FLOW-005` | None by design | `purchase.signal.updated.v1` | `purchase-projection` | High-interest/low-conversion detection emits an evidence window and thresholded signal only when configuration and source data are complete; stale/incomplete data cannot trigger a trusted recommendation. |
 | `F01.P-FLOW-006` | None by design | `purchase.voucher.correlated.v1` | `purchase-projection` | Voucher usage is correlated to purchase with voucher/order references, window, and attribution confidence; missing references, unavailable links, or duplicate voucher events remain explicit. |
+| `F01.P-FLOW-007` | None by design | `product.interest.updated.v1` | `purchase-projection` | Product purchase-interest ranking emits SKU-ranked scores with component evidence, scoring/config version, session scope, and freshness; unresolved SKU or stale projection is not a trusted rank. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

@@ -195,6 +195,14 @@ voucher/order references, session/window scope, evidence, and attribution
 confidence. `VOUCHER_REF_MISSING`, `ORDER_LINK_UNAVAILABLE`, and duplicate
 voucher events remain explicit non-success outcomes.
 
+### Incremental result: F01.P-FLOW-007
+
+No public OpenAPI path is generated for purchase-interest ranking. The internal
+projection exposes ranked SKUs, score components, scoring/config version,
+session/window scope, evidence, revision, and freshness. `SKU_UNRESOLVED`,
+`SCORE_CONFIG_MISSING`, and stale projection data remain explicit outcomes and
+cannot be used as authoritative recommendation evidence.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
