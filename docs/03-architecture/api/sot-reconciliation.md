@@ -325,6 +325,15 @@ outcome, actor, correlation/causation, hashes, and evidence without overwriting
 history. `TRACE_LINK_MISSING`, `AUDIT_WRITE_FAILED`, and
 `INTEGRITY_CHECK_FAILED` remain explicit audit failures.
 
+### F02 HUD session and delivery
+
+F02-FLOW-001 through F02-FLOW-006 are covered by the existing overview/SSE
+surfaces; no duplicate public paths are generated. HUD responses remain scoped
+to `live_session_id` and host capability, carry freshness/revision/confidence/
+evidence metadata, and expose pending, stale, withdrawn, expired, disconnected,
+or blocked states explicitly. Session isolation is enforced server-side, not by
+client route or cache keys alone.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
