@@ -35,6 +35,27 @@
 | G-CORE-079 | api | draft | DEFINE | G-CORE-050, G-CORE-055 | [`goals/G-CORE-079.md`](../goals/G-CORE-079.md) |
 | G-CORE-080 | feature | draft | DEFINE | G-CORE-079 | [`goals/G-CORE-080.md`](../goals/G-CORE-080.md) |
 | G-CORE-081 | security | draft | DEFINE | G-CORE-079, G-CORE-080 | [`goals/G-CORE-081.md`](../goals/G-CORE-081.md) |
+| G-CORE-082 | feature | draft | DEFINE | G-CORE-052, G-CORE-053, G-CORE-054 | [`goals/G-CORE-082.md`](../goals/G-CORE-082.md) |
+| G-CORE-083 | feature | draft | DEFINE | G-CORE-082, G-CORE-070, G-CORE-073, G-CORE-076, G-CORE-079 | [`goals/G-CORE-083.md`](../goals/G-CORE-083.md) |
+| G-CORE-084 | feature | draft | DEFINE | G-CORE-082, G-CORE-051 | [`goals/G-CORE-084.md`](../goals/G-CORE-084.md) |
+| G-CORE-085 | feature | draft | DEFINE | G-CORE-082, G-CORE-062 | [`goals/G-CORE-085.md`](../goals/G-CORE-085.md) |
+| G-CORE-086 | feature | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-085 | [`goals/G-CORE-086.md`](../goals/G-CORE-086.md) |
+| G-CORE-087 | security | draft | DEFINE | G-CORE-082, G-CORE-061, G-CORE-081 | [`goals/G-CORE-087.md`](../goals/G-CORE-087.md) |
+| G-CORE-088 | operations | draft | DEFINE | G-CORE-082, G-CORE-084, G-CORE-087 | [`goals/G-CORE-088.md`](../goals/G-CORE-088.md) |
+| G-CORE-089 | operations | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-088 | [`goals/G-CORE-089.md`](../goals/G-CORE-089.md) |
+| G-CORE-090 | operations | draft | DEFINE | G-CORE-071, G-CORE-082 | [`goals/G-CORE-090.md`](../goals/G-CORE-090.md) |
+| G-CORE-091 | operations | draft | DEFINE | G-CORE-075, G-PROMO-008 | [`goals/G-CORE-091.md`](../goals/G-CORE-091.md) |
+| G-CORE-092 | operations | draft | DEFINE | G-CORE-077, G-CORE-078 | [`goals/G-CORE-092.md`](../goals/G-CORE-092.md) |
+| G-CORE-093 | operations | draft | DEFINE | G-CORE-080, G-CORE-081 | [`goals/G-CORE-093.md`](../goals/G-CORE-093.md) |
+| G-CORE-094 | security | draft | DEFINE | G-CORE-074, G-CORE-078 | [`goals/G-CORE-094.md`](../goals/G-CORE-094.md) |
+| G-CORE-095 | operations | draft | DEFINE | G-CORE-062, G-CORE-088 | [`goals/G-CORE-095.md`](../goals/G-CORE-095.md) |
+| G-CORE-096 | operations | draft | DEFINE | G-CORE-082, G-CORE-090, G-CORE-091, G-CORE-092, G-CORE-093, G-CORE-094, G-CORE-095 | [`goals/G-CORE-096.md`](../goals/G-CORE-096.md) |
+| G-CORE-097 | operations | draft | DEFINE | G-CORE-096, G-CORE-088 | [`goals/G-CORE-097.md`](../goals/G-CORE-097.md) |
+| G-CORE-098 | qa | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-096 | [`goals/G-CORE-098.md`](../goals/G-CORE-098.md) |
+| G-CORE-099 | qa | draft | DEFINE | G-CORE-097, G-CORE-098, G-CORE-079 | [`goals/G-CORE-099.md`](../goals/G-CORE-099.md) |
+| G-CORE-100 | release | draft | DEFINE | G-CORE-096, G-CORE-097, G-CORE-098 | [`goals/G-CORE-100.md`](../goals/G-CORE-100.md) |
+| G-CORE-101 | release | draft | DEFINE | G-CORE-099, G-CORE-100 | [`goals/G-CORE-101.md`](../goals/G-CORE-101.md) |
+| G-CORE-102 | release | draft | DEFINE | G-CORE-098, G-CORE-099, G-CORE-101 | [`goals/G-CORE-102.md`](../goals/G-CORE-102.md) |
 
 ## Archived
 

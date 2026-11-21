@@ -64,6 +64,27 @@
 | [`G-CORE-079`](07-backlog/goals/G-CORE-079.md) | `draft` | Reconcile F05 test-authentication HTTP contract |
 | [`G-CORE-080`](07-backlog/goals/G-CORE-080.md) | `draft` | Implement server-managed F05 test sessions |
 | [`G-CORE-081`](07-backlog/goals/G-CORE-081.md) | `draft` | Enforce F05 test-mode and credential isolation |
+| [`G-CORE-082`](07-backlog/goals/G-CORE-082.md) | `draft` | Bootstrap Core BFF service runtime |
+| [`G-CORE-083`](07-backlog/goals/G-CORE-083.md) | `draft` | Wire Core BFF HTTP transport and route registry |
+| [`G-CORE-084`](07-backlog/goals/G-CORE-084.md) | `draft` | Implement Core BFF NATS request-reply adapter |
+| [`G-CORE-085`](07-backlog/goals/G-CORE-085.md) | `draft` | Implement Core BFF projection and Redis adapter |
+| [`G-CORE-086`](07-backlog/goals/G-CORE-086.md) | `draft` | Implement Core BFF timeout and reconciliation policy |
+| [`G-CORE-087`](07-backlog/goals/G-CORE-087.md) | `draft` | Validate Core BFF configuration and secrets |
+| [`G-CORE-088`](07-backlog/goals/G-CORE-088.md) | `draft` | Add Core BFF health and graceful shutdown |
+| [`G-CORE-089`](07-backlog/goals/G-CORE-089.md) | `draft` | Add Core BFF observability and redaction |
+| [`G-CORE-090`](07-backlog/goals/G-CORE-090.md) | `draft` | Bootstrap F02 Copilot service runtime |
+| [`G-CORE-091`](07-backlog/goals/G-CORE-091.md) | `draft` | Bootstrap F03 promotion integration runtime |
+| [`G-CORE-092`](07-backlog/goals/G-CORE-092.md) | `draft` | Bootstrap F04 control and audit runtimes |
+| [`G-CORE-093`](07-backlog/goals/G-CORE-093.md) | `draft` | Bootstrap F05 identity session runtime |
+| [`G-CORE-094`](07-backlog/goals/G-CORE-094.md) | `draft` | Bootstrap adapter safety runtime |
+| [`G-CORE-095`](07-backlog/goals/G-CORE-095.md) | `draft` | Bootstrap F01 projection runtime |
+| [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
+| [`G-CORE-097`](07-backlog/goals/G-CORE-097.md) | `draft` | Wire local production-shaped Compose runtime |
+| [`G-CORE-098`](07-backlog/goals/G-CORE-098.md) | `draft` | Add Core BFF contract and integration CI gates |
+| [`G-CORE-099`](07-backlog/goals/G-CORE-099.md) | `draft` | Add end-to-end Core BFF smoke evidence |
+| [`G-CORE-100`](07-backlog/goals/G-CORE-100.md) | `draft` | Prepare DigitalOcean deployment configuration |
+| [`G-CORE-101`](07-backlog/goals/G-CORE-101.md) | `draft` | Verify deployment rollback and recovery |
+| [`G-CORE-102`](07-backlog/goals/G-CORE-102.md) | `draft` | Complete Core BFF production-readiness evidence |
 
 ## Constraints
 
