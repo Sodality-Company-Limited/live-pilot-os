@@ -361,6 +361,16 @@ deduplication identity. Low/out stock, order volume, best-seller, voucher,
 price, promotion, and countdown states remain explicit when source truth is
 stale, unknown, revoked, or unavailable.
 
+### F02.4 Host Approval UI
+
+F02.4-FLOW-001 through F02.4-FLOW-008 do not create a generic public
+host-decision endpoint. The existing `decidePromotion` operation applies only
+when the resource is a promotion; other host decisions remain internal until a
+pilot operation is explicitly approved. Every decision requires actor capability,
+suggestion/resource revision, policy/evidence checks, idempotency, audit, and
+Emergency Pause enforcement. Unauthorized, stale, withdrawn, final, or unknown
+states fail closed.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
