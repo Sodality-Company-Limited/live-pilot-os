@@ -371,6 +371,15 @@ suggestion/resource revision, policy/evidence checks, idempotency, audit, and
 Emergency Pause enforcement. Unauthorized, stale, withdrawn, final, or unknown
 states fail closed.
 
+### F02 safety and integration
+
+F02-SAFETY-001 through F02-SAFETY-004 and F02-INTEGRATION-001 through
+F02-INTEGRATION-003 reuse existing overview, SSE, and action-log surfaces; no
+new public paths are generated. Grounding, redaction, outage, audit, F01 signal,
+compliance, and StreamPilot state contracts remain session-scoped and carry
+schema/version, freshness, evidence, correlation/causation, and explicit
+stale/degraded/blocked states. Sensitive or unverified content fails closed.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
