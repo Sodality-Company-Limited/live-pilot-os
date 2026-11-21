@@ -52,6 +52,18 @@
 | [`G-CORE-060`](07-backlog/goals/G-CORE-060.md) | `draft` | Compute idempotent Feature 01 purchase signals |
 | [`G-CORE-061`](07-backlog/goals/G-CORE-061.md) | `draft` | Integrate the JEV/OpenAI adapter for F01 analysis |
 | [`G-CORE-062`](07-backlog/goals/G-CORE-062.md) | `draft` | Project and recover Feature 01 dashboard read models |
+| [`G-CORE-070`](07-backlog/goals/G-CORE-070.md) | `draft` | Reconcile the F02 Core BFF HUD contract |
+| [`G-CORE-071`](07-backlog/goals/G-CORE-071.md) | `draft` | Produce grounded F02 host copilot suggestions |
+| [`G-CORE-072`](07-backlog/goals/G-CORE-072.md) | `draft` | Enforce F02 guidance freshness, redaction, and withdrawal |
+| [`G-CORE-073`](07-backlog/goals/G-CORE-073.md) | `draft` | Reconcile F03 Core BFF promotion contract integration |
+| [`G-CORE-074`](07-backlog/goals/G-CORE-074.md) | `draft` | Enforce F03 gateway and adapter safety boundary |
+| [`G-CORE-075`](07-backlog/goals/G-CORE-075.md) | `draft` | Orchestrate F03 verified-signal promotion workflow |
+| [`G-CORE-076`](07-backlog/goals/G-CORE-076.md) | `draft` | Reconcile F04 action-log and evidence API contract |
+| [`G-CORE-077`](07-backlog/goals/G-CORE-077.md) | `draft` | Enforce F04 approval mode and Emergency Pause control |
+| [`G-CORE-078`](07-backlog/goals/G-CORE-078.md) | `draft` | Append F04 audit receipts and secure adapter commands |
+| [`G-CORE-079`](07-backlog/goals/G-CORE-079.md) | `draft` | Reconcile F05 test-authentication HTTP contract |
+| [`G-CORE-080`](07-backlog/goals/G-CORE-080.md) | `draft` | Implement server-managed F05 test sessions |
+| [`G-CORE-081`](07-backlog/goals/G-CORE-081.md) | `draft` | Enforce F05 test-mode and credential isolation |
 
 ## Constraints
 
