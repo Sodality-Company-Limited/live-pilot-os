@@ -343,6 +343,15 @@ version, localization state, and explicit blocked/deferred/withdrawn status.
 Generation, priority, evidence, or review failures must never be rendered as
 verified guidance or trigger a consequential action.
 
+### F02.2 Product Q&A
+
+F02.2-FLOW-001 through F02.2-FLOW-007 reuse the existing overview/SSE surfaces;
+no separate public Q&A path is generated. Every answer or refusal carries
+approved-catalog version, evidence/source reference, confidence, freshness, and
+safe localization metadata. Catalog revocation/version change, ambiguity,
+unsupported or medical claims, and unknown stock remain visible refusal or
+degraded states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
