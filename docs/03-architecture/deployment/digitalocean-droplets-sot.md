@@ -10,7 +10,7 @@
 | messaging | private NATS JetStream nodes or approved managed equivalent | no public client access; durable streams and DLQ |
 | operations | private admin/bastion path | SSH keys only, MFA, audited access, no password login |
 
-Minimum production target is two application Droplets across failure domains where available. A single Droplet is staging/demo only and must be labeled as a single point of failure.
+Minimum production target is two application Droplets across failure domains where available. The current single-Droplet deployment is an explicitly accepted production interim topology and must be labeled as a single point of failure until scaled out.
 
 ## Firewall and access
 

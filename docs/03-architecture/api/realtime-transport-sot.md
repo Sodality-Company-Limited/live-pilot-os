@@ -2,6 +2,9 @@
 
 > **Status:** Production-readiness target; transport choice must be approved per surface.
 
+> **Current state:** SSE is the pilot default, but no screen-level transport row
+> is frozen yet. Realtime API generation remains blocked by the open decisions below.
+
 SSE is the default for server-to-client live session updates. WebSocket is permitted
 only where bidirectional low-latency interaction is required and must use the same
 authorization, envelope, and replay semantics.

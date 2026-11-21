@@ -3,6 +3,11 @@
 > **Status:** Required inventory before OpenAPI generation.
 > **Output:** OpenAPI paths, schemas, examples, contract tests, and coverage registry entries.
 
+> **Current state:** This file defines the required operation record but contains
+> no approved operation inventory yet. `openapi.yaml` remains a transport draft
+> until every path is registered below with complete traceability. See
+> [SOT reconciliation](sot-reconciliation.md).
+
 Every operation is registered using this record:
 
 | Field | Required value |

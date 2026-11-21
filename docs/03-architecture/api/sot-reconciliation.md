@@ -1,0 +1,64 @@
+# LivePilot OS — SOT Reconciliation Before API Generation
+
+> **Status:** reconciliation gate; API generation is blocked until the blockers in
+> this document are resolved or explicitly approved as pilot decisions.
+> **Scope:** local development and DigitalOcean production only. The production
+> topology remains production-shaped; the live demo injects frontend signals,
+> backend products, and simulated platform actions.
+
+## Authority order
+
+1. Product requirements and selected demo acceptance criteria.
+2. Feature indexes and detailed flow SOTs.
+3. Domain/resource state and policy SOTs.
+4. Boundary, identity, error, idempotency, realtime, and event contracts.
+5. API operation catalog.
+6. OpenAPI/AsyncAPI/JSON Schema generated artifacts.
+
+Generated artifacts cannot introduce behavior absent from a higher authority.
+
+## Reconciled baseline
+
+| Area | Reconciled decision | Evidence | API consequence |
+|---|---|---|---|
+| Environments | `local` and DigitalOcean `prod` only; CI is validation, not an environment | deployment README/runtime topology | No staging-only API behavior or config |
+| Demo boundary | frontend mock signals, backend mock products, simulated adapter; domain services, audit, policy, and approval remain real | demo scenarios, mock-data SOT, integration boundaries | Every simulated effect is labeled and cannot imply marketplace mutation |
+| Public HTTP | Portal BFF owns `/api/*`; public versioned contract is `/v1/*`; internal service ingress is `/internal/v1/*` | route-prefixing invariant | OpenAPI contains only public `/v1/*` operations |
+| Domain authority | one owning service and one authoritative writer per resource | domain-resource-state SOT, service topology | No endpoint is generated from a table or cross-service write |
+| AI | JEV owns orchestration; OpenAI is a provider behind the JEV port; local fixture is deterministic | JEV runtime, provider abstraction, OpenAI SOT | No direct provider endpoint or execution authority in OpenAPI |
+| Marketplace | adapter is simulated for the pilot; no active TikTok/provider credential surface | integration boundaries, provider decision SOT | No marketplace OAuth or provider API paths in the pilot contract |
+| Mutations | approval, policy verdict, idempotency, version, audit lineage, and explicit unknown state are required | domain state, authorization, idempotency SOTs | Mutations return pending/unknown where the effect is not confirmed |
+| Realtime | SSE is the default client transport; replay, heartbeat, filtering, and retention must be fixed per surface | realtime transport SOT | No realtime endpoint is frozen until those values are approved |
+
+## Current blockers
+
+1. The operation catalog is a schema/template, not an inventory. The five paths
+   currently present in `openapi.yaml` are not fully traceable to requirement,
+   acceptance, flow, authorization, state transition, error, event, idempotency,
+   and verification records.
+2. Production identity is still unresolved: OIDC provider, claim mapping, tenant
+   authority, service identity, role/capability registry, expiry, and rotation.
+   The seeded test-login contract is pilot-only and must not be presented as
+   production authentication.
+3. Realtime decisions are unresolved: surface mapping, replay retention,
+   subscriber limits, heartbeat, filtering, and gateway timeout.
+4. The NATS subject catalog has the required template but no approved subject rows,
+   schemas, retry/DLQ, retention, or replay owners.
+5. Resource schemas and ProblemDetails/error mappings need an operation-by-operation
+   approval record; the current OpenAPI responses are incomplete for the domain
+   state model (notably stale versions, unknown adapter outcomes, and policy/audit
+   lineage).
+
+## Entry gate for API generation
+
+Generation may begin only when each proposed operation has a catalog row containing:
+
+- requirement ID, acceptance scenario, and detailed flow ID;
+- owning service, authoritative persistence owner, actor capability, and tenant scope;
+- request/response schema, limits, freshness, pagination, and localized labels;
+- state transition, policy revision, audit lineage, and idempotency behavior;
+- synchronous errors plus async events/jobs and unknown-result behavior; and
+- contract, security, integration, and end-to-end verification commands.
+
+The existing API traceability and SOT hierarchy scripts are necessary gates, but
+they do not prove that an empty catalog is semantically complete.

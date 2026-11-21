@@ -14,6 +14,6 @@ Precedence is `safe build default < checked-in non-secret registry < environment
 
 ## Local → DigitalOcean binding
 
-Local uses `.env.local` from an ignored template and simulated adapters. DigitalOcean staging and production bind the same keys through separate environment scopes, secret sources, and policy revisions. No environment copies a production secret into local or staging.
+Local uses `.env.local` from an ignored template and fixture/simulated providers. DigitalOcean production binds the same keys through a separate environment scope, secret source, and policy revision. No environment copies a production secret into local.
 
 Every value has an owner, type, validation rule, sensitivity, reload behavior, and rotation/expiry expectation. Configuration changes are reviewed and auditable.

@@ -3,7 +3,8 @@ info:
   title: LivePilot OS Core API Contract
   version: 1.0.0
   description: >-
-    Canonical HTTP contract for the LivePilot OS boundary:
+    Draft HTTP transport contract for the LivePilot OS boundary. It becomes
+    generated/canonical only after operation-catalog reconciliation:
     Next.js Frontend <-> Next.js BFF <-> CORE BFF <-> Core Microservices.
     Domain rules remain owned by the responsible microservice; this document defines
     transport schemas, auth, correlation, idempotency, and public error semantics.

@@ -12,3 +12,6 @@ This hierarchy separates four concerns: immutable build defaults, environment co
 | Business policy registry | [business-policy-registry.yaml](business-policy-registry.yaml) |
 | Evaluation and precedence | [policy-evaluation-sot.md](policy-evaluation-sot.md) |
 | Change audit and approvals | [configuration-change-audit-sot.md](configuration-change-audit-sot.md) |
+| Third-party provider configuration | [../third-party-provider-config-sot.md](../third-party-provider-config-sot.md) |
+| AI/JEV provider runtime | [../jev-agent-runtime-sot.md](../jev-agent-runtime-sot.md), [../openai-provider-sot.md](../openai-provider-sot.md) |
+| Canonical SOT coverage | [../sot-coverage-index.md](../sot-coverage-index.md) |

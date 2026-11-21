@@ -13,15 +13,20 @@
 | Deployment pipeline and release gates | [deployment-pipeline-sot.md](deployment-pipeline-sot.md) |
 | Rollback and migration safety | [migration-rollback-sot.md](migration-rollback-sot.md) |
 | Backup, restore, and DR | [backup-restore-dr-sot.md](backup-restore-dr-sot.md) |
+| AI/JEV runtime and provider boundary | [../jev-agent-runtime-sot.md](../jev-agent-runtime-sot.md), [../ai-provider-abstraction-sot.md](../ai-provider-abstraction-sot.md) |
 
 ## Non-negotiable invariants
 
-1. Infrastructure is declarative and reviewable; console-only production changes are prohibited.
+1. The current environment ladder has exactly two environments: local development and DigitalOcean production. Infrastructure is declarative and reviewable; console-only production changes are prohibited.
 2. Local, staging, and production use the same image contract and health probes.
 3. No public exposure of PostgreSQL, NATS, Redis, internal services, or admin ports.
 4. A deployment is not successful until health, smoke, observability, and rollback evidence exists.
 5. Simulated behavior is visibly marked and cannot be mistaken for a confirmed marketplace mutation.
 6. Production deployment requires human approval; this SOT authorizes preparation, not an apply.
+
+## Current environment decision
+
+For the current LivePilot stage, local development is the only non-production environment. DigitalOcean is the production runtime. There is no separate staging environment or staging promotion step. The production runtime remains production-shaped; the live demo injects frontend signals and backend mock products, while `PLATFORM_ADAPTER_MODE=simulated` prevents real marketplace mutation.
 
 ## Decision boundary
 

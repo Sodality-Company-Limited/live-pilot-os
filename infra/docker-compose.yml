@@ -1,0 +1,81 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: livepilot-postgres
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 1.5
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Missing POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:?Missing POSTGRES_DB}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [livepilot]
+    logging:
+      driver: json-file
+      options: {max-size: "50m", max-file: "3"}
+
+  redis:
+    image: redis:7-alpine
+    container_name: livepilot-redis
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?Missing REDIS_PASSWORD}"]
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Missing REDIS_PASSWORD}
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [livepilot]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: livepilot-nats
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1
+    command: ["-js", "-sd", "/data", "-m", "8222", "--auth", "${NATS_TOKEN:?Missing NATS_TOKEN}"]
+    ports:
+      - "127.0.0.1:4222:4222"
+      - "127.0.0.1:8222:8222"
+    volumes:
+      - nats_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:8222/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [livepilot]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+networks:
+  livepilot:
+    name: livepilot-infra
+
+volumes:
+  postgres_data:
+    name: livepilot_postgres_data
+  redis_data:
+    name: livepilot_redis_data
+  nats_data:
+    name: livepilot_nats_data
