@@ -178,7 +178,19 @@
   },
   "active": "bd3317845cc75749",
   "lastOpenFiles": [
-    "Untitled.base",
-    "Untitled 1.base"
+    "docs/03-architecture/deployment/service-runtime-mapping-sot.md",
+    "docs/03-architecture/api/services/README.md",
+    "docs/03-architecture/api/services",
+    "docs/03-architecture/api/schemas/nats/telemetry-signal.schema.json",
+    "docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json",
+    "docs/03-architecture/api/schemas/nats/promotion-proposal.schema.json",
+    "docs/03-architecture/api/schemas/nats/promotion-decision.schema.json",
+    "docs/03-architecture/api/schemas/nats/execution-update.schema.json",
+    "docs/03-architecture/api/schemas/nats/control-pause.schema.json",
+    "docs/03-architecture/api/schemas/nats/audit-receipt.schema.json",
+    "docs/03-architecture/api/schemas/realtime-event.schema.json",
+    "docs/03-architecture/api/schemas/promotion.schema.json",
+    "docs/03-architecture/api/portal-bff/README.md",
+    "docs/03-architecture/api/core-bff/README.md"
   ]
 }
