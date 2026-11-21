@@ -573,3 +573,15 @@ The grouped decisions above apply to each detailed flow ID explicitly:
 - `F04.1-FLOW-001`, `F04.1-FLOW-002`, `F04.1-FLOW-003`, `F04.1-FLOW-004`, `F04.1-FLOW-005`, `F04.1-FLOW-006`, `F04.1-FLOW-007`
 - `F04.2-FLOW-001`, `F04.2-FLOW-002`, `F04.2-FLOW-003`, `F04.2-FLOW-004`, `F04.2-FLOW-005`, `F04.2-FLOW-006`, `F04.2-FLOW-007`
 - `F04.3-FLOW-001`, `F04.3-FLOW-002`, `F04.3-FLOW-003`, `F04.3-FLOW-004`, `F04.3-FLOW-005`, `F04.3-FLOW-006`, `F04.3-FLOW-007`, `F04.3-FLOW-008`, `F04.3-FLOW-009`
+
+### F04.4 Moderation Escalation
+
+F04.4-FLOW-001 through F04.4-FLOW-007 reuse the safe overview, SSE, and
+action-log projections; risk classification, escalation, case resolution, and
+deduplication remain owned by the internal `risk-control-service`. Severity
+maps to an explicit response: LOW is recorded, MEDIUM alerts, HIGH applies
+the configured control/approval response, and CRITICAL activates the
+authoritative pause path. Risk evidence is redacted, versioned, immutable,
+session-scoped, and linked to source/correlation/causation. Repeated source
+fingerprints produce one escalation; stale or conflicting case updates fail
+closed without erasing the original evidence.
