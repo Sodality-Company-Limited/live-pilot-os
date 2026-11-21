@@ -54,6 +54,26 @@ until the unresolved identity, realtime, and event decisions in
 | `getPromotion` | `GET /v1/promotions/{promotion_id}` | Host/Live Ops with session visibility | promotion service read model | safe read |
 | `getActionLog` | `GET /v1/live-sessions/{session_id}/actions` | Live Ops audit capability | audit service projection | safe read |
 
+### Flow-to-boundary reconciliation
+
+Not every detailed flow becomes a public HTTP endpoint. The following mapping is
+intentional: browser-visible reads and operator commands use OpenAPI; ingestion,
+classification, JEV orchestration, policy evaluation, projections, adapter safety,
+and audit append use authenticated internal routes or NATS/JetStream contracts.
+
+| SOT flow family | Public operation(s) | Internal contract and owner | Pilot status |
+|---|---|---|---|
+| F01 initialization, signal ingestion, normalization, duplicate/late handling, intent/risk classification, product resolution, metric projection, integrations, and safety flows | `getLiveSessionOverview`, `streamLiveSessionEvents` | session/telemetry/intent-risk/catalog services; versioned NATS commands/events; PostgreSQL authoritative state plus Redis projections | active; frontend signal injection is explicitly mock input |
+| F02 host HUD, realtime suggestions, grounding, stale/unsafe withdrawal, session isolation, and catalog/stock alerts | `getLiveSessionOverview`, `streamLiveSessionEvents`, `getPromotion` | JEV/copilot and catalog services; suggestion facts and withdrawal events through NATS; no direct AI/provider route | active read surface; host decision mutations are not yet selected for the demo |
+| F03 product-interest handling, catalog/stock verification, margin evaluation, voucher proposal, approval workflow, reservation, expiry, reconciliation, retry, DLQ, and action trace | `proposePromotion`, `decidePromotion`, `getPromotion` | promotion, margin, inventory, approval-control, execution/adapter-safety, and audit services; simulated adapter only | selected promotion scenario; pinning and real marketplace mutation excluded |
+| F04 decision logging, approval modes, emergency pause/resume, risk escalation, adapter command safety, reconciliation, credential isolation, and evidence | `getActionLog`; approval is exposed through `decidePromotion` only | control-plane, adapter-safety, and audit services; pause/commands/reconciliation are internal control contracts until pilot scope approves public routes | safety invariants active; extra operator commands are deferred |
+| F05 test login, invalid credentials, session read, and logout | `loginTestUser`, `getCurrentAuthSession`, `logoutTestUser` | identity/session service and audit; versioned auth events; Argon2id test accounts only in local/simulated mode | selected pilot entry; production OIDC remains a launch gate |
+
+The F01–F04 detailed flow files remain authoritative for internal event behavior.
+Their repeated `OPEN-001` route decisions are resolved here as “internal
+contract unless explicitly listed as a public operation”; payload and subject
+schemas still require the NATS catalog before AsyncAPI generation.
+
 ### `POST /v1/auth/login` — `loginTestUser`
 
 - **Does:** creates a server-managed test session for the selected pilot user.
