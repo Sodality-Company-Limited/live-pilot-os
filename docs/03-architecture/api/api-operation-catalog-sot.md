@@ -154,6 +154,14 @@ source-fact persistence inside the telemetry owner.
 | `F03.1-FLOW-005` | `getLiveSessionOverview`, `streamLiveSessionEvents` | Existing overview/SSE surfaces | `product-pinning-service` | Host sees pin context, evidence, approval, simulated mode, and observed state without provider secrets. |
 | `F03.1-FLOW-006` | `getPromotion`, `getActionLog` | Existing promotion/action-log reads | `execution-adapter-safety-service` | Pin failure preserves requested/observed/unknown state, retry classification, and audit evidence. |
 | `F03.1-FLOW-007` | None by design | Internal execution idempotency | `execution-adapter-safety-service` | Duplicate pin commands return one action receipt; conflicting fingerprint or final state is a conflict. |
+| `F03.2-FLOW-001` | `proposePromotion` | `POST /v1/live-sessions/{session_id}/promotions` | `promotion-service` | Creates a voucher proposal only after catalog, margin, approval-mode, session, and idempotency preconditions; proposal is not issuance. |
+| `F03.2-FLOW-002` | `getPromotion` | `GET /v1/promotions/{promotion_id}` | `promotion-service` | Flash-voucher schedule exposes explicit pending/scheduled/unknown timing and policy state; no countdown implies issuance success. |
+| `F03.2-FLOW-003` | `getPromotion` | Existing promotion status route | `promotion-service` | Claim limit is enforced atomically with explicit usage/limit evidence; over-limit claims are rejected without inflation. |
+| `F03.2-FLOW-004` | `getPromotion` | Existing promotion status route | `promotion-service` | Unused voucher expiry is time/policy governed and append-only; expired state cannot be reused or presented as active. |
+| `F03.2-FLOW-005` | `getPromotion` | Existing promotion status route | `promotion-service` | Voucher cancellation is authorized, idempotent, and auditable; final/unknown state is reconciled before retry. |
+| `F03.2-FLOW-006` | `proposePromotion` | Existing proposal route | `promotion-service` | Voucher eligibility is validated against session, catalog, policy, and audience scope; ineligible requests are explicit refusals. |
+| `F03.2-FLOW-007` | `proposePromotion` | Existing proposal route | `promotion-service` | Malformed voucher payloads fail validation before persistence or adapter calls; no partial voucher is created. |
+| `F03.2-FLOW-008` | `getPromotion` | Existing promotion status route | `promotion-service + execution-adapter-safety-service` | Delayed voucher responses remain pending/unknown until observed-state reconciliation; blind retry is prohibited. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
