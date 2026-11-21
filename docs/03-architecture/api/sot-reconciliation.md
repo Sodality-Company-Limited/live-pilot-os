@@ -465,3 +465,11 @@ The grouped decisions above apply to each detailed flow ID explicitly:
 - `F02.4-FLOW-001`, `F02.4-FLOW-002`, `F02.4-FLOW-003`, `F02.4-FLOW-004`, `F02.4-FLOW-005`, `F02.4-FLOW-006`, `F02.4-FLOW-007`, `F02.4-FLOW-008`
 - `F02-SAFETY-001`, `F02-SAFETY-002`, `F02-SAFETY-003`, `F02-SAFETY-004`
 - `F02-INTEGRATION-001`, `F02-INTEGRATION-002`, `F02-INTEGRATION-003`
+
+### F03 proposal preconditions and product pinning
+
+F03-FLOW-001 through F03-FLOW-004 and F03.1-FLOW-001 through F03.1-FLOW-007
+are mapped to existing promotion/action read surfaces or internal contracts;
+no new public pinning endpoint is generated. Catalog membership, stock,
+approval mode, idempotency, adapter isolation, simulated-mode labeling, and
+observed-state confirmation are mandatory before a consequential pin.
