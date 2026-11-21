@@ -532,3 +532,23 @@ The grouped decisions above apply to each detailed flow ID explicitly:
 - `F03.4-FLOW-001`, `F03.4-FLOW-002`, `F03.4-FLOW-003`, `F03.4-FLOW-004`, `F03.4-FLOW-005`, `F03.4-FLOW-006`, `F03.4-FLOW-007`, `F03.4-FLOW-008`
 - `F03.5-FLOW-001`, `F03.5-FLOW-002`, `F03.5-FLOW-003`, `F03.5-FLOW-004`, `F03.5-FLOW-005`, `F03.5-FLOW-006`, `F03.5-FLOW-007`
 - `F03-WORKFLOW-001`, `F03-WORKFLOW-002`, `F03-WORKFLOW-003`, `F03-WORKFLOW-004`, `F03-WORKFLOW-005`, `F03-WORKFLOW-006`
+
+### F04.1 Action Log and Approval Control
+
+F04.1-FLOW-001 through F04.1-FLOW-007 map to the existing proposal, SSE, and
+action-log surfaces plus internal versioned control/audit contracts. The
+`audit-service` is the append-only owner: receipts preserve actor capability,
+session scope, policy/control revision, correlation/causation, idempotency,
+propagation, retry/unknown state, and redacted evidence. No public endpoint
+writes audit storage directly, and corrections are new receipts rather than
+updates to historical records.
+
+### F04.2 Approval Modes
+
+F04.2-FLOW-001 through F04.2-FLOW-007 reuse the existing promotion decision and
+status/action-log operations; approval-mode evaluation and transitions remain
+owned by the internal `approval-control-service`. RECOMMEND_ONLY, ASSISTED,
+and AUTONOMOUS are server-side capabilities, not UI states. Every consequential
+commit checks actor capability, mode/control revision, policy, pause state,
+expiry, idempotency, and audit propagation. Unauthorized, expired, replayed,
+conflicting, or unknown mode changes fail closed and remain auditable.
