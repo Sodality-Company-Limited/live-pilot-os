@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/emergency-pause.schema.json",
+  "title": "EmergencyPause",
+  "description": "Payload for emergency pause commands and broadcast events across all mutating services",
+  "type": "object",
+  "required": [
+    "session_id",
+    "operation",
+    "pause_state",
+    "reason",
+    "control_revision",
+    "actor_ref",
+    "actor_role",
+    "occurred_at"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant-scoped live session identifier"
+    },
+    "operation": {
+      "type": "string",
+      "enum": ["pause", "resume"],
+      "description": "Emergency operation requested"
+    },
+    "pause_state": {
+      "type": "string",
+      "enum": ["active", "inactive"],
+      "description": "Deterministic emergency pause state"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Mandatory rationale for emergency pause or resumption"
+    },
+    "control_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing control-plane revision"
+    },
+    "actor_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Actor identity or automated risk system triggering pause"
+    },
+    "actor_role": {
+      "type": "string",
+      "enum": ["host", "live_ops", "admin", "automated_risk_system"],
+      "description": "Authorized role of the actor"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp when pause state changed"
+    },
+    "occurred_at_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Exact integer epoch milliseconds (Article V zero-float invariant)"
+    },
+    "incident_ref": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "Optional incident or risk trigger reference"
+    }
+  },
+  "additionalProperties": false
+}

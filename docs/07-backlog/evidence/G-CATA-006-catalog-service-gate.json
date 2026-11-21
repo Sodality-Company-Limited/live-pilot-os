@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CATA-006",
+  "service": "catalog-service",
+  "classification": "executable_invariant",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "generated_at": "2026-11-21T08:33:54.510Z",
+  "verdict": "PASS-SIMULATED",
+  "evidence_binding": "This receipt binds G-CATA-006 isolated service gate verdicts to the exact git revision, verification commands, exit codes, and SHA-256 digests of source, test, schema, and SOT files.",
+  "test_verdicts": [
+    {
+      "name": "catalogProductFacts",
+      "command": "node code/services/catalog-service/test/catalogProductFacts.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "duration_ms": 74,
+      "summary": "catalog-product-facts static and invariant checks: PASS"
+    },
+    {
+      "name": "catalogContractCompatibility",
+      "command": "node code/services/catalog-service/test/catalogContractCompatibility.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "duration_ms": 96,
+      "summary": "catalog-contract-compatibility: PASS (4 catalog schemas verified, 4 AsyncAPI subjects registered, LP11001-LP11005 ProblemDetails + NATS error parity, additive 1.1.0 + major 2.0.0 + dedup + DLQ gates passed)"
+    },
+    {
+      "name": "catalogQueryVerticalSlice",
+      "command": "node code/services/catalog-service/test/catalogQueryVerticalSlice.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "duration_ms": 141,
+      "summary": "catalog-query-vertical-slice: PASS (NATS request/reply, auth/tenant/session scope, approved minor-unit facts, draft/withdrawn/stale/unknown/ambiguous/version-mismatch refusals, timeout, redaction, dedup, and Postgres RLS adapter verified)"
+    },
+    {
+      "name": "catalogReliabilityMutation",
+      "command": "node code/services/catalog-service/test/catalogReliabilityMutation.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "duration_ms": 100,
+      "summary": "catalog-reliability-mutation: PASS (outbox atomicity & ordering, idempotency replay, LP04003 mismatch, LP04001 version/terminal conflict, retry backoff & DLQ routing, operator-authorized replay, emergency pause fail-closed, audit receipts, sensitive redaction, and Postgres RLS transaction adapter verified)"
+    },
+    {
+      "name": "runAllCatalogTests",
+      "command": "node code/services/catalog-service/test/runAllCatalogTests.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "suites_passed": 4,
+      "suites_total": 4,
+      "summary": "catalog-service master test runner: PASS (4/4 suites passed)"
+    }
+  ],
+  "gate_verdicts": [
+    {
+      "name": "error-code-registry",
+      "command": "node scripts/contract-check/error-code-registry.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Error-code registry check: PASS (38 registered codes)"
+    },
+    {
+      "name": "api-sot-traceability",
+      "command": "node scripts/api/check-api-sot-traceability.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "API SOT traceability: PASS (12 authorities present; operation catalog fields complete)"
+    },
+    {
+      "name": "architecture-sot-hierarchy",
+      "command": "node scripts/architecture/check-sot.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "SOT hierarchy check: 179 detailed flow file(s); PASS (0 error(s), 0 warning(s))"
+    },
+    {
+      "name": "tdd-traceability",
+      "command": "node scripts/testing/check-tdd-traceability.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "TDD traceability check: PASS (6 authorities present; catalog complete)"
+    }
+  ],
+  "invariants": [
+    {
+      "id": "INV-CATA-001",
+      "statement": "Single authoritative writer and schema isolation: catalog.* schema revokes PUBLIC privileges, enforces forced RLS across all 6 tables, uses pg_advisory_xact_lock, and keeps product_facts and product_state_history append-only.",
+      "verification_command": "node code/services/catalog-service/test/catalogProductFacts.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-002",
+      "statement": "Zero-float integer minor-unit monetary invariant: price_minor >= 0 integer, ISO 4217 currency ^[A-Z]{3}$, and currency_scale BETWEEN 0 AND 4.",
+      "verification_command": "node code/services/catalog-service/test/catalogProductFacts.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-003",
+      "statement": "Monotonic revisions and lifecycle transitions: fact_revision >= 1, version = fact_revision, and lifecycle draft -> approved -> stale|withdrawn with withdrawn terminal.",
+      "verification_command": "node code/services/catalog-service/test/catalogProductFacts.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-004",
+      "statement": "Contract and schema compatibility: 4 catalog schemas, 4 registered NATS/AsyncAPI subjects, LP11001-LP11005 ProblemDetails and NATS error parity, additive 1.1.0 compatibility, and major 2.0.0 fail-closed rejection.",
+      "verification_command": "node code/services/catalog-service/test/catalogContractCompatibility.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-005",
+      "statement": "Fail-closed read vertical slice: auth/tenant/session scope enforcement without cross-tenant existence disclosure, approved minor-unit fact resolution, draft/withdrawn/stale/unknown/ambiguous/version-mismatch refusals, timeout-as-unknown, and message_id deduplication.",
+      "verification_command": "node code/services/catalog-service/test/catalogQueryVerticalSlice.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-006",
+      "statement": "Mutation reliability, outbox atomicity, idempotency replay and LP04003 mismatch rejection, LP04001 conflict rejection, bounded retry backoff and DLQ routing, operator-authorized replay, and fail-closed emergency pause.",
+      "verification_command": "node code/services/catalog-service/test/catalogReliabilityMutation.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-CATA-007",
+      "statement": "Repository SOT, API traceability, error-code registry, and TDD traceability gates are green with zero errors and zero warnings.",
+      "verification_command": "node scripts/architecture/check-sot.mjs && node scripts/contract-check/error-code-registry.mjs && node scripts/api/check-api-sot-traceability.mjs && node scripts/testing/check-tdd-traceability.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "security_and_redaction_verdict": {
+    "verdict": "PASS",
+    "controls_verified": [
+      "PostgreSQL migration enforces REVOKE ALL FROM PUBLIC on catalog schema, all 6 tables, and all 4 trigger functions, plus ENABLE/FORCE ROW LEVEL SECURITY keyed to current_setting('app.tenant_id', true).",
+      "Read and mutation Postgres repository/store adapters bind tenant session context inside transactions and reject unauthenticated or cross-tenant/cross-session requests fail-closed without cross-tenant existence disclosure.",
+      "Sensitive credential and PII fields are redacted via redactSensitiveData, redactSensitiveText, sanitizeAuditMetadata, and computeRedactedPayloadSha256 prior to persistence, ProblemDetails/NATS error replies, and audit receipt emission.",
+      "DLQ replay is disabled by default and restricted to operator-authorized tenant-scoped invocations that preserve lineage and emit audit receipts on livepilot.v1.audit.receipt.append.",
+      "Emergency pause blocks catalog mutations and DLQ replay fail-closed with LP05004 (EMERGENCY_PAUSE_ACTIVE)."
+    ]
+  },
+  "evidence_limitations": [
+    "PostgreSQL live execution, runtime RLS policy enforcement, up/down migration execution, and concurrent transaction locking were verified via static SQL inspection, in-memory stores, and Postgres transaction adapter tests because no PostgreSQL server (psql/pg_isready absent) or running Docker daemon is available in this workspace.",
+    "NATS JetStream request/reply, pub/sub ordering, retry, and DLQ routing were exercised deterministically through InProcessNatsBus rather than an external NATS JetStream cluster.",
+    "Standalone tsc typechecking was not executed because tsc is not installed in PATH; TypeScript modules were executed directly via Node.js v26.12.1 native TypeScript support.",
+    "PASS-SIMULATED certifies isolated catalog-service tests, contracts, and SOT gates at this revision; it does not certify external platform availability or cross-service integration."
+  ],
+  "source_files": [
+    {
+      "path": "code/services/catalog-service/migrations/001_catalog_product_facts.up.sql",
+      "sha256": "72428e2a32a87ec96805f9caccfc8fd10a128dc1e3117ab4aa2b243d9fae1d65"
+    },
+    {
+      "path": "code/services/catalog-service/migrations/001_catalog_product_facts.down.sql",
+      "sha256": "6ee228100391f47a3f9bf6d8f6a7cdab9152a63c134a5d8f98f49ff8519c6fdb"
+    },
+    {
+      "path": "code/services/catalog-service/src/persistence/catalogProductFacts.ts",
+      "sha256": "7a585c6c17d7dce89f7f60addebce9b0a82e0456cecd98bd7e44441c047ba20e"
+    },
+    {
+      "path": "code/services/catalog-service/src/query/catalogErrors.ts",
+      "sha256": "0fdac0fc9a873088abe01b5552fd08b733dc62ea3bded0081c77fb02dd1d938f"
+    },
+    {
+      "path": "code/services/catalog-service/src/query/catalogProductRepository.ts",
+      "sha256": "e3058d0f15a3f0df0617e75a03af25fd19429cae6753154df98a4613aa46effa"
+    },
+    {
+      "path": "code/services/catalog-service/src/query/catalogProductQueryService.ts",
+      "sha256": "c74063e3d7f3eda87e4588377b2c2b1e4271a48920dfdd7caa2ba5fbbf8ee9a1"
+    },
+    {
+      "path": "code/services/catalog-service/src/mutation/catalogMutationStore.ts",
+      "sha256": "1c347e9cfd5ecfd9f448590a4feace63b931d50d005cbbf589be34d72a151790"
+    },
+    {
+      "path": "code/services/catalog-service/src/mutation/catalogMutationService.ts",
+      "sha256": "3314cea88fe39df4b5481767c8a9cc48f84d20de857f1df775412cf66d799c2b"
+    },
+    {
+      "path": "code/services/catalog-service/src/reliability/catalogOutboxProcessor.ts",
+      "sha256": "9943c35adb4cfee72a059ebe8d263d0dbd9e7d2718df9a9dafb7b26cf15b5ce7"
+    },
+    {
+      "path": "code/services/catalog-service/src/reliability/catalogAuditAndRedaction.ts",
+      "sha256": "ecb71bc0ebec7a07a356b69631375f5b048442a0e8d0782a9463d2ace85972b8"
+    },
+    {
+      "path": "code/services/catalog-service/src/transport/natsCatalogReadHandler.ts",
+      "sha256": "f04e5f468438c6adbf61d8a9374438fbc4ad3dc0ab08b01bb50f5a4b7f91ec0d"
+    },
+    {
+      "path": "code/services/catalog-service/src/transport/natsCatalogMutationHandler.ts",
+      "sha256": "447b8be96c9f80c98687bebf6961716c17f5ddc11f6b3f78e0145ed74d24346f"
+    },
+    {
+      "path": "code/services/catalog-service/test/catalogProductFacts.mjs",
+      "sha256": "7f9ee3c56864e9677b50d23e930ea47d32535e72b178ead39c0ed43ac9008f9e"
+    },
+    {
+      "path": "code/services/catalog-service/test/catalogContractCompatibility.mjs",
+      "sha256": "f12bf934b3f68fe03db8fe4d19b4ad63160632f993288f9ecd286bb7e612bb6d"
+    },
+    {
+      "path": "code/services/catalog-service/test/catalogQueryVerticalSlice.mjs",
+      "sha256": "4ec8f893a18694bbb3d32e1f19fc4ec52149c4039eca77d6351f3378069d71dd"
+    },
+    {
+      "path": "code/services/catalog-service/test/catalogReliabilityMutation.mjs",
+      "sha256": "202279dc9f56871378797380b6d796677714392f06b657a3464e9999af131780"
+    },
+    {
+      "path": "code/services/catalog-service/test/runAllCatalogTests.mjs",
+      "sha256": "415ca0d35208d8643636771118d05dae6e32f9afb3da432399f86fa82aeaa377"
+    }
+  ],
+  "schemas": [
+    {
+      "path": "docs/03-architecture/api/schemas/catalog-product-read.schema.json",
+      "sha256": "aefa37483a6af22841a749df4d035cbdbec2d5ef3620f2359ea8b324ea3485d5"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/problem-details.schema.json",
+      "sha256": "3e8e9d44981f0794a4ec09d1d73ffd566951a8f6beaf5902db61283107d4978c"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/nats/catalog-product-read-request.schema.json",
+      "sha256": "9952541b46a95f7733fb982d8bcd6bfef1f83aaee74e740b1627b83b6ec751a7"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/nats/catalog-product-read-reply.schema.json",
+      "sha256": "961da07223a03104b49c213592a146425ce118643aa8dbe1addcd29f8cc8a727"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/nats/catalog-product-updated.schema.json",
+      "sha256": "85a57e803d9fc19c4aca0637c22764fd3587c47106de2e264e47e39a93afcbde"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/nats/audit-receipt.schema.json",
+      "sha256": "44dc50b7f188a99fec869777aa66eb40d175ca43f2e8bbda101dfe813a0d2ae6"
+    }
+  ],
+  "sots": [
+    {
+      "path": "docs/03-architecture/overview.md",
+      "sha256": "b74e06493ca977a117ff4b3a6afb7948b301dfd83ec7c7583c373de3ce267e8f"
+    },
+    {
+      "path": "docs/03-architecture/testing-sot.md",
+      "sha256": "293ee400c016bfb3a724307e1445c38af01d2b0e454caa477d938f25e81a545e"
+    },
+    {
+      "path": "docs/03-architecture/software-quality-sot.md",
+      "sha256": "1550079551e2de76becc9508380154f4a0de738855024555b93dc685ba2c8946"
+    },
+    {
+      "path": "docs/03-architecture/api/services/catalog-service.md",
+      "sha256": "f2894b15f3bdf2d42ee71ea06d10fe35d996bc157c23350a718e5da2ef04bd2e"
+    },
+    {
+      "path": "docs/03-architecture/api/nats-subject-catalog-sot.md",
+      "sha256": "65e5ef28719697509a377cc5fc3cf1eba9cff426f272a2d9a7e33158cb0a460b"
+    },
+    {
+      "path": "docs/03-architecture/api/api-operation-catalog-sot.md",
+      "sha256": "5a120cd809e950f14e0823ccf2d109ca368160f565b1ffa961240da6d1f7cbf2"
+    },
+    {
+      "path": "docs/03-architecture/api/error-codes.yaml",
+      "sha256": "78807bbc8c1e5bfdb52e313e3e16a1ec05fe0d66cf91a7d5baf4ac41cdd331a2"
+    },
+    {
+      "path": "docs/03-architecture/api/error-problem-details-sot.md",
+      "sha256": "fc7840c3ded7e6f622a9f7e0c08353f2cff44c2b81ea298f91047f50c3638400"
+    },
+    {
+      "path": "docs/03-architecture/api/identity-tenancy-authorization-sot.md",
+      "sha256": "fa9ec54bb75940b0cdd5f1462c7046159d3a997ee41b0604fc895d819dd48229"
+    },
+    {
+      "path": "docs/03-architecture/api/domain-resource-state-sot.md",
+      "sha256": "6197514308952bf477fd5bbd61805b504b11218c9be6c30733e08a20fde7c826"
+    },
+    {
+      "path": "docs/03-architecture/api/idempotency-mutation-sot.md",
+      "sha256": "fbf20e46e4822b8a4e3e697591afd0e2e35526dd9059c8e7b9396d19878b6b87"
+    },
+    {
+      "path": "docs/03-architecture/api/data-persistence-contract-sot.md",
+      "sha256": "ed2d69ad17dbb5cfa138878a7bb0f9120ef60a36eb097e093515f6a846f7d204"
+    },
+    {
+      "path": "docs/03-architecture/testing/tdd-specification-catalog.md",
+      "sha256": "8d56a7c6494e680251c6af5c4d6ccaaa021b47ba81afc1c7dbd3ad37b817ec1c"
+    },
+    {
+      "path": "docs/03-architecture/contracts/flows/coverage.yaml",
+      "sha256": "b9f4f10cd2ee0eb602de650b425c9adc5bc0fb3dce0caebfa8fb79e8598e8ca2"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/approval-decision.schema.json",
+  "title": "ApprovalDecision",
+  "description": "Payload for approval decision commands and recorded events across promotion, pinning, and operator actions",
+  "type": "object",
+  "required": [
+    "approval_id",
+    "session_id",
+    "target_type",
+    "target_id",
+    "decision",
+    "decision_state",
+    "actor_ref",
+    "actor_role",
+    "expected_resource_version",
+    "decided_at"
+  ],
+  "properties": {
+    "approval_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Unique identifier of the approval aggregate"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant-scoped live session identifier"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": ["promotion", "product_pin", "scenario_automation", "copilot_action"],
+      "description": "Domain target bounded context"
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Domain entity identifier (e.g. promotion_id, sku, action_id)"
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["approve", "reject", "expire", "revoke"],
+      "description": "Decision verdict"
+    },
+    "decision_state": {
+      "type": "string",
+      "enum": ["requested", "approved", "rejected", "expired", "revoked"],
+      "description": "Deterministic lifecycle state of the approval aggregate"
+    },
+    "actor_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Actor identity or system component performing the decision"
+    },
+    "actor_role": {
+      "type": "string",
+      "enum": ["host", "live_ops", "admin", "system_policy"],
+      "description": "Authorized role of the actor"
+    },
+    "expected_resource_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Optimistic concurrency version of the approval aggregate"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp when decision was made"
+    },
+    "decided_at_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Exact integer epoch milliseconds (Article V zero-float invariant)"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC expiration timestamp for time-bounded approvals"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Optional or mandatory rationale for rejection/revocation"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Traceable audit and policy evidence IDs grounding this approval"
+    }
+  },
+  "additionalProperties": false
+}

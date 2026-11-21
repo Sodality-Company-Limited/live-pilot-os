@@ -3,6 +3,7 @@ import { validateSpawnRequest } from './session-budget.mjs';
 import { buildCompactPrompt } from './compact-prompt.mjs';
 import { budgetStatus, normalizeTokenUsage } from './token-usage.mjs';
 import { createTokenBudgetTracker } from './token-budget-tracker.mjs';
+import { loadRuntimeBudget } from './runtime-budget.mjs';
 
 /** Normalize and validate the contract shared by Codex, Claude, and Antigravity adapters. */
 export function prepareProviderSession(input, activeKeys = new Set(), usedPromptHashes = new Set()) {
@@ -22,7 +23,8 @@ export function prepareProviderSession(input, activeKeys = new Set(), usedPrompt
   const gate = validateSpawnRequest(request, activeKeys, usedPromptHashes);
   if (!gate.allowed) return { allowed: false, gate };
   const usage = normalizeTokenUsage(input.usage, input.prompt ?? input.mandate ?? '');
-  const budget = budgetStatus(usage, input.budget);
+  const runtimeBudget = loadRuntimeBudget(input.repoRoot);
+  const budget = budgetStatus(usage, { ...runtimeBudget, ...(input.budget || {}) });
   if (budget.exceeded) {
     const error = budget.inputExceeded
       ? 'input token budget exceeded'

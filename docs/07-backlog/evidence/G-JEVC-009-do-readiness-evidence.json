@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-JEVC-009",
+  "service": "jev-copilot-service",
+  "classification": "digitalocean_deployment_readiness",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "generated_at": "2026-11-21T08:52:00.000Z",
+  "verdict": "PASS-READY",
+  "approval_boundary": {
+    "production_apply_status": "HELD_FOR_HUMAN_APPROVAL",
+    "human_approval_required": true,
+    "autonomous_apply_executed": false,
+    "authorized_scope": "DigitalOcean deployment bundle preparation, packaging, runbook generation, and non-apply verification only; remote droplet apply requires tech lead authorization."
+  },
+  "runtime_contract": {
+    "container_name": "livepilot-jev-copilot-service",
+    "image": "livepilot/jev-copilot-service:latest",
+    "base_image": "node:22-alpine",
+    "multi_stage_build": true,
+    "non_root_user": "node",
+    "init_process": "dumb-init",
+    "internal_port": 8085,
+    "public_ports_published": [],
+    "loopback_ports": ["127.0.0.1:8085:8085"],
+    "network": "livepilot-infra",
+    "dependencies": ["postgres", "nats"],
+    "health_endpoints": {
+      "liveness": "/healthz",
+      "readiness": "/readyz"
+    },
+    "resource_limits": {
+      "memory": "512m",
+      "cpus": "1.0"
+    }
+  },
+  "artifact_digests": {
+    "dockerfile": "0f9e2b39581a2bb12b7cd1d525b472a592629cf5b73350e1090148cf826e3492",
+    "package_json": "dd96a5492ee6ab56871ad9aa9fa40c2002aba0b4b387b2c23496bb8303e30e10",
+    "entrypoint": "d3e426910884c8371b23c3c43c1584459b96b0a0c96299649a7aca375f98a8b2",
+    "docker_compose": "49902a6e5ded6a7c6c9bf4f1c3aec8a2888e3806303200558d27f07815c3ad2a",
+    "smoke_script": "00c5113b49e55189f9626ee517e6c82c3fa716578ab39740a1f11e0f187f89d9",
+    "runbook": "cf06d8606cedf11bc3d966521586e6dca596241e8d1215fe53a33a4ba18d4a68"
+  },
+  "verification_checks": [
+    {
+      "name": "dockerfile_and_multi_stage_build_validation",
+      "passed": true,
+      "summary": "Multi-stage node:22-alpine Dockerfile with non-root USER node and dumb-init signal handler verified."
+    },
+    {
+      "name": "docker_compose_config_validation",
+      "passed": true,
+      "summary": "docker-compose.yml config validated with resource limits (512m/1.0 cpu) and service_healthy dependencies."
+    },
+    {
+      "name": "smoke_test_suite",
+      "passed": true,
+      "summary": "All 39 unit/contract tests and static packaging assertions passed 100% green."
+    },
+    {
+      "name": "sot_traceability_and_governance",
+      "passed": true,
+      "summary": "Full compliance with runtime-topology-sot.md, digitalocean-droplets-sot.md, and error-code-registry."
+    }
+  ]
+}

@@ -38,6 +38,15 @@ No path may be added to OpenAPI without a catalog record and owning flow referen
 
 ## Recommended pilot operation inventory
 
+### Catalog internal approved-product read
+
+| Operation ID | Requirement / flow | Route | Owner | Actor/capability | Request / response | Events/jobs | Errors | Idempotency | Verification |
+|---|---|---|---|---|---|---|---|---|---|
+| `readApprovedCatalogProduct` | `REQ-LP-004`, `REQ-LP-005`, `REQ-LP-007`; `F01.1-FLOW-005`, `F01.1-FLOW-008`, `F02.2-FLOW-001`, `F02.2-FLOW-005`, `F02.2-FLOW-006` | None; internal versioned NATS request/reply only | `catalog-service` | Authenticated service principal with tenant/session scope | `livepilot.v1.catalog.product.read.request` → `livepilot.v1.catalog.product.read.reply`, schema `catalog-product-read.v1` | `livepilot.v1.catalog.product.updated` after committed revision; no browser route | `AUTHENTICATION_REQUIRED`, `TENANT_SCOPE_DENIED`, `SESSION_SCOPE_DENIED`, `REQUEST_INVALID`, `RESOURCE_NOT_FOUND`, `CATALOG_FACT_NOT_APPROVED`, `RESOURCE_VERSION_CONFLICT`, `CATALOG_FACT_STALE`, `ACTION_UNKNOWN`, `DEPENDENCY_UNAVAILABLE`, `DEPENDENCY_TIMEOUT` | `message_id` deduplicates identical requests; timeout remains unknown and requires reconciliation; no blind retry | JSON Schema, NATS catalog, tenant isolation, lifecycle/refusal, additive compatibility, producer/consumer verification; `node scripts/api/check-api-sot-traceability.mjs` |
+
+This is deliberately not a public HTTP operation. No route is added to OpenAPI;
+Core BFF and internal services consume the versioned NATS contract.
+
 ## Generated operation inventory — F01-FLOW-001
 
 | Operation ID | Requirement / flow | Route | Owner | Actor/capability | Request / response | Events/jobs | Errors | Idempotency | Verification |

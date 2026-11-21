@@ -1,0 +1,23 @@
+# Orchestrator Dispatch: CORE & INTE Epic Goals Execution
+
+- **Target Epic:** CORE / INTE
+- **Goals In Scope:** `G-CORE-065` through `G-CORE-070`
+- **Role:** Autonomous Orchestrator Supervisor
+- **Persona:** `Software Architect & Lead Systems Engineer`
+- **Primary Execution Target:** `G-CORE-065` (Freeze Intent/Risk Contract Module) -> `G-CORE-066`
+- **Lifecycle Mode:** Sequential Autonomous Execution
+- **Touch Map Boundaries:**
+  - `docs/03-architecture/api/services/intent-risk-service.md`
+  - `docs/03-architecture/api/schemas/nats/intent-risk*.schema.json`
+  - `docs/03-architecture/api/asyncapi.yaml`
+  - `docs/03-architecture/contracts/flows/coverage.yaml`
+  - `docs/03-architecture/specs/goals/G-CORE-065/`
+  - `docs/07-backlog/goals/G-CORE-*.md`
+  - `docs/07-backlog/queues/CORE.md`
+  - `docs/07-backlog/queues/INTE.md`
+- **Verification Harness:**
+  - `node docs/03-architecture/specs/goals/G-CORE-065/contract-validation.test.mjs`
+  - `node scripts/architecture/check-sot.mjs`
+  - `node scripts/api/check-api-sot-traceability.mjs`
+  - `node scripts/contract-check/error-code-registry.mjs`
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-CORE-065.md`

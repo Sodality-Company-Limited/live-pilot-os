@@ -1,0 +1,25 @@
+{
+  "name": "@livepilot/approval-control-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/server.ts",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "node test/verify-migrations.mjs && node --experimental-strip-types --test test/**/*.test.mjs test/**/*.test.ts",
+    "test:migrations": "node test/verify-migrations.mjs",
+    "test:unit": "node --experimental-strip-types --test test/**/*.test.mjs test/**/*.test.ts",
+    "start": "node --experimental-strip-types src/server.ts"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.7.2"
+  }
+}

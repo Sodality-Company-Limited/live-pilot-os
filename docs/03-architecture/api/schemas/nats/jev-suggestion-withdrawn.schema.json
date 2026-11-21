@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/jev-suggestion-withdrawn.schema.json",
+  "title": "livepilot.v1.copilot.suggestion.withdrawn",
+  "description": "NATS JetStream event emitted when an active or grounded JEV suggestion is retracted due to stale facts, emergency pause, session close, or manual override.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "suggestion_id",
+    "tenant_id",
+    "live_session_id",
+    "status",
+    "reason_code",
+    "withdrawn_at",
+    "aggregate_version",
+    "causation_ref"
+  ],
+  "properties": {
+    "suggestion_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "status": {
+      "type": "string",
+      "const": "withdrawn"
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "STALE_CATALOG_FACT",
+        "EMERGENCY_CONTROL_PAUSE",
+        "SESSION_TERMINATED",
+        "CONFIDENCE_DEGRADED",
+        "MANUAL_OVERRIDE",
+        "INCOMPATIBLE_POLICY_REVISION"
+      ]
+    },
+    "detail": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "withdrawn_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "aggregate_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "causation_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "causation_id",
+        "kind"
+      ],
+      "properties": {
+        "causation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "command",
+            "control_pause",
+            "catalog_update",
+            "session_lifecycle"
+          ]
+        }
+      }
+    }
+  }
+}

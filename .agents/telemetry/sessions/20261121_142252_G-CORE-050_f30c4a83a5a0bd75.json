@@ -1,0 +1,25 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "f30c4a83a5a0bd75",
+  "turns": 1,
+  "inputTokens": 163208,
+  "outputTokens": 923,
+  "childAgents": 0,
+  "elapsedSeconds": 26,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to audit only the declared Step 1 contract diff, then I’ll run both required SOT checks once.\nThe declared three files contain no plaintext secrets, and the session contract/AsyncAPI header sets match. I’m checking the recorded schema hash and running the two mandated SOT checks now; unrelated workspace changes are outside this review scope.\n{\"status\":\"complete\",\"decision\":\"approve\",\"changed_files\":[],\"tests\":[\"check-sot.mjs PASS\",\"check-api-sot-traceability.mjs PASS\",\"schema SHA-256 verified\"],\"failures\":[],\"blockers\":[],\"next_action\":\"Advance G-CORE-050 Step 1.\"}",
+  "mandate": "Perform final independent approval review of the G-CORE-050 Step 1 session contract diff only. Do not edit files. Confirm session-service.md and AsyncAPI required headers including X-Mode are consistent; DLQ/replay/SIMULATED metadata is explicit; coverage contains only session.lifecycle.livepilot.v1 for this step with schema hash; and both SOT checks pass. Return strict compact handoff with approve or request-changes decision.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "implementer",
+  "persona": "backend-api-engineer",
+  "provider": "Codex CLI",
+  "model": "o3-mini",
+  "sessionKey": "e3ac27c115e0ce9e",
+  "turns": 1,
+  "inputTokens": 196,
+  "outputTokens": 737,
+  "childAgents": 0,
+  "elapsedSeconds": 5,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "{\"type\":\"thread.started\",\"thread_id\":\"01a1fce8-563d-7102-a724-991c4dca8293\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Model metadata for `o3-mini` not found. Defaulting to fallback metadata; this can degrade performance and cause issues.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"error\",\"message\":\"{\\\"type\\\":\\\"error\\\",\\\"status\\\":400,\\\"error\\\":{\\\"type\\\":\\\"invalid_request_error\\\",\\\"message\\\":\\\"The 'o3-mini' model is not supported when using Codex with a ChatGPT account.\\\",\\\"code\\\":\\\"model_not_found\\\"}}\"}\n{\"type\":\"turn.failed\",\"error\":{\"message\":\"{\\\"type\\\":\\\"error\\\",\\\"status\\\":400,\\\"error\\\":{\\\"type\\\":\\\"invalid_request_error\\\",\\\"message\\\":\\\"The 'o3-mini' model is not supported when using Codex with a ChatGPT account.\\\",\\\"code\\\":\\\"model_not_found\\\"}}\"}}",
+  "mandate": "Execute only step 1 of G-CORE-050. Publish the versioned session-service lifecycle contract using only the allowed files: docs/03-architecture/api/services/session-service.md, docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json, docs/03-architecture/api/asyncapi.yaml, docs/03-architecture/contracts/flows/coverage.yaml, and docs/03-architecture/specs/goals/G-CORE-050/. Acceptance: start|pause|resume|end plus unknown-operation and stale-version semantics; NATS envelope ordering key retries DLQ replay authorization and mode label explicit; coverage registry points to contract and verification. Do not open the full goal card; use this packet only. Preserve unrelated changes. Run node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs. Return compact handoff with status, changed files, tests, failures, blockers, next action.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml",
+    "docs/03-architecture/specs/goals/G-CORE-050"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

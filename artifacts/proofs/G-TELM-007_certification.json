@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-TELM-007",
+  "classification": "executable_invariant",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "invariants": [
+    {
+      "id": "TELM-007-INV-001",
+      "statement": "Isolated telemetry-service ingests 10,000 signals across 50 concurrent live sessions with p95 < 50ms, p99 < 100ms, and 0 dropped signals.",
+      "verification_command": "node --test code/services/telemetry-service/test/certification/telemetry-certification.spec.ts",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "TELM-007-INV-002",
+      "statement": "Concurrent duplicate deliveries deduplicate with 10,000 bps accuracy and tampered payload conflicts fail closed (LP04003).",
+      "verification_command": "node --test code/services/telemetry-service/test/certification/telemetry-certification.spec.ts",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "TELM-007-INV-003",
+      "statement": "Chaos fault injection (transient DB outages, 5x retry exhaustion, poison payloads) achieves 0 dropped signals with deterministic DLQ routing.",
+      "verification_command": "node --test code/services/telemetry-service/test/certification/telemetry-certification.spec.ts",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/services/telemetry-service/src/domain/signal-state-machine.ts",
+      "sha256": "3bd6572c155dc7e45cd885ec7544bdc774af658b761b3671f177f4bcabe47722"
+    },
+    {
+      "path": "code/services/telemetry-service/src/repository/telemetry-signal.repository.ts",
+      "sha256": "9097c739893e6da494ddc64bed8e6aa62936da0f635107a8c83c2fb5c5c08887"
+    },
+    {
+      "path": "code/services/telemetry-service/src/ingest/telemetry-ingest.service.ts",
+      "sha256": "3afc59adb6cff5e0e090a697a66b9d13c51f4241b1229b9c8658c5548d310780"
+    },
+    {
+      "path": "code/services/telemetry-service/src/ingest/telemetry-ingest.controller.ts",
+      "sha256": "793fb7ea3582c100675100788bc1744c4e311a3300cced9af9b0f4981d94d3a4"
+    },
+    {
+      "path": "code/services/telemetry-service/src/reconciliation/telemetry-dlq.publisher.ts",
+      "sha256": "f313060ee6f61c58fa41c0c3b37640698f02a19a4965d39447eb8be23614750b"
+    },
+    {
+      "path": "code/services/telemetry-service/src/reconciliation/telemetry-reconciliation.service.ts",
+      "sha256": "53a3a27b4702d01a9984d9a99a5938a57ac4d34b8394fde6c527283784aa5545"
+    },
+    {
+      "path": "code/services/telemetry-service/test/certification/telemetry-certification.spec.ts",
+      "sha256": "37869ee924c968c393cb482ff3db9ba7ef2a1e9fb110db0c409ed0f7fe474b18"
+    },
+    {
+      "path": "docs/03-architecture/api/schemas/nats/telemetry-signal.schema.json",
+      "sha256": "e257cd7cda43f277b4efff717e9bba11c4c2e78c115a23e3349512b37172faf8"
+    }
+  ],
+  "scorecard": {
+    "benchmark": {
+      "totalSignals": 10000,
+      "concurrentSessions": 50,
+      "persistedSignals": 10000,
+      "acknowledgedSignals": 10000,
+      "droppedSignals": 0,
+      "totalDurationMs": 485,
+      "throughputSignalsPerSec": 20605,
+      "heapDeltaBytes": 68832880,
+      "latencyUs": {
+        "min": 1253,
+        "p50": 1894,
+        "p90": 4195,
+        "p95": 5642,
+        "p99": 7539,
+        "max": 14399
+      },
+      "latencyMs": {
+        "min": 1,
+        "p50": 2,
+        "p90": 4,
+        "p95": 6,
+        "p99": 8,
+        "max": 14
+      },
+      "basisPoints": {
+        "successRateBps": 10000,
+        "dropRateBps": 0,
+        "p95SlaUtilizationBps": 1128,
+        "p99SlaUtilizationBps": 754
+      }
+    },
+    "duplicate_storm": {
+      "totalDuplicatesSent": 1000,
+      "deduplicatedCount": 1000,
+      "conflictProbesSent": 50,
+      "conflictRejectedCount": 50,
+      "deduplicationRateBps": 10000,
+      "conflictRejectionRateBps": 10000
+    },
+    "chaos_resilience": {
+      "totalChaosSignals": 500,
+      "transientInjectedFailures": 100,
+      "recoveredAfterRetry": 100,
+      "exhaustedDeadLettered": 50,
+      "poisonDeadLettered": 50,
+      "reapedDispatchedCount": 25,
+      "droppedSignals": 0,
+      "zeroLossRateBps": 10000
+    }
+  },
+  "certification": "PASS",
+  "generated_at": "2026-11-21T08:44:54.442Z"
+}

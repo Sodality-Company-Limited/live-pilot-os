@@ -58,6 +58,35 @@ feature_indexes:
     flow_glob: ../../source-of-truth-flows/features/F05-test-authentication/flows/*.md
 
 contracts:
+  - id: telemetry.signal.livepilot.v1
+    owner: telemetry-service
+    source: ../../api/services/telemetry-service.md
+    schema: ../../api/schemas/nats/telemetry-signal.schema.json
+    sha256: e257cd7cda43f277b4efff717e9bba11c4c2e78c115a23e3349512b37172faf8
+    status: frozen_contract_verification_pending
+    producers: [telemetry-ingress]
+    consumers: [telemetry-service, intent-risk-service, copilot-service, audit-service]
+    flows: [F01-FLOW-002, F01-FLOW-003, F01-FLOW-004, F01-FLOW-005]
+    verification: "test -f docs/03-architecture/api/services/telemetry-service.md && node scripts/api/check-api-sot-traceability.mjs"
+  - id: catalog.product-read.livepilot.v1
+    owner: catalog-service
+    source: ../../api/services/catalog-service.md
+    schema: ../../api/schemas/catalog-product-read.schema.json
+    sha256: aefa37483a6af22841a749df4d035cbdbec2d5ef3620f2359ea8b324ea3485d5
+    status: frozen_contract_verification_pending
+    producers: [catalog-service]
+    consumers: [core-bff, jev-copilot-service, intent-risk-service, margin-policy-service, inventory-service, promotion-service, decision-engine-service, audit-service]
+    flows: [F01.1-FLOW-004, F01.1-FLOW-005, F01.1-FLOW-008, F02.2-FLOW-001, F02.2-FLOW-005, F02.2-FLOW-006]
+    verification: "test -f docs/03-architecture/api/services/catalog-service.md && test -f docs/03-architecture/api/schemas/catalog-product-read.schema.json && node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs && node scripts/contract-check/error-code-registry.mjs"
+  - id: session.lifecycle.livepilot.v1
+    owner: session-service
+    source: ../../api/services/session-service.md
+    schema: ../../api/schemas/nats/session-lifecycle.schema.json
+    sha256: 43d3669754b3cfa7ad8c1d56e010a32ed402bcbc0929fc74905654d03264d364
+    status: frozen_contract_verification_pending
+    producers: [core-bff]
+    consumers: [session-service, audit-service]
+    verification: "test -f docs/03-architecture/api/services/session-service.md && test -f docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json && rg -q 'livepilot.v1.session.lifecycle.request' docs/03-architecture/api/asyncapi.yaml"
   - id: deployment-runtime.livepilot.v1
     owner: platform-engineering-and-sre
     source: ../../deployment/README.md
@@ -150,16 +179,25 @@ contracts:
     owner: api-contracts-and-domain-architecture
     source: ../../api/nats-subject-catalog-sot.md
     status: pilot_inventory_schema_tests_pending
-    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
-    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    producers: [core-bff, telemetry-ingress, intent-risk-service, catalog-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, catalog-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
     verification: "test -f docs/03-architecture/api/nats-subject-catalog-sot.md && test -d docs/03-architecture/api/schemas/nats"
   - id: asyncapi.livepilot.v1
     owner: api-contracts-and-domain-architecture
     source: ../../api/asyncapi.yaml
     status: pilot_contract_compatibility_tests_pending
-    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
-    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    producers: [core-bff, telemetry-ingress, intent-risk-service, catalog-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, catalog-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
     verification: "test -f docs/03-architecture/api/asyncapi.yaml"
+  - id: intent-risk.events.livepilot.v1
+    owner: intent-risk-service
+    source: ../../api/services/intent-risk-service.md
+    schema: ../../api/schemas/nats/intent-risk-*.schema.json
+    status: frozen_contract_verification_pending
+    producers: [intent-risk-service]
+    consumers: [telemetry-service, risk-operator-control, audit-service]
+    flows: [F01.2-FLOW-001, F01.2-FLOW-002, F04.1-FLOW-001, F04.1-FLOW-002]
+    verification: "test -f docs/03-architecture/api/services/intent-risk-service.md && rg -q 'telemetry.intent.detected.v1' docs/03-architecture/api/asyncapi.yaml && test -f docs/03-architecture/api/schemas/nats/intent-risk-severity-ranked.schema.json"
   - id: contract-validation.livepilot.v1
     owner: api-governance-and-quality
     source: ../../api/contract-validation-report.md
@@ -213,3 +251,13 @@ contracts:
     producers: [telemetry-service, decision-engine-service, approval-control-service]
     consumers: [copilot-service, execution-service, audit-service]
     verification: "rg -q '^## Event vocabulary' docs/03-architecture/live-pilot-os-domain-model.md"
+  - id: jev.copilot.livepilot.v1
+    owner: jev-copilot-service
+    source: ../../api/services/jev-copilot-service.md
+    sha256: 5a845320e2cdbdd2e9686fee42d847ad865b56e95752b5b2b9eaa59f4f3512ab
+    status: service_contract_certified
+    producers: [jev-copilot-service]
+    consumers: [core-bff, session-service, approval-control-service, promotion-service, audit-service]
+    flows: [F01-INT-001, F02-SAFETY-003, F02.1-FLOW-001, F02.1-FLOW-003]
+    verification: "test -f docs/03-architecture/api/services/jev-copilot-service.md && test -f docs/03-architecture/api/schemas/nats/jev-suggestion-proposed.schema.json && test -f docs/03-architecture/api/schemas/nats/jev-suggestion-withdrawn.schema.json && test -f docs/03-architecture/api/schemas/nats/jev-copilot-delivery-degraded.schema.json"
+

@@ -1,0 +1,28 @@
+# Progress: worker-marg-005 (G-MARG-005)
+
+- [x] Initial briefing & dispatch contracts reviewed.
+- [x] Implemented `code/services/margin-policy-service/src/domain/alternatives-engine.mjs`:
+  - `calculateMaxAllowableDiscount`: exact integer ceiling arithmetic to find maximum allowable discount meeting floor bps.
+  - `generateAlternatives`: safer discount recommendation and verified bundle alternatives (e.g., Duo Glow Set).
+- [x] Implemented `code/services/margin-policy-service/src/service/stale-economics-handler.mjs`:
+  - Invalidation of stale pending approvals when catalog economics update.
+  - Re-evaluation trigger via `handleCatalogProductUpdated`.
+- [x] Enhanced `code/services/margin-policy-service/src/margin-policy-service.mjs`:
+  - Review band check triggering `NEEDS_APPROVAL` (F03.3-FLOW-004).
+  - Alternatives generation for non-approved proposals (F03.3-FLOW-005).
+  - SHA-256 evidence hashing & correlation preservation (F03.3-FLOW-007).
+  - Idempotency deduplication guard returning cached verdicts without duplicate outbox events.
+  - Fatal error interceptor and DLQ routing (`livepilot.v1.margin.verdict.recorded.dlq`).
+- [x] Enhanced `code/services/margin-policy-service/src/storage/margin-repository.mjs`:
+  - Added `review_band_bps` handling in policy store.
+  - Added `recordDlqEvent` for outbox dead-letter recording.
+- [x] Implemented zero-mock test suite `code/services/margin-policy-service/test/margin-reliability.test.mjs`:
+  - F03.3-FLOW-004: Human approval routing (`NEEDS_APPROVAL`).
+  - F03.3-FLOW-005: Safer discount and bundle suggestions (Duo Glow Set).
+  - F03.3-FLOW-007: Margin evidence preservation (SHA-256 hash, correlation lineage).
+  - F03.3-FLOW-008: Stale economics re-evaluation on catalog update.
+  - Idempotency caching & deduplication.
+  - Fatal error DLQ routing.
+- [x] Verification passes:
+  - `npm test --prefix code/services/margin-policy-service`: 13 tests, 12 suites, 100% pass.
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-MARG-005.md`: 51/51 sections passed (100% conformance).

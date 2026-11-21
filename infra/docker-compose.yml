@@ -68,6 +68,332 @@ services:
       driver: json-file
       options: {max-size: "20m", max-file: "3"}
 
+  identity-session:
+    build:
+      context: ../code/services/identity-session-service
+      dockerfile: Dockerfile
+    container_name: livepilot-identity-session
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      PORT: "3000"
+      HOST: "0.0.0.0"
+      NODE_ENV: "production"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  catalog-service:
+    build:
+      context: ../code/services/catalog-service
+      dockerfile: Dockerfile
+    image: livepilot/catalog-service:latest
+    container_name: livepilot-catalog-service
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - "3006"
+    environment:
+      NODE_ENV: "production"
+      PORT: "3006"
+      HOST: "0.0.0.0"
+      APP_ENV: ${APP_ENV:-prod}
+      PLATFORM_ADAPTER_MODE: ${PLATFORM_ADAPTER_MODE:-simulated}
+      CATALOG_EXECUTION_MODE: ${CATALOG_EXECUTION_MODE:-SIMULATED}
+      DATABASE_URL: ${CATALOG_DATABASE_URL:-postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable}
+      NATS_URL: ${NATS_URL:-nats://nats:4222}
+      NATS_TOKEN: ${NATS_TOKEN:?Missing NATS_TOKEN}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3006/readyz"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  telemetry-service:
+    build:
+      context: ../code/services/telemetry-service
+      dockerfile: Dockerfile
+    image: livepilot/telemetry-service:latest
+    container_name: livepilot-telemetry-service
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - "8080"
+    environment:
+      NODE_ENV: "production"
+      PORT: "8080"
+      HOST: "0.0.0.0"
+      APP_ENV: ${APP_ENV:-prod}
+      DATABASE_URL: ${TELEMETRY_DATABASE_URL:-postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable}
+      NATS_URL: ${NATS_URL:-nats://nats:4222}
+      NATS_TOKEN: ${NATS_TOKEN:?Missing NATS_TOKEN}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8080/readyz"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  margin-policy-service:
+    build:
+      context: ../code/services/margin-policy-service
+      dockerfile: Dockerfile
+    image: livepilot/margin-policy-service:latest
+    container_name: livepilot-margin-policy
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "127.0.0.1:8084:8084"
+    environment:
+      NODE_ENV: "production"
+      PORT: "8084"
+      HOST: "0.0.0.0"
+      APP_ENV: ${APP_ENV:-prod}
+      MARGIN_EXECUTION_MODE: ${MARGIN_EXECUTION_MODE:-SIMULATED}
+      DATABASE_URL: ${MARGIN_DATABASE_URL:-postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable}
+      NATS_URL: ${NATS_URL:-nats://nats:4222}
+      NATS_TOKEN: ${NATS_TOKEN:?Missing NATS_TOKEN}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8084/healthz"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  intent-risk-service:
+    build:
+      context: ../code/services/intent-risk-service
+      dockerfile: Dockerfile
+    image: livepilot/intent-risk-service:latest
+    container_name: livepilot-intent-risk-service
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    ports:
+      - "127.0.0.1:3002:3002"
+    environment:
+      NODE_ENV: "production"
+      PORT: "3002"
+      HOST: "0.0.0.0"
+      DATABASE_URL: postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3002/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  session-service:
+    build:
+      context: ../code/services/session-service
+      dockerfile: Dockerfile
+    image: livepilot/session-service:latest
+    container_name: livepilot-session-service
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    ports:
+      - "127.0.0.1:3004:3004"
+    environment:
+      NODE_ENV: "production"
+      PORT: "3004"
+      HOST: "0.0.0.0"
+      APP_ENV: ${APP_ENV:-prod}
+      DATABASE_URL: postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable
+      NATS_URL: nats://nats:4222
+      NATS_TOKEN: ${NATS_TOKEN:?Missing NATS_TOKEN}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3004/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  inventory-service:
+    build:
+      context: ../code/services/inventory-service
+      dockerfile: Dockerfile
+    image: livepilot/inventory-service:latest
+    container_name: livepilot-inventory-service
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    ports:
+      - "127.0.0.1:3005:3005"
+    environment:
+      NODE_ENV: "production"
+      PORT: "3005"
+      DATABASE_URL: postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3005/healthz"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  jev-copilot-service:
+    build:
+      context: ../code/services/jev-copilot-service
+      dockerfile: Dockerfile
+    image: livepilot/jev-copilot-service:latest
+    container_name: livepilot-jev-copilot-service
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "127.0.0.1:8085:8085"
+    environment:
+      NODE_ENV: "production"
+      PORT: "8085"
+      HOST: "0.0.0.0"
+      APP_ENV: ${APP_ENV:-prod}
+      JEV_EXECUTION_MODE: ${JEV_EXECUTION_MODE:-SIMULATED}
+      DATABASE_URL: ${JEV_DATABASE_URL:-postgres://${POSTGRES_USER:?Missing POSTGRES_USER}:${POSTGRES_PASSWORD:?Missing POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Missing POSTGRES_DB}?sslmode=disable}
+      NATS_URL: ${NATS_URL:-nats://nats:4222}
+      NATS_TOKEN: ${NATS_TOKEN:?Missing NATS_TOKEN}
+      AI_PROVIDER: ${AI_PROVIDER:-openai}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-pro}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8085/healthz"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks: [livepilot]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  krakend-edge:
+    image: devopsfaith/krakend:2.8
+    container_name: livepilot-krakend-edge
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ../docker/krakend/krakend-edge.json:/etc/krakend/krakend.json:ro
+    environment:
+      KRAKEND_PORT: "8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/__health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks: [livepilot]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
+  krakend-mesh:
+    image: devopsfaith/krakend:2.8
+    container_name: livepilot-krakend-mesh
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    ports:
+      - "127.0.0.1:8081:8080"
+    volumes:
+      - ../docker/krakend/krakend-mesh.json:/etc/krakend/krakend.json:ro
+    environment:
+      KRAKEND_PORT: "8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/__health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks: [livepilot]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "3"}
+
 networks:
   livepilot:
     name: livepilot-infra

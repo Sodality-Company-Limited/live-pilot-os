@@ -128,6 +128,10 @@ export async function spawnCodexSubagent({
   profile,
   outputSchema,
   dangerouslyBypassApprovals = false,
+  // The unified spawner uses this provider-neutral option name. Keep the
+  // Codex-specific flag as an alias so bounded Soda sessions actually use
+  // the requested non-interactive execution mode.
+  dangerouslySkipPermissions = false,
   timeoutMs = 300_000,
   codexBin = 'codex',
   onTelemetry,
@@ -140,7 +144,7 @@ export async function spawnCodexSubagent({
     model,
     profile,
     outputSchema,
-    dangerouslyBypassApprovals,
+    dangerouslyBypassApprovals: dangerouslyBypassApprovals || dangerouslySkipPermissions,
   });
 
   let child;

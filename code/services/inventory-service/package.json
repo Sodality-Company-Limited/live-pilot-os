@@ -1,0 +1,13 @@
+{
+  "name": "livepilot-inventory-service",
+  "version": "1.0.0",
+  "description": "LivePilot OS Inventory Service - Authoritative Stock Reservation and Concurrency Controller",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/**/*.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

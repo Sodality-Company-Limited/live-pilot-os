@@ -1085,3 +1085,43 @@
 ## [2026-10-18T13:41:04.110Z] goal_verification | Goal G-ML-007: Parameter-Efficient LoRA/QLoRA Training Pipeline verified 100% green across 25 Socratic Whys, 20 measured episodes, and 8 killed adversarial mutations.
 
 ## [2026-10-18T14:51:29.762Z] goal_verification | Goal G-ML-007: Parameter-Efficient LoRA/QLoRA Training Pipeline verified 100% green across 25 Socratic Whys, 20 measured episodes, and 8 killed adversarial mutations.
+
+## [2026-11-21T07:00:19.786Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_140019_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:00:52.294Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_140052_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:01:09.839Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_140109_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:19:28.858Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_141928_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:20:10.609Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_142010_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:21:08.275Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_142108_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:22:02.220Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_142202_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:22:52.120Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-050): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_142252_g_core_050_subagent_telemetry.md`.
+
+## [2026-11-21T07:23:39.292Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-051): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_142339_g_core_051_subagent_telemetry.md`.
+
+## [2026-11-21T07:30:56.306Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-065): Recorded modular telemetry and forensic report for event_mesh_nats_lead (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_143056_g_core_065_subagent_telemetry.md`.
+
+## [2026-11-21T07:40:00.611Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-058): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144000_g_core_058_subagent_telemetry.md`.
+
+## [2026-11-21T07:41:58.471Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-058): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144158_g_core_058_subagent_telemetry.md`.
+
+## [2026-11-21T07:42:26.603Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-078): Recorded modular telemetry and forensic report for backend-api-engineer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144226_g_core_078_subagent_telemetry.md`.
+
+## [2026-11-21T07:43:07.992Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-058): Recorded modular telemetry and forensic report for core-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144307_g_core_058_subagent_telemetry.md`.
+
+## [2026-11-21T07:44:29.633Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-058): Recorded modular telemetry and forensic report for core-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144429_g_core_058_subagent_telemetry.md`.
+
+## [2026-11-21T07:44:41.689Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-078): Recorded modular telemetry and forensic report for security-code-reviewer (Codex CLI). Status: undefined. Saved to `docs/06_raw/20261121_144441_g_core_078_subagent_telemetry.md`.
+
+## [2026-11-21T08:02:32.794Z] subagent_telemetry | Subagent Execution Telemetry (G-IDEN-002): Recorded modular telemetry and forensic report for backend-engineer (Antigravity CLI). Status: undefined. Saved to `docs/06_raw/20261121_150232_g_iden_002_subagent_telemetry.md`.
+
+## [2026-11-21T08:10:08.206Z] subagent_telemetry | Subagent Execution Telemetry (G-JEVC-001): Recorded modular telemetry and forensic report for soda-core-engineer (Antigravity CLI). Status: undefined. Saved to `docs/06_raw/20261121_151008_g_jevc_001_subagent_telemetry.md`.
+
+## [2026-11-21T08:10:37.058Z] subagent_telemetry | Subagent Execution Telemetry (G-CATA-001): Recorded modular telemetry and forensic report for backend-systems-architect (Antigravity CLI). Status: undefined. Saved to `docs/06_raw/20261121_151037_g_cata_001_subagent_telemetry.md`.
+
+## [2026-11-21T08:11:11.421Z] subagent_telemetry | Subagent Execution Telemetry (G-CORE-065): Recorded modular telemetry and forensic report for Systems Reliability & Verification Engineer (Antigravity CLI). Status: undefined. Saved to `docs/06_raw/20261121_151111_g_core_065_subagent_telemetry.md`.

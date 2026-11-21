@@ -7,7 +7,7 @@
 export const MODEL_TIERS = {
   reasoning: {
     description: 'High-capability complex reasoning and formal architectural planning',
-    codex: 'o3-mini',
+    codex: 'gpt-5.6-luna',
     antigravity: 'gemini-2.5-pro',
     gemini: 'gemini-2.5-pro',
     claude: 'claude-3-7-sonnet',
@@ -17,7 +17,7 @@ export const MODEL_TIERS = {
   },
   balanced: {
     description: 'Fast, high-throughput implementation and straightforward coding tasks',
-    codex: 'gpt-4o',
+    codex: 'gpt-5.6-luna',
     antigravity: 'gemini-2.5-flash',
     gemini: 'gemini-2.0-flash',
     claude: 'claude-3-5-haiku',

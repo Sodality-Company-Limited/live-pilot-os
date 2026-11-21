@@ -11,7 +11,14 @@
 
 | ID | Status | Summary |
 |----|--------|---------|
-| *(none)* | — | No active goals |
+| [`G-OPS-002`](07-backlog/goals/G-OPS-002.md) | `planned` | Deploy identity/session service to DigitalOcean |
+| [`G-SEC-002`](07-backlog/goals/G-SEC-002.md) | `ready` | Identity/session persistence contract |
+| [`G-SEC-003`](07-backlog/goals/G-SEC-003.md) | `planned` | Local credential verification |
+| [`G-SEC-004`](07-backlog/goals/G-SEC-004.md) | `planned` | Server-managed session lifecycle |
+| [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
+| [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
+| [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
+| [`G-APPR-007`](07-backlog/goals/G-APPR-007.md) | `planned` | Package Approval & Control service for DigitalOcean deployment with health probes and runbook |
 
 ## Constraints
 

@@ -1,0 +1,134 @@
+{
+  "schema_id": "https://schemas.livepilot.invalid/nats/audit-receipt.schema.json",
+  "contract_id": "audit.receipt.livepilot.v1",
+  "fixtures": [
+    {
+      "id": "valid-audit-receipt-accepted-with-actor-and-evidence",
+      "result": "accepted",
+      "description": "Standard accepted audit receipt with human operator actor and multiple evidence hash digests.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.4.2",
+        "evidence_ids": [
+          "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+          "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+        ]
+      },
+      "headers": {
+        "Nats-Msg-Id": "nats-msg-audit-0001",
+        "X-Correlation-Id": "corr-01JCPZ0001-audit",
+        "X-Idempotency-Key": "idem-tenant-alpha-01-rcpt-0001",
+        "X-Tenant-Id": "tenant-alpha-01",
+        "X-Session-Id": "sess-live-20261121-01",
+        "X-Schema-Version": "1.0.0",
+        "X-Producer": "session-service",
+        "X-Traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+        "X-Mode": "CONFIRMED"
+      }
+    },
+    {
+      "id": "valid-audit-receipt-rejected-with-null-actor-and-empty-evidence",
+      "result": "rejected",
+      "description": "Rejected audit receipt from autonomous system with null actor_ref and empty evidence_ids array.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0002",
+        "aggregate_id": "promo-flash-99",
+        "actor_ref": null,
+        "result": "rejected",
+        "policy_revision": "pol-v2.0.0",
+        "evidence_ids": []
+      },
+      "headers": {
+        "Nats-Msg-Id": "nats-msg-audit-0002",
+        "X-Correlation-Id": "corr-01JCPZ0002-audit",
+        "X-Idempotency-Key": "idem-tenant-alpha-01-rcpt-0002",
+        "X-Tenant-Id": "tenant-alpha-01",
+        "X-Session-Id": "sess-live-20261121-01",
+        "X-Schema-Version": "1.0.0",
+        "X-Producer": "promotion-service",
+        "X-Traceparent": "00-5bf92f3577b34da6a3ce929d0e0e4736-11f067aa0ba902b7-01",
+        "X-Mode": "CONFIRMED"
+      }
+    },
+    {
+      "id": "valid-audit-receipt-failed-without-evidence-ids",
+      "result": "failed",
+      "description": "Failed audit receipt where evidence_ids is omitted (optional property) and actor_ref is system workload.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0003",
+        "aggregate_id": "action-exec-101",
+        "actor_ref": "system-runner-node-3",
+        "result": "failed",
+        "policy_revision": "pol-v1.0.0"
+      },
+      "headers": {
+        "Nats-Msg-Id": "nats-msg-audit-0003",
+        "X-Correlation-Id": "corr-01JCPZ0003-audit",
+        "X-Idempotency-Key": "idem-tenant-alpha-01-rcpt-0003",
+        "X-Tenant-Id": "tenant-alpha-01",
+        "X-Session-Id": "sess-live-20261121-01",
+        "X-Schema-Version": "1.0.0",
+        "X-Producer": "execution-service",
+        "X-Traceparent": "00-6bf92f3577b34da6a3ce929d0e0e4736-22f067aa0ba902b7-01",
+        "X-Mode": "SANDBOX"
+      }
+    },
+    {
+      "id": "valid-audit-receipt-unknown-null-actor-populated-evidence",
+      "result": "unknown",
+      "description": "Unknown result audit receipt representing timeout or partitioned downstream verdict with populated evidence hashes.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0004",
+        "aggregate_id": "decision-rev-88",
+        "actor_ref": null,
+        "result": "unknown",
+        "policy_revision": "pol-v3.1.0-beta",
+        "evidence_ids": [
+          "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ]
+      },
+      "headers": {
+        "Nats-Msg-Id": "nats-msg-audit-0004",
+        "X-Correlation-Id": "corr-01JCPZ0004-audit",
+        "X-Idempotency-Key": "idem-tenant-beta-02-rcpt-0004",
+        "X-Tenant-Id": "tenant-beta-02",
+        "X-Session-Id": "sess-live-20261121-02",
+        "X-Schema-Version": "1.0.0",
+        "X-Producer": "approval-control-service",
+        "X-Traceparent": "00-7bf92f3577b34da6a3ce929d0e0e4736-33f067aa0ba902b7-01",
+        "X-Mode": "SIMULATED"
+      }
+    },
+    {
+      "id": "valid-audit-receipt-reconciled-with-string-actor",
+      "result": "reconciled",
+      "description": "Reconciled audit receipt emitted following offline ledger reconciliation or operator adjustment.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0005",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "compliance-auditor-bob",
+        "result": "reconciled",
+        "policy_revision": "pol-v1.4.2",
+        "evidence_ids": [
+          "sha256:5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+          "sha256:4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        ]
+      },
+      "headers": {
+        "Nats-Msg-Id": "nats-msg-audit-0005",
+        "X-Correlation-Id": "corr-01JCPZ0005-audit",
+        "X-Causation-Id": "cause-01JCPZ0005-discrepancy",
+        "X-Idempotency-Key": "idem-tenant-alpha-01-rcpt-0005",
+        "X-Tenant-Id": "tenant-alpha-01",
+        "X-Session-Id": "sess-live-20261121-01",
+        "X-Schema-Version": "1.0.0",
+        "X-Producer": "audit-service",
+        "X-Traceparent": "00-8bf92f3577b34da6a3ce929d0e0e4736-44f067aa0ba902b7-01",
+        "X-Mode": "CONFIRMED"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.livepilot.io/nats/inventory-reservation-request.schema.json",
+  "title": "InventoryReservationRequest",
+  "description": "Request payload for atomic inventory stock reservation",
+  "type": "object",
+  "required": [
+    "correlation_id",
+    "causation_id",
+    "tenant_id",
+    "session_id",
+    "idempotency_key",
+    "sku",
+    "quantity",
+    "ttl_seconds"
+  ],
+  "properties": {
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "causation_id": { "type": "string", "format": "uuid" },
+    "tenant_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "session_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "idempotency_key": { "type": "string", "minLength": 8, "maxLength": 128 },
+    "sku": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "quantity": { "type": "integer", "minimum": 1, "maximum": 100000 },
+    "ttl_seconds": { "type": "integer", "minimum": 10, "maximum": 3600 }
+  },
+  "additionalProperties": false
+}

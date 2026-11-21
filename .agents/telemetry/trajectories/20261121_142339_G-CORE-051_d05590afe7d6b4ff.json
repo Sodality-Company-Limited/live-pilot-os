@@ -1,0 +1,42 @@
+{
+  "sessionKey": "d05590afe7d6b4ff",
+  "goalId": "G-CORE-051",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "persona": "backend-api-engineer",
+  "role": "implementer",
+  "mandate": "Execute only step 1 of G-CORE-051. Add the service-owned live-session persistence migration and tests within the declared touch map. Do not read the full goal card. Preserve unrelated changes. Implement expand/contract safety, tenant/session isolation, optimistic versioning, idempotency uniqueness, and transactional outbox invariants. Return strict compact handoff and stop at the verification checkpoint.",
+  "touchMap": [
+    "code/services/session-service/migrations",
+    "code/services/session-service/tests",
+    "docs/03-architecture/specs/goals/G-CORE-051"
+  ],
+  "fullPrompt": "=== SODA OS SUBAGENT BOUNDED EXECUTION CONTRACT ===\nGoal ID: G-CORE-051\nRole: implementer\nPersona: backend-api-engineer\nPersona Directives: Enforce strict contract boundaries; return typed responses; validate all incoming requests; zero mocks and zero stubs.\nMandate: Execute only step 1 of G-CORE-051. Add the service-owned live-session persistence migration and tests within the declared touch map. Do not read the full goal card. Preserve unrelated changes. Implement expand/contract safety, tenant/session isolation, optimistic versioning, idempotency uniqueness, and transactional outbox invariants. Return strict compact handoff and stop at the verification checkpoint.\nDeclared Touch Map: code/services/session-service/migrations, code/services/session-service/tests, docs/03-architecture/specs/goals/G-CORE-051\nAcceptance Criteria: Follow canonical goal card specifications\nVerification Commands: service migration test command recorded by the implementation repository\n--- Mandatory Constitutional Invariants ---\n1. Act strictly as the declared single persona; never switch or adopt additional personas.\n2. Zero mocks, zero stubs, zero dummy fallbacks. Write 100% production-ready code.\n3. Do not create, modify, or delete files outside the declared touch map.\n4. Do not spawn child agents; execute commands bounded by timeout.\n5. Stop execution at the verification checkpoint and return a concise handoff.\n--- MANDATORY EPHEMERAL WORKER CONTRACT ---\n1. You are an ephemeral worker. You exist only to complete this single task.\n2. Perform your assigned file edit, run the verification command once.\n3. Emit your compact handoff JSON and CEASE calling tools immediately.\n4. Do not await user response or ask follow-up questions.\n--- Expected Handoff Format ---\nReturn: Status (complete|blocked|needs-review), changed files, tests, failures, blockers, and next action.",
+  "rawResponse": "I’m executing step 1 within the declared touch map, inspecting only the service migration/tests and the scoped G-CORE-051 specification, then I’ll run the recorded migration verification once and stop.\n{\n  \"status\": \"blocked\",\n  \"changed_files\": [],\n  \"tests\": [],\n  \"failures\": [\n    \"Declared service paths do not exist.\",\n    \"No migration/test framework or recorded service migration verification command is present.\"\n  ],\n  \"blockers\": [\n    \"Cannot implement production-ready persistence safely without the service scaffold and executable verification command.\"\n  ],\n  \"next_action\": \"Provide or establish the session-service implementation scaffold and its migration test command, then rerun step 1.\"\n}",
+  "summary": "I’m executing step 1 within the declared touch map, inspecting only the service migration/tests and the scoped G-CORE-051 specification, then I’ll run the recorded migration verification once and stop.\n{\n  \"status\": \"blocked\",\n  \"changed_files\": [],\n  \"tests\": [],\n  \"failures\": [\n    \"Declared service paths do not exist.\",\n    \"No migration/test framework or recorded service migration verification command is present.\"\n  ],\n  \"blockers\": [\n    \"Cannot implement production-ready persistence safely without the service scaffold and executable verification command.\"\n  ],\n  \"next_action\": \"Provide or establish the session-service implementation scaffold and its migration test command, then rerun step 1.\"\n}",
+  "status": "needs-review",
+  "exitCode": 0,
+  "changedFiles": [],
+  "inputTokens": 155269,
+  "outputTokens": 1095,
+  "elapsedSeconds": 27,
+  "turns": 1,
+  "tools": {
+    "commands": 1
+  },
+  "verification": {
+    "command": "service migration test command recorded by the implementation repository",
+    "passed": false,
+    "testsRun": 1,
+    "testsPassed": 0
+  },
+  "initialState": {
+    "touchMap": [
+      "code/services/session-service/migrations",
+      "code/services/session-service/tests",
+      "docs/03-architecture/specs/goals/G-CORE-051"
+    ]
+  },
+  "recordedAt": "2026-11-21T07:23:39.293Z",
+  "digest": "b76d150eb4d1d90bd63b665b57b13ea7a313353191a699927fb37f28e7ebe539"
+}
