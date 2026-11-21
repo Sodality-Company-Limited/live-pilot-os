@@ -1,0 +1,22 @@
+{
+  "goal_id": "G-DAVE-021",
+  "git_head_sha": "23dfd6c3c028a8b7420e4680f204ee054ae8dc7d",
+  "timestamp_utc": "2026-10-11T06:12:10Z",
+  "deployment_state": "ROLLED_BACK",
+  "ticks_evaluated": 1003,
+  "total_rollbacks": 1,
+  "max_rollback_duration_us": 0.75,
+  "rollback_sub_1ms_sla_satisfied": true,
+  "rollback_events": [
+    {
+      "trigger": "LATENCY_BREACH",
+      "tick_id": 1002,
+      "reason": "3 consecutive latency breaches (P99=1500.0us > 1000.0us)",
+      "timestamp_utc": "2026-10-11T06:12:10Z",
+      "rollback_duration_us": 0.75,
+      "prior_active_model": "candidate",
+      "restored_model": "baseline"
+    }
+  ],
+  "exit_code": 0
+}

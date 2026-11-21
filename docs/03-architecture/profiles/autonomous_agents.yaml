@@ -1,0 +1,62 @@
+# Soda OS Goal Profile Schema: Autonomous Agents Profile
+# Profile ID: autonomous_agents
+# Description: Applied to goals governing autonomous multi-agent pipelines, decision routing, tool execution sandboxes, and fail-closed autonomy boundaries.
+
+profile:
+  id: autonomous_agents
+  name: "Autonomous Multi-Agent Governance & Safety Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: decision_contract
+    description: "Canonical decision schema (GovernedDecision) requiring confidence, evidence citations, uncertainty quantification, and risk classification."
+    type: markdown_or_schema
+    required_fields:
+      - decision_id
+      - model_id
+      - confidence
+      - evidence
+      - uncertainty
+      - risk
+      - action
+      - provenance
+
+  - id: routing_contract
+    description: "Exhaustive truth table mapping Risk x Evidence x Confidence permutations deterministically to valid actions."
+    type: yaml_or_table
+    permitted_actions:
+      - proceed
+      - verify
+      - defer
+      - human_review
+    invariants:
+      - "No unhandled state permutations"
+      - "High-risk unverified actions MUST defer or require human review"
+      - "Zero low-confidence actions allowed to proceed"
+
+  - id: sandbox_and_tool_authorization
+    description: "Least-privilege tool execution boundary, WASM sandboxing, memory ceilings (256MB), and gas budgets."
+    type: markdown_section
+    required_elements:
+      - "Sandbox boundary"
+      - "Tool authorization"
+      - "Memory ceiling"
+      - "Execution timeout"
+
+  - id: human_review_boundary
+    description: "Explicit trigger conditions under which autonomous execution halts and transfers control to a human operator."
+    type: markdown_section
+    required_elements:
+      - "High-risk trigger"
+      - "Verification failure trigger"
+      - "Calibration drift trigger"
+      - "SLA timeout trigger"
+
+  - id: audit_ledger_contract
+    description: "Structured session event logging with cryptographic citations and token provenance."
+    type: markdown_section
+    required_elements:
+      - "Audit log format"
+      - "Provenance hashes"
+      - "Tamper-evident verification"

@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Live OS · Control Room Demo</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        --bg: #100e0d;
+        --surface: #171412;
+        --surface-raised: #211c19;
+        --surface-inset: #0c0b0a;
+        --border: #38302b;
+        --border-strong: #51453e;
+        --text: #f4f0ec;
+        --muted: #b1a69f;
+        --subtle: #857a73;
+        --orange: #ee4d2d;
+        --orange-bright: #ff6849;
+        --orange-soft: #351c16;
+        --green: #68c995;
+        --green-soft: #172820;
+        --yellow: #e9b05d;
+        --yellow-soft: #302515;
+        --blue: #8ebcf2;
+        --shadow: 0 18px 44px rgb(0 0 0 / 26%);
+        --r-sm: 10px;
+        --r-md: 16px;
+        --r-lg: 22px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 52% -30%, rgb(238 77 45 / 9%), transparent 52%),
+          var(--bg);
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      button, input { font: inherit; }
+      button { color: inherit; }
+      button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+        outline: 2px solid var(--orange-bright);
+        outline-offset: 3px;
+      }
+      button { cursor: pointer; }
+
+      .app { height: 100%; display: flex; flex-direction: column; }
+      .topbar {
+        flex: 0 0 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 34px;
+        border-bottom: 1px solid rgb(255 255 255 / 5%);
+        background: rgb(16 14 13 / 82%);
+      }
+      .brand, .top-actions, .brand-copy, .session-meta, .page-actions, .role-switch,
+      .section-title, .live-indicator, .product-title-row, .topic-heading, .cue-heading,
+      .viewer-row, .video-brand, .video-brand-meta, .video-top, .video-footer,
+      .decision-top, .timeline-heading, .product-row, .metric-label, .toast {
+        display: flex;
+        align-items: center;
+      }
+      .brand { gap: 11px; min-width: 0; }
+      .brand-mark {
+        width: 32px; height: 32px; display: grid; place-items: center;
+        border-radius: 10px; background: var(--orange); color: #17100d;
+        font-weight: 900; font-size: 16px; letter-spacing: -1px;
+        box-shadow: 0 5px 16px rgb(238 77 45 / 22%);
+      }
+      .brand-copy { align-items: flex-start; flex-direction: column; gap: 1px; }
+      .brand-name { font-size: 14px; line-height: 1.1; font-weight: 720; letter-spacing: -.02em; }
+      .brand-caption { color: var(--subtle); font-size: 9px; font-weight: 650; letter-spacing: .12em; }
+      .top-actions { gap: 14px; }
+      .session-meta { gap: 9px; color: var(--muted); font-size: 11px; }
+      .session-id { color: #d8cec8; font-weight: 650; }
+      .status-dot { width: 7px; height: 7px; border-radius: 99px; background: var(--green); box-shadow: 0 0 12px rgb(104 201 149 / 45%); }
+      .divider { width: 1px; height: 20px; background: var(--border); }
+      .avatar {
+        width: 30px; height: 30px; display: grid; place-items: center;
+        border-radius: 50%; background: #33231e; color: #f3c3a9; font-size: 11px; font-weight: 750;
+      }
+
+      .page-head {
+        flex: 0 0 88px;
+        display: flex; align-items: center; justify-content: space-between; gap: 24px;
+        padding: 0 34px;
+      }
+      .eyebrow { color: var(--orange-bright); font-size: 9px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+      h1 { margin: 4px 0 2px; font-size: 23px; line-height: 1.15; letter-spacing: -.04em; font-weight: 680; }
+      .page-subtitle { margin: 0; color: var(--muted); font-size: 11px; }
+      .page-actions { gap: 9px; }
+      .session-pill {
+        display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px;
+        border-radius: 99px; color: #f1b09d; background: var(--orange-soft);
+        border: 1px solid rgb(238 77 45 / 19%); font-size: 10px; font-weight: 700;
+      }
+      .role-switch {
+        padding: 3px; border-radius: 12px; gap: 2px;
+        background: #141210; border: 1px solid var(--border);
+      }
+      .role-button {
+        display: flex; align-items: center; gap: 8px; border: 0; border-radius: 9px;
+        background: transparent; color: var(--muted); padding: 8px 12px;
+        font-size: 11px; font-weight: 650; transition: background 180ms ease-out, color 180ms ease-out;
+      }
+      .role-button:hover { color: var(--text); }
+      .role-button[aria-selected="true"] { color: var(--text); background: #2a221e; box-shadow: inset 0 0 0 1px #41342e; }
+      .role-icon { width: 15px; height: 15px; display: inline-grid; place-items: center; font-size: 13px; }
+
+      .toolbar {
+        flex: 0 0 48px; display: flex; align-items: center; justify-content: space-between;
+        padding: 0 34px; border-top: 1px solid rgb(255 255 255 / 4%); border-bottom: 1px solid rgb(255 255 255 / 5%);
+        background: rgb(23 20 18 / 55%);
+      }
+      .live-indicator { gap: 8px; font-size: 10px; color: var(--muted); }
+      .live-label { color: var(--text); font-size: 10px; font-weight: 700; }
+      .live-label span { color: var(--orange-bright); }
+      .toolbar-right { display: flex; align-items: center; gap: 8px; }
+      .timecode { color: var(--subtle); font-variant-numeric: tabular-nums; font-family: "Fira Code", ui-monospace, monospace; font-size: 10px; margin-right: 7px; }
+      .button {
+        display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+        min-height: 32px; border: 1px solid var(--border); border-radius: 9px;
+        padding: 0 11px; background: #201b18; color: #e2d9d3;
+        font-size: 10px; font-weight: 650; transition: background 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out;
+      }
+      .button:hover { background: #2b231f; border-color: var(--border-strong); }
+      .button:active { transform: translateY(1px); }
+      .button-primary { background: var(--orange); border-color: var(--orange); color: #170f0c; }
+      .button-primary:hover { background: var(--orange-bright); border-color: var(--orange-bright); }
+      .button-quiet { background: transparent; border-color: transparent; color: var(--muted); }
+      .button-quiet:hover { color: var(--text); background: #241f1b; }
+      .button svg { width: 13px; height: 13px; }
+      .hidden-input { position: absolute; width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; }
+
+      .workspace {
+        flex: 1 1 auto; min-height: 0; padding: 16px 34px 22px;
+      }
+      .room-grid {
+        height: 100%; min-height: 0; display: grid; grid-template-columns: minmax(275px, .78fr) minmax(0, 1.65fr);
+        gap: 14px; max-width: 1600px; margin: 0 auto;
+      }
+      .stage-column { min-height: 0; display: flex; justify-content: center; }
+      .stage-frame {
+        position: relative; height: 100%; max-height: 100%; width: auto; max-width: 100%;
+        aspect-ratio: 9 / 16; overflow: hidden; border: 1px solid #443832; border-radius: 18px;
+        background: #211b18; box-shadow: var(--shadow); isolation: isolate;
+      }
+      .mock-video, .uploaded-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .uploaded-video { display: none; background: #080707; }
+      .mock-video {
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 50% 20%, rgb(195 112 76 / 28%), transparent 41%),
+          radial-gradient(ellipse at 80% 45%, rgb(119 64 48 / 24%), transparent 48%),
+          linear-gradient(180deg, #49322a 0%, #30251f 42%, #191513 100%);
+      }
+      .mock-video::before, .mock-video::after { content: ""; position: absolute; pointer-events: none; }
+      .mock-video::before {
+        width: 42%; aspect-ratio: 1; top: 12%; right: -12%; border-radius: 50%;
+        background: rgb(238 150 109 / 9%); filter: blur(26px);
+      }
+      .mock-video::after {
+        left: 0; right: 0; bottom: 0; height: 47%;
+        background: linear-gradient(0deg, rgb(12 10 9 / 90%), transparent);
+      }
+      .studio-lamp { position: absolute; top: 20%; left: 8%; width: 14px; height: 70px; border-radius: 99px; background: rgb(244 192 158 / 12%); filter: blur(5px); }
+      .portrait-scene { position: absolute; inset: 16% 3% 23%; display: grid; place-items: center; }
+      .portrait-scene svg { height: 100%; width: 100%; filter: drop-shadow(0 20px 20px rgb(0 0 0 / 25%)); }
+      .video-top {
+        z-index: 2; position: absolute; top: 13px; left: 12px; right: 12px; justify-content: space-between; gap: 8px;
+      }
+      .video-brand { gap: 7px; min-width: 0; }
+      .shop-avatar { width: 27px; height: 27px; display: grid; place-items: center; flex: none; border-radius: 50%; color: #2a130e; background: #f4a27e; font-weight: 800; font-size: 10px; border: 1.5px solid rgb(255 255 255 / 70%); }
+      .video-brand-meta { flex-direction: column; align-items: flex-start; min-width: 0; gap: 1px; text-shadow: 0 1px 6px #000; }
+      .video-brand-meta strong { font-size: 9px; white-space: nowrap; }
+      .video-brand-meta span { color: #e3d6d0; font-size: 7px; }
+      .live-tag { display: flex; align-items: center; gap: 4px; flex: none; padding: 5px 7px; border-radius: 6px; background: #c93821; color: white; font-size: 8px; font-weight: 800; box-shadow: 0 3px 10px rgb(0 0 0 / 22%); }
+      .live-tag .status-dot { width: 5px; height: 5px; background: white; box-shadow: none; }
+      .viewer-chip { z-index: 2; position: absolute; top: 49px; right: 12px; display: inline-flex; gap: 4px; align-items: center; padding: 5px 7px; color: #f4ebe6; border-radius: 6px; background: rgb(17 13 11 / 62%); font-size: 8px; font-variant-numeric: tabular-nums; }
+      .chat-overlay {
+        z-index: 3; position: absolute; left: 10px; right: 9px; bottom: 132px;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 5px;
+        max-height: 206px; overflow: hidden; pointer-events: none;
+        mask-image: linear-gradient(to bottom, transparent 0, black 15%, black 100%);
+      }
+      .chat-message {
+        max-width: 93%; padding: 5px 8px; border-radius: 10px; color: #f7f1ed;
+        background: rgb(20 15 13 / 68%); font-size: 8px; line-height: 1.45;
+        text-shadow: 0 1px 2px #000; animation: message-enter 240ms cubic-bezier(.16,1,.3,1) both;
+      }
+      .chat-message strong { color: #ffb39b; margin-right: 4px; font-weight: 750; }
+      .chat-message em { color: #ffe1d5; font-style: normal; }
+      .pinned-product {
+        z-index: 4; position: absolute; left: 9px; right: 9px; bottom: 43px;
+        display: flex; align-items: center; gap: 8px; padding: 8px;
+        border: 1px solid rgb(255 255 255 / 17%); border-radius: 10px;
+        background: rgb(21 17 15 / 90%); box-shadow: 0 6px 22px rgb(0 0 0 / 26%);
+      }
+      .product-thumb { flex: none; width: 37px; height: 42px; display: grid; place-items: center; border-radius: 7px; background: #ecd4c3; }
+      .bottle { position: relative; width: 15px; height: 26px; border: 1px solid #c39a7e; border-radius: 4px 4px 5px 5px; background: #f9f1e9; }
+      .bottle::before { content: ""; position: absolute; width: 6px; height: 4px; top: -5px; left: 4px; background: #b9967f; border-radius: 2px 2px 0 0; }
+      .bottle::after { content: ""; position: absolute; top: 10px; left: 2px; width: 9px; height: 5px; background: #ee4d2d; opacity: .8; }
+      .pinned-copy { flex: 1; min-width: 0; }
+      .pinned-copy strong { display: block; color: #f8f1ed; font-size: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pinned-copy span { display: block; color: #c8b9b0; margin-top: 2px; font-size: 7px; }
+      .pinned-price { text-align: right; font-size: 10px; font-weight: 800; white-space: nowrap; }
+      .pinned-price small { display: block; color: #d77a5f; font-size: 7px; font-weight: 600; text-decoration: line-through; }
+      .video-footer { z-index: 5; position: absolute; bottom: 0; left: 0; right: 0; justify-content: space-between; height: 38px; padding: 0 11px; color: #e7dcd6; font-size: 8px; }
+      .video-footer .sound-toggle { border: 0; padding: 5px; background: transparent; color: inherit; }
+      .video-caption { position: absolute; z-index: 2; left: 12px; bottom: 228px; font-size: 8px; font-weight: 650; color: #fff5ef; text-shadow: 0 2px 7px #000; }
+      .stage-placeholder {
+        position: absolute; z-index: 1; inset: 0; display: grid; place-items: center;
+        color: transparent; pointer-events: none;
+      }
+      .stage-frame.has-video .mock-video, .stage-frame.has-video .portrait-scene, .stage-frame.has-video .studio-lamp { display: none; }
+      .stage-frame.has-video .uploaded-video { display: block; }
+
+      .insights { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 12px; }
+      .insights-head { flex: 0 0 32px; display: flex; align-items: center; justify-content: space-between; }
+      .section-title { gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: -.015em; }
+      .section-kicker { color: var(--subtle); font-size: 9px; }
+      .updated-label { color: var(--subtle); font-size: 9px; }
+      .host-layout, .ops-layout { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); grid-template-rows: minmax(0,1.05fr) minmax(0,.95fr); gap: 12px; }
+      .tile {
+        min-width: 0; min-height: 0; padding: 15px 16px; overflow: hidden;
+        border: 1px solid var(--border); border-radius: var(--r-md);
+        background: linear-gradient(145deg, rgb(255 255 255 / 2.1%), transparent 55%), var(--surface);
+        box-shadow: 0 7px 20px rgb(0 0 0 / 9%);
+      }
+      .tile-topic { grid-column: 1; grid-row: 1; }
+      .tile-metrics { grid-column: 2; grid-row: 1; }
+      .tile-cue { grid-column: 1 / span 2; grid-row: 2; }
+      .tile-offer { grid-column: 1; grid-row: 2; }
+      .tile-trace { grid-column: 2; grid-row: 1 / span 2; }
+      .tile-ops-topic { grid-column: 1; grid-row: 1; }
+      .tile-topic, .tile-trace { display: flex; flex-direction: column; }
+      .topic-heading, .cue-heading, .timeline-heading, .decision-top { justify-content: space-between; gap: 10px; }
+      .tile-title { margin: 0; font-size: 11px; line-height: 1.2; font-weight: 700; letter-spacing: -.01em; }
+      .tile-description { color: var(--subtle); font-size: 9px; margin-top: 4px; }
+      .topic-count { color: #e8a28d; background: #2d1c17; border: 1px solid #503026; padding: 4px 7px; border-radius: 99px; font-size: 8px; font-weight: 750; white-space: nowrap; }
+      .topic-list { flex: 1; min-height: 0; overflow: auto; margin: 13px -3px 0 0; padding: 0 4px 0 0; list-style: none; scrollbar-color: #57473e transparent; scrollbar-width: thin; }
+      .topic-item { display: grid; grid-template-columns: 25px minmax(0,1fr) auto; gap: 8px; align-items: center; padding: 9px 0; border-top: 1px solid rgb(255 255 255 / 5%); animation: message-enter 240ms cubic-bezier(.16,1,.3,1) both; }
+      .topic-icon { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 8px; color: #f3a18a; background: var(--orange-soft); font-size: 10px; }
+      .topic-copy { min-width: 0; }
+      .topic-copy strong { display: block; font-size: 9px; font-weight: 650; line-height: 1.35; }
+      .topic-copy small { display: block; color: var(--subtle); margin-top: 3px; font-size: 8px; }
+      .topic-volume { color: #dfc7bb; font-variant-numeric: tabular-nums; font-size: 9px; font-weight: 700; white-space: nowrap; }
+      .topic-volume small { color: var(--subtle); font-size: 7px; font-weight: 500; }
+
+      .metrics-product { display: flex; align-items: center; gap: 9px; margin-top: 12px; padding: 8px; border-radius: 10px; background: #201a17; }
+      .mini-bottle { flex: none; width: 28px; height: 32px; display: grid; place-items: center; border-radius: 7px; background: #ecd4c3; transform: scale(.72); }
+      .product-title-row { min-width: 0; flex-direction: column; align-items: flex-start; gap: 2px; }
+      .product-title-row strong { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 8px; }
+      .product-title-row span { color: var(--subtle); font-size: 7px; }
+      .product-price { margin-left: auto; text-align: right; font-size: 9px; font-weight: 750; white-space: nowrap; }
+      .product-price span { display: block; color: var(--subtle); margin-top: 2px; font-size: 7px; font-weight: 500; }
+      .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 10px; }
+      .metric-cell { min-width: 0; padding: 8px 9px; border: 1px solid #2e2824; border-radius: 9px; background: #1d1916; }
+      .metric-label { justify-content: space-between; color: var(--muted); font-size: 8px; }
+      .metric-label span:last-child { color: var(--subtle); font-size: 8px; }
+      .metric-value { display: block; margin-top: 5px; color: var(--text); font-size: 17px; line-height: 1; font-weight: 720; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+      .metric-value small { color: var(--subtle); font-size: 8px; letter-spacing: 0; font-weight: 550; }
+      .metric-delta { color: var(--green); font-size: 7px; margin-top: 4px; }
+      .stock-row { display: flex; align-items: center; justify-content: space-between; margin-top: 9px; color: var(--muted); font-size: 8px; }
+      .stock-row strong { color: var(--text); font-size: 9px; font-variant-numeric: tabular-nums; }
+      .stock-track { height: 4px; margin-top: 5px; border-radius: 99px; background: #342d28; overflow: hidden; }
+      .stock-track span { display: block; width: 63%; height: 100%; background: #d78162; border-radius: inherit; transition: width 200ms ease-out; }
+
+      .tile-cue { position: relative; background: linear-gradient(125deg, rgb(238 77 45 / 9%), transparent 62%), #191513; }
+      .cue-heading { align-items: flex-start; }
+      .cue-badge { display: inline-flex; align-items: center; gap: 5px; color: #e7a18d; font-size: 8px; font-weight: 700; }
+      .cue-badge span { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+      .cue-text { max-width: 58ch; margin: 18px 0 14px; font-size: clamp(15px,1.45vw,20px); line-height: 1.45; letter-spacing: -.035em; font-weight: 610; }
+      .cue-text mark { color: #ff9578; background: transparent; }
+      .cue-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 8px; }
+      .cue-actions { display: flex; gap: 7px; }
+      .button-small { min-height: 28px; padding: 0 9px; font-size: 8px; }
+
+      .offer-label { color: var(--subtle); margin: 14px 0 6px; font-size: 8px; }
+      .offer-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgb(255 255 255 / 5%); font-size: 9px; }
+      .offer-row span { color: var(--muted); }
+      .offer-row strong { font-variant-numeric: tabular-nums; }
+      .offer-discount { color: #ffa389; }
+      .guardrail { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 9px 0 10px; padding: 8px 9px; border: 1px solid #35503f; border-radius: 9px; background: var(--green-soft); }
+      .guardrail span { color: #c0d9c8; font-size: 8px; }
+      .guardrail strong { display: inline-flex; align-items: center; gap: 4px; color: #84d5a4; font-size: 8px; }
+      .offer-check { width: 100%; }
+      .tile-trace { min-height: 0; }
+      .trace-state { color: #96d5ad; font-size: 8px; }
+      .timeline { position: relative; flex: 1; min-height: 0; overflow: auto; margin: 13px -2px 0 0; padding: 0 7px 0 0; scrollbar-width: thin; scrollbar-color: #57473e transparent; }
+      .timeline::before { content: ""; position: absolute; top: 9px; bottom: 5px; left: 5px; width: 1px; background: #3b3029; }
+      .timeline-item { position: relative; padding: 0 0 16px 20px; }
+      .timeline-item::before { content: ""; position: absolute; top: 4px; left: 1px; width: 9px; height: 9px; border-radius: 50%; background: #36251e; border: 2px solid #cd6144; }
+      .timeline-item:last-child::before { background: var(--green); border-color: var(--green); box-shadow: 0 0 8px rgb(104 201 149 / 25%); }
+      .timeline-time { color: var(--subtle); font: 8px "Fira Code", ui-monospace, monospace; }
+      .timeline-item strong { display: block; margin-top: 4px; font-size: 8px; font-weight: 650; }
+      .timeline-item p { margin: 3px 0 0; color: var(--muted); font-size: 8px; line-height: 1.5; }
+      .timeline-item .pass { color: var(--green); }
+      .ops-signal { margin-top: 11px; padding: 9px 10px; border-radius: 9px; background: #1e1916; color: var(--muted); font-size: 8px; line-height: 1.5; }
+      .ops-signal strong { color: var(--text); }
+      .ops-signal .signal-count { color: var(--orange-bright); font-weight: 750; }
+
+      .toast {
+        position: fixed; z-index: 10; right: 28px; bottom: 22px; gap: 9px;
+        padding: 11px 14px; border: 1px solid #464039; border-radius: 12px;
+        background: #201b18; color: #f3eeea; box-shadow: var(--shadow);
+        font-size: 11px; opacity: 0; transform: translateY(8px); pointer-events: none;
+        transition: opacity 180ms ease-out, transform 180ms ease-out;
+      }
+      .toast.show { opacity: 1; transform: translateY(0); }
+      .toast-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+      .screen-reader-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+      [hidden] { display: none !important; }
+      @keyframes message-enter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+      @media (max-width: 1050px) {
+        .topbar, .page-head, .toolbar { padding-left: 22px; padding-right: 22px; }
+        .workspace { padding-left: 22px; padding-right: 22px; }
+        .room-grid { grid-template-columns: minmax(250px, .72fr) minmax(0, 1.6fr); gap: 10px; }
+        .host-layout, .ops-layout { gap: 9px; }
+        .tile { padding: 12px; }
+        .page-head { flex-basis: 80px; }
+        .stage-frame { border-radius: 15px; }
+      }
+      @media (max-width: 760px) {
+        body { height: auto; min-height: 100vh; overflow: auto; }
+        .app { min-height: 100vh; height: auto; }
+        .topbar { flex-basis: 58px; padding: 0 16px; }
+        .session-meta .session-id, .session-meta .session-label, .top-actions .divider { display: none; }
+        .page-head { flex-basis: auto; padding: 18px 16px 14px; align-items: flex-start; flex-direction: column; gap: 13px; }
+        .page-actions { width: 100%; justify-content: space-between; }
+        .toolbar { height: 46px; flex-basis: 46px; padding: 0 16px; }
+        .toolbar-right .timecode { display: none; }
+        .toolbar-right .button { padding: 0 8px; }
+        .workspace { padding: 14px 14px 24px; }
+        .room-grid { display: flex; flex-direction: column; height: auto; gap: 14px; }
+        .stage-column { height: min(74vh, 700px); min-height: 520px; }
+        .stage-frame { width: auto; height: 100%; }
+        .insights { min-height: 710px; }
+        .insights-head { flex-basis: 28px; }
+        .host-layout, .ops-layout { flex: none; grid-template-columns: 1fr 1fr; grid-template-rows: 330px 240px; }
+        .tile-topic { grid-column: 1 / span 2; grid-row: 1; }
+        .tile-metrics { grid-column: 1 / span 2; grid-row: 2; }
+        .tile-cue { grid-column: 1 / span 2; grid-row: 3; }
+        .host-layout { grid-template-rows: 310px 270px 220px; }
+        .tile-ops-topic { grid-column: 1 / span 2; grid-row: 1; }
+        .tile-offer { grid-column: 1 / span 2; grid-row: 2; }
+        .tile-trace { grid-column: 1 / span 2; grid-row: 3; }
+        .ops-layout { grid-template-rows: 290px 250px 250px; }
+        .cue-text { font-size: 17px; }
+      }
+      @media (max-width: 390px) {
+        h1 { font-size: 21px; }
+        .role-button { padding: 8px 9px; }
+        .host-layout, .ops-layout { display: flex; flex-direction: column; }
+        .tile-topic { min-height: 310px; }
+        .tile-metrics { min-height: 270px; }
+        .tile-cue { min-height: 220px; }
+        .tile-ops-topic { min-height: 290px; }
+        .tile-offer { min-height: 250px; }
+        .tile-trace { min-height: 245px; }
+        .session-pill { font-size: 9px; padding: 7px 8px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand" aria-label="Live OS">
+          <div class="brand-mark" aria-hidden="true">S</div>
+          <div class="brand-copy">
+            <span class="brand-name">live os</span>
+            <span class="brand-caption">COMMERCE CONTROL ROOM</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <div class="session-meta"><span class="status-dot" aria-hidden="true"></span><span class="session-label">Session</span><span class="session-id">#LS-2048</span><span class="divider"></span><span>Bangkok, TH</span></div>
+          <div class="avatar" aria-label="ผู้ดูแลร้าน">MN</div>
+        </div>
+      </header>
+
+      <section class="page-head" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow">Shopee live · control room</div>
+          <h1 id="page-title">Live Control Room</h1>
+          <p class="page-subtitle">ติดตามสิ่งที่คนดูสนใจ แล้วช่วยให้ Host ตอบได้ทันจังหวะ</p>
+        </div>
+        <div class="page-actions">
+          <div class="session-pill"><span class="status-dot" aria-hidden="true"></span> DEMO SIMULATION</div>
+          <div class="role-switch" role="tablist" aria-label="เลือกหน้าทำงาน">
+            <button class="role-button" id="host-tab" role="tab" aria-selected="true" aria-controls="host-panel">
+              <span class="role-icon" aria-hidden="true">◉</span> Host
+            </button>
+            <button class="role-button" id="ops-tab" role="tab" aria-selected="false" aria-controls="ops-panel" tabindex="-1">
+              <span class="role-icon" aria-hidden="true">⌘</span> Live Ops
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <div class="live-indicator"><span class="live-label"><span>●</span> LIVE</span><span>จำลองสถานการณ์ขายระหว่างไลฟ์</span></div>
+        <div class="toolbar-right">
+          <span class="timecode" id="timecode">00:14:32</span>
+          <label class="button button-quiet" for="video-file" title="เลือกวิดีโอแนวตั้ง 9:16">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="5" y="2.5" width="10" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m8.5 8 4 2-4 2V8Z" fill="currentColor"/></svg>
+            ใส่วิดีโอ
+          </label>
+          <input class="hidden-input" id="video-file" type="file" accept="video/*" aria-label="เลือกไฟล์วิดีโอไลฟ์" />
+          <button class="button" id="pause-button" type="button" aria-label="พักการจำลอง">
+            <svg id="pause-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6.2 4.5h2.4v11H6.2zm5.2 0h2.4v11h-2.4z"/></svg>
+            <span id="pause-label">พักเดโม</span>
+          </button>
+          <button class="button button-quiet" id="reset-button" type="button" aria-label="เริ่มข้อมูลเดโมใหม่">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.5 6.5A6.5 6.5 0 1 1 4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4.5 3.5v3.2h3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            รีเซ็ต
+          </button>
+        </div>
+      </div>
+
+      <main class="workspace">
+        <div class="room-grid">
+          <section class="stage-column" aria-label="ภาพไลฟ์แนวตั้งและแชต">
+            <div class="stage-frame" id="stage-frame">
+              <div class="mock-video" aria-hidden="true">
+                <div class="studio-lamp"></div>
+                <div class="portrait-scene">
+                  <svg viewBox="0 0 360 600" role="img" aria-label="ภาพจำลองโฮสต์กำลังนำเสนอเซรั่ม">
+                    <ellipse cx="180" cy="575" rx="145" ry="28" fill="#090807" opacity=".35"/>
+                    <path d="M38 570c8-116 37-196 101-222 21-10 47-16 68-16 21 0 51 6 73 17 62 30 87 107 92 221H38Z" fill="#b75d43"/>
+                    <path d="M95 368c16-27 42-43 71-47l15 45 18-45c30 4 56 20 73 48l-24 77H115l-20-78Z" fill="#f0ddd0"/>
+                    <path d="M110 229c0-89 28-147 82-147 64 0 91 58 85 152l-15 111-141-5-11-111Z" fill="#231815"/>
+                    <path d="M132 242c0-62 25-97 64-97 44 0 66 35 66 97 0 74-26 122-65 122-37 0-65-48-65-122Z" fill="#e6b89e"/>
+                    <path d="M118 233c4-82 36-132 86-132 49 0 80 36 84 119-22-12-39-34-49-61-21 30-66 47-121 46Z" fill="#241916"/>
+                    <path d="M127 264c-20-16-30-3-25 20 3 16 11 27 22 29m143-49c20-16 30-3 25 20-3 16-11 27-22 29" fill="#e6b89e"/>
+                    <path d="M157 252c8-5 18-5 26 0m35 0c8-5 18-5 26 0" stroke="#493027" stroke-width="4" stroke-linecap="round"/>
+                    <ellipse cx="171" cy="270" rx="4" ry="5" fill="#30201b"/><ellipse cx="230" cy="270" rx="4" ry="5" fill="#30201b"/>
+                    <path d="M183 304c8 7 19 7 27 0" stroke="#ae5c50" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M140 229c8-20 26-33 44-34m47 1c15 5 27 16 34 32" stroke="#2b1a16" stroke-width="10" stroke-linecap="round"/>
+                    <path d="M97 395c-30 57-32 127-30 176m199-174c30 54 35 119 39 174" stroke="#e6b89e" stroke-width="28" stroke-linecap="round"/>
+                    <g transform="translate(235 438) rotate(9)">
+                      <rect x="0" y="9" width="34" height="89" rx="8" fill="#f4e8dc" stroke="#c8a98e" stroke-width="2"/>
+                      <rect x="10" y="0" width="14" height="13" rx="4" fill="#b38b70"/>
+                      <rect x="5" y="42" width="24" height="20" rx="3" fill="#dc7153"/>
+                      <text x="17" y="55" text-anchor="middle" fill="#fff6ef" font-size="7" font-family="sans-serif" font-weight="700">SERA</text>
+                    </g>
+                    <circle cx="173" cy="319" r="3" fill="#f8d4bd"/><circle cx="230" cy="319" r="3" fill="#f8d4bd"/>
+                  </svg>
+                </div>
+              </div>
+              <video class="uploaded-video" id="uploaded-video" playsinline muted loop aria-label="วิดีโอไลฟ์ที่เลือก"></video>
+              <div class="video-top">
+                <div class="video-brand">
+                  <div class="shop-avatar" aria-hidden="true">M</div>
+                  <div class="video-brand-meta"><strong>Mira Beauty Official</strong><span>ร้านค้าแนะนำ · Shopee Mall</span></div>
+                </div>
+                <div class="live-tag"><span class="status-dot" aria-hidden="true"></span> LIVE</div>
+              </div>
+              <div class="viewer-chip" aria-label="ผู้ชม 1,284 คน">◉ <span id="viewer-count">1,284</span></div>
+              <div class="video-caption">เซรั่มตัวนี้ช่วยเติมความชุ่มชื้นได้ดีมากค่ะ</div>
+              <div class="chat-overlay" id="chat-overlay" aria-label="แชตที่แสดงบนวิดีโอ"></div>
+              <div class="pinned-product">
+                <div class="product-thumb" aria-hidden="true"><div class="bottle"></div></div>
+                <div class="pinned-copy"><strong>SOFT SKIN Barrier Serum 30 ml</strong><span>อันดับ 1 · บำรุงผิวหน้า</span></div>
+                <div class="pinned-price"><small>฿490</small>฿389</div>
+              </div>
+              <div class="video-footer"><span>▣ &nbsp; แชร์ไลฟ์จำลอง</span><button class="sound-toggle" type="button" id="play-toggle" aria-label="เล่นวิดีโอจำลอง">▶ &nbsp; เล่นตัวอย่าง</button></div>
+            </div>
+          </section>
+
+          <section class="insights" id="host-panel" role="tabpanel" aria-labelledby="host-tab">
+            <div class="insights-head">
+              <div><div class="section-title">ภาพรวมผู้ชม <span class="section-kicker">AUDIENCE SIGNALS</span></div></div>
+              <span class="updated-label">อัปเดตล่าสุด <span id="last-updated">เมื่อสักครู่</span></span>
+            </div>
+            <div class="host-layout">
+              <article class="tile tile-topic">
+                <div class="topic-heading"><div><h2 class="tile-title">หัวข้อที่คนสนใจ</h2><div class="tile-description">เก็บเป็น log ไม่ทับรายการเดิม</div></div><span class="topic-count" id="topic-count">3 หัวข้อ</span></div>
+                <ul class="topic-list" id="topic-list" aria-label="บันทึกหัวข้อผู้ชม"></ul>
+              </article>
+              <article class="tile tile-metrics">
+                <div><h2 class="tile-title">สินค้าที่กำลังสนใจ</h2><div class="tile-description">สัญญาณระหว่างไลฟ์ · อัปเดตเป็นช่วง</div></div>
+                <div class="metrics-product">
+                  <div class="mini-bottle" aria-hidden="true"><div class="bottle"></div></div>
+                  <div class="product-title-row"><strong>SOFT SKIN Barrier Serum</strong><span>30 ml · SKU SS-30-04</span></div>
+                  <div class="product-price">฿389<span>จาก ฿490</span></div>
+                </div>
+                <div class="metric-grid">
+                  <div class="metric-cell"><div class="metric-label"><span>ผู้สนใจ</span><span>◉</span></div><strong class="metric-value" id="interested">84</strong><div class="metric-delta">↑ 12 ใน 5 นาที</div></div>
+                  <div class="metric-cell"><div class="metric-label"><span>คลิกสินค้า</span><span>↗</span></div><strong class="metric-value" id="clicks">126</strong><div class="metric-delta">↑ 8 ใน 5 นาที</div></div>
+                  <div class="metric-cell"><div class="metric-label"><span>ใส่ตะกร้า</span><span>＋</span></div><strong class="metric-value" id="carts">39</strong><div class="metric-delta">↑ 5 ใน 5 นาที</div></div>
+                  <div class="metric-cell"><div class="metric-label"><span>คงเหลือ</span><span>▤</span></div><strong class="metric-value" id="stock">126 <small>ชิ้น</small></strong><div class="metric-delta" style="color:var(--yellow)">สต็อกปกติ</div></div>
+                </div>
+              </article>
+              <article class="tile tile-cue">
+                <div class="cue-heading"><div><h2 class="tile-title">Host cue</h2><div class="tile-description">คำแนะนำสั้น ๆ จากสิ่งที่ผู้ชมถามซ้ำ</div></div><span class="cue-badge"><span></span> AI SUGGESTION</span></div>
+                <p class="cue-text" id="host-cue">“มีคนถามเรื่อง <mark>ส่วนลด</mark> ซ้ำหลายครั้ง ลองแจ้งโปร 10% พร้อมบอกว่าราคาหลังลดเหลือ ฿350 ได้เลยค่ะ”</p>
+                <div class="cue-foot"><span>อ้างอิงจาก 12 ข้อความ · หัวข้อ “ขอส่วนลด”</span><div class="cue-actions"><button class="button button-small" type="button" id="talking-points">ดู talking points</button><button class="button button-small button-primary" type="button" id="copy-cue">คัดลอก cue</button></div></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="insights" id="ops-panel" role="tabpanel" aria-labelledby="ops-tab" hidden>
+            <div class="insights-head">
+              <div class="section-title">การตัดสินใจและข้อเสนอ <span class="section-kicker">LIVE OPERATIONS</span></div>
+              <span class="updated-label">ซิงก์กับหน้า Host <span style="color:var(--green)">●</span></span>
+            </div>
+            <div class="ops-layout">
+              <article class="tile tile-ops-topic">
+                <div class="topic-heading"><div><h2 class="tile-title">สัญญาณผู้ชม</h2><div class="tile-description">คำถามซ้ำและความสนใจสินค้า</div></div><span class="topic-count">กำลังพุ่งขึ้น</span></div>
+                <div class="ops-signal"><span class="signal-count">12 คน</span> ถามเรื่องส่วนลดใน 2 นาทีล่าสุด<br /><strong>หัวข้อยอดนิยม: “ขอโค้ดลดเพิ่มได้ไหม”</strong></div>
+                <div class="metrics-product">
+                  <div class="mini-bottle" aria-hidden="true"><div class="bottle"></div></div>
+                  <div class="product-title-row"><strong>SOFT SKIN Barrier Serum</strong><span>SKU SS-30-04 · 30 ml</span></div>
+                  <div class="product-price">฿389<span>สต็อก 126</span></div>
+                </div>
+                <div class="metric-grid">
+                  <div class="metric-cell"><div class="metric-label"><span>ผู้สนใจ</span></div><strong class="metric-value" id="ops-interested">84</strong></div>
+                  <div class="metric-cell"><div class="metric-label"><span>คลิกสินค้า</span></div><strong class="metric-value" id="ops-clicks">126</strong></div>
+                  <div class="metric-cell"><div class="metric-label"><span>ใส่ตะกร้า</span></div><strong class="metric-value" id="ops-carts">39</strong></div>
+                  <div class="metric-cell"><div class="metric-label"><span>คงเหลือ</span></div><strong class="metric-value" id="ops-stock">126 <small>ชิ้น</small></strong></div>
+                </div>
+              </article>
+              <article class="tile tile-offer">
+                <div class="topic-heading"><div><h2 class="tile-title">ตรวจข้อเสนอ</h2><div class="tile-description">ตรวจ guardrails ก่อนส่ง cue ให้ Host</div></div><span class="topic-count">ข้อเสนอใหม่</span></div>
+                <div class="offer-label">SOFT SKIN Barrier Serum · SKU SS-30-04</div>
+                <div class="offer-row"><span>ราคาปัจจุบัน</span><strong>฿389</strong></div>
+                <div class="offer-row"><span>ส่วนลดที่เสนอ</span><strong class="offer-discount">10%</strong></div>
+                <div class="offer-row"><span>ราคาหลังลด</span><strong>฿350.10</strong></div>
+                <div class="offer-row"><span>กำไรขั้นต้นหลังลด</span><strong>฿112.10</strong></div>
+                <div class="guardrail"><span>Margin floor · ฿90.00</span><strong>✓ ผ่านเกณฑ์</strong></div>
+                <button class="button button-primary offer-check" id="check-offer" type="button">ตรวจข้อเสนอ 10%</button>
+              </article>
+              <article class="tile tile-trace">
+                <div class="timeline-heading"><div><h2 class="tile-title">Decision trace</h2><div class="tile-description">ลำดับการตรวจสอบข้อเสนอ</div></div><span class="trace-state" id="trace-state">● พร้อมตรวจ</span></div>
+                <div class="timeline" id="timeline" aria-label="ประวัติการตัดสินใจ" aria-live="polite">
+                  <div class="timeline-item"><span class="timeline-time">14:32:04</span><strong>ข้อเสนอถูกสร้าง</strong><p>ส่วนลด 10% สำหรับสินค้า SS-30-04</p></div>
+                  <div class="timeline-item"><span class="timeline-time">14:32:05</span><strong>ตรวจราคาหลังลด</strong><p>฿350.10 · ราคายังสูงกว่าต้นทุน</p></div>
+                  <div class="timeline-item"><span class="timeline-time">14:32:05</span><strong>ตรวจ margin floor</strong><p>฿112.10 เทียบขั้นต่ำ ฿90.00</p></div>
+                  <div class="timeline-item"><span class="timeline-time">14:32:06</span><strong class="pass">ผ่านเกณฑ์ · พร้อมส่ง cue</strong><p>ยืนยันโดย Live Ops · จำลอง</p></div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-dot"></span><span id="toast-text">บันทึกแล้ว</span></div>
+    <div class="screen-reader-only" id="stream-status" aria-live="polite"></div>
+
+    <script>
+      const messages = [
+        { name: "Ploy", text: "ผิวแพ้ง่ายใช้ได้ไหมคะ", topic: "ผิวแพ้ง่าย", icon: "♡" },
+        { name: "mild_k", text: "มีโค้ดลดเพิ่มไหมคะ 🧡", topic: "ขอส่วนลด", icon: "%" },
+        { name: "Ning", text: "ตัวนี้ใช้ก่อนหรือหลังมอยส์เจอร์คะ", topic: "วิธีใช้", icon: "✳" },
+        { name: "Fah S.", text: "ตอนนี้เหลือกี่ชิ้นคะ", topic: "ถามสต็อก", icon: "▤" },
+        { name: "beambeam", text: "กดใส่ตะกร้าแล้วค่ะ รอโปรเลย", topic: "สนใจซื้อ", icon: "♡" },
+        { name: "June", text: "ลด 10% ได้ถึงกี่โมงคะ", topic: "ขอส่วนลด", icon: "%" },
+        { name: "Praew", text: "มีรีวิวสำหรับผิวแห้งไหมคะ", topic: "ขอรายละเอียด", icon: "✳" },
+        { name: "Mint🍊", text: "ราคาไลฟ์ดีกว่าหน้าร้านไหมคะ", topic: "ขอราคา", icon: "฿" },
+        { name: "Aom", text: "ใช้เช้าเย็นได้เลยหรือเปล่า", topic: "วิธีใช้", icon: "✳" },
+        { name: "nanat", text: "ไซซ์นี้มีของพร้อมส่งไหมคะ", topic: "ถามสต็อก", icon: "▤" },
+        { name: "Looknam", text: "มีคูปองร้านใช้ร่วมกันได้ไหม", topic: "ขอคูปอง", icon: "⌑" },
+        { name: "Belle", text: "สนใจค่ะ ขอสี/กลิ่นหน่อย", topic: "ขอรายละเอียด", icon: "♡" },
+        { name: "Fern", text: "เห็นคนรีวิวเยอะมาก น่าลองค่ะ", topic: "สนใจซื้อ", icon: "♡" },
+        { name: "Kwan", text: "โปรหมดตอนกี่โมงนะคะ", topic: "ขอส่วนลด", icon: "%" },
+        { name: "Oil P.", text: "ของแท้จาก official ใช่ไหมคะ", topic: "ยืนยันร้านค้า", icon: "✓" },
+        { name: "ployy", text: "กดซื้อแล้ว ส่งไวไหมคะ", topic: "สนใจซื้อ", icon: "♡" },
+        { name: "Mook", text: "มีส่วนผสมอะไรที่ควรระวังไหมคะ", topic: "ขอรายละเอียด", icon: "✳" },
+        { name: "View", text: "ถ้าใช้คู่กับวิตามินซีได้ไหม", topic: "วิธีใช้", icon: "✳" }
+      ];
+
+      const topics = new Map([
+        ["ขอส่วนลด", { icon: "%", count: 12, detail: "ถามโปรและราคาหลังลด" }],
+        ["ผิวแพ้ง่าย", { icon: "♡", count: 8, detail: "ถามเรื่องการระคายเคือง" }],
+        ["วิธีใช้", { icon: "✳", count: 6, detail: "ลำดับการใช้และการใช้ร่วมกัน" }]
+      ]);
+      let messageIndex = 5;
+      let running = true;
+      let streamTimer;
+      let toastTimer;
+      let videoUrl;
+      let metricCount = { interested: 84, clicks: 126, carts: 39, stock: 126, viewers: 1284 };
+
+      const byId = (id) => document.getElementById(id);
+      const chatOverlay = byId("chat-overlay");
+      const topicList = byId("topic-list");
+
+      function renderTopics() {
+        topicList.replaceChildren();
+        for (const [name, item] of topics) {
+          const li = document.createElement("li");
+          li.className = "topic-item";
+          li.innerHTML = `<span class="topic-icon" aria-hidden="true">${item.icon}</span><span class="topic-copy"><strong></strong><small></small></span><span class="topic-volume"></span>`;
+          li.querySelector(".topic-copy strong").textContent = name;
+          li.querySelector(".topic-copy small").textContent = item.detail;
+          li.querySelector(".topic-volume").innerHTML = `<span>${item.count}</span> <small>ข้อความ</small>`;
+          topicList.append(li);
+        }
+        byId("topic-count").textContent = `${topics.size} หัวข้อ`;
+      }
+
+      function addMessage(message) {
+        const row = document.createElement("div");
+        row.className = "chat-message";
+        const name = document.createElement("strong");
+        name.textContent = message.name;
+        const body = document.createElement("span");
+        body.textContent = message.text;
+        row.append(name, body);
+        chatOverlay.append(row);
+        while (chatOverlay.children.length > 6) chatOverlay.firstElementChild.remove();
+
+        if (topics.has(message.topic)) topics.get(message.topic).count += 1;
+        else topics.set(message.topic, { icon: message.icon, count: 1, detail: "หัวข้อจากแชตล่าสุด" });
+        renderTopics();
+        messageIndex += 1;
+        if (messageIndex % 3 === 0) {
+          metricCount.interested += 1;
+          metricCount.clicks += 2;
+          if (messageIndex % 6 === 0) metricCount.carts += 1;
+          metricCount.viewers += (messageIndex % 4) + 1;
+          updateMetrics();
+        }
+        byId("last-updated").textContent = "เมื่อสักครู่";
+        byId("stream-status").textContent = `ข้อความใหม่จาก ${message.name}: ${message.text}`;
+      }
+
+      function updateMetrics() {
+        byId("interested").textContent = metricCount.interested;
+        byId("clicks").textContent = metricCount.clicks;
+        byId("carts").textContent = metricCount.carts;
+        byId("stock").innerHTML = `${metricCount.stock} <small>ชิ้น</small>`;
+        byId("ops-interested").textContent = metricCount.interested;
+        byId("ops-clicks").textContent = metricCount.clicks;
+        byId("ops-carts").textContent = metricCount.carts;
+        byId("ops-stock").innerHTML = `${metricCount.stock} <small>ชิ้น</small>`;
+        byId("viewer-count").textContent = metricCount.viewers.toLocaleString("th-TH");
+      }
+
+      function tick() {
+        if (!running) return;
+        addMessage(messages[messageIndex % messages.length]);
+      }
+      function startStream() {
+        clearInterval(streamTimer);
+        running = true;
+        byId("pause-label").textContent = "พักเดโม";
+        byId("pause-button").setAttribute("aria-label", "พักการจำลอง");
+        byId("pause-icon").innerHTML = '<path d="M6.2 4.5h2.4v11H6.2zm5.2 0h2.4v11h-2.4z"/>';
+        streamTimer = setInterval(tick, 4200);
+      }
+      function pauseStream() {
+        running = false;
+        clearInterval(streamTimer);
+        byId("pause-label").textContent = "เล่นต่อ";
+        byId("pause-button").setAttribute("aria-label", "เล่นการจำลองต่อ");
+        byId("pause-icon").innerHTML = '<path d="m7 4.7 8.7 5.3L7 15.3V4.7Z"/>';
+      }
+      function showToast(message) {
+        byId("toast-text").textContent = message;
+        byId("toast").classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => byId("toast").classList.remove("show"), 2300);
+      }
+
+      function renderSeedMessages() {
+        chatOverlay.replaceChildren();
+        messages.slice(0, 5).forEach((message) => {
+          const row = document.createElement("div"); row.className = "chat-message";
+          const name = document.createElement("strong"); name.textContent = message.name;
+          const body = document.createElement("span"); body.textContent = message.text;
+          row.append(name, body); chatOverlay.append(row);
+        });
+      }
+
+      function setRole(role) {
+        const isHost = role === "host";
+        byId("host-tab").setAttribute("aria-selected", String(isHost));
+        byId("ops-tab").setAttribute("aria-selected", String(!isHost));
+        byId("host-tab").tabIndex = isHost ? 0 : -1;
+        byId("ops-tab").tabIndex = isHost ? -1 : 0;
+        byId("host-panel").hidden = !isHost;
+        byId("ops-panel").hidden = isHost;
+      }
+
+      byId("host-tab").addEventListener("click", () => setRole("host"));
+      byId("ops-tab").addEventListener("click", () => setRole("ops"));
+      for (const [tab, role] of [[byId("host-tab"), "host"], [byId("ops-tab"), "ops"]]) {
+        tab.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+            event.preventDefault();
+            const next = role === "host" ? "ops" : "host";
+            setRole(next);
+            byId(`${next}-tab`).focus();
+          }
+        });
+      }
+      byId("pause-button").addEventListener("click", () => running ? pauseStream() : startStream());
+      byId("reset-button").addEventListener("click", () => {
+        pauseStream();
+        messageIndex = 5;
+        metricCount = { interested: 84, clicks: 126, carts: 39, stock: 126, viewers: 1284 };
+        topics.clear();
+        topics.set("ขอส่วนลด", { icon: "%", count: 12, detail: "ถามโปรและราคาหลังลด" });
+        topics.set("ผิวแพ้ง่าย", { icon: "♡", count: 8, detail: "ถามเรื่องการระคายเคือง" });
+        topics.set("วิธีใช้", { icon: "✳", count: 6, detail: "ลำดับการใช้และการใช้ร่วมกัน" });
+        renderSeedMessages();
+        byId("timeline").innerHTML = '<div class="timeline-item"><span class="timeline-time">14:32:04</span><strong>ข้อเสนอถูกสร้าง</strong><p>ส่วนลด 10% สำหรับสินค้า SS-30-04</p></div><div class="timeline-item"><span class="timeline-time">14:32:05</span><strong>ตรวจราคาหลังลด</strong><p>฿350.10 · ราคายังสูงกว่าต้นทุน</p></div><div class="timeline-item"><span class="timeline-time">14:32:05</span><strong>ตรวจ margin floor</strong><p>฿112.10 เทียบขั้นต่ำ ฿90.00</p></div><div class="timeline-item"><span class="timeline-time">14:32:06</span><strong class="pass">ผ่านเกณฑ์ · พร้อมส่ง cue</strong><p>ยืนยันโดย Live Ops · จำลอง</p></div>';
+        byId("trace-state").textContent = "● พร้อมตรวจ";
+        byId("trace-state").style.color = "";
+        renderTopics(); updateMetrics(); startStream();
+        byId("host-cue").innerHTML = '“มีคนถามเรื่อง <mark>ส่วนลด</mark> ซ้ำหลายครั้ง ลองแจ้งโปร 10% พร้อมบอกว่าราคาหลังลดเหลือ ฿350 ได้เลยค่ะ”';
+        showToast("เริ่มข้อมูลเดโมใหม่แล้ว");
+      });
+      byId("video-file").addEventListener("change", (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        if (!file.type.startsWith("video/")) { showToast("กรุณาเลือกไฟล์วิดีโอ"); return; }
+        if (videoUrl) URL.revokeObjectURL(videoUrl);
+        videoUrl = URL.createObjectURL(file);
+        const video = byId("uploaded-video");
+        video.src = videoUrl;
+        byId("stage-frame").classList.add("has-video");
+        video.play().catch(() => {});
+        byId("play-toggle").textContent = "❚❚  พักวิดีโอ";
+        showToast("ใส่วิดีโอในพื้นที่ไลฟ์แล้ว");
+      });
+      byId("play-toggle").addEventListener("click", () => {
+        const video = byId("uploaded-video");
+        if (!byId("stage-frame").classList.contains("has-video")) {
+          showToast("เลือกไฟล์วิดีโอเพื่อเล่นตัวอย่าง");
+          byId("video-file").click();
+          return;
+        }
+        if (video.paused) { video.play().catch(() => {}); byId("play-toggle").textContent = "❚❚  พักวิดีโอ"; }
+        else { video.pause(); byId("play-toggle").textContent = "▶  เล่นตัวอย่าง"; }
+      });
+      byId("check-offer").addEventListener("click", () => {
+        byId("trace-state").textContent = "● ตรวจแล้ว · ผ่าน";
+        byId("trace-state").style.color = "var(--green)";
+        const item = document.createElement("div");
+        item.className = "timeline-item";
+        item.innerHTML = '<span class="timeline-time">14:34:18</span><strong class="pass">ตรวจข้อเสนอ 10% · ผ่าน</strong><p>Margin ฿112.10 สูงกว่าเกณฑ์ขั้นต่ำ ฿90.00</p>';
+        byId("timeline").append(item);
+        byId("timeline").scrollTop = byId("timeline").scrollHeight;
+        byId("host-cue").innerHTML = '“แจ้งลูกค้าได้เลยค่ะว่า <mark>ลด 10%</mark> แล้วเหลือ ฿350.10 โปรนี้ผ่านเกณฑ์ร้านค้าแล้ว”';
+        showToast("ตรวจผ่านแล้ว · อัปเดต cue ให้ Host");
+      });
+      byId("copy-cue").addEventListener("click", async () => {
+        const text = byId("host-cue").textContent.replace(/[“”]/g, "");
+        try { await navigator.clipboard.writeText(text); showToast("คัดลอก Host cue แล้ว"); }
+        catch { showToast("เลือกข้อความใน cue เพื่อคัดลอก"); }
+      });
+      byId("talking-points").addEventListener("click", () => showToast("Talking points: ส่วนลด 10% · ราคา ฿350.10 · สต็อก 126 ชิ้น"));
+
+      renderSeedMessages();
+      renderTopics();
+      startStream();
+      window.addEventListener("beforeunload", () => { clearInterval(streamTimer); if (videoUrl) URL.revokeObjectURL(videoUrl); });
+    </script>
+  </body>
+</html>

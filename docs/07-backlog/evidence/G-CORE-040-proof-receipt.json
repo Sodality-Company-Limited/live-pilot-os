@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-040",
+  "generated_at": "2026-10-18T22:28:00.000Z",
+  "source_revision": "6995c95f0965e9477ff47167d45b24dc635d46d4",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-040-001",
+      "claim": "Perceptual pixel mismatch ratio delta is strictly bounded in [0, 10000] basis points, and any mismatch exceeding tolerance tau fails closed.",
+      "statement": "delta in [0, 10000] basis points with fail-closed threshold.",
+      "verification_command": "node --test tests/lib/visual-parity-guard.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-040-002",
+      "claim": "Perceptual diff computation across identical image buffers produces an exact zero delta, and diff calculation is symmetric.",
+      "statement": "Diff(A, A) = 0 and Diff(A, B) = Diff(B, A)",
+      "verification_command": "node --test tests/lib/visual-parity-guard.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/visual-parity-guard.mjs": "b62905d9b6b91330bf1b9e87479c8142f0c62c37aec1ccc5ad1da0c3ecde2c4d",
+    "template/scripts/lib/visual-parity-guard.mjs": "b62905d9b6b91330bf1b9e87479c8142f0c62c37aec1ccc5ad1da0c3ecde2c4d",
+    ".agents/skills/soda-visual-parity-guard/SKILL.md": "ffa258cdcc73e4a757e972b4dd29d1da565c658d63e0d6abbf7a79d1bea1b17f",
+    "template/.agents/skills/soda-visual-parity-guard/SKILL.md": "ffa258cdcc73e4a757e972b4dd29d1da565c658d63e0d6abbf7a79d1bea1b17f",
+    "tests/lib/visual-parity-guard.test.mjs": "62a91a66e765bbdcc339a8890067fce8d9eb97ba2c974d37615014dbd8912842"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/visual-parity-guard.mjs",
+      "sha256": "b62905d9b6b91330bf1b9e87479c8142f0c62c37aec1ccc5ad1da0c3ecde2c4d"
+    },
+    {
+      "path": "template/scripts/lib/visual-parity-guard.mjs",
+      "sha256": "b62905d9b6b91330bf1b9e87479c8142f0c62c37aec1ccc5ad1da0c3ecde2c4d"
+    },
+    {
+      "path": ".agents/skills/soda-visual-parity-guard/SKILL.md",
+      "sha256": "ffa258cdcc73e4a757e972b4dd29d1da565c658d63e0d6abbf7a79d1bea1b17f"
+    },
+    {
+      "path": "template/.agents/skills/soda-visual-parity-guard/SKILL.md",
+      "sha256": "ffa258cdcc73e4a757e972b4dd29d1da565c658d63e0d6abbf7a79d1bea1b17f"
+    },
+    {
+      "path": "tests/lib/visual-parity-guard.test.mjs",
+      "sha256": "62a91a66e765bbdcc339a8890067fce8d9eb97ba2c974d37615014dbd8912842"
+    }
+  ],
+  "certification": "PASS"
+}

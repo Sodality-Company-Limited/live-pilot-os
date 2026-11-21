@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-014",
+  "artifact_id": "ART-FONT-RENDERING-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "status": "PASSED",
+  "certification": "PASS",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "font_rendering_audit": {
+    "supported_engines": [
+      "chromium",
+      "webkit",
+      "gecko"
+    ],
+    "elements_evaluated_count": 7,
+    "max_advance_width_delta_observed": 1.42,
+    "max_advance_width_ceiling_px": 2.0,
+    "advance_width_tolerance_satisfied": true,
+    "max_line_height_delta_observed": 0,
+    "max_line_height_ceiling_px": 1.0,
+    "line_height_tolerance_satisfied": true,
+    "fout_layout_shift": 0,
+    "horizontal_overflow_detected": false,
+    "horizontal_overflow_free": true,
+    "viewports_verified": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
+    "zero_mock_enforced": true
+  },
+  "invariants": [
+    {
+      "id": "014-INV-001",
+      "statement": "Cross-Browser and Font Rendering Verification satisfies all geometry, advance width, line height, FOUT, and overflow invariants with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/cross-browser-font-verifier.mjs verify-conformance",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/cross-browser-font-verifier.mjs",
+      "sha256": "8e045d5e86de648180f55e3d00157696be70840cf400275542c2445aab694b88"
+    },
+    {
+      "path": "tests/unit/test-cross-browser-font-verifier.mjs",
+      "sha256": "42aa06647042d941856c4a695acb6766b5f6e8a5985bf96496d6754b89f92c5c"
+    },
+    {
+      "path": "artifacts/visual/font-rendering-matrix.json",
+      "sha256": "dcaa01afd493988f6c3f9327800dd750b9e4e15675ecbfd163cf3eba95e2d1e1"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-014.md",
+      "sha256": "3cf38539349ce65a742a1c5d71ddd8110150758fe518db107810ba3253b6cefb"
+    }
+  ],
+  "generated_at": "2026-10-03T21:42:00.000Z"
+}

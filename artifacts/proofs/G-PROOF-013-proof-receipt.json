@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-013",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-013-INV-001",
+      "statement": "Verification Architecture Guide and Operator Runbook pass all 25 documentation conformance tests, relative link integrity, and CLI script validity.",
+      "verification_command": "node --test tests/unit/test-verification-documentation-conformance.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/03-architecture/verification-architecture-guide.md",
+      "sha256": "7064e33a981ed9b7076651b39ab003e490070338d3c0db0628ba8ae19f36336d"
+    },
+    {
+      "path": "docs/06-workflows/verification-operator-runbook.md",
+      "sha256": "e89be7e9f61e9ad5057eaaef51e250ee96e36f3b334e581908b2557761475119"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T18:25:00.000Z"
+}

@@ -1,0 +1,32 @@
+# Soda OS Goal Profile Schema: Deployment Profile
+# Profile ID: deployment
+# Description: Applied to infrastructure rollout, container deployments, canary releases, and cluster provisioning.
+
+profile:
+  id: deployment
+  name: "Production Deployment & Infrastructure Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: artifact_digest
+    description: "Cryptographically verified container image SHA256 digest or release tarball hash."
+    type: markdown_section
+    required_elements:
+      - "Artifact URI"
+      - "SHA256 digest"
+
+  - id: rollout_strategy
+    description: "Canary progression or blue/green traffic shifting schedule."
+    type: markdown_section
+    required_elements:
+      - "Canary stages"
+      - "Health probe criteria"
+      - "Automated rollback trigger"
+
+  - id: resource_limits
+    description: "CGroup v2 / Kubernetes CPU and memory requests and hard limits."
+    type: markdown_section
+    required_elements:
+      - "CPU request/limit"
+      - "Memory request/limit"

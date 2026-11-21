@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-003",
+  "generated_at": "2026-10-14T04:58:27.081Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-003-INV-001",
+      "statement": "12 typed agent persona contracts with 4-tier precedence and veto enforcement pass clean vs adversarial battery with zero mocks and exit code 0.",
+      "verification_command": "node scripts/harness/ux-persona-registry-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-003-INV-002",
+      "statement": "UX Persona Registry unit test suite passes 28/28 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-persona-registry.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-003-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-003",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-persona-registry.mjs",
+      "sha256": "2922fe2be346062d24c077904410781ae6fdd8a3efa552e84b97fd62ad9e6326"
+    },
+    {
+      "path": "tests/unit/test-ux-persona-registry.mjs",
+      "sha256": "8d3ff1adb08936217b04dc2bb104f82ec706dc613f445ba1af60808e53ba5ab6"
+    },
+    {
+      "path": "scripts/harness/ux-persona-registry-harness.mjs",
+      "sha256": "5f3aaad7ddaff9cd89922102698a141d10232f907a1d19ab283687824e85a655"
+    },
+    {
+      "path": ".agents/rules/ux-persona-governance.md",
+      "sha256": "bcc76531d96ad5d581809a5274c4e799b858d728de8d070dd864a2bba781f981"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-003.md",
+      "sha256": "84182503e1026924ed85e34f3b8527413a615e906b9cacacecd3d64459b20c31"
+    }
+  ],
+  "certification": "PASS"
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-014",
+  "generated_at": "2026-10-11T07:39:07.841Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-014-INV-001",
+      "claim": "Formalized and validated Soda OS GovernedDecision contract requiring explicit confidence, evidence arrays, uncertainty bounds, and execution intent on all agent decisions.",
+      "statement": "Formalized and validated Soda OS GovernedDecision contract requiring explicit confidence, evidence arrays, uncertainty bounds, and execution intent on all agent decisions.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-014-INV-002",
+      "claim": "Validator strictly enforces confidence in [0.0, 1.0] and rejects non-finite numbers.",
+      "statement": "Validator strictly enforces confidence in [0.0, 1.0] and rejects non-finite numbers.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-014-INV-003",
+      "claim": "Validator strictly enforces non-empty string answer and array of strings evidence.",
+      "statement": "Validator strictly enforces non-empty string answer and array of strings evidence.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-014-INV-004",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-014-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "governed_decision_contract_pass_rate",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9568233464896543,
+      "upper": 1,
+      "center": 0.9784116732448271,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "template/scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "scripts/harness/confidence-calibration-harness.mjs": "9f3d8663ee2a1b1ea7ff9649571796eb63e36e651732cd72ce187ef99ff3d1e4",
+    "docs/07-backlog/goals/_archived/G-ML-014.md": "d35301462679e10df8d74d919266fe73352126acdd2d7378ffa45d51782ff229",
+    "docs/02-product/acceptance/G-ML-014.md": "face29c571e36716419c2523d184dd2a3de7b7943fda374c09f2c77f2a717058",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-014.md": "025715e6a52f9bc9730c8425e03b15b9b2e75e35638c8ff0ce2eb99daa4c0c02",
+    "scripts/agentic/g-ml-014-5why-socratic-engine.mjs": "4e2e487effa1627f49fff575199e8fad87d2a29aff90b53782af4c52c1bfe74d"
+  },
+  "certification": "PASS"
+}

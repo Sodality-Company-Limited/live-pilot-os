@@ -1,0 +1,27 @@
+# Soda OS Goal Profile Schema: Mathematical Invariant & Proof Receipt Profile
+# Profile ID: proof_receipt
+# Description: Applied to goals executing formal invariant verification, mathematical proofs, statistical bounds, or empirical proof receipt generation.
+
+profile:
+  id: proof_receipt
+  name: "Mathematical Invariant & Proof Receipt Profile"
+  version: "1.0.0"
+  mandatory: false
+
+required_sections:
+  - id: proof_receipt
+    description: "Cryptographic proof receipt binding invariant verification to active Git commit and hashes."
+    type: yaml_block
+    schema:
+      invariant_id: string
+      classification: string # formal_invariant | executable_property | statistical_claim | visual_claim | operational_claim | security_claim | human_approval_claim | model_claim
+      command: string
+      exit_code: number
+      source_hashes: object
+      dataset_hashes: object
+      model_hash: string
+      git_commit: string
+      assumptions: list
+      evidence: list
+      timestamp: string
+      result: string # passed | failed

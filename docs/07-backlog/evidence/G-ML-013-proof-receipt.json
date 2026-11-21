@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-013",
+  "generated_at": "2026-10-11T07:39:07.032Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-013-INV-001",
+      "claim": "TypeScript/Node.js runtime adapter module executing inference against the dual-head model, extracting text completions and calibrated confidence scores.",
+      "statement": "TypeScript/Node.js runtime adapter module executing inference against the dual-head model, extracting text completions and calibrated confidence scores.",
+      "verification_command": "node tests/integration/test-model-adapter.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-013-INV-002",
+      "claim": "Adapter validates confidence strictly in range [0.0, 1.0] and rejects non-finite numbers.",
+      "statement": "Adapter validates confidence strictly in range [0.0, 1.0] and rejects non-finite numbers.",
+      "verification_command": "node tests/integration/test-model-adapter.mjs -k test_error_handling_invalid_confidence",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-013-INV-003",
+      "claim": "Throws explicit ModelInferenceError on gateway timeout SLA breach, network partition, or malformed JSON.",
+      "statement": "Throws explicit ModelInferenceError on gateway timeout SLA breach, network partition, or malformed JSON.",
+      "verification_command": "node tests/integration/test-model-adapter.mjs -k test_error_handling",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-013-INV-004",
+      "claim": "Integration tests pass with exit code 0 and live socket transport.",
+      "statement": "Integration tests pass with exit code 0 and live socket transport.",
+      "verification_command": "node tests/integration/test-model-adapter.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "model_adapter_verification_pass_rate",
+    "population": "measured_live_socket_trials",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9998750156230473,
+      "upper": 1,
+      "center": 0.9999375078115237,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/model-adapter.mjs": "5b22ddf10bbbe45f47bb17dbb0d2cf0fd656aa60230409409099b80a711f4e50",
+    "template/scripts/lib/model-adapter.mjs": "5b22ddf10bbbe45f47bb17dbb0d2cf0fd656aa60230409409099b80a711f4e50",
+    "tests/integration/test-model-adapter.mjs": "c2919af3c2923197468c1d974f0a65748ab6ca652984dff6067d9a198ae3280c",
+    "docs/07-backlog/goals/_archived/G-ML-013.md": "a17a3d28bbc7fb9ab241883474a9422cea988cfeca72e091ec231132b0f293c2",
+    "docs/02-product/acceptance/G-ML-013.md": "e95e146c6e8d7a045d5793bdb8405dd52f3770e5d1ba26a685c798d3e14af046",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-013.md": "b6d6bedeec0dbb09da8e3ab884dfa402acd5c988a940b7ef06042e08d887f30e",
+    "scripts/agentic/g-ml-013-5why-socratic-engine.mjs": "f20eed38f2a07c336d34a596e4892c871b8713ad4d206bde23ff2f7087844cb9"
+  },
+  "certification": "PASS"
+}

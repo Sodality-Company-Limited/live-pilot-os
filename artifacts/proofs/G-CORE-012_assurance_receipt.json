@@ -1,0 +1,25 @@
+{
+  "receipt_schema": "soda_goal_assurance_v2",
+  "goal_id": "G-CORE-012",
+  "status": "ASSURED_PRODUCTION_READY",
+  "assurance_levels": {
+    "template_conformance": true,
+    "atomicity_outcome_graph": true,
+    "dependency_dag": true,
+    "scope_drift_integrity": true,
+    "assumptions_risk_governance": true,
+    "failure_rollback_policy": true,
+    "proof_contract": true,
+    "executable_invariants": true,
+    "statistical_evidence": true,
+    "routing_truth_table": true,
+    "artifact_provenance": true,
+    "security_boundaries": true,
+    "observability_telemetry": true,
+    "resource_budgets": true,
+    "post_ship_learning": true,
+    "lifecycle_receipts": true
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-29T15:38:41.500Z"
+}

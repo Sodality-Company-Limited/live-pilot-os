@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-002",
+  "classification": "executable_invariant",
+  "source_revision": "08c382ffb6d6bcc7c870f0ef58f5b92bd9cbd409",
+  "invariants": [
+    {
+      "id": "G-AG-002-INV-001",
+      "statement": "Independent input and output token ceiling gates enforce limits independently of total combined budget.",
+      "verification_command": "node --test scripts/agents/test/token-usage.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/token-usage.mjs",
+      "sha256": "a8e0db0c1d4155c57c65d0e98c1df4ab6e5fb5762b694f7cc54ee85dddbc942a"
+    },
+    {
+      "path": "scripts/agents/test/token-usage.test.mjs",
+      "sha256": "c27191edfb16cebd657bec3f3865f33c15dc93c9646ecee7348a4efbc839c4e8"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T04:19:04.789Z"
+}

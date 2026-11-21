@@ -1,0 +1,28 @@
+{
+  "dataset_name": "Stage 4 12-Persona Multi-Agent Trajectories",
+  "total_trajectories": 2500,
+  "outcome_distribution": {
+    "EMIT_DECISION": 2000,
+    "DEFER": 250,
+    "REJECT_AS_UNSAFE": 250
+  },
+  "average_tokens_consumed": 1989,
+  "total_collisions_resolved": 1143,
+  "persona_participation_frequencies": {
+    "dark_pattern_ethics_watchdog": 1945,
+    "accessibility_auditor": 1875,
+    "i18n_multilocale_stylist": 1875,
+    "ergonomics_cognitive_critic": 1876,
+    "enterprise_info_architect": 1876,
+    "design_systems_lead": 1876,
+    "typography_scale_architect": 1875,
+    "visual_balance_density": 1929,
+    "interaction_choreographer": 1874,
+    "color_contrast_specialist": 1874,
+    "motion_haptics_engineer": 1873,
+    "microcopy_tone_specialist": 1874
+  },
+  "all_12_personas_participated": true,
+  "lifecycle_states_evaluated_count": 10,
+  "generated_at": "2026-10-14T06:52:34.093Z"
+}

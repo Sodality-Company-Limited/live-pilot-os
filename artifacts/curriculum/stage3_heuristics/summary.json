@@ -1,0 +1,38 @@
+{
+  "benchmark_name": "Stage 3 UX Heuristics & WCAG 2.2 AAA Benchmark",
+  "total_scenarios": 1200,
+  "category_distribution": {
+    "nielsen": 600,
+    "wcag_aaa": 420,
+    "clean": 180
+  },
+  "severity_distribution": {
+    "0": 180,
+    "1": 150,
+    "2": 430,
+    "3": 220,
+    "4": 220
+  },
+  "heuristic_breakdown": {
+    "H1": 60,
+    "H2": 60,
+    "H3": 60,
+    "H4": 60,
+    "H5": 60,
+    "H6": 60,
+    "H7": 60,
+    "H8": 60,
+    "H9": 60,
+    "H10": 60,
+    "WCAG_1.4.6": 70,
+    "WCAG_1.4.11": 70,
+    "WCAG_2.1.2": 70,
+    "WCAG_2.4.7": 70,
+    "WCAG_2.5.5": 70,
+    "WCAG_3.3.1": 70,
+    "PASSING": 180
+  },
+  "nielsen_coverage_count": 10,
+  "wcag_coverage_count": 8,
+  "generated_at": "2026-10-14T06:03:32.472Z"
+}

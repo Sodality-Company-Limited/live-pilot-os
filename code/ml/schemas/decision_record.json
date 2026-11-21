@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.soda-os.dev/ml/decision_record.json",
+  "title": "DecisionRecord",
+  "description": "Canonical schema for agent multi-turn decision trajectories and calibrated confidence training records.",
+  "type": "object",
+  "required": [
+    "context_id",
+    "prompt",
+    "completion",
+    "evidence_list",
+    "ground_truth_outcome",
+    "risk_level"
+  ],
+  "properties": {
+    "context_id": {
+      "type": "string",
+      "description": "Unique deterministic identifier for the decision context (UUIDv7 or nanoid).",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Input prompt or observation state presented to the agent model.",
+      "minLength": 1
+    },
+    "completion": {
+      "type": "string",
+      "description": "Autoregressive generation or action emitted by the model.",
+      "minLength": 1
+    },
+    "evidence_list": {
+      "type": "array",
+      "description": "List of cryptographic receipts, tool citations, or verified reference documents.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ground_truth_outcome": {
+      "type": "string",
+      "description": "Empirical ground-truth verification outcome (e.g. success, failure, correct, incorrect).",
+      "minLength": 1
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "Operational risk level associated with this decision scope.",
+      "enum": ["normal", "high"]
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Predicted or calibrated confidence score strictly within [0.0, 1.0].",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "RFC 3339 UTC timestamp recording when the decision was executed.",
+      "format": "date-time"
+    },
+    "calibrated_score": {
+      "type": "number",
+      "description": "Post-hoc calibrated probability score strictly within [0.0, 1.0].",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Auxiliary telemetry metadata and execution environment attributes.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

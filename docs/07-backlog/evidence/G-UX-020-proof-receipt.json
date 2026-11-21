@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-020",
+  "generated_at": "2026-10-14T11:23:11.353Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-020-INV-001",
+      "statement": "Multi-bin calibration harness satisfies ECE <= 0.050, Brier <= 0.150, HCER <= 0.010, and AUROC >= 0.850.",
+      "verification_command": "node scripts/harness/statistical-calibration-gate-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-020-INV-002",
+      "statement": "Statistical calibration harness Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-statistical-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-020-INV-003",
+      "statement": "Python calibration evaluator module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "/opt/anaconda3/envs/py310/bin/python -m pytest tests/ml/test_calibration_evaluator.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-020-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-020",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/statistical-calibration-harness.mjs",
+      "sha256": "8c7792e0dbe7549870900f1810d0678c39104cc5aff89cffaad45f3a132e721f"
+    },
+    {
+      "path": "code/ml/src/eval/calibration_evaluator.py",
+      "sha256": "7c19b66ec9ced00daa295cb169a34cd3c46d44e2ab55e7b7474300da83e2aba3"
+    },
+    {
+      "path": "tests/unit/test-statistical-calibration-harness.mjs",
+      "sha256": "83669a0be6963fcee0079c8ae2ec0a5c62be6538f9ad618d89f92ea5c9299e7e"
+    },
+    {
+      "path": "tests/ml/test_calibration_evaluator.py",
+      "sha256": "54fde6efd8963d2fb9350bbf483cc44f171f39dd82955b8fa401780bec73656d"
+    },
+    {
+      "path": "scripts/harness/statistical-calibration-gate-harness.mjs",
+      "sha256": "6fc9a9e9b52820e69544bffb7d2ba0f5bfaaa359703081b87149c109d88ba0f7"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-020.md",
+      "sha256": "5ab9a04e0a04955eb3dadc7fb191fe97153e4617a49bb97be3800688cc218321"
+    }
+  ],
+  "certification": "PASS"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-019",
+  "classification": "executable_invariant",
+  "source_revision": "8fee7a7decd52bc88f7c138b005ef0373b65f843",
+  "invariants": [
+    {
+      "id": "G-AG-019-INV-001",
+      "statement": "LLM Wiki retrieval enforces exclusive single-owner lease per goal, rejecting concurrent unreleased retrieval requests.",
+      "verification_command": "node --test scripts/agents/test/step-context-harness.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/step-context-harness.mjs",
+      "sha256": "dbe99e7531670949acc98e8b456db312dbf1543d4835cf1ecb131c79ec029572"
+    },
+    {
+      "path": "scripts/agents/test/step-context-harness.test.mjs",
+      "sha256": "43a76bb110d821082542e21bf53abee5f089b25e6cfe43dd1d9f1f72b9f7a087"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:56:00.000Z"
+}

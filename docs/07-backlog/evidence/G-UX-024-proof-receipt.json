@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-024",
+  "generated_at": "2026-10-14T12:28:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-024-INV-001",
+      "statement": "Headless React AST generator compiles 10 scene graphs with zero raw literals, 100% 5-state coverage, and kills 5/5 adversarial probes.",
+      "verification_command": "node scripts/harness/react-ast-guardrail-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-024-INV-002",
+      "statement": "Headless React AST generator Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-react-ast-generator.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-024-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-024",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/react-ast-generator.mjs",
+      "sha256": "b9b153a0be7f502ccb3b7ba8c4e87aee9376a872a29a4c7501b099d9151eb6da"
+    },
+    {
+      "path": "tests/unit/test-react-ast-generator.mjs",
+      "sha256": "0d13505785bc4a66c02deec1a96535e4563aa83f031e49ae16712923cf4e82f6"
+    },
+    {
+      "path": "scripts/harness/react-ast-guardrail-harness.mjs",
+      "sha256": "4e7c5b982f2dd76863773f7ca84ca50500d23677538c8ffe30c71e1ca030ab34"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-024.md",
+      "sha256": "cdc6f0dd106abdcd761d95eb6fd49f570815350a3646ecffa649fa5d06998676"
+    }
+  ],
+  "certification": "PASS"
+}

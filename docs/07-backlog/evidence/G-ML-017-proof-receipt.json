@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-017",
+  "generated_at": "2026-10-11T07:39:09.041Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-017-INV-001",
+      "claim": "Centralized configuration manager and validator for model serving providers, endpoint URIs, checkpoint versions, and threshold parameters.",
+      "statement": "Centralized configuration manager and validator for model serving providers, endpoint URIs, checkpoint versions, and threshold parameters.",
+      "verification_command": "node tests/unit/test-model-config.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-017-INV-002",
+      "claim": "Pre-flight HTTP socket health check detects unreachable endpoints and SLA timeouts fail-closed.",
+      "statement": "Pre-flight HTTP socket health check detects unreachable endpoints and SLA timeouts fail-closed.",
+      "verification_command": "node tests/unit/test-model-config.mjs -k test_health_check",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-017-INV-003",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-017-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "model_config_verification_accuracy",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.8388753915139584,
+      "upper": 1,
+      "center": 0.9194376957569792,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/model-config.mjs": "3561f085953d4bda8022842aed875eea5cd8dd6ea34264a1a7dc5451148bdb31",
+    "template/scripts/lib/model-config.mjs": "3561f085953d4bda8022842aed875eea5cd8dd6ea34264a1a7dc5451148bdb31",
+    "tests/unit/test-model-config.mjs": "fb950f7287dc899d5991078f8807cb9fe93fc28e185bcf6ff508498369c99f5c",
+    "template/tests/unit/test-model-config.mjs": "fb950f7287dc899d5991078f8807cb9fe93fc28e185bcf6ff508498369c99f5c",
+    "docs/07-backlog/goals/_archived/G-ML-017.md": "8b3c240f2dbad597ed5195597a315c78fc62048a86c66b5bc5c273a2709f3ea4",
+    "docs/02-product/acceptance/G-ML-017.md": "445294821010a727ac47831a42c43c7e3532fe812c50cf8905561591e6d85675",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-017.md": "42d2fcef8f33bb6773a55394631a5c3c424add6c621c641cf0d18b99b22d035b",
+    "scripts/agentic/g-ml-017-5why-socratic-engine.mjs": "f904716f0e0825cf6aca0f1ecc96d3eadd9b0490766ad0b572050cb783d4fb0f"
+  },
+  "certification": "PASS"
+}

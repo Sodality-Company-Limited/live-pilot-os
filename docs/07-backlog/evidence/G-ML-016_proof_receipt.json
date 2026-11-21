@@ -1,0 +1,76 @@
+{
+  "receipt_version": "1.0.0",
+  "goal_id": "G-ML-016",
+  "status": "proven",
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-10-02T04:01:59.477Z",
+  "source_hashes": {
+    "scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+    "template/scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+    "scripts/harness/confidence-calibration-harness.mjs": "9e8abbe0dd276f7869bb4da874c0fbdbf9d789e59fa194a5aba4391d3bd7f493",
+    "tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+    "template/tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+    "scripts/harness/property-tests/test-routing-truth-table.mjs": "e03f3a9fe92985cdc64307b4f12ea8337ee3dea226ebbe9fa1fe1ed24271c76a",
+    "docs/07-backlog/goals/G-ML-016.md": "4baab8db61f19c71f8800f6f021e7eb5d7b9d09eb639156c20fc782e192dcf63",
+    "docs/02-product/acceptance/G-ML-016.md": "570a712216de6070dd499da2cc1a40ad4f4ae2922292f3da1bcd52c0d40c9f14",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-016.md": "6fb006f1882798a3b7930321826090e580f1987b581ada44d8bc14222d70104e",
+    "scripts/agentic/g-ml-016-5why-socratic-engine.mjs": "d4350cbb131d47121c599816b08b30bf1c6174b3998fd99ef550eb48acfa1bc9"
+  },
+  "invariants": [
+    {
+      "receipt_version": "1.0.0",
+      "goal": "G-ML-016",
+      "goal_id": "G-ML-016",
+      "invariant": "ROUTE-FSM-001",
+      "invariant_id": "ROUTE-FSM-001",
+      "classification": "executable_property_test",
+      "passed": true,
+      "command": "node scripts/harness/property-tests/test-routing-truth-table.mjs",
+      "exit_code": 0,
+      "assumptions": [],
+      "sample_count": 20,
+      "source_hashes": {
+        "scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+        "template/scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+        "scripts/harness/confidence-calibration-harness.mjs": "9e8abbe0dd276f7869bb4da874c0fbdbf9d789e59fa194a5aba4391d3bd7f493",
+        "tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+        "template/tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+        "scripts/harness/property-tests/test-routing-truth-table.mjs": "e03f3a9fe92985cdc64307b4f12ea8337ee3dea226ebbe9fa1fe1ed24271c76a",
+        "docs/07-backlog/goals/G-ML-016.md": "4baab8db61f19c71f8800f6f021e7eb5d7b9d09eb639156c20fc782e192dcf63",
+        "docs/02-product/acceptance/G-ML-016.md": "570a712216de6070dd499da2cc1a40ad4f4ae2922292f3da1bcd52c0d40c9f14",
+        "docs/07-backlog/clarifications/CLARIFICATION-G-ML-016.md": "6fb006f1882798a3b7930321826090e580f1987b581ada44d8bc14222d70104e",
+        "scripts/agentic/g-ml-016-5why-socratic-engine.mjs": "d4350cbb131d47121c599816b08b30bf1c6174b3998fd99ef550eb48acfa1bc9"
+      },
+      "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+      "generated_at": "2026-10-02T04:01:59.477Z"
+    }
+  ],
+  "statistical_claims": [
+    {
+      "receipt_version": "1.0.0",
+      "goal": "G-ML-016",
+      "claim_id": "STAT-ML-016-001",
+      "metric": "routing_truth_table_accuracy",
+      "sample_count": 20,
+      "successes": 20,
+      "confidence_interval_95": [
+        0.8388698745050668,
+        0.9999999999999999
+      ],
+      "statistical_method": "wilson_score_interval",
+      "kill_rate": 1,
+      "mutations_evaluated": 8,
+      "mutations_killed": 8,
+      "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+      "generated_at": "2026-10-02T04:01:59.477Z"
+    }
+  ],
+  "baseline_blocker": {
+    "id": "BLOCKER-ML-016-01",
+    "goalId": "G-ML-016",
+    "title": "Absence of Full 4-Way Routing State Machine and Permutation Truth Table in Runtime Libraries",
+    "rootCause": "The routeDecision function lacked complete 8-permutation truth table mapping, flexible input candidate validation, and dedicated unit test coverage, risking uncalibrated execution dispatch during high-stakes tool execution.",
+    "resolution": "Implemented full 4-way routeDecision finite state machine in scripts/lib/confidence-calibration.mjs (mirrored to template/) with configurable tau, flexible answer handling, exhaustive 8-row truth table verification, fail-closed type assertions, and complete property and unit test suites.",
+    "status": "RESOLVED_AND_VERIFIED"
+  }
+}

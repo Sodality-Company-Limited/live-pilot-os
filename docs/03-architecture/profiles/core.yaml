@@ -1,0 +1,147 @@
+# Soda OS Goal Profile Schema: Core Profile
+# Profile ID: core
+# Description: Mandatory universal profile applied to every Soda OS Goal Card.
+# Invariant: Every goal MUST satisfy all required sections and machine-readable contracts in this profile.
+
+profile:
+  id: core
+  name: "Soda OS Core Goal Assurance Profile"
+  version: "2.0.0"
+  mandatory: true
+
+required_sections:
+  - id: goal_contract
+    description: "Machine-readable YAML contract containing goal identity, profiles, atomicity, risk, reversibility, and lifecycle status."
+    type: yaml_block
+    schema:
+      id: string
+      version: integer
+      kind: enum[feature, bugfix, refactor, architecture, governance, release]
+      status: enum[draft, planned, ready, in_progress, review, blocked, approved, done]
+      profiles: array[string]
+      atomicity:
+        outcome_count: integer
+        primary_outcome: string
+        secondary_outcomes: array[string]
+        split_candidates: array[string]
+      owner:
+        role: string
+      risk:
+        level: enum[low, medium, high, critical]
+        reasons: array[string]
+      reversibility:
+        level: enum[reversible, partially_reversible, irreversible]
+      lifecycle:
+        spec: enum[draft, clarified, specified, ready]
+        implementation: enum[pending, in_progress, complete]
+        verification: enum[pending, running, passed, failed]
+        evidence: enum[pending, partial, complete]
+        review: enum[pending, changes_requested, approved]
+        release: enum[unreleased, staged, shipped]
+        learning: enum[pending, observed, analyzed, complete]
+
+  - id: problem_and_value
+    description: "Detailed problem statement, affected actors, current vs desired behavior, failure cost, and urgency justification."
+    type: markdown_section
+    required_elements:
+      - "Problem"
+      - "Affected users or agents"
+      - "Current behavior"
+      - "Failure cost"
+      - "Desired behavior"
+      - "Why now"
+      - "If not completed"
+
+  - id: scope_boundary
+    description: "Explicit demarcation of In, Out, Explicitly Deferred, Future Work, and Non-Goals."
+    type: markdown_section
+    required_elements:
+      - "In"
+      - "Out"
+      - "Explicitly deferred"
+      - "Future work"
+      - "Non-goals"
+
+  - id: dependency_graph
+    description: "Machine-readable dependency graph references and blocker checks."
+    type: markdown_section
+    required_elements:
+      - "Dependencies"
+      - "Blockers"
+      - "Dependent goals"
+
+  - id: assumptions_registry
+    description: "Explicit registry of assumptions with validation plan and invalidation conditions."
+    type: yaml_or_table
+    item_fields:
+      - id
+      - statement
+      - confidence
+      - validation_goal
+      - invalidation_condition
+      - owner
+
+  - id: risks_registry
+    description: "Structured risk registry with detection triggers, mitigations, and emergency response."
+    type: yaml_or_table
+    item_fields:
+      - id
+      - category
+      - description
+      - likelihood
+      - impact
+      - mitigation
+      - detection
+      - response
+      - owner
+
+  - id: failure_and_rollback
+    description: "Deterministic failure policies and executable rollback command."
+    type: yaml_block
+    schema:
+      failure_policy:
+        dependency_unavailable: string
+        invalid_input: string
+        verification_failure: string
+        timeout: string
+      rollback:
+        trigger: string
+        command: string
+        scope: string
+        reversible: boolean
+        data_recovery: string
+        verification: string
+
+  - id: semantic_work_steps
+    description: "Ordered atomic work steps specifying allowed files, commands, expected exit codes, and stop conditions."
+    type: markdown_section
+    step_contract:
+      - allowed_files
+      - actions
+      - verification_command
+      - completion_gate
+      - stop_condition
+      - zero_mock_check
+
+  - id: proof_contract
+    description: "Machine-readable invariant registry and test bindings."
+    type: yaml_block
+    schema:
+      invariants: array[object]
+
+  - id: acceptance_criteria
+    description: "Testable, verifiable acceptance criteria checkboxes."
+    type: checklist
+
+  - id: touch_map
+    description: "Exact repository relative paths touched by this goal."
+    type: file_list
+
+  - id: learning_loop
+    description: "Post-ship telemetry, observation schedule, regression metrics, and revalidation triggers."
+    type: markdown_section
+    required_elements:
+      - "Observed metrics"
+      - "Review schedule"
+      - "Regression threshold"
+      - "Feedback mechanism"

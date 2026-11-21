@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-001",
+  "generated_at": "2026-10-14T04:58:27.073Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-001-INV-001",
+      "statement": "Canonical UX Decision Contract Draft 2020-12 schema validation satisfies all declared invariants with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/ux-decision-schema-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-001-INV-002",
+      "statement": "UX Decision Contract unit test suite passes 17/17 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-decision-contract.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-001-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-001",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "schemas/ux-decision-contract.schema.json",
+      "sha256": "d28189f6d1291bf5fa83db0a4148b6035ca6f85fb0421f7803f538c9c29ec901"
+    },
+    {
+      "path": "scripts/lib/ux-decision-contract.mjs",
+      "sha256": "70a974ca7aaf0af6309f74b986d5a15a7c4b13adfee0bd836f1478f6a311d24e"
+    },
+    {
+      "path": "tests/unit/test-ux-decision-contract.mjs",
+      "sha256": "9668b746d56bdf80e85d8bdcdebb937879b9ed06b02c64fe0d256adcbbfaa5a0"
+    },
+    {
+      "path": "scripts/harness/ux-decision-schema-harness.mjs",
+      "sha256": "d9ae1ccc476a0c9118bacb2429807e37b9cce2c3c238d5e76710a8a4714f7ad5"
+    },
+    {
+      "path": ".agents/rules/ux-decision-contract.md",
+      "sha256": "5e4f5e84f1925b27e979ae7ec16812fc04793e6ccc7ad3e4a6baf1b6dc483eb7"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-001.md",
+      "sha256": "45f238aec22c09973d0cc287f3fd3bb6e9135a6c03d3255220a1c7208308104b"
+    }
+  ],
+  "certification": "PASS"
+}

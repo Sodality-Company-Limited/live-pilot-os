@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-009",
+  "artifact_id": "ART-MOTION-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
+  "status": "PASSED",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "motion_metrics": {
+    "max_transition_duration_ms": 300,
+    "max_duration_ceiling_satisfied": true,
+    "layout_thrashing_properties_prohibited": [
+      "top",
+      "left",
+      "right",
+      "bottom",
+      "width",
+      "height",
+      "margin",
+      "padding"
+    ],
+    "keyframes_audited": 5,
+    "gpu_accelerated_properties_enforced": [
+      "transform",
+      "opacity"
+    ],
+    "prefers_reduced_motion_override_active": true,
+    "fps_budget": "60fps_hardware_accelerated"
+  },
+  "invariants": [
+    {
+      "id": "009-INV-001",
+      "statement": "Motion and Interaction Fidelity satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/motion-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/motion-harness.mjs",
+      "sha256": "64088f833362d9021c16831d95c40abc1c5f3601ca986b3e6309565c93face4b"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-20T07:51:59.488Z"
+}

@@ -1,0 +1,43 @@
+{
+  "artifact_id": "G-OPS-001-ha-health",
+  "goal_id": "G-OPS-001",
+  "receipt_schema": "dave_ha_health_receipt_v1",
+  "status": "verified",
+  "timestamp": "2026-10-10T14:38:12.554Z",
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": {
+    "G-OPS-001-INV-001": {
+      "name": "Determinism & Conformance",
+      "passed": true,
+      "exit_code": 0
+    },
+    "G-OPS-001-HA-001": {
+      "name": "Failover Latency",
+      "measured_latency_ms": 512.934,
+      "sla_ceiling_ms": 1000,
+      "passed": true
+    },
+    "G-OPS-001-WAL-001": {
+      "name": "WAL Replay Latency & Data Loss",
+      "measured_replay_ms": 0.23,
+      "sla_ceiling_ms": 500,
+      "data_loss_count": 0,
+      "passed": true
+    },
+    "G-OPS-001-PROBE-001": {
+      "name": "Health Probe Response Latency",
+      "liveness_latency_ms": 1.352,
+      "readiness_latency_ms": 0.836,
+      "sla_ceiling_ms": 10,
+      "passed": true
+    },
+    "G-OPS-001-MEM-001": {
+      "name": "Memory RSS Ceiling",
+      "rss_bytes": 59031552,
+      "rss_mb": 56.3,
+      "memory_ceiling_mb": 128,
+      "passed": true
+    }
+  },
+  "zero_mock_verified": true
+}

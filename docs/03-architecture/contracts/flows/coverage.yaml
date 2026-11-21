@@ -1,0 +1,160 @@
+version: 1
+status: canonical_registry
+scope: livepilot-hackathon
+last_audited: 2026-11-20
+
+# This registry records contract ownership and evidence. A path match is not proof
+# of semantic compatibility; the named verification command must also pass.
+flows:
+  live-session-control-sot.md:
+    owner: architecture-and-product
+    status: aggregate_frozen_target
+    authority: aggregate_only
+    detail_authorities:
+      - ../source-of-truth-flows/features/F01-live-chat-telemetry/index.md
+      - ../source-of-truth-flows/features/F02-host-screen-assistant/index.md
+      - ../source-of-truth-flows/features/F03-streampilot-agent/index.md
+      - ../source-of-truth-flows/features/F04-risk-operator-control/index.md
+    source_documents:
+      - path: ../../../02-product/project-brief.md
+        sha256: 88cf379a16827388204363e99daa4a54e9fe3466f7a26d6b20426db5aba06a55
+      - path: ../../live-pilot-os-requirements.md
+        sha256: b89c09482479f564f8eb9354f1455c0e110ab1479dd7a9face792629266aa3ba
+      - path: ../../live-pilot-os-domain-model.md
+        sha256: 3bb053b47c415e2128c11dc16349f28645fcd218da77c6d3724c2f1d1c2402f2
+    verification:
+      - command: "test -f docs/03-architecture/api/openapi.yaml"
+        purpose: http_contract_present
+      - command: "rg -q 'REQ-LP-009|REQ-LP-013|REQ-LP-015' docs/03-architecture/live-pilot-os-requirements.md"
+        purpose: selected_demo_requirements_present
+      - command: "rg -q 'RECOMMEND_ONLY|ASSISTED|AUTONOMOUS' docs/03-architecture/live-pilot-os-domain-model.md"
+        purpose: approval_modes_present
+
+feature_indexes:
+  - id: F01
+    owner: telemetry-and-intent
+    path: ../../source-of-truth-flows/features/F01-live-chat-telemetry/index.md
+    status: detailed
+    flow_glob: ../../source-of-truth-flows/features/F01-live-chat-telemetry/flows/*.md
+  - id: F02
+    owner: host-copilot
+    path: ../../source-of-truth-flows/features/F02-host-screen-assistant/index.md
+    status: detailed
+    flow_glob: ../../source-of-truth-flows/features/F02-host-screen-assistant/flows/*.md
+  - id: F03
+    owner: store-management-and-profit-protection
+    path: ../../source-of-truth-flows/features/F03-streampilot-agent/index.md
+    status: detailed
+    flow_glob: ../../source-of-truth-flows/features/F03-streampilot-agent/flows/*.md
+  - id: F04
+    owner: risk-and-operator-control
+    path: ../../source-of-truth-flows/features/F04-risk-operator-control/index.md
+    status: detailed
+    flow_glob: ../../source-of-truth-flows/features/F04-risk-operator-control/flows/*.md
+
+contracts:
+  - id: deployment-runtime.livepilot.v1
+    owner: platform-engineering-and-sre
+    source: ../../deployment/README.md
+    sha256: c48e61b325b3019e462d35612be1d4c0a3082add45301e81e519c974371d5e4f
+    status: production_readiness_target
+    producers: [platform-engineering, release-engineering, sre]
+    consumers: [services, ui, workers, operators]
+    verification: "test -f docs/03-architecture/deployment/README.md"
+  - id: configuration-policy.livepilot.v1
+    owner: platform-engineering-and-domain-governance
+    source: ../../configuration/README.md
+    sha256: 74ae2417ee7f11a4421f1b59a4b7f18259f06d1836bedb12cc7924a24e155a3a
+    status: production_readiness_target
+    producers: [platform-engineering, security, domain-owners]
+    consumers: [services, ui, workers, operators, audit]
+    verification: "test -f docs/03-architecture/configuration/README.md"
+  - id: technical-specifications.livepilot.v1
+    owner: architecture-and-platform
+    source: ../../technical-specifications-sot.md
+    sha256: f4a92b744fd97f2e2f18353a3f4d89ae137a3f6d5a02cc77e99a498442a41d03
+    status: production_readiness_target
+    producers: [architecture, platform-engineering, security, sre]
+    consumers: [services, deployment, release-engineering]
+    verification: "test -f docs/03-architecture/technical-specifications-sot.md"
+  - id: software-quality.livepilot.v1
+    owner: quality-and-release-engineering
+    source: ../../software-quality-sot.md
+    sha256: 28673c716a55f44235f388162f8709109a8fca2922fa55b3e8986a73e47d4146
+    status: enterprise_quality_contract
+    producers: [architecture, engineering, qa, security, sre]
+    consumers: [services, ui, adapters, deployment, release-engineering]
+    verification: "node scripts/architecture/check-sot.mjs"
+  - id: localization.livepilot.v1
+    owner: product-and-localization
+    source: ../../localization-sot.md
+    sha256: d1074945358ce947a4f4af6ad4b2af97e8d171aa15dbaeb27741ca41788f86be
+    status: production_readiness_target
+    producers: [product, design, frontend, api, localization]
+    consumers: [ui, bff, services, support, release-engineering]
+    verification: "test -f docs/03-architecture/localization-sot.md"
+  - id: route-prefixing.livepilot.v1
+    owner: api-and-platform-architecture
+    source: ../../api/route-prefixing-and-boundary-invariant.md
+    sha256: c0636a51969eacb40856d925882f7e3310dc73c6922949a1cf472fe958462746
+    status: frozen_target
+    producers: [portal-bff, edge-gateway, core-bff, internal-mesh]
+    consumers: [browser, services, platform-engineering, security]
+    verification: "test -f docs/03-architecture/api/route-prefixing-and-boundary-invariant.md"
+  - id: error-codes.livepilot.v1
+    owner: api-governance
+    source: ../../api/error-codes.yaml
+    sha256: 0193d9047bea6d46e5694aa767dcaa093f98a55136b4acece0de1ff33bb92565
+    status: canonical_registry
+    producers: [api-governance, domain-services]
+    consumers: [openapi, bff, ui, support, localization, observability]
+    verification: "node scripts/contract-check/error-code-registry.mjs"
+  - id: testing.livepilot.v1
+    owner: quality-and-release-engineering
+    source: ../../testing-sot.md
+    sha256: 293ee400c016bfb3a724307e1445c38af01d2b0e454caa477d938f25e81a545e
+    status: production_readiness_target
+    producers: [qa, engineering, security, sre, release-engineering]
+    consumers: [api, services, ui, adapters, deployment]
+    verification: "test -f docs/03-architecture/testing-sot.md"
+  - id: tdd.livepilot.v1
+    owner: engineering-and-quality
+    source: ../../testing/tdd-sot.md
+    sha256: 7c890716441295abb49276168aba47f4049569813780751d38c9d13066e3dd6e
+    status: production_readiness_target
+    producers: [engineering, qa, architecture]
+    consumers: [services, ui, api, release-engineering]
+    verification: "node scripts/testing/check-tdd-traceability.mjs"
+  - id: ux-ui.livepilot.v1
+    owner: product-design-and-frontend
+    source: ../../ux/README.md
+    sha256: 99db2910ffbf693f970df751066ed9aecd821eaca6e9994ff8c83d2105f9117c
+    status: canonical_target
+    producers: [product, design, frontend, accessibility, localization]
+    consumers: [ui, bff, api, realtime, qa, observability]
+    verification: "test -f docs/03-architecture/ux/README.md"
+  - id: http.core.v1
+    owner: api-contracts
+    source: ../../api/openapi.yaml
+    sha256: 4608b92df1c19607255a9c71bb92fdd709886255a1fd55936516d75bfdb0b878
+    status: canonical
+    producers: [portal-bff]
+    consumers: [host-ui, live-ops-ui]
+    verification: "test -f docs/03-architecture/api/openapi.yaml"
+  - id: requirements.livepilot.v1
+    owner: product-architecture
+    source: ../../live-pilot-os-requirements.md
+    sha256: b89c09482479f564f8eb9354f1455c0e110ab1479dd7a9face792629266aa3ba
+    status: canonical
+    producers: [product-discovery]
+    consumers: [architecture, goals, tests]
+    verification: >-
+      rg -q 'REQ-LP-001' docs/03-architecture/live-pilot-os-requirements.md
+  - id: domain.events.livepilot.v1
+    owner: domain-architecture
+    source: ../../live-pilot-os-domain-model.md
+    sha256: 3bb053b47c415e2128c11dc16349f28645fcd218da77c6d3724c2f1d1c2402f2
+    status: draft_vocabulary
+    producers: [telemetry-service, decision-engine-service, approval-control-service]
+    consumers: [copilot-service, execution-service, audit-service]
+    verification: "rg -q '^## Event vocabulary' docs/03-architecture/live-pilot-os-domain-model.md"

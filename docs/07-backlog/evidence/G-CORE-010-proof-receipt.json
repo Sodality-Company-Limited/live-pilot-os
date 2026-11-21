@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-010",
+  "generated_at": "2026-09-29T22:00:00.000Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-010-INV-001",
+      "statement": "Agent Observability and Resource-Budget Contracts satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/observability-contract-harness.mjs docs/07-backlog/goals/G-CORE-010.md",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/agent-observability-harness.mjs",
+      "sha256": "b9b0057b26adb588a40178896fc105dd76dcdb440931d882ef391353708dca47"
+    },
+    {
+      "path": "scripts/harness/observability-contract-harness.mjs",
+      "sha256": "3707250daf0152d8990ffa441ee87ce768674db31b90d9ea03f9237a5c7c7940"
+    },
+    {
+      "path": "scripts/harness/resource-budget-harness.mjs",
+      "sha256": "8f753b85efa0828a9dd8c1b87989862be6439bc0b51b86938fc880080c96b3b7"
+    },
+    {
+      "path": "docs/03-architecture/agent-observability.md",
+      "sha256": "0ed80a5c55d8f70380317afab36965e6846261fc7bc99c9dff8a3d7f9bd8c152"
+    },
+    {
+      "path": "docs/03-architecture/resource-budgeting.md",
+      "sha256": "2fcb4f2feaff64fe3d892b04537788cde5fed063c1d0f28b3df9c5e86d3a9a9a"
+    },
+    {
+      "path": ".agents/rules/observability-contract.md",
+      "sha256": "34e71954422de0d058c198205ad89775b1cd0e2d96d13557ba95f19af948eb2d"
+    }
+  ],
+  "certification": "PASS"
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-011",
+  "generated_at": "2026-10-23T05:11:42.937Z",
+  "source_revision": "f67823642b6dd700b0f0a54540a13377282a730a",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-011-INV-001",
+      "claim": "Framework-Source Versus Downstream-Project Upgrade Mode satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "statement": "Framework-Source Versus Downstream-Project Upgrade Mode satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node cli.js upgrade --report",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "cli.js",
+      "sha256": "651b33acfc5b7d6bb07f5b724c8f9f411168c4d390d30c8a6456d197e129e408"
+    },
+    {
+      "path": "package.json",
+      "sha256": "1e022fd29a2f4dbadd5cf61af63aa8e3bbe09fa0942e99a73a4a3d6a10f90c04"
+    },
+    {
+      "path": "template/framework-manifest.yml",
+      "sha256": "fa47daf6500340297b6ce838f4112af85140d9fc146fa5cc1409f7c558f6aa90"
+    },
+    {
+      "path": "docs/03-architecture/upgrade-modes.md",
+      "sha256": "6189471abcd9d2e4ee42d206408f6af17e419b760da906a7c5227dd29c2184d1"
+    },
+    {
+      "path": "scripts/agentic/g-core-011-5why-socratic-engine.mjs",
+      "sha256": "2792ce066fa3229149f243ca09f2f76c1cd5305b5cc05774fa8805e843b33054"
+    }
+  ],
+  "certification": "PASS"
+}

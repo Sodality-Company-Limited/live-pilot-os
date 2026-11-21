@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-041",
+  "generated_at": "2026-10-18T16:40:54.000Z",
+  "source_revision": "5eb7c5e4c43788cd3976cc784aabdf657e52bb77",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-041-001",
+      "claim": "Identical error stack input text deterministically produces identical failure context, identical hypothesis matrices, and identical probe rankings across repeated invocations.",
+      "statement": "Deterministic hypothesis generation across identical failure inputs.",
+      "verification_command": "node --test tests/lib/autonomous-diagnostician.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-041-002",
+      "claim": "Every generated hypothesis contains concrete, non-empty falsifiable probe conditions with zero placeholder stubs.",
+      "statement": "Falsifiable probe conditions generated for all failure classes.",
+      "verification_command": "node --test tests/lib/autonomous-diagnostician.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/autonomous-diagnostician.mjs": "6cb5fd905d220c11f3d7db52f135704d0a3397cd59de0298a26b653078771f1b",
+    "template/scripts/lib/autonomous-diagnostician.mjs": "6cb5fd905d220c11f3d7db52f135704d0a3397cd59de0298a26b653078771f1b",
+    ".agents/skills/soda-autonomous-diagnostician/SKILL.md": "d2a354cbbcdbf45717890280ac536265a7da1b90024aedf6841ef85aa2880b36",
+    "template/.agents/skills/soda-autonomous-diagnostician/SKILL.md": "d2a354cbbcdbf45717890280ac536265a7da1b90024aedf6841ef85aa2880b36",
+    "tests/lib/autonomous-diagnostician.test.mjs": "5c9036ecb26a7d9e2c1867566bac3b410d8129c056352ffb93e5537b9c2204c7"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/autonomous-diagnostician.mjs",
+      "sha256": "6cb5fd905d220c11f3d7db52f135704d0a3397cd59de0298a26b653078771f1b"
+    },
+    {
+      "path": "template/scripts/lib/autonomous-diagnostician.mjs",
+      "sha256": "6cb5fd905d220c11f3d7db52f135704d0a3397cd59de0298a26b653078771f1b"
+    },
+    {
+      "path": ".agents/skills/soda-autonomous-diagnostician/SKILL.md",
+      "sha256": "d2a354cbbcdbf45717890280ac536265a7da1b90024aedf6841ef85aa2880b36"
+    },
+    {
+      "path": "template/.agents/skills/soda-autonomous-diagnostician/SKILL.md",
+      "sha256": "d2a354cbbcdbf45717890280ac536265a7da1b90024aedf6841ef85aa2880b36"
+    },
+    {
+      "path": "tests/lib/autonomous-diagnostician.test.mjs",
+      "sha256": "5c9036ecb26a7d9e2c1867566bac3b410d8129c056352ffb93e5537b9c2204c7"
+    }
+  ],
+  "certification": "PASS"
+}

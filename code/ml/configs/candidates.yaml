@@ -1,0 +1,49 @@
+schema_version: "1.0.0"
+benchmark_profile: "agent_decision_reasoning_v1"
+evaluation:
+  precision: "bfloat16"
+  default_seed: 42
+  greedy_decoding:
+    temperature: 0.0
+    do_sample: false
+    top_p: 1.0
+    top_k: 0
+  ece_bins: 10
+  latency_budget_ms: 250.0
+  memory_budget_mb: 256.0
+  vram_budget_gb: 16.0
+
+candidates:
+  qwen3_8b:
+    id: "qwen3_8b"
+    name: "Qwen3-8B"
+    checkpoint_id: "Qwen/Qwen3-8B"
+    architecture: "Qwen3ForCausalLM"
+    context_length: 32768
+    parameters_count: 8192000000
+    precision: "bfloat16"
+    decoding:
+      temperature: 0.0
+      do_sample: false
+      max_new_tokens: 128
+      seed: 42
+    hardware:
+      min_vram_gb: 16
+      recommended_dtype: "bfloat16"
+
+  gemma_4:
+    id: "gemma_4"
+    name: "Gemma 4"
+    checkpoint_id: "google/gemma-4-9b"
+    architecture: "Gemma4ForCausalLM"
+    context_length: 16384
+    parameters_count: 9240000000
+    precision: "bfloat16"
+    decoding:
+      temperature: 0.0
+      do_sample: false
+      max_new_tokens: 128
+      seed: 42
+    hardware:
+      min_vram_gb: 16
+      recommended_dtype: "bfloat16"

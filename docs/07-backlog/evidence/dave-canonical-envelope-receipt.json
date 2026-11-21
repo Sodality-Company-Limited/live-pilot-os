@@ -1,0 +1,15 @@
+{
+  "goal_id": "G-DAVE-042",
+  "iterations": 10000,
+  "latency_us": {
+    "avg": 0.11,
+    "p50": 0.12,
+    "p95": 0.12,
+    "p99": 0.17
+  },
+  "p99_sla_us": 30.0,
+  "passed": true,
+  "canonical_fields_count": 27,
+  "sha256_sample": "f8cb47a6c521cbd4dcfce4507b6d06b960b85afabdc6b83b2c7b28650d047c53",
+  "timestamp_utc": "2026-10-09T21:51:00Z"
+}

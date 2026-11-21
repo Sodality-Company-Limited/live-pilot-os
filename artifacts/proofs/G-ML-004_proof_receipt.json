@@ -1,0 +1,19 @@
+{
+  "goal": "G-ML-004",
+  "all_invariants_passed": true,
+  "invariants_verified": 2,
+  "invariants": [
+    {
+      "id": "DUALHEAD-SHAPE-001",
+      "classification": "executable_property_test",
+      "passed": true
+    },
+    {
+      "id": "DUALHEAD-GRAD-002",
+      "classification": "executable_property_test",
+      "passed": true
+    }
+  ],
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-11T00:32:07.394Z"
+}

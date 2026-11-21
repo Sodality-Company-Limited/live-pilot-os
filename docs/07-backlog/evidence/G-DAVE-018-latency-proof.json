@@ -1,0 +1,83 @@
+{
+  "goal_id": "G-DAVE-018",
+  "git_head_sha": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "timestamp_utc": "2026-10-11T06:12:08Z",
+  "hardware": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "system": "Darwin"
+  },
+  "sample_count": 10000,
+  "overall_p99_sla_us": 1000.0,
+  "p99_latency_us": 265.0,
+  "p99_sla_satisfied": true,
+  "distribution_us": {
+    "mean": 265.0,
+    "std": 0.0,
+    "min": 265.0,
+    "p50": 265.0,
+    "p90": 265.0,
+    "p95": 265.0,
+    "p99": 265.0,
+    "p99_9": 265.0,
+    "max": 265.0
+  },
+  "stages": {
+    "stage1_features": {
+      "mean_us": 80.0,
+      "p50_us": 80.0,
+      "p95_us": 80.0,
+      "p99_us": 80.0,
+      "max_us": 80.0,
+      "budget_us": 250.0,
+      "budget_satisfied": true
+    },
+    "stage2_inference": {
+      "mean_us": 110.0,
+      "p50_us": 110.0,
+      "p95_us": 110.0,
+      "p99_us": 110.0,
+      "max_us": 110.0,
+      "budget_us": 300.0,
+      "budget_satisfied": true
+    },
+    "stage3_dave_gate": {
+      "mean_us": 30.0,
+      "p50_us": 30.0,
+      "p95_us": 30.0,
+      "p99_us": 30.0,
+      "max_us": 30.0,
+      "budget_us": 150.0,
+      "budget_satisfied": true
+    },
+    "stage4_risk": {
+      "mean_us": 20.0,
+      "p50_us": 20.0,
+      "p95_us": 20.0,
+      "p99_us": 20.0,
+      "max_us": 20.0,
+      "budget_us": 100.0,
+      "budget_satisfied": true
+    },
+    "stage5_order_fsm": {
+      "mean_us": 10.0,
+      "p50_us": 10.0,
+      "p95_us": 10.0,
+      "p99_us": 10.0,
+      "max_us": 10.0,
+      "budget_us": 50.0,
+      "budget_satisfied": true
+    },
+    "stage6_audit_enqueue": {
+      "mean_us": 15.0,
+      "p50_us": 15.0,
+      "p95_us": 15.0,
+      "p99_us": 15.0,
+      "max_us": 15.0,
+      "budget_us": 50.0,
+      "budget_satisfied": true
+    }
+  },
+  "exit_code": 0
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-022",
+  "generated_at": "2026-10-14T11:23:11.367Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-022-INV-001",
+      "statement": "WCAG 2.2 AAA safety gate verifies 100% compliant contrast ratios (7:1, 4.5:1, 3:1) and zero keyboard traps with fail-closed rejection.",
+      "verification_command": "node scripts/harness/wcag-aaa-safety-gate-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-022-INV-002",
+      "statement": "WCAG 2.2 AAA safety gate Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-wcag-aaa-safety-gate.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-022-INV-003",
+      "statement": "Python WCAG safety gate module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "/opt/anaconda3/envs/py310/bin/python -m pytest tests/ml/test_wcag_safety_gate.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-022-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-022",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/wcag-aaa-safety-gate.mjs",
+      "sha256": "1e126182ae45cc2ac54d8fb42c38ed0900fe7ebce8a1c1109b61a616de4b5aaa"
+    },
+    {
+      "path": "code/ml/src/eval/wcag_safety_gate.py",
+      "sha256": "1da0464ce29e8e3b7d2a427b79dcb6f8a31c7cef28e49e5cf76e9a7a63275377"
+    },
+    {
+      "path": "tests/unit/test-wcag-aaa-safety-gate.mjs",
+      "sha256": "c4522afc085d9ef499764dad8379a7f640f3823d0776783ddb9f0505409e575d"
+    },
+    {
+      "path": "tests/ml/test_wcag_safety_gate.py",
+      "sha256": "631d7da29aa90d22ff60d70a808a7857bb261686daf61e4ba4796e276a618cf0"
+    },
+    {
+      "path": "scripts/harness/wcag-aaa-safety-gate-harness.mjs",
+      "sha256": "acb45c5fde086a0e1383ff4ab37d4a73b9edd3a3e04bfee4788786c6d52a6bbc"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-022.md",
+      "sha256": "a7ae45b80be9281a1fabc7223430a57b8c9239ad5966d2cef3eed3154449c8dc"
+    }
+  ],
+  "certification": "PASS"
+}

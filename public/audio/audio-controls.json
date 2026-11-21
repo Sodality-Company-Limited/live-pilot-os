@@ -1,0 +1,11 @@
+{
+  "mute_suppression_enabled": true,
+  "default_mute": false,
+  "persist_preference": true,
+  "volume_ceiling_db": -12,
+  "supported_earcons": [
+    "chime-complete.wav",
+    "toggle-click.wav"
+  ],
+  "accessibility_alternative": "visual_toast_or_status_indicator"
+}

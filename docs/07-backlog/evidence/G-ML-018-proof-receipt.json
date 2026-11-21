@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-018",
+  "generated_at": "2026-10-11T07:39:09.784Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-018-INV-001",
+      "claim": "Accounting and telemetry module tracking inference latency, token counts, value-head compute overhead, and associated financial costs per agent step.",
+      "statement": "Accounting and telemetry module tracking inference latency, token counts, value-head compute overhead, and associated financial costs per agent step.",
+      "verification_command": "node tests/unit/test-model-telemetry.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-018-INV-002",
+      "claim": "Value-head compute overhead monitored with threshold alert triggered when overhead exceeds 15% budget.",
+      "statement": "Value-head compute overhead monitored with threshold alert triggered when overhead exceeds 15% budget.",
+      "verification_command": "node tests/unit/test-model-telemetry.mjs -k test_overhead_monitor",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-018-INV-003",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-018-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "model_telemetry_verification_accuracy",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.8388753915139584,
+      "upper": 1,
+      "center": 0.9194376957569792,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/model-telemetry.mjs": "273fb67568021ac67ba45c4ee64d8b4b0348981819eccdfad8ee429413cce290",
+    "template/scripts/lib/model-telemetry.mjs": "273fb67568021ac67ba45c4ee64d8b4b0348981819eccdfad8ee429413cce290",
+    "tests/unit/test-model-telemetry.mjs": "3d94a205422686420a5029ce9325ef3c8dae2b2365098fc843006cb3b595cdb5",
+    "template/tests/unit/test-model-telemetry.mjs": "3d94a205422686420a5029ce9325ef3c8dae2b2365098fc843006cb3b595cdb5",
+    "docs/07-backlog/goals/G-ML-018.md": "854a94d47667b3fc9364c43006658a9e56dada7291324c1caedf2ecd3ba3ca64",
+    "docs/02-product/acceptance/G-ML-018.md": "8aa94ab9f86ebaea703a3ca90f57c04c9ccc1194b51e782ffb0a52fc4ed5604b",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-018.md": "e1a63c492a80692c80a7448b54ce79c2182cff0e701e65bcd060dd30e0d7cc8b",
+    "scripts/agentic/g-ml-018-5why-socratic-engine.mjs": "0c4a5ff0a57ff99a95be0402c77ff42497f58098e1ee4b61b36ac1680b08d607"
+  },
+  "certification": "PASS"
+}

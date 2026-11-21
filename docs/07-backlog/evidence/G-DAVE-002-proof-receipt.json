@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-002",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-DAVE-002-INV-001",
+      "statement": "DAVE Decision Domain and Expert Registry satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-schema-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-expert-registry.mjs",
+      "sha256": "b42cb9c8502fd0183318392452780b421b05c29d75c5a7618c60e70ce35874cc"
+    },
+    {
+      "path": "tests/unit/test-dave-expert-registry.mjs",
+      "sha256": "c6b33c421a2822a0ca1057345c92ac1cab0cf8867bfdc88b2991904680ed38cb"
+    },
+    {
+      "path": "docs/03-architecture/dave-domain-taxonomy.md",
+      "sha256": "19e1da0d964efdb8d53daf8b20e559bc0e8aea3ecfbe970ccf2167eede43c16d"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T08:04:00.000Z"
+}

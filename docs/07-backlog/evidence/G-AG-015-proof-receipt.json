@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-015",
+  "classification": "executable_invariant",
+  "source_revision": "47dd32d7e10c63e9a81f8f788ae9538c9eeeb839",
+  "invariants": [
+    {
+      "id": "G-AG-015-INV-001",
+      "statement": "Subagent sessions exceeding declared input token limits are rejected at the pre-spawn gate independently of output or combined ceilings.",
+      "verification_command": "node --test scripts/agents/test/provider-adapter-contract.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/provider-adapter-contract.mjs",
+      "sha256": "77a6ce53d51b969ee488c983cf9cf500c7724cf1fb82949cae3cc97bb58d61af"
+    },
+    {
+      "path": "scripts/agents/test/provider-adapter-contract.test.mjs",
+      "sha256": "c1aca9e89a7abc5ac02e2039bc9d2a321e2773fbd98824ea197da338f21e08a8"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:42:00.000Z"
+}

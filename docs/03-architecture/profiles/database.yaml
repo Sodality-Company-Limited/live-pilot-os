@@ -1,0 +1,31 @@
+# Soda OS Goal Profile Schema: Database Profile
+# Profile ID: database
+# Description: Applied to database schema changes, indexing, query optimization, and Row-Level Security.
+
+profile:
+  id: database
+  name: "Database Architecture & Storage Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: schema_ddl
+    description: "Declarative DDL migrations with non-destructive changes."
+    type: markdown_or_file
+    required_elements:
+      - "DDL script location"
+      - "Idempotent migration guard"
+
+  - id: rollback_ddl
+    description: "Tested down-migration script restoring database state cleanly."
+    type: markdown_or_file
+    required_elements:
+      - "Down migration script"
+      - "Data recovery validation"
+
+  - id: security_policies
+    description: "PostgreSQL Row-Level Security (RLS) policies and tenant isolation."
+    type: markdown_section
+    required_elements:
+      - "RLS policy definitions"
+      - "Tenant key isolation"

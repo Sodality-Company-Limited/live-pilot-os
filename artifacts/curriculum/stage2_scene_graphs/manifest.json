@@ -1,0 +1,37 @@
+{
+  "dataset_name": "Stage 2 UI Scene Graph Pairs Dataset",
+  "total_records": 5000,
+  "splits": {
+    "train": {
+      "count": 4000,
+      "ratio": 0.8
+    },
+    "validation": {
+      "count": 500,
+      "ratio": 0.1
+    },
+    "test": {
+      "count": 500,
+      "ratio": 0.1
+    }
+  },
+  "zero_leakage_verified": true,
+  "viewport_distribution": {
+    "desktop": 2000,
+    "tablet": 1500,
+    "mobile": 1500
+  },
+  "unique_classes_represented": 9,
+  "class_frequencies": {
+    "ScreenRoot": 5000,
+    "MetricStatCard": 1250,
+    "HeaderBar": 625,
+    "HeadingTypography": 1250,
+    "PrimaryButton": 1250,
+    "CardContainer": 4375,
+    "TableViewGrid": 3750,
+    "PaginationControl": 3750,
+    "TextInputField": 625
+  },
+  "generated_at": "2026-10-14T06:01:27.676Z"
+}

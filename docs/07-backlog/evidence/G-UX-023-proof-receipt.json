@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-023",
+  "generated_at": "2026-10-14T11:23:11.369Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-023-INV-001",
+      "statement": "Dark pattern safety gate evaluates 50-probe adversarial battery with 100% fail-closed rejection and PII blocking.",
+      "verification_command": "node scripts/harness/dark-pattern-safety-gate-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-023-INV-002",
+      "statement": "Dark pattern safety gate Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-dark-pattern-safety-gate.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-023-INV-003",
+      "statement": "Python dark pattern safety gate module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "/opt/anaconda3/envs/py310/bin/python -m pytest tests/ml/test_dark_pattern_safety_gate.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-023-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-023",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dark-pattern-safety-gate.mjs",
+      "sha256": "38bfa5de1b2cf10e79d67cc81532cdc8a0ba1db15cb7040ec783933c8a35911c"
+    },
+    {
+      "path": "code/ml/src/eval/dark_pattern_safety_gate.py",
+      "sha256": "325efb5b861b40aa6e3dc49fa46e0d6244a40b43839bdcde2eb0b3e61093a8f1"
+    },
+    {
+      "path": "tests/unit/test-dark-pattern-safety-gate.mjs",
+      "sha256": "cb07cb3eea64bd18322961ffe3d9efc16c8d5fb09baf366c27824eac12bc5c38"
+    },
+    {
+      "path": "tests/ml/test_dark_pattern_safety_gate.py",
+      "sha256": "025428868eb426a0ba583ff204833024dd9e28ea1b2d123eb2b95fe18b7fb626"
+    },
+    {
+      "path": "scripts/harness/dark-pattern-safety-gate-harness.mjs",
+      "sha256": "4b8c47c8c47e8272fd5f8ae09c18fcbe5b5fbbdf8e1cf996441f93c5b5a64924"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-023.md",
+      "sha256": "51e248332289e31fb9b1fcfd779f61fe4f15870fbffeba3d3b84815d29859064"
+    }
+  ],
+  "certification": "PASS"
+}

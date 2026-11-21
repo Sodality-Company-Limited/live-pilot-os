@@ -1,0 +1,33 @@
+{
+  "dataset_name": "Stage 5 Contrastive Preference Dataset (DPO & KTO)",
+  "total_dpo_pairs": 3500,
+  "total_kto_records": 7000,
+  "kto_loss_aversion_lambda": 1.33,
+  "splits": {
+    "train": {
+      "count": 2800,
+      "ratio": 0.8
+    },
+    "validation": {
+      "count": 350,
+      "ratio": 0.1
+    },
+    "test": {
+      "count": 350,
+      "ratio": 0.1
+    }
+  },
+  "zero_contamination_verified": true,
+  "flaw_distribution": {
+    "raw_hex_literal": 438,
+    "wcag_aaa_contrast_failure": 438,
+    "missing_focus_ring": 438,
+    "dark_pattern_trick": 438,
+    "inconsistent_typography_scale": 437,
+    "missing_aria_role": 437,
+    "unhandled_error_state": 437,
+    "touch_target_too_small": 437
+  },
+  "unique_flaws_count": 8,
+  "generated_at": "2026-10-14T06:55:18.831Z"
+}

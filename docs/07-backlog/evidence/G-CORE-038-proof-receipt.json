@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-038",
+  "generated_at": "2026-10-18T22:25:00.000Z",
+  "source_revision": "69754a82e3938f38974caa42b136c692c5adf9b7",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-038-001",
+      "claim": "Epistemic trace audits are deterministic for identical step inputs.",
+      "statement": "Audit(T, S) = Audit(T, S)",
+      "verification_command": "node --test tests/lib/epistemic-trace-auditor.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-038-002",
+      "claim": "Every evaluated reasoning trace must contain non-empty problem decomposition, hypothesis formulation, evidence citation, and conclusion steps.",
+      "statement": "Completeness verification over reasoning trace pillars.",
+      "verification_command": "node --test tests/lib/epistemic-trace-auditor.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/epistemic-trace-auditor.mjs": "8f7a8ea68dc5fb32308238d4382ca497b65859af2c5a1854a0ad2a6506735457",
+    "template/scripts/lib/epistemic-trace-auditor.mjs": "8f7a8ea68dc5fb32308238d4382ca497b65859af2c5a1854a0ad2a6506735457",
+    ".agents/skills/soda-epistemic-trace-auditor/SKILL.md": "ead909b03ccad6b7eb39ca04d6494ebe2a7fb7e142b2e246295efde744838095",
+    "template/.agents/skills/soda-epistemic-trace-auditor/SKILL.md": "ead909b03ccad6b7eb39ca04d6494ebe2a7fb7e142b2e246295efde744838095",
+    "tests/lib/epistemic-trace-auditor.test.mjs": "3b24771d5752b5282638d9005d2ff35122136f65804c52b84f63b183fb619516"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/epistemic-trace-auditor.mjs",
+      "sha256": "8f7a8ea68dc5fb32308238d4382ca497b65859af2c5a1854a0ad2a6506735457"
+    },
+    {
+      "path": "template/scripts/lib/epistemic-trace-auditor.mjs",
+      "sha256": "8f7a8ea68dc5fb32308238d4382ca497b65859af2c5a1854a0ad2a6506735457"
+    },
+    {
+      "path": ".agents/skills/soda-epistemic-trace-auditor/SKILL.md",
+      "sha256": "ead909b03ccad6b7eb39ca04d6494ebe2a7fb7e142b2e246295efde744838095"
+    },
+    {
+      "path": "template/.agents/skills/soda-epistemic-trace-auditor/SKILL.md",
+      "sha256": "ead909b03ccad6b7eb39ca04d6494ebe2a7fb7e142b2e246295efde744838095"
+    },
+    {
+      "path": "tests/lib/epistemic-trace-auditor.test.mjs",
+      "sha256": "3b24771d5752b5282638d9005d2ff35122136f65804c52b84f63b183fb619516"
+    }
+  ],
+  "certification": "PASS"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-039",
+  "generated_at": "2026-10-18T22:26:00.000Z",
+  "source_revision": "894fbff7c479edb5e7c34e91386d538cff3fb3b2",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-039-001",
+      "claim": "Stack rebasing follows a strict topological ordering: parent branches are rebased and committed prior to child branches, guaranteeing monotonicity.",
+      "statement": "Topological ordering guarantees monotonicity in branch depth.",
+      "verification_command": "node --test tests/lib/git-stack-orchestrator.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-039-002",
+      "claim": "Re-running stack synchronization on an up-to-date branch stack yields a zero-diff no-op.",
+      "statement": "Rebase(Rebase(S)) = Rebase(S)",
+      "verification_command": "node --test tests/lib/git-stack-orchestrator.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/git-stack-orchestrator.mjs": "a486cd5ed1e53048f94f5371cb0f720af5883fc0d0c522e16495c7602dc1198f",
+    "template/scripts/lib/git-stack-orchestrator.mjs": "a486cd5ed1e53048f94f5371cb0f720af5883fc0d0c522e16495c7602dc1198f",
+    ".agents/skills/soda-git-stack-orchestrator/SKILL.md": "3d709e9ba96cfe02839351f0919c4411a81201259ffad57d9f4b84e25e046e6c",
+    "template/.agents/skills/soda-git-stack-orchestrator/SKILL.md": "3d709e9ba96cfe02839351f0919c4411a81201259ffad57d9f4b84e25e046e6c",
+    "tests/lib/git-stack-orchestrator.test.mjs": "ec3635eea0fbb4295f017f36df0891e85320a248f352216c0c6d7a0b2c7f8809"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/git-stack-orchestrator.mjs",
+      "sha256": "a486cd5ed1e53048f94f5371cb0f720af5883fc0d0c522e16495c7602dc1198f"
+    },
+    {
+      "path": "template/scripts/lib/git-stack-orchestrator.mjs",
+      "sha256": "a486cd5ed1e53048f94f5371cb0f720af5883fc0d0c522e16495c7602dc1198f"
+    },
+    {
+      "path": ".agents/skills/soda-git-stack-orchestrator/SKILL.md",
+      "sha256": "3d709e9ba96cfe02839351f0919c4411a81201259ffad57d9f4b84e25e046e6c"
+    },
+    {
+      "path": "template/.agents/skills/soda-git-stack-orchestrator/SKILL.md",
+      "sha256": "3d709e9ba96cfe02839351f0919c4411a81201259ffad57d9f4b84e25e046e6c"
+    },
+    {
+      "path": "tests/lib/git-stack-orchestrator.test.mjs",
+      "sha256": "ec3635eea0fbb4295f017f36df0891e85320a248f352216c0c6d7a0b2c7f8809"
+    }
+  ],
+  "certification": "PASS"
+}

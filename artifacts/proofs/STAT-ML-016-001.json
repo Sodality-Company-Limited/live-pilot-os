@@ -1,0 +1,18 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-016",
+  "claim_id": "STAT-ML-016-001",
+  "metric": "routing_truth_table_accuracy",
+  "sample_count": 20,
+  "successes": 20,
+  "confidence_interval_95": [
+    0.8388698745050668,
+    0.9999999999999999
+  ],
+  "statistical_method": "wilson_score_interval",
+  "kill_rate": 1,
+  "mutations_evaluated": 8,
+  "mutations_killed": 8,
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-11T00:38:23.876Z"
+}

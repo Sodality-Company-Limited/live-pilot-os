@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-010",
+  "classification": "executable_invariant",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
+  "invariants": [
+    {
+      "id": "G-PROOF-010-INV-001",
+      "statement": "Standardized counterexample trace serialization and deterministic replay engine reproduces failing traces deterministically.",
+      "verification_command": "node scripts/harness/counterexample-minimizer.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-010-INV-002",
+      "statement": "Cryptographic receipt freshness validator detects source drift, git revision mismatches, and expired receipts, failing closed with exit code 1.",
+      "verification_command": "node scripts/harness/counterexample-minimizer.mjs --check-freshness --receipt G-PROOF-010",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/counterexample-minimizer.mjs",
+      "sha256": "c23d5eaeb358c57a2f5a7016c8fcf4cc7dd0b33d7f20394d0b761a1b1524c387"
+    },
+    {
+      "path": "scripts/lib/receipt-freshness-engine.mjs",
+      "sha256": "52b6ee7350fa80e16dcfdf141b233f643250440681047f12ffb3b63ac8863b0c"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-20T07:51:58.404Z"
+}

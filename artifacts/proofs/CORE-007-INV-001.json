@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-CORE-007",
+  "goal_id": "G-CORE-007",
+  "invariant": "CORE-007-INV-001",
+  "invariant_id": "CORE-007-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/statistical-evidence-harness.mjs docs/07-backlog/goals/G-CORE-007.md",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-CORE-007.md": "ea9efc430c6d3c1f30d191371a5093f855ab74ac9187fe281f7262e29d89e7ec",
+    "scripts/lib/confidence-calibration.mjs": "5b9794905026e9d6d7718ba57a9cc2cea554744519f11389adcff61d4f5282d1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-29T07:37:21.989Z"
+}

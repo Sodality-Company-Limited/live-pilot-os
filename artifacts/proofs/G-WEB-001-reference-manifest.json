@@ -1,0 +1,29 @@
+{
+  "artifact_id": "ART-G-WEB-001-REFERENCE-MANIFEST",
+  "goal_id": "G-WEB-001",
+  "generated_at": "2026-10-03T17:05:00Z",
+  "references": [
+    {
+      "reference_id": "REF-0001",
+      "type": "image",
+      "purpose": "visual_layout_reference",
+      "uri": "data/references/REF-0001.png",
+      "content_hash": "sha256:d7146fad2c9c3a601f8160ae2c8072285d2e41c22a39a226ee78a24e5c59cbb8",
+      "source": "human_uploaded",
+      "authority": "approved_design_reference",
+      "relevance": "defines layout, color tokens, and geometry for G-WEB-001",
+      "used_by": [
+        "G-WEB-001"
+      ],
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "device_pixel_ratio": 1.0
+      },
+      "fonts": [
+        "Inter",
+        "Fira Code"
+      ]
+    }
+  ]
+}

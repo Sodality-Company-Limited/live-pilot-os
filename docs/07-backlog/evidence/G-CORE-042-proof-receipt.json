@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-042",
+  "generated_at": "2026-10-18T16:42:09.000Z",
+  "source_revision": "36c4de09f1cd88a492721cc91a8806776f66e6be",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-042-001",
+      "claim": "Technical markdown and code payload bytes are exactly preserved: sum bytes_out(payload) === sum bytes_in(payload).",
+      "statement": "Payload Byte Conservation Invariant holds 100% byte-for-byte.",
+      "verification_command": "node --test tests/lib/live-stream-scrubber.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-042-002",
+      "claim": "Scrubbing an already clean token stream yields an identical byte sequence: Scrub(Scrub(S)) === Scrub(S).",
+      "statement": "Scrubbing Idempotency Invariant holds.",
+      "verification_command": "node --test tests/lib/live-stream-scrubber.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/live-stream-scrubber.mjs": "99925df5a6bae3d659628556dbaec8dcc1fc7aa7624d46476136727abbe7e98d",
+    "template/scripts/lib/live-stream-scrubber.mjs": "99925df5a6bae3d659628556dbaec8dcc1fc7aa7624d46476136727abbe7e98d",
+    ".agents/skills/soda-live-stream-scrubber/SKILL.md": "5757b425b222b69a643dbb1dc71eaed85650c971e19da89b66d7bc10d00212d8",
+    "template/.agents/skills/soda-live-stream-scrubber/SKILL.md": "5757b425b222b69a643dbb1dc71eaed85650c971e19da89b66d7bc10d00212d8",
+    "tests/lib/live-stream-scrubber.test.mjs": "6a861cd91fcddd2b490ac128292a1bda21976be4225038f26b83c2937e029f91"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/live-stream-scrubber.mjs",
+      "sha256": "99925df5a6bae3d659628556dbaec8dcc1fc7aa7624d46476136727abbe7e98d"
+    },
+    {
+      "path": "template/scripts/lib/live-stream-scrubber.mjs",
+      "sha256": "99925df5a6bae3d659628556dbaec8dcc1fc7aa7624d46476136727abbe7e98d"
+    },
+    {
+      "path": ".agents/skills/soda-live-stream-scrubber/SKILL.md",
+      "sha256": "5757b425b222b69a643dbb1dc71eaed85650c971e19da89b66d7bc10d00212d8"
+    },
+    {
+      "path": "template/.agents/skills/soda-live-stream-scrubber/SKILL.md",
+      "sha256": "5757b425b222b69a643dbb1dc71eaed85650c971e19da89b66d7bc10d00212d8"
+    },
+    {
+      "path": "tests/lib/live-stream-scrubber.test.mjs",
+      "sha256": "6a861cd91fcddd2b490ac128292a1bda21976be4225038f26b83c2937e029f91"
+    }
+  ],
+  "certification": "PASS"
+}
