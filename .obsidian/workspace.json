@@ -178,6 +178,7 @@
   },
   "active": "bd3317845cc75749",
   "lastOpenFiles": [
+    "docs/03-architecture/api/services/promotion-service.md",
     "docs/02-product/acceptance/G-PROMO-009.md",
     "docs/02-product/acceptance/G-PROMO-008.md",
     "docs/02-product/acceptance/G-PROMO-007.md",
@@ -206,7 +207,6 @@
     "docs/03-architecture/specs/goals/G-PROMO-007/G-PROMO-007-architecture-spec.md",
     "docs/03-architecture/specs/goals/G-PROMO-007",
     "docs/03-architecture/specs/goals/G-PROMO-006/G-PROMO-006-worktree-plan.md",
-    "docs/03-architecture/specs/goals/G-PROMO-006/G-PROMO-006-threat-model.md",
     "docs/03-architecture/specs/goals/G-PROMO-006",
     "docs/03-architecture/specs/goals/G-PROMO-005",
     "docs/03-architecture/specs/goals/G-PROMO-004",

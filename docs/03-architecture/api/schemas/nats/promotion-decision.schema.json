@@ -1,1 +1,29 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.livepilot.invalid/nats/promotion-decision.schema.json","type":"object","required":["promotion_id","decision","expected_resource_version","actor_ref"],"properties":{"promotion_id":{"type":"string","minLength":8},"decision":{"type":"string","enum":["approve","reject"]},"expected_resource_version":{"type":"integer","minimum":1},"actor_ref":{"type":"string","minLength":1},"reason":{"type":"string","maxLength":500}},"additionalProperties":false}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/promotion-decision.schema.json",
+  "title": "LivePilot Promotion Decision v1",
+  "description": "Versioned approval command/fact payload. A decision never implies issuance; observed adapter state is required for issued.",
+  "type": "object",
+  "required": ["schema_version", "message_kind", "event_type", "promotion_id", "decision", "expected_resource_version", "resource_version", "policy_revision", "approval_revision", "actor_ref", "capability", "idempotency_key", "idempotency_fingerprint", "correlation_id", "causation_id", "lifecycle_state"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "message_kind": {"type": "string", "enum": ["command", "event"]},
+    "event_type": {"type": "string", "enum": ["promotion.decision.requested", "promotion.decision.recorded"]},
+    "promotion_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "decision": {"type": "string", "enum": ["approve", "reject"]},
+    "expected_resource_version": {"type": "integer", "minimum": 1},
+    "resource_version": {"type": "integer", "minimum": 1},
+    "policy_revision": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "approval_revision": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "actor_ref": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "capability": {"type": "string", "const": "promotion.approve"},
+    "idempotency_key": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{8,256}$"},
+    "idempotency_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "causation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "lifecycle_state": {"type": "string", "enum": ["pending", "approved", "rejected", "unknown", "expired", "cancelled"]},
+    "reason": {"type": "string", "maxLength": 500, "pattern": "^[^\\r\\n]*$"},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]}
+  },
+  "additionalProperties": false
+}

@@ -2,19 +2,86 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.livepilot.invalid/api/promotion.schema.json",
   "title": "LivePilot Promotion",
+  "$comment": "The promotion aggregate is PostgreSQL-authoritative and is committed atomically with its inbox outcome, transition audit, and versioned transactional outbox event. Consumers must not infer state from an uncommitted message, projection, or provider payload.",
+  "x-persistence-contract": {
+    "authoritative_store": "postgresql",
+    "authoritative_writer": "promotion-service",
+    "aggregate_key": ["tenant_id", "promotion_id"],
+    "versioning": {
+      "field": "resource_version",
+      "compare_and_set": true,
+      "increment": "exactly_once_per_accepted_mutation",
+      "stale_write": "reject_without_state_or_outbox_write"
+    },
+    "atomic_unit": ["promotion_aggregate", "promotion_inbox", "promotion_transition_audit", "promotion_outbox"],
+    "outbox": {
+      "publish_boundary": "after_commit",
+      "delivery": "at_least_once",
+      "consumer_deduplication": ["message_id", "promotion_id", "resource_version"]
+    },
+    "inbox": {
+      "deduplication": ["tenant_id", "idempotency_key", "idempotency_fingerprint"],
+      "mismatch": "stable_conflict_without_mutation",
+      "ack_boundary": "after_durable_commit"
+    },
+    "recovery": {
+      "replay_source": "committed_outbox_or_dlq_record_only",
+      "requires": ["new_replay_id", "original_causation_id", "operator_authorization", "schema_revalidation", "audit_result"],
+      "forbidden": ["raw_provider_payload", "direct_aggregate_mutation", "unobserved_issuance"]
+    },
+    "secrets_policy": "never_persist_credentials_tokens_passwords_or_raw_provider_payloads"
+  },
+  "x-read-model-contract": {
+    "authoritative_fields": ["status", "resource_version"],
+    "projection_is_non_authoritative": true,
+    "projection_version_rule": "projected_resource_version_must_not_exceed_authoritative_resource_version",
+    "projection_apply_rule": "apply_only_if_event_resource_version_is_exactly_current_projection_version_plus_one",
+    "duplicate_or_older_event": "ignore_without_mutating_authoritative_state_or_advancing_projection",
+    "gap_or_mismatched_aggregate": "mark_projection_stale_and_require_reconciliation",
+    "missing_or_untrusted_projection": "do_not_serve_projection_as_current; return safe degraded metadata or dependency-unavailable response",
+    "read_side_effects": "none"
+  },
   "type": "object",
-  "required": ["promotion_id", "session_id", "product_id", "status", "resource_version", "mode"],
+  "required": ["promotion_id", "session_id", "product_id", "status", "resource_version", "mode", "read_model"],
   "properties": {
-    "promotion_id": {"type": "string", "minLength": 8, "maxLength": 128},
-    "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "product_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "promotion_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$"},
+    "product_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$"},
     "status": {"type": "string", "enum": ["proposed", "pending", "approved", "rejected", "issued", "expired", "cancelled", "unknown"]},
     "resource_version": {"type": "integer", "minimum": 1},
     "discount_percent": {"type": "number", "minimum": 0, "maximum": 100},
     "margin_percent": {"type": ["number", "null"], "minimum": -100, "maximum": 100},
-    "policy_revision": {"type": ["string", "null"], "maxLength": 128},
-    "action_id": {"type": ["string", "null"], "maxLength": 128},
-    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]}
+    "policy_revision": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "action_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9_-]{1,128}$"},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]},
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "causation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "actor_ref": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "capability": {"type": ["string", "null"], "enum": ["promotion.propose", "promotion.approve", "promotion.cancel", null]},
+    "idempotency_fingerprint": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "read_model": {
+      "type": "object",
+      "required": ["authoritative_state", "projection_status", "projected_resource_version", "version_lag", "reconciliation"],
+      "properties": {
+        "authoritative_state": {"type": "string", "enum": ["proposed", "pending", "approved", "rejected", "issued", "expired", "cancelled", "unknown"]},
+        "projection_status": {"type": "string", "enum": ["current", "stale", "unknown", "missing"]},
+        "projected_resource_version": {"type": ["integer", "null"], "minimum": 1},
+        "version_lag": {"type": ["integer", "null"], "minimum": 0},
+        "reconciliation": {
+          "type": "object",
+          "required": ["status", "required", "last_reconciled_resource_version", "last_reconciled_at"],
+          "properties": {
+            "status": {"type": "string", "enum": ["not_required", "pending", "in_progress", "reconciled", "blocked"]},
+            "required": {"type": "boolean"},
+            "last_reconciled_resource_version": {"type": ["integer", "null"], "minimum": 1},
+            "last_reconciled_at": {"type": ["string", "null"], "format": "date-time"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false
 }
