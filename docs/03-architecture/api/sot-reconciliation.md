@@ -473,3 +473,11 @@ are mapped to existing promotion/action read surfaces or internal contracts;
 no new public pinning endpoint is generated. Catalog membership, stock,
 approval mode, idempotency, adapter isolation, simulated-mode labeling, and
 observed-state confirmation are mandatory before a consequential pin.
+
+### F03.2 Smart Voucher Engine
+
+F03.2-FLOW-001 through F03.2-FLOW-008 map to the existing promotion proposal and
+status operations; no separate voucher endpoint is generated. Voucher lifecycle
+must preserve integer limits/counts, eligibility/policy evidence, idempotency,
+expiry/cancellation state, simulated adapter labeling, and explicit pending or
+unknown outcomes until observed-state reconciliation.
