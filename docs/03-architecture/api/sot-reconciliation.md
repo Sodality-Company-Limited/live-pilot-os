@@ -145,3 +145,12 @@ intent-risk/compliance boundary emits a redacted `UNSUPPORTED_CLAIM` signal and
 review-needed status, preserving evidence and policy lineage without presenting
 the claim as verified guidance. `POLICY_UNAVAILABLE`, `CLAIM_SCOPE_UNKNOWN`,
 and low confidence remain explicit non-success outcomes.
+
+### Incremental result: F01.1-FLOW-007
+
+No public OpenAPI path is generated for repeated-question clustering. The
+worker emits a rebuildable `QuestionCluster` projection with count,
+representative question, product/time-window context, and evidence IDs. Invalid
+input, invalid windows, or model unavailability remain rejected/deferred states;
+the `chat.question.clustered.v1` event schema still needs canonical registry
+coverage.
