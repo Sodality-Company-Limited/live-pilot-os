@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-028](../../07-backlog/goals/G-PROMO-028.md)  
 **Title:** Promotion service DigitalOcean release  
-**Status:** planned  
+**Status:** blocked
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion service DigitalOcean release
 

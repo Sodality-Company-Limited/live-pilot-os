@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-021](../../07-backlog/goals/G-PROMO-021.md)  
 **Title:** Promotion inventory integration  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion inventory integration
 

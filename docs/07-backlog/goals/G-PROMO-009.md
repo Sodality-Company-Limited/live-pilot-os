@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-009
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-009: Promotion service DigitalOcean release and rollback evidence
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion service DigitalOcean release and rollback evidence  
 **Epic:** PROMO  

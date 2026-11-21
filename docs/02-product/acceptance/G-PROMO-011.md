@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-011](../../07-backlog/goals/G-PROMO-011.md)  
 **Title:** Promotion persistence migrations  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion persistence migrations
 

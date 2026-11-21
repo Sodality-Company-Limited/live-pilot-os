@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-012
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-012: Promotion domain state machine
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion domain state machine  
 **Epic:** PROMO  

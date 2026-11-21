@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-014](../../07-backlog/goals/G-PROMO-014.md)  
 **Title:** Promotion contract compatibility tests  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion contract compatibility tests
 

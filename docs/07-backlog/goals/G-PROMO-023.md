@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-023
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-023: Promotion pause expiry cancellation workflow
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion pause expiry cancellation workflow  
 **Epic:** PROMO  

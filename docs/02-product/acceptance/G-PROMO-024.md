@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-024](../../07-backlog/goals/G-PROMO-024.md)  
 **Title:** Promotion retry DLQ and replay worker  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion retry DLQ and replay worker
 

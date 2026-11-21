@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-026
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-026: Promotion service-level verification matrix
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion service-level verification matrix  
 **Epic:** PROMO  

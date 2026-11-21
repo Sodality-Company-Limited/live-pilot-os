@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-002
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-002: Promotion event schemas and NATS compatibility
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion event schemas and NATS compatibility  
 **Epic:** PROMO  

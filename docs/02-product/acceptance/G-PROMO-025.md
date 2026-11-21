@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-025](../../07-backlog/goals/G-PROMO-025.md)  
 **Title:** Promotion audit receipt integration  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion audit receipt integration
 

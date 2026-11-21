@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-016](../../07-backlog/goals/G-PROMO-016.md)  
 **Title:** Promotion NATS adapter boundary  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion NATS adapter boundary
 

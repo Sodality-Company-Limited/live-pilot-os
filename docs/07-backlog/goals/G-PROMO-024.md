@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-024
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-024: Promotion retry DLQ and replay worker
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion retry DLQ and replay worker  
 **Epic:** PROMO  

@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-025
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-025: Promotion audit receipt integration
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion audit receipt integration  
 **Epic:** PROMO  

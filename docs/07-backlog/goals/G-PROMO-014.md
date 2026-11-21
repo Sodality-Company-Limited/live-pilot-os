@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-014
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-014: Promotion contract compatibility tests
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion contract compatibility tests  
 **Epic:** PROMO  

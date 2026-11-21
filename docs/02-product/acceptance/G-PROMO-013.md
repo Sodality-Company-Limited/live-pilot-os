@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-013](../../07-backlog/goals/G-PROMO-013.md)  
 **Title:** Promotion authorization and idempotency boundary  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion authorization and idempotency boundary
 

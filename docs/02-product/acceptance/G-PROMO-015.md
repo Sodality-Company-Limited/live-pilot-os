@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-015](../../07-backlog/goals/G-PROMO-015.md)  
 **Title:** Promotion repository transaction boundary  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion repository transaction boundary
 

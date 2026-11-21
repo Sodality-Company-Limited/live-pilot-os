@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-010](../../07-backlog/goals/G-PROMO-010.md)  
 **Title:** Promotion service runtime bootstrap  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion service runtime bootstrap
 

@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-012](../../07-backlog/goals/G-PROMO-012.md)  
 **Title:** Promotion domain state machine  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion domain state machine
 

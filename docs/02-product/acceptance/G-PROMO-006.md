@@ -1,6 +1,6 @@
 # G-PROMO-006 — Acceptance Contract
 
-> Status: planned; scenarios become executable evidence when the goal is promoted to ready.
+> Status: review; scenarios remain subject to coordinator evidence review.
 
 ## Goal reference
 

@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-027](../../07-backlog/goals/G-PROMO-027.md)  
 **Title:** Promotion API architecture and release gates  
-**Status:** planned  
+**Status:** blocked
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion API architecture and release gates
 

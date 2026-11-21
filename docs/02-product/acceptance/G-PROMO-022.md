@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-022](../../07-backlog/goals/G-PROMO-022.md)  
 **Title:** Promotion execution safety integration  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion execution safety integration
 
