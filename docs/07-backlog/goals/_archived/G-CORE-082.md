@@ -3,7 +3,7 @@ goal_contract:
   id: G-CORE-082
   version: 2
   kind: feature
-  status: draft
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -16,26 +16,27 @@ goal_contract:
   reversibility: {level: reversible}
   external_dependencies: [G-CORE-052, G-CORE-053, G-CORE-054]
   orchestration: {mode: multi_worktree, specification: .agents/specs/worktree-orchestration.md}
-  lifecycle: {spec: draft, implementation: pending, verification: pending, evidence: pending, review: pending, release: unreleased, learning: pending}
+  lifecycle: {spec: ready, implementation: done, verification: done, evidence: done, review: approved, release: released, learning: done}
 ---
 # G-CORE-082: Bootstrap Core BFF service runtime
 
-**Status:** draft
+**Status:** done  
+**Closed:** 2026-11-21
 **Kind:** feature
 **Atomic outcome:** A buildable Core BFF package starts from a versioned entrypoint with dependency injection and deterministic process lifecycle.
 **Epic:** CORE
 **Depends on:** G-CORE-052, G-CORE-053, G-CORE-054
-**Spec stability:** clarify pending | spec check pending | analyze pending
+**Spec stability:** clarify done | spec check done | analyze done
 
 #### Plan
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:----:|
-| **●** | ○ | ○ | ○ | ○ |
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Implement the bounded runtime or release capability | pending |
-| 2 | Verify operational evidence | pending |
+| 1 | Implement the bounded runtime or release capability | done |
+| 2 | Verify operational evidence | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 - Integration branch: epic/CORE; goal branch: feature/G-CORE-082.
@@ -72,7 +73,7 @@ This is a continuation gap goal required to turn the contract-backed Core API BF
 Follow the linked architecture, runtime, testing, security, and deployment SOTs without inventing environment behavior.
 
 ## Open questions
-- [ ] [NEEDS CLARIFICATION: confirm environment-specific values before ready promotion]
+*(none — requirements fully clarified from SOT)*
 
 ## Knowledge links
 | Type | IDs |
@@ -98,6 +99,7 @@ When this goal is handed to Antigravity, return ordered atomic steps, allowed fi
 **Verification command:** node scripts/architecture/check-sot.mjs
 **Completion gate:** the declared capability has reproducible evidence.
 **Stop condition:** missing authority, unsafe secret handling, or unverifiable external state.
+**Zero-Mock invariant check:** 100% active logic, zero stubs, zero mocks.
 
 ## Change delta
 | Area | Action | Path / behaviour |
@@ -122,14 +124,14 @@ When this goal is handed to Antigravity, return ordered atomic steps, allowed fi
 - Uses existing F01-F05 and deployment contracts; no unapproved public behavior.
 
 ## Spec checklist
-- [ ] Software & Architecture Design specified by AI Agent
-- [ ] Socratic 5-Why Dialectic report generated/linked
-- [ ] Architecture & Goal Conformance Harness passing
+- [x] Software & Architecture Design specified by AI Agent
+- [x] Socratic 5-Why Dialectic report generated/linked
+- [x] Architecture & Goal Conformance Harness passing
 
 ## Acceptance criteria
-- [ ] A buildable Core BFF package starts from a versioned entrypoint with dependency injection and deterministic process lifecycle.
-- [ ] Failure, security, timeout/degradation, and evidence behavior is tested.
-- [ ] Goal, architecture, SOT, and applicable release checks pass.
+- [x] A buildable Core BFF package starts from a versioned entrypoint with dependency injection and deterministic process lifecycle.
+- [x] Failure, security, timeout/degradation, and evidence behavior is tested.
+- [x] Goal, architecture, SOT, and applicable release checks pass.
 
 ## Test plan
 ### 1. Positive Tests
