@@ -253,6 +253,19 @@ For the current implementation wave, goals are limited to microservices,
 PostgreSQL migrations, Redis usage, NATS producers/consumers, and the JEV/OpenAI
 adapter. Portal UI, Portal BFF, and Core BFF goals are deferred until the
 microservice wave is complete.
+
+## Independent service execution gate
+
+Each microservice must be implemented and tested independently before any
+cross-service integration goal begins. A service is eligible for integration only
+after its isolated migration, domain logic, NATS contract, handler, authorization,
+idempotency, timeout/unknown, audit, observability, and regression tests pass.
+
+Integration agents must not repair or silently change an incomplete service. If a
+service gate fails, the coordinator returns that service goal to its owner and
+keeps unrelated service work isolated. Cross-service integration begins only when
+all participating service goals have reproducible green evidence and disjoint
+implementation changes have been reviewed.
 - **Minimize diff** — smallest change that satisfies acceptance criteria.
 - **Do not deploy to production** unless goal explicitly includes it and human confirms.
 - **No secrets** — never commit or expose `.env`, tokens, keys (see `security.md`).
