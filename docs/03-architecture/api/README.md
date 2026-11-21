@@ -20,6 +20,9 @@ See [.agents/skills/soda-rest-api/SKILL.md](../../../.agents/skills/soda-rest-ap
 | Contract | Status | Goal |
 |----------|--------|------|
 | [openapi.yaml](openapi.yaml) | HTTP transport draft; generation blocked pending catalog reconciliation | Architecture baseline |
+| [portal-bff/openapi.yaml](portal-bff/openapi.yaml) | Browser same-origin `/api/*` contract | Portal BFF |
+| [core-bff/openapi.yaml](core-bff/openapi.yaml) | Private `/internal/v1/core/*` orchestration contract | Core BFF |
+| [services/README.md](services/README.md) | Microservice ownership and NATS contract boundary | Domain services |
 | [authentication.md](authentication.md) | Test-mode login, session, and logout contract | REQ-LP-017 |
 | [route-prefixing-and-boundary-invariant.md](route-prefixing-and-boundary-invariant.md) | Canonical route topology and prefixes | Architecture baseline |
 | [NATS subject/message template](nats-subject-message-template.md) | Canonical async contract template | Architecture baseline |
