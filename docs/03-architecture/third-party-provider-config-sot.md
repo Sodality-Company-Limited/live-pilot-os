@@ -8,7 +8,7 @@ never in Git, fixtures, prompts, browser payloads, or logs.
 | Provider | Use | Current mode |
 |---|---|---|
 | OpenAI | JEV inference | candidate production provider; server-side only |
-| TikTok/Shopee/Lazada adapters | marketplace actions | simulated for demo; production contracts TBD |
+| Marketplace adapters | marketplace actions | simulated for demo; production contracts TBD |
 | Resend or equivalent | transactional notifications | optional until notification flow is enabled |
 | DigitalOcean | production runtime substrate | active |
 

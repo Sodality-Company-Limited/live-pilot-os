@@ -8,7 +8,7 @@
 | Redis | selected | cache, dedup, rate-limit, coordination | never authoritative |
 | OpenAI | selected candidate | JEV inference | provider adapter, privacy, schema/eval/cost gates |
 | JEV | selected internal component | agent orchestration | runtime and safety SOT |
-| TikTok/Shopee/Lazada | future adapters | marketplace mutation | official API, scopes, certification, sandbox evidence |
+| Marketplace adapters | future adapters | marketplace mutation | official API, scopes, certification, sandbox evidence |
 | Resend | optional candidate | transactional email | notification requirement and secret/retention review |
 | S3-compatible object storage | required direction | audit/archive/backups | encryption, retention, restore proof |
 

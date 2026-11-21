@@ -24,8 +24,8 @@ Provider boundary rules:
 
 - OpenAI is called only through JEV; it never receives raw viewer identifiers,
   credentials, authoritative inventory, or approval/execution authority.
-- TikTok, Shopee, and Lazada are future adapter targets. The current demo uses the
-  simulated adapter and does not claim production marketplace API support.
+- Marketplace adapters are future targets. The current demo uses the simulated
+  adapter and does not claim production marketplace API support.
 - Resend is optional and disabled by default until a notification requirement and
   retention/secret review exist.
 - Every enabled provider needs an owner, environment scope, endpoint, secret names,
@@ -39,4 +39,3 @@ The production file belongs outside Git, for example:
 
 Set permissions to `600`, keep ownership with `root`, and rotate credentials on
 ownership changes. The current demo keeps `PLATFORM_ADAPTER_MODE=simulated`; real
-TikTok credentials are not required for the demo scenarios.
