@@ -267,6 +267,14 @@ internal via `copilot.signal.available.v1`; the public SSE surface may expose
 only the redacted, authorized projection. `CONSUMER_UNAVAILABLE`,
 `DTO_REDACTION_FAILED`, and `SIGNAL_EXPIRED` remain explicit delivery states.
 
+### Incremental result: F01-INTEGRATION-002
+
+No new public OpenAPI path is generated. Product-interest delivery to StreamPilot
+uses internal `streampilot.product-interest.available.v1`; any public SSE view is
+limited to the authorized safe projection. `CONSUMER_UNAVAILABLE`,
+`CATALOG_EVIDENCE_MISSING`, and `STALE_PROJECTION` remain explicit delivery or
+deferred states and cannot authorize a product action.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
