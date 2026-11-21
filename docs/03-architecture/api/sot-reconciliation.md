@@ -275,6 +275,14 @@ limited to the authorized safe projection. `CONSUMER_UNAVAILABLE`,
 `CATALOG_EVIDENCE_MISSING`, and `STALE_PROJECTION` remain explicit delivery or
 deferred states and cannot authorize a product action.
 
+### Incremental result: F01-INTEGRATION-003
+
+No new public OpenAPI path is generated. Compliance delivery uses internal
+`compliance.risk.detected.v1` and must preserve redacted evidence, policy
+version, severity, actor/source lineage, and correlation/causation.
+`COMPLIANCE_UNAVAILABLE`, `EVIDENCE_REDACTION_FAILED`, and
+`POLICY_VERSION_MISSING` remain explicit failure/deferred states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
