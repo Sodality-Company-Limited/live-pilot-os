@@ -481,3 +481,11 @@ status operations; no separate voucher endpoint is generated. Voucher lifecycle
 must preserve integer limits/counts, eligibility/policy evidence, idempotency,
 expiry/cancellation state, simulated adapter labeling, and explicit pending or
 unknown outcomes until observed-state reconciliation.
+
+### F03.3 Margin Protection
+
+F03.3-FLOW-001 through F03.3-FLOW-008 map to proposal/decision/status surfaces;
+no standalone margin endpoint is generated. All money fields use integer minor
+units with explicit currency and scale. Margin verdicts preserve policy version,
+economic inputs, evidence, actor separation, idempotency, and re-evaluation on
+changed economics; loss-making or unknown outcomes fail closed.

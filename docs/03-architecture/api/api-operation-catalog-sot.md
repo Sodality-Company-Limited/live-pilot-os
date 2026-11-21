@@ -162,6 +162,14 @@ source-fact persistence inside the telemetry owner.
 | `F03.2-FLOW-006` | `proposePromotion` | Existing proposal route | `promotion-service` | Voucher eligibility is validated against session, catalog, policy, and audience scope; ineligible requests are explicit refusals. |
 | `F03.2-FLOW-007` | `proposePromotion` | Existing proposal route | `promotion-service` | Malformed voucher payloads fail validation before persistence or adapter calls; no partial voucher is created. |
 | `F03.2-FLOW-008` | `getPromotion` | Existing promotion status route | `promotion-service + execution-adapter-safety-service` | Delayed voucher responses remain pending/unknown until observed-state reconciliation; blind retry is prohibited. |
+| `F03.3-FLOW-001` | `proposePromotion` | Existing proposal route | `margin-policy-service` | Contribution margin uses integer minor units, explicit ISO currency/scale, policy version, and immutable input evidence. |
+| `F03.3-FLOW-002` | `decidePromotion` | `POST /v1/promotions/{promotion_id}/decision` | `margin-policy-service + approval-control-service` | Safe discount approval requires margin floor, policy verdict, actor capability, separation of duties, and idempotent decision receipt. |
+| `F03.3-FLOW-003` | `proposePromotion`, `decidePromotion` | Existing proposal/decision routes | `margin-policy-service` | Loss-making discount is rejected with deterministic margin evidence; no execution or inventory mutation follows. |
+| `F03.3-FLOW-004` | `decidePromotion` | Existing decision route | `approval-control-service` | Human approval is explicit, authorized, time-bounded, version-checked, and auditable; approval is never inferred from UI state. |
+| `F03.3-FLOW-005` | `proposePromotion` | Existing proposal route | `margin-policy-service` | Safer alternative includes margin evidence, policy version, and bounded recommendation; it does not execute a discount. |
+| `F03.3-FLOW-006` | `proposePromotion` | Existing proposal route | `margin-policy-service` | Money arithmetic rejects floating-point inputs and persists integer minor units/currency scale only. |
+| `F03.3-FLOW-007` | `getPromotion`, `getActionLog` | Existing promotion/action-log reads | `margin-policy-service + audit-service` | Margin evidence preserves inputs, policy/model version, verdict, actor/correlation lineage, and immutable receipt. |
+| `F03.3-FLOW-008` | `proposePromotion`, `getPromotion` | Existing proposal/status routes | `margin-policy-service` | Changed economics trigger deterministic re-evaluation against current catalog/stock/policy revision before approval or execution. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
