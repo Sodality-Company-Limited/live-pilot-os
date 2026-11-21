@@ -244,6 +244,14 @@ evidence window, confidence, revision, and freshness. `BASELINE_UNAVAILABLE`,
 missing threshold configuration, and stale data remain explicit degraded or
 deferred states and cannot trigger an implied action.
 
+### Incremental result: F01.3-FLOW-005
+
+This flow is covered by the existing overview and SSE operations; no new public
+path is added. Alerts must carry policy version, source evidence, deduplication
+identity, severity, session scope, and freshness. `ALERT_POLICY_UNAVAILABLE`,
+`ALERT_DEDUP_CONFLICT`, and stale projection remain explicit failure/deferred
+states rather than silent or duplicate alerts.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
