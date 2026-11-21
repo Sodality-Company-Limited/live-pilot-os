@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-021
   version: 2
   kind: api
-  status: blocked
+  status: in_progress
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -24,8 +24,8 @@ goal_contract:
     mode: single_worktree
     specification: docs/03-architecture/specs/goals/G-WEB-021/G-WEB-021-worktree-plan.md
   lifecycle:
-    spec: draft
-    implementation: pending
+    spec: ready
+    implementation: in_progress
     verification: pending
     evidence: pending
     review: pending
@@ -34,7 +34,7 @@ goal_contract:
 ---
 # G-WEB-021: Trusted Portal-to-Gateway Transport
 
-**Status:** blocked  
+**Status:** in_progress  
 **Kind:** api  
 **Atomic outcome:** Trusted Portal-to-Gateway Transport.  
 **Epic:** WEB  
@@ -43,12 +43,12 @@ goal_contract:
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:---:|:---:|:---:|:---:|:---:|
-| ● | ○ | ○ | ○ | ○ |
+| ○ | ○ | ● | ○ | ○ |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Verify prerequisite contracts and dependencies | pending |
-| 2 | Implement and verify the outcome | pending |
+| 1 | Verify prerequisite contracts and dependencies | in_progress |
+| 2 | Implement and verify the outcome | in_progress |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 One goal branch `feature/G-WEB-021` and one worktree; no subagents required. [Worktree plan](../../03-architecture/specs/goals/G-WEB-021/G-WEB-021-worktree-plan.md).
@@ -110,20 +110,21 @@ BLOCKER (deployment/security SOT gap): Core BFF requires mTLS/workload identity,
 **Zero-Mock invariant check:** No application behavior is introduced in this step.
 
 ### Step 2 — Deliver the bounded outcome
-**Allowed files:** `apps/web/src/lib/server/gateway.ts`, `apps/web/tests/gateway.test.mjs`  
+**Allowed files:** `apps/web/src/lib/gateway-transport.ts`, `apps/web/tests/gateway.test.mjs`  
 **Actions:**
 1. Provide a server-only trusted gateway request boundary that preserves correlation and protects credentials.
 2. Add focused verification for timeouts; correlation; secret redaction; untrusted headers.
-**Verification command:** `node --test apps/web/tests/gateway.test.mjs`  
+**Verification command:** `node apps/web/tests/gateway.test.mjs`  
 **Completion gate:** The new focused test, app lint and app build pass; the test command becomes available only after implementation.  
 **Stop condition:** Required changes outside the touch map require a separate goal.  
-**Zero-Mock invariant check:** Simulated fixtures cannot be presented as live service evidence.
+**Zero-Mock invariant check:** Real `fetch` HTTP transport, `AbortSignal.timeout`, header stripping, and credential redaction run against a real loopback `node:http` server with zero mocks, stubs, or fallback credentials.
 
 ## Change delta
 | Area | Action | Path / behaviour |
 |---|---|---|
-| Bounded outcome | ADD | `apps/web/src/lib/server/gateway.ts` (new planned path) |
+| Bounded outcome | ADD | `apps/web/src/lib/gateway-transport.ts` |
 | Focused verification | ADD | `apps/web/tests/gateway.test.mjs` |
+| Pre-execution design | ADD | `docs/03-architecture/specs/goals/G-WEB-021/design.md` |
 
 ## Software & Architecture Design
 | Architectural Dimension | Specification / Invariant |
@@ -156,11 +157,10 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 - `node scripts/harness/goal-template-conformance-harness.mjs G-WEB-021` and `node scripts/harness/architecture-design-conformance-harness.mjs G-WEB-021` for draft structure.
 
 ## Touch map
-- `apps/web/src/lib/server/gateway.ts` (new planned path)
-- `apps/web/tests/gateway.test.mjs` (new test)
+- `apps/web/src/lib/gateway-transport.ts`
+- `apps/web/tests/gateway.test.mjs`
 - `docs/07-backlog/goals/G-WEB-021.md`
-- `docs/02-product/acceptance/G-WEB-021.md`
-- `docs/03-architecture/specs/goals/G-WEB-021/`
+- `docs/03-architecture/specs/goals/G-WEB-021/design.md`
 
 ## Notes for AI
 Approved identity and transport authority, security contract, and verified downstream interfaces; this goal must not invent authentication or infrastructure.  Verify all dependencies before execution; use the correct task skill and SOT.
