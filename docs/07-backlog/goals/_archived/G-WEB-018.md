@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-018
   version: 2
   kind: api
-  status: blocked
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -25,18 +25,19 @@ goal_contract:
     mode: single_worktree
     specification: docs/03-architecture/specs/goals/G-WEB-018/G-WEB-018-worktree-plan.md
   lifecycle:
-    spec: draft
-    implementation: pending
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    spec: ready
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 
 # G-WEB-018: Serve an Authorized Session Overview through Portal BFF
 
-**Status:** blocked  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** api  
 **Atomic outcome:** An authorized browser can retrieve a session overview through the Portal BFF.  
 **Epic:** WEB  
@@ -45,12 +46,12 @@ goal_contract:
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:----:|
-| **●** | ○ | ○ | ○ | ○ |
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|------|--------|
-| 1 | Verify prerequisites and scope | pending |
-| 2 | Implement the bounded outcome and focused verification | pending |
+| 1 | Verify prerequisites and scope | done |
+| 2 | Implement the bounded outcome and focused verification | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 Use one goal branch `feature/G-WEB-018` and one worktree; no subagents are required. See the dedicated worktree plan below.
@@ -154,16 +155,16 @@ Consumes `getLiveSessionOverview`; no schema edits are authorized by this goal. 
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; no report is claimed.
+- [x] Socratic 5-Why Dialectic report generated/linked; no report is claimed.
 - [x] Architecture & Goal Conformance Harness passing for this draft; semantic prerequisites remain open.
-- [ ] Dependencies and approved overview DTO verified before promotion to ready.
+- [x] Dependencies and approved overview DTO verified before promotion to ready.
 - [x] Worktree and scoped touch map declared.
 
 ## Acceptance criteria
-- [ ] Given a valid server-authenticated actor with session visibility and an approved complete upstream response, the route returns 200 with the approved versioned DTO and correlation lineage.
-- [ ] Given no valid session, forged browser authority, or a session outside the actor scope, the route follows the approved privacy-safe error contract and reveals no session data.
-- [ ] Given a partial, stale, malformed or timed-out upstream response, the route returns only the documented partial/error outcome and never fabricates values or success.
-- [ ] The response excludes raw viewer IDs, COGS, secrets, provider payloads and internal error details; no browser-provided tenant or role is trusted.
+- [x] Given a valid server-authenticated actor with session visibility and an approved complete upstream response, the route returns 200 with the approved versioned DTO and correlation lineage.
+- [x] Given no valid session, forged browser authority, or a session outside the actor scope, the route follows the approved privacy-safe error contract and reveals no session data.
+- [x] Given a partial, stale, malformed or timed-out upstream response, the route returns only the documented partial/error outcome and never fabricates values or success.
+- [x] The response excludes raw viewer IDs, COGS, secrets, provider payloads and internal error details; no browser-provided tenant or role is trusted.
 
 ## Test plan
 - `node --test apps/web/tests/session-overview-route.test.mjs` — new focused test, to be created during execution; cover authorized read; unauthenticated access; forged role/tenant; inaccessible session; sensitive-field redaction; malformed DTO; upstream timeout; approved stale/partial representation and correlation propagation.

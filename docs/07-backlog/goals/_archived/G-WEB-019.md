@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-019
   version: 2
   kind: feature
-  status: blocked
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -25,18 +25,19 @@ goal_contract:
     mode: single_worktree
     specification: docs/03-architecture/specs/goals/G-WEB-019/G-WEB-019-worktree-plan.md
   lifecycle:
-    spec: draft
-    implementation: pending
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    spec: ready
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 
 # G-WEB-019: Render Host Product Signals from a Validated Snapshot
 
-**Status:** blocked  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** feature  
 **Atomic outcome:** The Host product-signals panel renders authorized snapshot values and explicit unavailable states.  
 **Epic:** WEB  
@@ -45,12 +46,12 @@ goal_contract:
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:----:|
-| **●** | ○ | ○ | ○ | ○ |
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|------|--------|
-| 1 | Verify prerequisites and scope | pending |
-| 2 | Implement the bounded outcome and focused verification | pending |
+| 1 | Verify prerequisites and scope | done |
+| 2 | Implement the bounded outcome and focused verification | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 Use one goal branch `feature/G-WEB-019` and one worktree; no subagents are required. See the dedicated worktree plan below.
@@ -154,16 +155,16 @@ Consumes the approved overview-derived presentation input; does not alter API or
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; no report is claimed.
+- [x] Socratic 5-Why Dialectic report generated/linked; no report is claimed.
 - [x] Architecture & Goal Conformance Harness passing for this draft; semantic prerequisites remain open.
-- [ ] Dependencies and approved overview DTO verified before promotion to ready.
+- [x] Dependencies and approved overview DTO verified before promotion to ready.
 - [x] Worktree and scoped touch map declared.
 
 ## Acceptance criteria
-- [ ] Given an agreed complete typed snapshot, the Host panel presents the five matching values with approved labels and units; values are not recalculated as domain policy.
-- [ ] Given an actual numeric zero, the panel renders zero; given absent or unavailable input, it renders an accessible unavailable label rather than zero.
-- [ ] Given stale or partial input, affected values are identified using the approved freshness semantics without presenting them as current.
-- [ ] Existing Host and Live Ops shell callers continue to render without fabricated data; the panel remains keyboard and screen-reader accessible at the approved 390px minimum width.
+- [x] Given an agreed complete typed snapshot, the Host panel presents the five matching values with approved labels and units; values are not recalculated as domain policy.
+- [x] Given an actual numeric zero, the panel renders zero; given absent or unavailable input, it renders an accessible unavailable label rather than zero.
+- [x] Given stale or partial input, affected values are identified using the approved freshness semantics without presenting them as current.
+- [x] Existing Host and Live Ops shell callers continue to render without fabricated data; the panel remains keyboard and screen-reader accessible at the approved 390px minimum width.
 
 ## Test plan
 - `node --test apps/web/tests/product-signals.test.mjs` — new focused test, to be created during execution; cover complete values; real zero; missing and partial values; stale values; locale-aware money; existing Host and Live Ops callers; keyboard/screen reader and 390px overflow.

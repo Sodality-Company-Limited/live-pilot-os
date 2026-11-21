@@ -11,8 +11,6 @@
 
 | Goal | Title | Status | Depends On | File |
 |------|-------|--------|------------|------|
-| G-WEB-018 | Serve an Authorized Session Overview through Portal BFF | blocked | G-WEB-020 | [`goals/G-WEB-018.md`](../goals/G-WEB-018.md) |
-| G-WEB-019 | Render Host Product Signals from a Validated Snapshot | blocked | G-WEB-016, G-WEB-018 | [`goals/G-WEB-019.md`](../goals/G-WEB-019.md) |
 | G-WEB-025 | Portal Session Event Stream | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-025.md`](../goals/G-WEB-025.md) |
 | G-WEB-026 | Portal Promotion Proposal Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-026.md`](../goals/G-WEB-026.md) |
 | G-WEB-027 | Portal Promotion Decision Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-027.md`](../goals/G-WEB-027.md) |
@@ -45,6 +43,8 @@
 | G-WEB-022 | Portal Login Route | 2026-11-21 | [`goals/_archived/G-WEB-022.md`](../goals/_archived/G-WEB-022.md) |
 | G-WEB-021 | Trusted Portal-to-Gateway Transport | 2026-11-21 | [`goals/_archived/G-WEB-021.md`](../goals/_archived/G-WEB-021.md) |
 | G-WEB-020 | Server-derived Portal Session Context | 2026-11-21 | [`goals/_archived/G-WEB-020.md`](../goals/_archived/G-WEB-020.md) |
+| G-WEB-019 | Render Host Product Signals from a Validated Snapshot | 2026-11-21 | [`goals/_archived/G-WEB-019.md`](../goals/_archived/G-WEB-019.md) |
+| G-WEB-018 | Serve an Authorized Session Overview through Portal BFF | 2026-11-21 | [`goals/_archived/G-WEB-018.md`](../goals/_archived/G-WEB-018.md) |
 | G-WEB-017 | Apply an Orange Accent to the Live OS Dark Theme | 2026-11-21 | [`goals/_archived/G-WEB-017.md`](../goals/_archived/G-WEB-017.md) |
 | G-WEB-016 | Live OS Frontend and Storybook Foundation | 2026-11-21 | [`goals/_archived/G-WEB-016.md`](../goals/_archived/G-WEB-016.md) |
 | G-WEB-015 | Interaction-State and Keyboard Path Verification | 2026-11-21 | [`goals/_archived/G-WEB-015.md`](../goals/_archived/G-WEB-015.md) |

@@ -37,8 +37,8 @@ const { LiveShell } = loadComponent("live-shell");
 test("renders product signals panel in LiveShell for host role", () => {
   const markup = renderToStaticMarkup(React.createElement(LiveShell, { role: "host" }));
   assert.ok(markup.includes("Product signals"));
-  assert.ok(markup.includes("Cart additions"));
-  assert.ok(markup.includes("Orders placed"));
+  assert.ok(markup.includes("Add to cart"));
+  assert.ok(markup.includes("Product clicks"));
 });
 
 test("renders product signals panel in LiveShell for ops role", () => {
