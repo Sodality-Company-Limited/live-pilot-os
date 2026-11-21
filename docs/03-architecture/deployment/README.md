@@ -13,6 +13,7 @@
 | Deployment pipeline and release gates | [deployment-pipeline-sot.md](deployment-pipeline-sot.md) |
 | Rollback and migration safety | [migration-rollback-sot.md](migration-rollback-sot.md) |
 | Backup, restore, and DR | [backup-restore-dr-sot.md](backup-restore-dr-sot.md) |
+| AI/JEV runtime and provider boundary | [../jev-agent-runtime-sot.md](../jev-agent-runtime-sot.md), [../ai-provider-abstraction-sot.md](../ai-provider-abstraction-sot.md) |
 
 ## Non-negotiable invariants
 
@@ -25,7 +26,7 @@
 
 ## Current environment decision
 
-For the current LivePilot stage, local development is the only non-production environment. DigitalOcean is the production runtime. There is no separate staging environment or staging promotion step. Production remains `SIMULATED` for marketplace actions until the requirements and integration SOT explicitly authorize live mutation.
+For the current LivePilot stage, local development is the only non-production environment. DigitalOcean is the production runtime. There is no separate staging environment or staging promotion step. The production runtime remains production-shaped; the live demo injects frontend signals and backend mock products, while `PLATFORM_ADAPTER_MODE=simulated` prevents real marketplace mutation.
 
 ## Decision boundary
 

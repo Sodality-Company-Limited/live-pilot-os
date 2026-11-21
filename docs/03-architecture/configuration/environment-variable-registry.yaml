@@ -9,14 +9,70 @@ rules:
 variables:
   - key: APP_ENV
     type: enum
-    allowed: [local, ci, staging, production]
+    allowed: [local, ci, prod]
     required: true
     secret: false
     source: deployment
     reload: restart
-  - key: PLATFORM_MODE
+  - key: DEMO_MODE
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: DEMO_SCENARIO
+    type: enum
+    allowed: [opportunity, threat]
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: FRONTEND_MOCK_SIGNALS
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: BACKEND_MOCK_PRODUCTS
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: PLATFORM_ADAPTER_MODE
     type: enum
     allowed: [simulated, sandbox, production]
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: AI_PROVIDER
+    type: enum
+    allowed: [fixture, openai]
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: OPENAI_API_KEY
+    type: secret
+    required: false
+    secret: true
+    source: secret_manager_or_protected_env
+    reload: restart
+  - key: OPENAI_MODEL
+    type: string
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: JEV_PROMPT_REVISION
+    type: string
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: JEV_SCHEMA_REVISION
+    type: string
     required: true
     secret: false
     source: deployment

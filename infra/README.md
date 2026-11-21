@@ -1,8 +1,14 @@
 # LivePilot DigitalOcean infrastructure
 
-This follows Aflovia's Droplet pattern, constrained by the LivePilot deployment SOT: local development runs on the workstation and the production runtime runs on one Ubuntu 24.04 DigitalOcean Droplet, using Docker Compose, private loopback bindings, persistent named volumes, and root-owned secrets. Marketplace actions remain explicitly `SIMULATED` until separately approved.
+This follows Aflovia's Droplet pattern, constrained by the LivePilot deployment SOT: local development runs on the workstation and the production runtime runs on one Ubuntu 24.04 DigitalOcean Droplet, using Docker Compose, private loopback bindings, persistent named volumes, and root-owned secrets. The architecture remains production-shaped; only live demo inputs are mocked at explicit boundaries.
 
 The SOT-authoritative durable state is PostgreSQL plus NATS JetStream. Redis is reconstructable cache/coordination only. ClickHouse is intentionally excluded until an approved architecture decision exists.
+
+The demo supports two scenarios through `DEMO_SCENARIO`: `opportunity` (frontend-injected buying interest plus backend mock products) and `threat` (frontend-injected aggressive discount/risk signals evaluated against backend mock product economics, blocked when margin fails, and pivoted to a verified bundle).
+
+`PLATFORM_ADAPTER_MODE=simulated` limits only external marketplace mutation. It does not downgrade persistence, authorization, policy, audit, idempotency, or reconciliation.
+
+Third-party integration variables follow the sanitized template in [`third-party/`](third-party/README.md). Real credentials stay in root-owned files outside Git.
 
 ## Local development
 
