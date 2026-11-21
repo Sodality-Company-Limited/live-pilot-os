@@ -9,12 +9,18 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | Epic | Queue | Notes |
 |------|-------|-------|
 | CORE | [queues/CORE.md](queues/CORE.md) | Core / unscoped |
+| CATA | [queues/CATA.md](queues/CATA.md) | Catalog Service |
 | DAVE | [queues/DAVE.md](queues/DAVE.md) | DAVE Decision System & Governance |
+| IDEN | [queues/IDEN.md](queues/IDEN.md) | Identity and Session Service |
+| INTE | [queues/INTE.md](queues/INTE.md) | Intent/Risk Service |
+| JEVC | [queues/JEVC.md](queues/JEVC.md) | JEV/Copilot Service |
+| LIVE | [queues/LIVE.md](queues/LIVE.md) | Live-session service |
 | ML | [queues/ML.md](queues/ML.md) | Machine Learning & Cognitive Calibration |
 | OPS | [queues/OPS.md](queues/OPS.md) | DAVE Operations & Deployment Governance |
 | PAY | [queues/PAY.md](queues/PAY.md) | Active queue |
 | PROOF | [queues/PROOF.md](queues/PROOF.md) | DAVE Mathematical Invariant & Assurance Proofs |
 | SEC | [queues/SEC.md](queues/SEC.md) | DAVE Multimodal Security & Privacy Controls |
+| TELM | [queues/TELM.md](queues/TELM.md) | Telemetry Service |
 | TEMPLATE | [queues/TEMPLATE.md](queues/TEMPLATE.md) | Active queue |
 | UX | [queues/UX.md](queues/UX.md) | Multimodal UX/UI Design Decision Layer |
 | WEB | [queues/WEB.md](queues/WEB.md) | DAVE Exact Web Application Pipeline |
