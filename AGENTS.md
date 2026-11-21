@@ -238,6 +238,21 @@ Details: [docs/04-agents/dev-roles.md](docs/04-agents/dev-roles.md)
 - **SOT-linked skill selection** — architecture-impacting skills must be selected with an explicit SOT touch map; missing or stale SOT links block execution until resolved.
 - **Automated evidence before `done`** — status must reach `approved` only after all required automated gates pass; no human sign-off state is required.
 - **Respect Project Scope** — no out-of-scope features without a new goal row.
+
+## LivePilot goal-generation authority
+
+For this repository, Codex is the authoritative Soda OS context and atomic-goal
+generator for LivePilot OS. Antigravity artifacts are not required for LivePilot
+goal drafting.
+
+Codex must inspect the repository SOTs directly, generate a LivePilot-specific
+context artifact, create atomic goals and their required satellite specifications,
+and run the goal-template and architecture conformance checks.
+
+For the current implementation wave, goals are limited to microservices,
+PostgreSQL migrations, Redis usage, NATS producers/consumers, and the JEV/OpenAI
+adapter. Portal UI, Portal BFF, and Core BFF goals are deferred until the
+microservice wave is complete.
 - **Minimize diff** — smallest change that satisfies acceptance criteria.
 - **Do not deploy to production** unless goal explicitly includes it and human confirms.
 - **No secrets** — never commit or expose `.env`, tokens, keys (see `security.md`).
