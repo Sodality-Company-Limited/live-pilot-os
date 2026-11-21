@@ -11,11 +11,6 @@
 
 | Goal | Title | Status | Depends On | File |
 |------|-------|--------|------------|------|
-| G-WEB-025 | Portal Session Event Stream | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-025.md`](../goals/G-WEB-025.md) |
-| G-WEB-026 | Portal Promotion Proposal Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-026.md`](../goals/G-WEB-026.md) |
-| G-WEB-027 | Portal Promotion Decision Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-027.md`](../goals/G-WEB-027.md) |
-| G-WEB-028 | Portal Promotion Read Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-028.md`](../goals/G-WEB-028.md) |
-| G-WEB-029 | Portal Action Log Read Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-029.md`](../goals/G-WEB-029.md) |
 | G-WEB-035 | Audience Topic Log Binding | blocked | G-WEB-016, G-WEB-020, G-WEB-021, G-WEB-033 | [`goals/G-WEB-035.md`](../goals/G-WEB-035.md) |
 | G-WEB-044 | Simulated Session Controls | blocked | G-WEB-016, G-WEB-020, G-WEB-021 | [`goals/G-WEB-044.md`](../goals/G-WEB-044.md) |
 | G-WEB-046 | Validate Host and Live Ops Integration Journey | blocked | G-WEB-016, G-WEB-020, G-WEB-021, G-WEB-030, G-WEB-031, G-WEB-033, G-WEB-034, G-WEB-035, G-WEB-036, G-WEB-037, G-WEB-038, G-WEB-039, G-WEB-040, G-WEB-041, G-WEB-043, G-WEB-044 | [`goals/G-WEB-046.md`](../goals/G-WEB-046.md) |
@@ -38,6 +33,11 @@
 | G-WEB-032 | Session Logout Control | 2026-11-21 | [`goals/_archived/G-WEB-032.md`](../goals/_archived/G-WEB-032.md) |
 | G-WEB-031 | Role-Scoped UI Access Gate | 2026-11-21 | [`goals/_archived/G-WEB-031.md`](../goals/_archived/G-WEB-031.md) |
 | G-WEB-030 | Host and Live Ops Login Screen | 2026-11-21 | [`goals/_archived/G-WEB-030.md`](../goals/_archived/G-WEB-030.md) |
+| G-WEB-029 | Portal Action Log Read Route | 2026-11-21 | [`goals/_archived/G-WEB-029.md`](../goals/_archived/G-WEB-029.md) |
+| G-WEB-028 | Portal Promotion Read Route | 2026-11-21 | [`goals/_archived/G-WEB-028.md`](../goals/_archived/G-WEB-028.md) |
+| G-WEB-027 | Portal Promotion Decision Route | 2026-11-21 | [`goals/_archived/G-WEB-027.md`](../goals/_archived/G-WEB-027.md) |
+| G-WEB-026 | Portal Promotion Proposal Route | 2026-11-21 | [`goals/_archived/G-WEB-026.md`](../goals/_archived/G-WEB-026.md) |
+| G-WEB-025 | Portal Session Event Stream | 2026-11-21 | [`goals/_archived/G-WEB-025.md`](../goals/_archived/G-WEB-025.md) |
 | G-WEB-024 | Portal Logout Route | 2026-11-21 | [`goals/_archived/G-WEB-024.md`](../goals/_archived/G-WEB-024.md) |
 | G-WEB-023 | Portal Session Read Route | 2026-11-21 | [`goals/_archived/G-WEB-023.md`](../goals/_archived/G-WEB-023.md) |
 | G-WEB-022 | Portal Login Route | 2026-11-21 | [`goals/_archived/G-WEB-022.md`](../goals/_archived/G-WEB-022.md) |

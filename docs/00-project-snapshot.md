@@ -45,11 +45,6 @@
 | [`G-PROMO-026`](07-backlog/goals/G-PROMO-026.md) | `review` | Promotion service-level verification matrix |
 | [`G-PROMO-027`](07-backlog/goals/G-PROMO-027.md) | `blocked` | Promotion API architecture and release gates |
 | [`G-PROMO-028`](07-backlog/goals/G-PROMO-028.md) | `blocked` | Promotion service DigitalOcean release |
-| [`G-WEB-025`](07-backlog/goals/G-WEB-025.md) | `blocked` | Portal Session Event Stream |
-| [`G-WEB-026`](07-backlog/goals/G-WEB-026.md) | `blocked` | Portal Promotion Proposal Route |
-| [`G-WEB-027`](07-backlog/goals/G-WEB-027.md) | `blocked` | Portal Promotion Decision Route |
-| [`G-WEB-028`](07-backlog/goals/G-WEB-028.md) | `blocked` | Portal Promotion Read Route |
-| [`G-WEB-029`](07-backlog/goals/G-WEB-029.md) | `blocked` | Portal Action Log Read Route |
 | [`G-WEB-035`](07-backlog/goals/G-WEB-035.md) | `blocked` | Audience Topic Log Binding |
 | [`G-WEB-044`](07-backlog/goals/G-WEB-044.md) | `blocked` | Simulated Session Controls |
 | [`G-WEB-046`](07-backlog/goals/G-WEB-046.md) | `blocked` | Validate Host and Live Ops Integration Journey |
