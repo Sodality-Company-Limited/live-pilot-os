@@ -20,6 +20,10 @@ epics:
     name: DAVE Operations & Deployment Governance
     next_seq: 2
     reserved: []
+  PROMO:
+    name: Promotion Service
+    next_seq: 29
+    reserved: []
   PROOF:
     name: DAVE Mathematical Invariant & Assurance Proofs
     next_seq: 14

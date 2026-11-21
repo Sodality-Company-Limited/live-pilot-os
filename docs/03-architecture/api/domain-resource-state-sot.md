@@ -14,7 +14,7 @@ database tables as an accidental contract.
 | Live session | session service | scheduled, live, paused, ended | start, pause, resume, end |
 | Product/SKU | catalog service | active, unavailable, archived | publish, unpublish |
 | Inventory reservation | inventory service | requested, reserved, released, committed, expired, conflict | reserve, release, commit |
-| Promotion/voucher | promotion service | proposed, pending, approved, rejected, issued, expired, cancelled | approve, issue, cancel |
+| Promotion/voucher | promotion-service (sole authoritative writer) | proposed, pending, approved, rejected, issued, unknown, expired, cancelled | propose, approve, issue-on-observation, reconcile, expire, cancel |
 | Suggestion/alert | copilot/decision service | created, shown, accepted, edited, dismissed, expired | accept, edit, dismiss |
 | Approval | approval-control service | requested, approved, rejected, expired, revoked | approve, reject, revoke |
 | Platform action | execution service | requested, accepted, pending, succeeded, failed, unknown, reconciled | dispatch, retry, reconcile |
@@ -23,6 +23,12 @@ database tables as an accidental contract.
 Every mutation includes `resource_id`, `resource_version`, actor context, policy
 revision, idempotency key, and correlation. Invalid transitions return a stable conflict
 error and cannot partially mutate state.
+
+Promotion-specific invariant: only `promotion-service` may mutate Promotion/Voucher state;
+approval-control owns approval decisions, execution owns action observations, and inventory
+owns reservations. Pending, stale, paused, unauthorized, duplicate-conflict, unavailable,
+or unobserved inputs cannot transition to `issued`. A timeout or missing observation is
+`unknown` and requires reconciliation before retry.
 
 ## Required schema fields
 
