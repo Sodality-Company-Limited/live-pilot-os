@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-010",
+  "artifact_id": "ART-ASSET-PROVENANCE-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
+  "status": "PASSED",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "provenance_audit": {
+    "visual_assets_scanned": 4,
+    "audio_assets_scanned": 2,
+    "manifest_grounded_count": 6,
+    "zero_unlicensed_assets": true,
+    "mute_suppression_verified": true
+  },
+  "invariants": [
+    {
+      "id": "010-INV-001",
+      "statement": "Asset and Reference Provenance satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/asset-harness.mjs && node scripts/harness/audio-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/02-product/design/asset-provenance-manifest.json",
+      "sha256": "17de402b1dfb369dab4dd1791d8fbf872578576dd573d6371d32215cea58af09"
+    },
+    {
+      "path": "scripts/harness/asset-harness.mjs",
+      "sha256": "64fbc45fa81d63c9b24b0a2bbfccea29e7a606a8039e39c6e4974595dbc8df18"
+    },
+    {
+      "path": "scripts/harness/audio-harness.mjs",
+      "sha256": "636be63a772496e3375b596563c8a586445378d910f4f07bac65f78744cb6ea2"
+    },
+    {
+      "path": "public/assets/soda-logo.svg",
+      "sha256": "66257a62c5c52b82db3a97e3a619d65457144d75b91dabff33fa022d0b0c1c4a"
+    },
+    {
+      "path": "public/assets/verified-badge.svg",
+      "sha256": "6d0055daa3068937decb76b52769af03220746417a9f02676f3b680b905d588b"
+    },
+    {
+      "path": "public/assets/status-indicator.svg",
+      "sha256": "89b956c00ebcad54c506109f924febc6853d7f0214ef073e99796fdea87cc3d2"
+    },
+    {
+      "path": "public/assets/decision-canvas-preview.webp",
+      "sha256": "fe0510ff141507235f411400f1c05dc3af88f09f58746045ab5a91f213bd3565"
+    },
+    {
+      "path": "public/audio/chime-complete.wav",
+      "sha256": "11b6f833f5fd89c96df1fa253d2ff0c8cf35b2bee3e20da0e570d24df98f14d1"
+    },
+    {
+      "path": "public/audio/toggle-click.wav",
+      "sha256": "bbc4395d11fdf7b3711431fd77a2dbc8a344e3796712b3aa09312194a98b66ca"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-20T07:51:57.818Z"
+}

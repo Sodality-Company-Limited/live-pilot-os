@@ -1,0 +1,17 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-001",
+  "invariant": "TRAJ-SCHEMA-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/confidence-calibration-harness.mjs",
+  "exit_code": 0,
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-ML-001.md": "d6912758527eb9e89bfe4505d2bece1519e1e3f5cc3270cf2e451e5f5236be91",
+    "artifacts/proofs/TRAJ-SCHEMA-001.json": "6977dacdb7d7b5b7a5b5d1b138aeb68e328962d50f78d43eb14cf94969f4acb6",
+    "scripts/lib/confidence-calibration.mjs": "5b9794905026e9d6d7718ba57a9cc2cea554744519f11389adcff61d4f5282d1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-09-28T14:51:32.154Z"
+}

@@ -1,0 +1,22 @@
+{
+  "goal": "G-DAVE-022",
+  "timestamp_utc": "2026-10-11T06:12:10Z",
+  "benchmark": {
+    "iterations": 10000,
+    "mean_overhead_us": 5.834,
+    "median_overhead_us": 5.625,
+    "p95_overhead_us": 7.125,
+    "p99_overhead_us": 7.958,
+    "max_overhead_us": 58.083,
+    "sla_ceiling_us": 10.0,
+    "p99_sla_passed": true
+  },
+  "metrics_summary": {
+    "dave_decision_total": 10000,
+    "dave_ece_gauge": 0.37999999999999634,
+    "dave_brier_gauge": 0.39439999999999586,
+    "drift_alerts_raised": 20102
+  },
+  "openmetrics_sample": "# HELP dave_decision_total Total number of executed decisions classified by domain and action\n# TYPE dave_decision_total counter\ndave_decision_total{action=\"BUY\",domain=\"alpha_hft\"} 10100.0\n# HELP dave_risk_veto_total Total number of pre-trade risk and friction rejections\n# TYPE dave_risk_veto_total counter\ndave_risk_veto_total 0.0\n# HELP dave_ece_gauge Current Expected Calibration Error over sliding tick window\n# TYPE dave_ece_gauge gauge\ndave_ece_gauge 0.37999999999999634\n# HELP dave_brier_gau",
+  "certification": "PASS"
+}

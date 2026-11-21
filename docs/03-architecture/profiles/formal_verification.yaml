@@ -1,0 +1,61 @@
+# Soda OS Goal Profile Schema: Formal Verification & Program Verification Profile
+# Profile ID: formal_verification
+# Description: Applied to goals requiring mathematical proof, formal methods, deductive verification, constructive logic, model checking, or sound static analysis.
+# Invariant: Every goal declaring this profile MUST specify formal semantics, verification paradigms, machine-checked assertions, and proof evidence artifacts.
+
+profile:
+  id: formal_verification
+  name: "Formal Methods & Program Verification Profile"
+  version: "1.0.0"
+  mandatory: false
+
+required_sections:
+  - id: formal_verification
+    description: "Machine-readable formal verification contract specifying verification paradigm, semantics, Hoare logic conditions, type theory invariants, model checking properties, and solver evidence."
+    type: yaml_block
+    schema:
+      paradigm: enum[interactive_proof, deductive_verification, correctness_by_construction, proof_carrying_code, model_checking, abstract_interpretation]
+      target_module: string
+      spec_language: enum[lean4, coq_rocq, isabelle_hol, dafny, fstar, why3, viper, frama_c_acsl, spark_ada, tla_plus, spin_promela, smt_lib2]
+      trusted_computing_base:
+        kernel: string
+        axioms: array[string]
+      verification_conditions:
+        type: array
+        items:
+          id: string
+          name: string
+          kind: enum[total_correctness, partial_correctness, safety_invariant, liveness_property]
+          precondition: string
+          postcondition: string
+          weakest_precondition: string
+          loop_invariants: array[string]
+          loop_variants: array[string]
+          separation_logic_frame: string
+      type_theory_invariants:
+        dependent_types: string
+        refinement_types: string
+        linear_affine_handling: enum[linear, affine, unrestricted]
+      model_checking:
+        temporal_logic: enum[LTL, CTL]
+        properties:
+          type: array
+          items:
+            id: string
+            type: enum[safety, liveness]
+            formula: string
+            state_space_mitigation: string
+            engine: string
+      abstract_interpretation:
+        abstract_domain: enum[sign, interval, octagons, polyhedra]
+        galois_connection: string
+        widening_operator: string
+        soundness_guarantee: string
+      solvers_and_checkers:
+        smt_solvers: array[object]
+        model_checkers: array[object]
+        proof_assistants: array[object]
+      evidence_artifacts:
+        proof_script: string
+        vcg_output: string
+        solver_receipt: string

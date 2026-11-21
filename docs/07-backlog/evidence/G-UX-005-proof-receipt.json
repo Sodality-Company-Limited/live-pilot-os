@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-005",
+  "generated_at": "2026-10-14T05:29:32.526Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-005-INV-001",
+      "statement": "SigLIP ViT dynamic patch tiling produces exactly 7 tiles (1,792 tokens) on Desktop, bounded <= 11% of context.",
+      "verification_command": "node scripts/harness/gemma4-vision-adapter-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-005-INV-002",
+      "statement": "Gemma 4 vision adapter unit test suite passes 10/10 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-gemma4-vision-adapter.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-005-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-005",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/vision/gemma4_multimodal_adapter.py",
+      "sha256": "a069f1fd8f4dc6b0b3abe5a2eae3ab076a959148f389411db9ea63bb56a170cb"
+    },
+    {
+      "path": "code/ml/configs/vision_adapter.yaml",
+      "sha256": "8cf1f55044c7709f24e42092988d9407d221bb81f4b8b2bb1163ef8295520b6e"
+    },
+    {
+      "path": "scripts/lib/gemma4-vision-adapter.mjs",
+      "sha256": "7c130f4746b8d8d64bd928b275d2a537ee559adecb7f868fca03c713a9373932"
+    },
+    {
+      "path": "tests/unit/test-gemma4-vision-adapter.mjs",
+      "sha256": "ff400b33279a0cc73f452db271d369b5131f4a469d927b5899d97f712c91a800"
+    },
+    {
+      "path": "scripts/harness/gemma4-vision-adapter-harness.mjs",
+      "sha256": "ee87bb42a16467fac07c961984531f0030fb98335869c9748f099293f31c1ca8"
+    },
+    {
+      "path": "tests/ml/test_gemma4_multimodal_adapter.py",
+      "sha256": "6acf3c8c426476193b83ca430835f9ac27615901fc0019621840d657f4609a2b"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-005.md",
+      "sha256": "9bc1d6daa98d28d8ee234c3ce3f476a62293870f846cae9feafe4ee232e08eba"
+    }
+  ],
+  "certification": "PASS"
+}

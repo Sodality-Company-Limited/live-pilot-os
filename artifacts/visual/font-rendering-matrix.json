@@ -1,0 +1,804 @@
+{
+  "schema_version": "1.0.0",
+  "goal_id": "G-WEB-014",
+  "artifact_id": "ART-FONT-RENDERING-MATRIX",
+  "generated_at": "2026-10-03T14:46:38.564Z",
+  "source_revision": "9ff93ddcc6ad75461607f18ba9ed9944230eb63e",
+  "status": "PASSED",
+  "certification": "PASS",
+  "supported_engines": [
+    "chromium",
+    "webkit",
+    "gecko"
+  ],
+  "engine_profiles": {
+    "chromium": {
+      "engine": "blink",
+      "rasterizer": "skia",
+      "antialiasing": "subpixel-antialiased",
+      "textRendering": "optimizeLegibility",
+      "subpixelHinting": "medium",
+      "fontDisplayStrategy": "swap"
+    },
+    "webkit": {
+      "engine": "webkit",
+      "rasterizer": "coretext",
+      "antialiasing": "antialiased",
+      "textRendering": "geometricPrecision",
+      "subpixelHinting": "auto",
+      "fontDisplayStrategy": "swap"
+    },
+    "gecko": {
+      "engine": "gecko",
+      "rasterizer": "webrender",
+      "antialiasing": "grayscale-antialiased",
+      "textRendering": "optimizeLegibility",
+      "subpixelHinting": "slight",
+      "fontDisplayStrategy": "swap"
+    }
+  },
+  "font_cascade_specifications": {
+    "sans": {
+      "token": "--font-sans",
+      "primary": "Inter",
+      "fallbackChain": [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif"
+      ],
+      "fontDisplay": "swap",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "mono": {
+      "token": "--font-mono",
+      "primary": "Fira Code",
+      "fallbackChain": [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Menlo",
+        "Monaco",
+        "Consolas",
+        "monospace"
+      ],
+      "fontDisplay": "swap",
+      "weights": [
+        400,
+        500,
+        600
+      ]
+    }
+  },
+  "tolerances": {
+    "max_advance_width_delta_px": 2,
+    "max_line_height_delta_px": 1,
+    "fout_layout_shift_ceiling": 0,
+    "horizontal_overflow_allowed": false
+  },
+  "metrics_summary": {
+    "max_advance_width_delta_observed": 1.42,
+    "max_line_height_delta_observed": 0,
+    "fout_layout_shift": 0,
+    "horizontal_overflow_detected": false,
+    "horizontal_overflow_free": true
+  },
+  "viewport_evaluations": {
+    "desktop": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "horizontal_overflow_detected": false,
+      "horizontal_overflow_free": true,
+      "engines": {
+        "chromium": {
+          "engine": "chromium",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 376.25,
+              "height": 32,
+              "advance_width": 376.25,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.39,
+              "height": 28,
+              "advance_width": 290.39,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.79,
+              "height": 24,
+              "advance_width": 356.79,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 788.7,
+              "height": 20,
+              "advance_width": 788.7,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.48,
+              "height": 20,
+              "advance_width": 129.48,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.8,
+              "height": 18,
+              "advance_width": 124.8,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.68,
+              "height": 16,
+              "advance_width": 133.68,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "webkit": {
+          "engine": "webkit",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 375.87,
+              "height": 32,
+              "advance_width": 375.87,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.1,
+              "height": 28,
+              "advance_width": 290.1,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.43,
+              "height": 24,
+              "advance_width": 356.43,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 787.91,
+              "height": 20,
+              "advance_width": 787.91,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.35,
+              "height": 20,
+              "advance_width": 129.35,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.74,
+              "height": 18,
+              "advance_width": 124.74,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.61,
+              "height": 16,
+              "advance_width": 133.61,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "gecko": {
+          "engine": "gecko",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 376.55,
+              "height": 32,
+              "advance_width": 376.55,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.62,
+              "height": 28,
+              "advance_width": 290.62,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 357.08,
+              "height": 24,
+              "advance_width": 357.08,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 789.33,
+              "height": 20,
+              "advance_width": 789.33,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.58,
+              "height": 20,
+              "advance_width": 129.58,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.85,
+              "height": 18,
+              "advance_width": 124.85,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.73,
+              "height": 16,
+              "advance_width": 133.73,
+              "horizontal_overflow": false
+            }
+          ]
+        }
+      }
+    },
+    "tablet": {
+      "name": "tablet",
+      "width": 1024,
+      "height": 768,
+      "horizontal_overflow_detected": false,
+      "horizontal_overflow_free": true,
+      "engines": {
+        "chromium": {
+          "engine": "chromium",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 376.25,
+              "height": 32,
+              "advance_width": 376.25,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.39,
+              "height": 28,
+              "advance_width": 290.39,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.79,
+              "height": 24,
+              "advance_width": 356.79,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 788.7,
+              "height": 20,
+              "advance_width": 788.7,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.48,
+              "height": 20,
+              "advance_width": 129.48,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.8,
+              "height": 18,
+              "advance_width": 124.8,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.68,
+              "height": 16,
+              "advance_width": 133.68,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "webkit": {
+          "engine": "webkit",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 375.87,
+              "height": 32,
+              "advance_width": 375.87,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.1,
+              "height": 28,
+              "advance_width": 290.1,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.43,
+              "height": 24,
+              "advance_width": 356.43,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 787.91,
+              "height": 20,
+              "advance_width": 787.91,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.35,
+              "height": 20,
+              "advance_width": 129.35,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.74,
+              "height": 18,
+              "advance_width": 124.74,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.61,
+              "height": 16,
+              "advance_width": 133.61,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "gecko": {
+          "engine": "gecko",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 376.55,
+              "height": 32,
+              "advance_width": 376.55,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.62,
+              "height": 28,
+              "advance_width": 290.62,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 357.08,
+              "height": 24,
+              "advance_width": 357.08,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 789.33,
+              "height": 20,
+              "advance_width": 789.33,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.58,
+              "height": 20,
+              "advance_width": 129.58,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.85,
+              "height": 18,
+              "advance_width": 124.85,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.73,
+              "height": 16,
+              "advance_width": 133.73,
+              "horizontal_overflow": false
+            }
+          ]
+        }
+      }
+    },
+    "mobile": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow_detected": false,
+      "horizontal_overflow_free": true,
+      "engines": {
+        "chromium": {
+          "engine": "chromium",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 358,
+              "height": 64,
+              "advance_width": 376.25,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.39,
+              "height": 28,
+              "advance_width": 290.39,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.79,
+              "height": 24,
+              "advance_width": 356.79,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 358,
+              "height": 60,
+              "advance_width": 788.7,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.48,
+              "height": 20,
+              "advance_width": 129.48,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.8,
+              "height": 18,
+              "advance_width": 124.8,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.68,
+              "height": 16,
+              "advance_width": 133.68,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "webkit": {
+          "engine": "webkit",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 358,
+              "height": 64,
+              "advance_width": 375.87,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.1,
+              "height": 28,
+              "advance_width": 290.1,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 356.43,
+              "height": 24,
+              "advance_width": 356.43,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 358,
+              "height": 60,
+              "advance_width": 787.91,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.35,
+              "height": 20,
+              "advance_width": 129.35,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.74,
+              "height": 18,
+              "advance_width": 124.74,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.61,
+              "height": 16,
+              "advance_width": 133.61,
+              "horizontal_overflow": false
+            }
+          ]
+        },
+        "gecko": {
+          "engine": "gecko",
+          "horizontal_overflow": false,
+          "boxes": [
+            {
+              "element_id": "elem-h1",
+              "selector": "h1",
+              "width": 358,
+              "height": 64,
+              "advance_width": 376.55,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h2",
+              "selector": "h2",
+              "width": 290.62,
+              "height": 28,
+              "advance_width": 290.62,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-h3",
+              "selector": "h3",
+              "width": 357.08,
+              "height": 24,
+              "advance_width": 357.08,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-body",
+              "selector": "p.body",
+              "width": 358,
+              "height": 60,
+              "advance_width": 789.33,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-button",
+              "selector": "button.btn-primary",
+              "width": 129.58,
+              "height": 20,
+              "advance_width": 129.58,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-code",
+              "selector": "code.metric",
+              "width": 124.85,
+              "height": 18,
+              "advance_width": 124.85,
+              "horizontal_overflow": false
+            },
+            {
+              "element_id": "elem-badge",
+              "selector": "span.badge",
+              "width": 133.73,
+              "height": 16,
+              "advance_width": 133.73,
+              "horizontal_overflow": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "font_metrics_report": {
+    "status": "PASSED",
+    "certification": "PASS",
+    "elements_evaluated_count": 7,
+    "max_advance_width_delta_px": 1.42,
+    "advance_width_ceiling_px": 2,
+    "advance_width_tolerance_satisfied": true,
+    "max_line_height_delta_px": 0,
+    "line_height_tolerance_satisfied": true,
+    "fout_layout_shift": 0,
+    "fout_layout_shift_zero": true,
+    "font_display_strategy": "swap",
+    "violations_count": 0,
+    "issues": [],
+    "comparisons": [
+      {
+        "element_id": "elem-h1",
+        "selector": "h1",
+        "font_family": "sans",
+        "font_size": 24,
+        "chromium_width": 376.25,
+        "webkit_width": 375.87,
+        "gecko_width": 376.55,
+        "max_advance_width_delta": 0.68,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-h2",
+        "selector": "h2",
+        "font_family": "sans",
+        "font_size": 20,
+        "chromium_width": 290.39,
+        "webkit_width": 290.1,
+        "gecko_width": 290.62,
+        "max_advance_width_delta": 0.52,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-h3",
+        "selector": "h3",
+        "font_family": "sans",
+        "font_size": 18,
+        "chromium_width": 356.79,
+        "webkit_width": 356.43,
+        "gecko_width": 357.08,
+        "max_advance_width_delta": 0.65,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-body",
+        "selector": "p.body",
+        "font_family": "sans",
+        "font_size": 14,
+        "chromium_width": 788.7,
+        "webkit_width": 787.91,
+        "gecko_width": 789.33,
+        "max_advance_width_delta": 1.42,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-button",
+        "selector": "button.btn-primary",
+        "font_family": "sans",
+        "font_size": 14,
+        "chromium_width": 129.48,
+        "webkit_width": 129.35,
+        "gecko_width": 129.58,
+        "max_advance_width_delta": 0.23,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-code",
+        "selector": "code.metric",
+        "font_family": "mono",
+        "font_size": 13,
+        "chromium_width": 124.8,
+        "webkit_width": 124.74,
+        "gecko_width": 124.85,
+        "max_advance_width_delta": 0.11,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      },
+      {
+        "element_id": "elem-badge",
+        "selector": "span.badge",
+        "font_family": "mono",
+        "font_size": 12,
+        "chromium_width": 133.68,
+        "webkit_width": 133.61,
+        "gecko_width": 133.73,
+        "max_advance_width_delta": 0.12,
+        "max_advance_width_delta_passed": true,
+        "line_height_delta": 0,
+        "line_height_delta_passed": true,
+        "descender_passed": true,
+        "passed": true
+      }
+    ],
+    "timestamp": "2026-10-03T21:40:00.000Z"
+  },
+  "engine_readability_failures": []
+}

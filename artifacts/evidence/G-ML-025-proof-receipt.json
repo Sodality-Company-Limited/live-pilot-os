@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "receipt_id": "RECEIPT-G-ML-025-1791025296705",
+  "goal_id": "G-ML-025",
+  "generated_at": "2026-10-03T11:01:36.705Z",
+  "source_revision": "90f86e247ee34d5ff189df205bfa7fd86a79b784",
+  "classification": "executable_invariant",
+  "certification": "PASS",
+  "invariants": [
+    {
+      "id": "G-ML-025-INV-001",
+      "claim": "DAVE Decision Trajectory and Correction Dataset satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "statement": "DAVE Decision Trajectory and Correction Dataset satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/dave-cli.mjs export-rlcd-data",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 50,
+    "successes": 50,
+    "pass_rate": 1,
+    "split": "test",
+    "baseline": "legacy_framework_baseline",
+    "interval_method": "wilson_score",
+    "confidence_interval": {
+      "lower": 0.9289,
+      "upper": 1,
+      "center": 0.9644,
+      "confidence_level": 0.95
+    }
+  },
+  "epistemic_evaluation": {
+    "domain_episodes_measured": 20,
+    "domain_episodes_passed": 20,
+    "pass_rate": 1,
+    "wilson_95_ci": {
+      "lower": 0.8389,
+      "center": 0.9194,
+      "upper": 1,
+      "margin": 0.0806
+    },
+    "adversarial_mutations_evaluated": 8,
+    "adversarial_mutations_killed": 8,
+    "mutation_kill_rate": 1
+  },
+  "dataset_validation": {
+    "output_path": "artifacts/rlcd/train_dataset.jsonl",
+    "total_records": 20,
+    "splits": {
+      "train": 16,
+      "validation": 2,
+      "test": 2
+    },
+    "split_isolation": "0% contamination verified"
+  },
+  "tracked_file_hashes": {
+    "scripts/lib/dave-trajectory-builder.mjs": "100c5318c9c78717cce8954161141d2a62ff3a03451b365e10a8314e2c5f540b",
+    "scripts/harness/model-training-contract-harness.mjs": "44a4863e808adcdb757e2af24a291baeeb6a45433ec40b8e01dd8494f0e830f2",
+    "tests/unit/test-dave-trajectory-builder.mjs": "16f32b488a30cb3c3dbd0d07d57d3e8c67139fc0ba9e9aa59116ec1ba3db89c9",
+    "artifacts/rlcd/train_dataset.jsonl": "46ea92b1f361446d829aa5511911f7e881fd2c1f7b622e92058874f0bc05a45d",
+    "artifacts/evidence/G-ML-025-training-contract.json": "badf7ea3819f389d2df446862657b66b3e1bca41ec3bb69af17ddbdace47d119",
+    "docs/02-product/acceptance/G-ML-025.md": "4f134acb1d52f86db2e780cb4a9756e532028360529e047957b8d3874366126b",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-025.md": "65e2dd28a244540f9bb4b29174845cdb2b4111d77992f0c67d5fabe6e5b877b8",
+    "docs/07-backlog/goals/G-ML-025.md": "0ce8f278317d3f3c8fbd5d3430de3a8b05e72d3071337c688ec36057e3ba4021",
+    "scripts/agentic/g-ml-025-5why-socratic-engine.mjs": "63527e28a210fcc7da782b0e482c2048805134217768e36c6fc362670e77188b"
+  },
+  "signature": "11234c493849fda30a3339da6f51dcb5d8a350fbc58b608a6404fab7f5a6d53e"
+}

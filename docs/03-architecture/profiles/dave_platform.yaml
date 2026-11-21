@@ -1,0 +1,23 @@
+# Soda OS Goal Profile Schema: DAVE System 1 Decision Platform Profile
+# Profile ID: dave_platform
+# Description: Applied to goals implementing core DAVE runtime orchestration, expert registries, conflict resolution, evidence graphs, and autonomy policies.
+
+profile:
+  id: dave_platform
+  name: "DAVE System 1 Decision Platform Profile"
+  version: "1.0.0"
+  mandatory: false
+
+required_sections:
+  - id: dave_orchestrator
+    description: "11-stage DAVE decision state machine configuration."
+    type: yaml_block
+    schema:
+      state_machine:
+        initial_state: string # INTENT_RECEIVED
+        terminal_states: list # [EXECUTED, VERIFIED, LEARNED]
+        transitions: list
+      routing_policy:
+        high_risk_unverified: string # defer | human_review
+        conflict_action: string # human_review
+        fail_closed: boolean # true

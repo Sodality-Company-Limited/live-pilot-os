@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-006",
+  "generated_at": "2026-10-11T07:35:13.187Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "RLCD-LOSS-001",
+      "claim": "wrong-answer loss strictly increases with confidence",
+      "statement": "wrong-answer loss strictly increases with confidence",
+      "verification_command": "node scripts/harness/property-tests/test-calibrated-loss.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "RLCD-LOSS-002",
+      "claim": "calibrated reward and loss values remain finite with zero NaN or Infinity at confidence bounds [0.0, 1.0]",
+      "statement": "calibrated reward and loss values remain finite with zero NaN or Infinity at confidence bounds [0.0, 1.0]",
+      "verification_command": "pytest tests/ml/test_calibrated_loss.py -k test_boundary_numerical_stability",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/src/training/losses/calibrated_reward.py",
+      "sha256": "eff06fad17b75885b23fdd401072316a62659b202880ce99471b251c6fc45e36"
+    },
+    {
+      "path": "code/ml/src/training/losses/__init__.py",
+      "sha256": "ba84e540b0010e8dd4f572bc4929535b65d6f96fa17ab4e74521c7a0e2813a7f"
+    },
+    {
+      "path": "tests/ml/test_calibrated_loss.py",
+      "sha256": "b1ffd383e1bc2fc3585906b50406210a809487f8dd08714e32187bfed30ad4c5"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-006.md",
+      "sha256": "de25e677e8940d68f158a812b69cfbbd9c66bf9922514a928d8e1303be6fe56b"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-006.md",
+      "sha256": "56d4d90b2e988ef57e6398d49ae223be2efe222587f31b5d388cccc53eefae73"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-006.md",
+      "sha256": "c53d4df6dd14f6978732beb1d9fa657a375362474b8b3520ec20050a5cc74e88"
+    },
+    {
+      "path": "scripts/agentic/g-ml-006-5why-socratic-engine.mjs",
+      "sha256": "d87de62b539df9e92d3a3a3341eff9d059c7b865af309385817b175af6cfd141"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-006-5why-socratic-engine.mjs",
+      "sha256": "d87de62b539df9e92d3a3a3341eff9d059c7b865af309385817b175af6cfd141"
+    }
+  ],
+  "certification": "PASS"
+}

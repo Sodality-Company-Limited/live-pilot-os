@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-016",
+  "generated_at": "2026-10-11T07:39:08.523Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ROUTE-FSM-001",
+      "claim": "Exhaustive truth table across Risk x Evidence x Confidence uniquely maps all permutations to valid routing actions with zero unhandled states.",
+      "statement": "Exhaustive truth table across Risk x Evidence x Confidence uniquely maps all permutations to valid routing actions with zero unhandled states.",
+      "verification_command": "node scripts/harness/property-tests/test-routing-truth-table.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-016-INV-002",
+      "claim": "routeDecision unit test battery exercises all 8 permutations, boundary conditions, and fail-closed rejections.",
+      "statement": "routeDecision unit test battery exercises all 8 permutations, boundary conditions, and fail-closed rejections.",
+      "verification_command": "node tests/unit/test-routing-decision.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-016-INV-003",
+      "claim": "Confidence calibration harness verifies 8-permutation truth table and fail-closed guards.",
+      "statement": "Confidence calibration harness verifies 8-permutation truth table and fail-closed guards.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-016-INV-004",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-016-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "routing_truth_table_accuracy",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.8388698745050668,
+      "upper": 0.9999999999999999,
+      "center": 0.9194349372525333,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "template/scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770",
+    "scripts/harness/confidence-calibration-harness.mjs": "9f3d8663ee2a1b1ea7ff9649571796eb63e36e651732cd72ce187ef99ff3d1e4",
+    "tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+    "template/tests/unit/test-routing-decision.mjs": "784c2299744a1e059921f047a5e01a051267ca3030ef1c4e075cf814185fba49",
+    "scripts/harness/property-tests/test-routing-truth-table.mjs": "e03f3a9fe92985cdc64307b4f12ea8337ee3dea226ebbe9fa1fe1ed24271c76a",
+    "docs/07-backlog/goals/_archived/G-ML-016.md": "7834f55d0eb35146e501abdf2bd76471f63ce867fcd2b7d357bdbcd40eda9aa1",
+    "docs/02-product/acceptance/G-ML-016.md": "570a712216de6070dd499da2cc1a40ad4f4ae2922292f3da1bcd52c0d40c9f14",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-016.md": "6fb006f1882798a3b7930321826090e580f1987b581ada44d8bc14222d70104e",
+    "scripts/agentic/g-ml-016-5why-socratic-engine.mjs": "d4350cbb131d47121c599816b08b30bf1c6174b3998fd99ef550eb48acfa1bc9"
+  },
+  "certification": "PASS"
+}

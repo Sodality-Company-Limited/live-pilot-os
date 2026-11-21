@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-007",
+  "generated_at": "2026-10-11T07:36:38.432Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-007-INV-001",
+      "claim": "End-to-end parameter-efficient training pipeline targeting attention projections and auxiliary value head under combined language and calibration loss.",
+      "statement": "End-to-end parameter-efficient training pipeline targeting attention projections and auxiliary value head under combined language and calibration loss.",
+      "verification_command": "pytest tests/ml/test_training_pipeline.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-007-INV-002",
+      "claim": "trainable parameters bounded strictly below 2.0% with 100% frozen base transformer backbone parameters",
+      "statement": "trainable parameters bounded strictly below 2.0% with 100% frozen base transformer backbone parameters",
+      "verification_command": "pytest tests/ml/test_training_pipeline.py -k test_trainable_parameters",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-007-INV-003",
+      "claim": "safetensors checkpoint emission and bitwise tensor roundtrip verification",
+      "statement": "safetensors checkpoint emission and bitwise tensor roundtrip verification",
+      "verification_command": "pytest tests/ml/test_training_pipeline.py -k test_safetensors_checkpoint_roundtrip",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "source_files": [
+    {
+      "path": "code/ml/src/training/train_pipeline.py",
+      "sha256": "877e67b22aa1678c5d4ad6b5cde6ee8ca81da44112065f9768d2973adf1d4a39"
+    },
+    {
+      "path": "code/ml/configs/lora_config.yaml",
+      "sha256": "7d4aab23d42ec28170050f2bda9279031218be563d1f844e54ef7eaa3c84af18"
+    },
+    {
+      "path": "tests/ml/test_training_pipeline.py",
+      "sha256": "ecbb0ac650bcff14d49a97051f62a6a3f0c80f86ca77f1f401fd5b6f55eb9ab9"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-007.md",
+      "sha256": "fcd2fff630bc9fb87dac4d8f93b8bbd1b9344221f9f10b8a1a386c1213022d9e"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-007.md",
+      "sha256": "6ea6e4d70987565333900501cc5e0092b90b24149a1bbcff90a7c20681b722c3"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-007.md",
+      "sha256": "9cee5480ce6c52957680fc323eb407a13d8decf430d8575395796d14bacf1525"
+    },
+    {
+      "path": "scripts/agentic/g-ml-007-5why-socratic-engine.mjs",
+      "sha256": "3064410245f4b9876a97a2b6732fbecc724897e86540ea1043a6a5b5af3af5eb"
+    }
+  ],
+  "touch_map_digests": [
+    {
+      "path": "code/ml/src/training/train_pipeline.py",
+      "sha256": "877e67b22aa1678c5d4ad6b5cde6ee8ca81da44112065f9768d2973adf1d4a39"
+    },
+    {
+      "path": "code/ml/configs/lora_config.yaml",
+      "sha256": "7d4aab23d42ec28170050f2bda9279031218be563d1f844e54ef7eaa3c84af18"
+    },
+    {
+      "path": "tests/ml/test_training_pipeline.py",
+      "sha256": "ecbb0ac650bcff14d49a97051f62a6a3f0c80f86ca77f1f401fd5b6f55eb9ab9"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-007.md",
+      "sha256": "fcd2fff630bc9fb87dac4d8f93b8bbd1b9344221f9f10b8a1a386c1213022d9e"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-007.md",
+      "sha256": "6ea6e4d70987565333900501cc5e0092b90b24149a1bbcff90a7c20681b722c3"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-007.md",
+      "sha256": "9cee5480ce6c52957680fc323eb407a13d8decf430d8575395796d14bacf1525"
+    },
+    {
+      "path": "scripts/agentic/g-ml-007-5why-socratic-engine.mjs",
+      "sha256": "3064410245f4b9876a97a2b6732fbecc724897e86540ea1043a6a5b5af3af5eb"
+    }
+  ],
+  "certification": "PASS"
+}

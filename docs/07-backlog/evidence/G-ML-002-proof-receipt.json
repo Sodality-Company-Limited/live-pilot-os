@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-002",
+  "generated_at": "2026-10-11T07:31:51.149Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-002-INV-001",
+      "claim": "Deterministic outcome-labeling engine that computes empirical correctness, evidence verification status, and target probabilities for raw decision records.",
+      "statement": "Deterministic outcome-labeling engine that computes empirical correctness, evidence verification status, and target probabilities for raw decision records.",
+      "verification_command": "pytest tests/ml/test_labeler.py",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.8388698745050668,
+      "upper_bound": 0.9999999999999999
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.6755843804891231,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/src/dataset/labeler.py",
+      "sha256": "9a0be35228ba355f6cf69d53c2d5ec6398d150cc6079689ea7562f71b7d62385"
+    },
+    {
+      "path": "tests/ml/test_labeler.py",
+      "sha256": "7030d5e1c958b2389f1b1505a352a1752f5a0ef3ad9a356c6036bd631a8bd285"
+    },
+    {
+      "path": "data/processed/train_labeled_v1.jsonl",
+      "sha256": "bc111c48c85faa14d123e4b7f346235c0f4140dae19eb9b9f51655fd93f7fe8d"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-002.md",
+      "sha256": "b073809b1a9171fe7a8101539c77ae7b4a45f31f15f916205c5ae9b7e8913b65"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-002.md",
+      "sha256": "f06d043206d973c4d469e61f6afb6fde9169944b792a0132ab79ae3b196a236d"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-002.md",
+      "sha256": "ddfa49512602d25f8a750b1e268c61b85a27d33bffdf50800727940612d5f282"
+    },
+    {
+      "path": "scripts/agentic/g-ml-002-5why-socratic-engine.mjs",
+      "sha256": "0caf6448e3fe6ef204ddb070f4e045e2a26cdf8a072697c2261f7ee14559ceda"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-002-5why-socratic-engine.mjs",
+      "sha256": "0caf6448e3fe6ef204ddb070f4e045e2a26cdf8a072697c2261f7ee14559ceda"
+    }
+  ],
+  "certification": "PASS"
+}

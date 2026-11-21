@@ -1,0 +1,56 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-021",
+  "goal_id": "G-ML-021",
+  "invariant": "ML-021-INV-001",
+  "invariant_id": "ML-021-INV-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/agent-workflow-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "scripts/harness/agent-workflow-harness.mjs": "c17ad2fcf329c874cf5949b92fccf6bce7398949e455b2fab670b1e131d2666a",
+    "template/scripts/harness/agent-workflow-harness.mjs": "c17ad2fcf329c874cf5949b92fccf6bce7398949e455b2fab670b1e131d2666a",
+    "tests/e2e/test-calibrated-agent-workflow.mjs": "c0b7b3a254d8d98bb618e91f00daaad04f0a359e39c80acdd7eb79d6032191d8",
+    "template/tests/e2e/test-calibrated-agent-workflow.mjs": "c0b7b3a254d8d98bb618e91f00daaad04f0a359e39c80acdd7eb79d6032191d8",
+    "docs/07-backlog/goals/G-ML-021.md": "b62afa6fca7e25b9261b0ef767d1f360aaddb388a2daa1aaf942fedcb838a8ff",
+    "docs/02-product/acceptance/G-ML-021.md": "bce11cccfedb34fbdf2e2b900cf1e742e9432b1cdb7b8be1793d1dafbfecc22e",
+    "template/docs/02-product/acceptance/G-ML-021.md": "bce11cccfedb34fbdf2e2b900cf1e742e9432b1cdb7b8be1793d1dafbfecc22e",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-021.md": "82fd405fd42292f4095cc608dae9108132d4396c36c739b349637005051bad65",
+    "template/docs/07-backlog/clarifications/CLARIFICATION-G-ML-021.md": "82fd405fd42292f4095cc608dae9108132d4396c36c739b349637005051bad65",
+    "scripts/agentic/g-ml-021-5why-socratic-engine.mjs": "5db024e2b01c0ce0c996652da6eb5bb572fd3fa38a48d9109d922242ce915bf8",
+    "template/scripts/agentic/g-ml-021-5why-socratic-engine.mjs": "5db024e2b01c0ce0c996652da6eb5bb572fd3fa38a48d9109d922242ce915bf8",
+    "scripts/agentic/g-ml-021-provenance-oracle-evaluator.mjs": "d677f8265ee1f590662cf1bf464a85f1d4a51c7b103f3cbf0669b7f0e7471b38",
+    "template/scripts/agentic/g-ml-021-provenance-oracle-evaluator.mjs": "d677f8265ee1f590662cf1bf464a85f1d4a51c7b103f3cbf0669b7f0e7471b38",
+    "scripts/harness/g-ml-021-replication-harness.mjs": "d18e84d32af4451d84dfa16e08f43b887e3ee24a4a7539d1c963da466dc2f003",
+    "template/scripts/harness/g-ml-021-replication-harness.mjs": "d18e84d32af4451d84dfa16e08f43b887e3ee24a4a7539d1c963da466dc2f003"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-10-02T14:00:00.000Z",
+  "evaluation": {
+    "blocker": {
+      "id": "BLOCKER-ML-021-01",
+      "goal": "G-ML-021",
+      "title": "Absence of End-to-End Calibrated Agent Workflow Integration Harness and E2E Test Suite",
+      "root_cause": "Prior to G-ML-021, Soda OS lacked an integrated, multi-step agent workflow harness orchestrating goal initialization, inference dispatch, tool execution, physical evidence verification, dynamic routing, decision ledger audit logging, and missing evidence recovery sagas.",
+      "impact": "Autonomous agents operated without full end-to-end integration verification, risking runtime deadlocks or unhandled exceptions during high-stakes tool execution.",
+      "status": "RESOLVED_AND_VERIFIED"
+    },
+    "episodes_evaluated": 20,
+    "episodes_passed": 20,
+    "mutations_tested": 8,
+    "mutations_killed": 8,
+    "wilson_score": {
+      "successes": 20,
+      "total": 20,
+      "sampleProportion": 1,
+      "center": 0.9194,
+      "lower": 0.8389,
+      "upper": 1,
+      "confidenceLevel": 0.95
+    }
+  },
+  "certification": "PASS"
+}

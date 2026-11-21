@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-010",
+  "generated_at": "2026-10-11T07:38:20.789Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-010-INV-001",
+      "claim": "Automated regression test suite evaluating the trained dual-head model on benchmark coding, reasoning, and instruction-following datasets.",
+      "statement": "Automated regression test suite evaluating the trained dual-head model on benchmark coding, reasoning, and instruction-following datasets.",
+      "verification_command": "pytest tests/ml/test_text_regression.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-010-INV-002",
+      "claim": "Perplexity degradation (PPL_dual - PPL_base) / PPL_base * 100% is strictly bounded below 3.0%",
+      "statement": "Perplexity degradation (PPL_dual - PPL_base) / PPL_base * 100% is strictly bounded below 3.0%",
+      "verification_command": "pytest tests/ml/test_text_regression.py -k test_perplexity_comparison",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-010-INV-003",
+      "claim": "Python and multi-language AST syntax validity on generated code snippets is strictly >= 98.0%",
+      "statement": "Python and multi-language AST syntax validity on generated code snippets is strictly >= 98.0%",
+      "verification_command": "pytest tests/ml/test_text_regression.py -k test_syntax_parsing",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-010-INV-004",
+      "claim": "Autoregressive generation length ratio is in [0.95, 1.05] and repetition delta within +/- 2.0%",
+      "statement": "Autoregressive generation length ratio is in [0.95, 1.05] and repetition delta within +/- 2.0%",
+      "verification_command": "pytest tests/ml/test_text_regression.py -k test_autoregressive_invariants",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "regression_gate_pass_rate",
+    "population": "regression_episode_trials",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9568233464896543,
+      "upper": 1,
+      "center": 0.9784116732448271,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "code/ml/eval/text_regression_eval.py": "3ec84936a2671dc7ab5d1baac8ee623775d721abbcb109d641f0d3fab016dbeb",
+    "tests/ml/test_text_regression.py": "1a35dfa81a1238e130cfe67dcacf44968be470e71044c80fbea0541bd0f612ac",
+    "artifacts/eval/text_regression_scorecard.json": "6f37251a98a3d373f4f52152f16224e8d600a443e14d6836b798b19f015ba056",
+    "docs/07-backlog/goals/_archived/G-ML-010.md": "612eae64b6c9f4fda787b95e90073b61a881307ac61d12daa2633f225e904a40",
+    "docs/02-product/acceptance/G-ML-010.md": "61cbb395a40b0fda52e29a58fa7d10caa899dc6d3d7a50fb530eed4712ae2691",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-010.md": "76fdc403b1a9de06bae4bb304e68764f36ca2259ca9baa39d737152c6619c22c",
+    "scripts/agentic/g-ml-010-5why-socratic-engine.mjs": "7eba144d398297f04c8969b5c5ae20d1a71a30f6e174175b6d56886609703a97"
+  },
+  "certification": "PASS"
+}

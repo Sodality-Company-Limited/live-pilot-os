@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal_id": "G-ML-016",
+  "artifact_id": "G-ML-016-proof-receipt-v1",
+  "invariant_id": "ML-016-INV-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/confidence-calibration-harness.mjs",
+  "exit_code": 0,
+  "sample_count": 5000,
+  "source_hashes": {
+    "scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+    "template/scripts/lib/confidence-calibration.mjs": "56ec12cfac971c8288c02d5caf9c239adbc8ccfa3841598b65edbcfd7c24deb6",
+    "scripts/harness/confidence-calibration-harness.mjs": "9e8abbe0dd276f7869bb4da874c0fbdbf9d789e59fa194a5aba4391d3bd7f493",
+    "docs/07-backlog/goals/_archived/G-ML-016.md": "7834f55d0eb35146e501abdf2bd76471f63ce867fcd2b7d357bdbcd40eda9aa1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-10-02T11:03:00.000Z"
+}

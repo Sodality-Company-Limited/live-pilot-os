@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-011",
+  "generated_at": "2026-10-14T06:18:02.302Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-011-INV-001",
+      "statement": "Stage 3 UX heuristics benchmark curates 1,200 scenarios across Nielsen 10 and WCAG 2.2 AAA with exit code 0.",
+      "verification_command": "node scripts/harness/ux-heuristics-benchmark-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-011-INV-002",
+      "statement": "UX heuristics benchmark unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-heuristics-benchmark.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-011-INV-003",
+      "statement": "Python curriculum heuristics benchmark module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_heuristics.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-011-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-011",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-heuristics-benchmark.mjs",
+      "sha256": "91a90bce971efd6952b50f8a9100a5a0eb3efeead2d92d4f4cf39834127b98e0"
+    },
+    {
+      "path": "code/ml/src/curriculum/heuristics_benchmark.py",
+      "sha256": "a3e64a08f54483bb9ab263b277a623a4dc3b775fd3c11cd6730c656c7277e820"
+    },
+    {
+      "path": "artifacts/curriculum/stage3_heuristics/summary.json",
+      "sha256": "012f5f9ef910f60d0db57cbb273e388faf107a8b7c9a199c7b0db7d1ad598e0f"
+    },
+    {
+      "path": "tests/unit/test-ux-heuristics-benchmark.mjs",
+      "sha256": "36c537673a9daaf8eac219cfea0d254504a9361da65db84815142422cd71897a"
+    },
+    {
+      "path": "scripts/harness/ux-heuristics-benchmark-harness.mjs",
+      "sha256": "57b1a0c47383e23cde217aff13f0134ab2eecb79d0b0956a77b9971f8bf2ce61"
+    },
+    {
+      "path": "tests/ml/test_curriculum_heuristics.py",
+      "sha256": "c520c04ef914cb8783c5df0e6798caf90b704ca62d9dcd4458d85d4ab879395b"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-011.md",
+      "sha256": "bd23646df51371235b69153e420dc7ee9ef4386dc3aab52ce0ac2f4195c5f301"
+    }
+  ],
+  "certification": "PASS"
+}

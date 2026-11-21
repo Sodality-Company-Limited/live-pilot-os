@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-046",
+  "generated_at": "2026-10-18T23:22:06.000Z",
+  "source_revision": "b6291813e002a4ac08552fb3af8ef07d6cded86d",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "INV-046-001",
+      "claim": "Evaluating identical user prompts against identical skill catalogs yields bitwise identical ranked skill lists: Route(P, K) === Route(P, K).",
+      "statement": "Intent classification is strictly deterministic.",
+      "verification_command": "node --test tests/lib/intent-playbook-router.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "INV-046-002",
+      "claim": "The returned candidate skill matches are sorted in strictly non-ascending order of confidence score in [0, 10000] basis points.",
+      "statement": "Confidence score ranking is monotonic non-ascending.",
+      "verification_command": "node --test tests/lib/intent-playbook-router.test.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "touch_map_digests": {
+    "scripts/lib/intent-playbook-router.mjs": "461c99f071a5a1ff349b1111cf728a65b3f0d99fe5dfe63e63e25c2dcc0a3e2e",
+    "template/scripts/lib/intent-playbook-router.mjs": "461c99f071a5a1ff349b1111cf728a65b3f0d99fe5dfe63e63e25c2dcc0a3e2e",
+    ".agents/skills/soda-intent-playbook-router/SKILL.md": "fa30a7c92152afdf49d1d91c6c218b8cc66d17e47d6b1512fa38e0ddae1237be",
+    "template/.agents/skills/soda-intent-playbook-router/SKILL.md": "fa30a7c92152afdf49d1d91c6c218b8cc66d17e47d6b1512fa38e0ddae1237be",
+    "tests/lib/intent-playbook-router.test.mjs": "8a6aaa9aeb1f4f13ea7a3fc4aa0ea9dd4a885c8b2da70edb1d90b89191c6e448"
+  },
+  "source_files": [
+    {
+      "path": "scripts/lib/intent-playbook-router.mjs",
+      "sha256": "461c99f071a5a1ff349b1111cf728a65b3f0d99fe5dfe63e63e25c2dcc0a3e2e"
+    },
+    {
+      "path": "template/scripts/lib/intent-playbook-router.mjs",
+      "sha256": "461c99f071a5a1ff349b1111cf728a65b3f0d99fe5dfe63e63e25c2dcc0a3e2e"
+    },
+    {
+      "path": ".agents/skills/soda-intent-playbook-router/SKILL.md",
+      "sha256": "fa30a7c92152afdf49d1d91c6c218b8cc66d17e47d6b1512fa38e0ddae1237be"
+    },
+    {
+      "path": "template/.agents/skills/soda-intent-playbook-router/SKILL.md",
+      "sha256": "fa30a7c92152afdf49d1d91c6c218b8cc66d17e47d6b1512fa38e0ddae1237be"
+    },
+    {
+      "path": "tests/lib/intent-playbook-router.test.mjs",
+      "sha256": "8a6aaa9aeb1f4f13ea7a3fc4aa0ea9dd4a885c8b2da70edb1d90b89191c6e448"
+    }
+  ],
+  "certification": "PASS"
+}

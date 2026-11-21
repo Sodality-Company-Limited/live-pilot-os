@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-019",
+  "generated_at": "2026-10-14T07:55:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-019-INV-001",
+      "statement": "Model provenance ledger verifies unbroken HMAC-SHA256 hash chaining, tracks Stage 1-6 dataset lineage, and detects tampering.",
+      "verification_command": "node scripts/harness/model-provenance-ledger-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-019-INV-002",
+      "statement": "Model provenance ledger unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-model-provenance-ledger.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-019-INV-003",
+      "statement": "Python provenance tracker module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_provenance_tracker.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-019-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-019",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "schemas/model-provenance.schema.json",
+      "sha256": "8e8c7eaee67fec16779e19a5e60970d1a2f5ff2bd1855064ab77a2c89ed8f6e7"
+    },
+    {
+      "path": "code/ml/src/training/provenance_tracker.py",
+      "sha256": "54e1906bd8c32a4dd89a5134889dab0f5cf20e4d0b5d7fe05efa07a73f531c26"
+    },
+    {
+      "path": "scripts/lib/model-provenance-ledger.mjs",
+      "sha256": "d6ed4b3dcaf8a00dd13c531922e287167ec0f323552d2c27c0b51abb7cbe70b9"
+    },
+    {
+      "path": "tests/unit/test-model-provenance-ledger.mjs",
+      "sha256": "0b804eb20c80dc5f325fb1c3a3bbf9aeae1d0bd95c198a001ae1709b609d8590"
+    },
+    {
+      "path": "tests/ml/test_provenance_tracker.py",
+      "sha256": "cf1dc6e095481d25e0956eb0eb1259b0b93dc233619bed257c789f32ec5d1116"
+    },
+    {
+      "path": "scripts/harness/model-provenance-ledger-harness.mjs",
+      "sha256": "26a7a30ca25e40a5bef615fb18402e32c0706a4e3df775c840d564f536a38f26"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-019.md",
+      "sha256": "6ae631e9f79031e9e798b3c4efb0115edf530d66e2133a8cdd19b3ba7e82386d"
+    }
+  ],
+  "certification": "PASS"
+}

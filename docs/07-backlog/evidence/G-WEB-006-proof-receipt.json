@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-006",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "006-INV-001",
+      "statement": "Visual Regression Harness satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/visual-regression-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/visual-regression-harness.mjs",
+      "sha256": "5d855fe63bcbca17428e818edbfbdfabe81f5b2cc19e8d2f3ac56452dbb9a051"
+    },
+    {
+      "path": "artifacts/proofs/visual_fidelity_receipt.json",
+      "sha256": "b14a23250d3bd8570cf49196ac80677044070648336429f0a7d0867b5d196f07"
+    },
+    {
+      "path": "tests/unit/test-visual-regression.mjs",
+      "sha256": "64f7fad49fda52cc4fdffc19ce258697cd947e410860a7cba66ec129da27cddc"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-006.md",
+      "sha256": "5e303f2551142547d87f3a6b3132ced02bd545ff7a96b8e316536dc0a31c467f"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T10:44:05.995Z"
+}

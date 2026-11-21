@@ -1,0 +1,450 @@
+/**
+ * ════════════════════════════════════════════════════════════════════════════════
+ * 🌐 SODA OS RESPONSIVE LAYOUT SYSTEM
+ * ════════════════════════════════════════════════════════════════════════════════
+ * Framework: Soda OS
+ * Epic: WEB (DAVE Exact Web Application Pipeline)
+ * Goal Reference: G-WEB-007 (Responsive Layout Verification)
+ * Design Reference: REF-0001 (1440x900 Desktop Grid @ 1.0 DPR)
+ * Viewport Matrix:
+ *   - Desktop: 1440x900 (2-column grid, expanded CommandRail)
+ *   - Tablet:  1024x768 (collapsible rail, fluid canvas, off-canvas drawer)
+ *   - Mobile:  390x844  (single-column stacked layout, drawer evidence, compact rail)
+ * Invariants: Zero Mocks, Zero Stubs, Zero Raw Hex Codes, Zero CLS, Zero Overflow.
+ * ════════════════════════════════════════════════════════════════════════════════
+ */
+
+@import '../tokens/index.css';
+
+/* ==========================================================================
+   1. Universal Reset & Zero-Overflow Foundation
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   2. Workspace Root & Landmark Containers
+   ========================================================================== */
+.workspace-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.workspace-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--layout-header-height, 64px);
+  min-height: var(--layout-header-height, 64px);
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.workspace-container {
+  display: grid;
+  grid-template-columns: minmax(720px, 1fr) var(--layout-drawer-width, 360px);
+  min-height: calc(100vh - var(--layout-header-height, 64px));
+  width: 100%;
+  max-width: var(--layout-max-width, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  transition: grid-template-columns var(--duration-normal, 250ms) var(--ease-standard);
+}
+
+.workspace-root[data-evidence-collapsed="true"] .workspace-container {
+  grid-template-columns: 1fr 0px;
+}
+
+.workspace-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-6);
+  overflow-y: auto;
+  background-color: var(--color-bg-base);
+}
+
+.workspace-evidence {
+  position: relative;
+  width: var(--layout-drawer-width, 360px);
+  min-height: calc(100vh - var(--layout-header-height, 64px));
+  border-left: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-surface);
+  overflow-y: auto;
+  transition: width var(--duration-normal, 250ms) var(--ease-standard),
+              transform var(--duration-normal, 250ms) var(--ease-standard);
+}
+
+.workspace-root[data-evidence-collapsed="true"] .workspace-evidence {
+  width: 0;
+  border-left: none;
+  overflow: hidden;
+}
+
+.workspace-evidence-inner {
+  width: var(--layout-drawer-width, 360px);
+  height: 100%;
+}
+
+.workspace-modal-portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-overlay);
+  backdrop-filter: blur(4px);
+}
+
+/* ==========================================================================
+   3. Desktop Viewport (1440x900 Base Geometry)
+   ========================================================================== */
+@media (min-width: 1280px) {
+  .workspace-container {
+    grid-template-columns: minmax(720px, 1fr) var(--layout-drawer-width, 360px);
+    max-width: var(--layout-max-width, 1440px);
+  }
+
+  .command-rail-left {
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .command-rail-center {
+    flex: 1 1 auto;
+    max-width: 560px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .command-rail-right {
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+
+  .decision-canvas-container {
+    min-width: 720px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: var(--space-6);
+  }
+
+  .evidence-panel-container {
+    width: var(--layout-drawer-width, 360px);
+    min-width: 320px;
+    max-width: 420px;
+  }
+}
+
+/* ==========================================================================
+   4. Tablet Viewport (1024x768 Breakpoint Adaptation: 768px - 1279px)
+   ========================================================================== */
+@media (max-width: 1279px) and (min-width: 768px) {
+  .workspace-container {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    padding: 0 var(--space-4);
+  }
+
+  /* CommandRail collapses into icon/compact mode */
+  .command-rail-container {
+    padding: 0 var(--space-3) !important;
+  }
+
+  .command-rail-left {
+    min-width: auto !important;
+    gap: var(--space-2) !important;
+  }
+
+  .workspace-breadcrumb {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .command-rail-center {
+    max-width: 380px !important;
+  }
+
+  .command-rail-right {
+    min-width: auto !important;
+    gap: var(--space-2) !important;
+  }
+
+  /* DecisionCanvas remains fully reachable and fluid */
+  .decision-canvas-container {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: var(--space-5) var(--space-4) !important;
+    margin: 0 !important;
+  }
+
+  /* EvidencePanel becomes off-canvas collapsible drawer */
+  .workspace-evidence {
+    position: fixed;
+    top: var(--layout-header-height, 64px);
+    right: 0;
+    bottom: 0;
+    width: var(--layout-drawer-width, 360px);
+    z-index: 45;
+    box-shadow: var(--shadow-xl);
+    transform: translateX(0);
+    border-left: 1px solid var(--color-border-subtle);
+  }
+
+  .workspace-root[data-evidence-collapsed="true"] .workspace-evidence {
+    transform: translateX(100%);
+    width: var(--layout-drawer-width, 360px);
+  }
+
+  .evidence-panel-container {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .evidence-panel-inner {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   5. Mobile Viewport (390x844 Breakpoint Adaptation: < 768px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .workspace-root {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .workspace-header {
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    padding: 0 var(--space-2);
+  }
+
+  .workspace-container {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    min-height: calc(100vh - 56px);
+    width: 100%;
+    max-width: 100vw;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  /* CommandRail: Single-line stacked compact header */
+  .command-rail-container {
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    padding: 0 var(--space-2) !important;
+  }
+
+  .command-rail-container nav {
+    gap: var(--space-2) !important;
+  }
+
+  .command-rail-left {
+    min-width: auto !important;
+    gap: var(--space-1) !important;
+    flex: 0 0 auto;
+  }
+
+  .brand-pill {
+    padding: var(--space-0-5) var(--space-1) !important;
+    font-size: var(--text-caption, 12px) !important;
+  }
+
+  .workspace-breadcrumb {
+    display: none !important; /* Conceal breadcrumb on small mobile viewports */
+  }
+
+  .command-rail-center {
+    flex: 1 1 auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .command-rail-center input {
+    height: 32px !important;
+    font-size: var(--text-caption, 12px) !important;
+    padding: 0 var(--space-2) !important;
+  }
+
+  .command-rail-center kbd {
+    display: none !important;
+  }
+
+  .command-rail-right {
+    min-width: auto !important;
+    gap: var(--space-1) !important;
+    flex: 0 0 auto;
+  }
+
+  .command-rail-right [role="status"] {
+    padding: var(--space-0-5) var(--space-2) !important;
+    font-size: var(--text-caption, 12px) !important;
+  }
+
+  /* Main Workspace Area */
+  .workspace-main {
+    padding: var(--space-3) var(--space-2);
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* DecisionCanvas: Full-width stacked cards */
+  .decision-canvas-container {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: var(--space-3) var(--space-2) !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .goal-header-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--space-3) !important;
+    padding: var(--space-3) var(--space-4) !important;
+  }
+
+  .decision-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-3) !important;
+  }
+
+  .decision-card {
+    padding: var(--space-3) var(--space-3) !important;
+  }
+
+  .decision-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: var(--space-2) !important;
+  }
+
+  .decision-actions button {
+    width: 100% !important;
+  }
+
+  /* EvidencePanel: Bottom-Sheet Drawer Overlay */
+  .workspace-evidence {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    max-width: 100vw !important;
+    border-left: none;
+    z-index: 45;
+    transform: translateY(0);
+    background-color: var(--color-bg-surface);
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform var(--duration-normal, 250ms) var(--ease-standard);
+  }
+
+  .workspace-root[data-evidence-collapsed="true"] .workspace-evidence {
+    transform: translateY(100%);
+    width: 100% !important;
+  }
+
+  .workspace-evidence-inner {
+    width: 100% !important;
+  }
+
+  .evidence-panel-container {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    border-left: none !important;
+  }
+
+  /* Review Modal Adaptation */
+  .workspace-modal-portal > div {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    margin: var(--space-2) !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* ==========================================================================
+   6. Touch Target & Accessibility Standards (WCAG 2.2 Level AA)
+   ========================================================================== */
+button,
+a,
+input,
+select,
+[role="button"],
+[role="tab"] {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+@media (min-width: 768px) {
+  /* Smaller desktop controls are permissible with precise pointing devices */
+  button.compact,
+  [role="button"].compact {
+    min-height: 32px;
+  }
+}

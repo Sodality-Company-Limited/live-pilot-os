@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-013",
+  "generated_at": "2026-10-14T06:58:30.663Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-013-INV-001",
+      "statement": "Stage 5 contrastive preference dataset generates 3,500 DPO pairs, 7,000 KTO records with 0 leakage and exit code 0.",
+      "verification_command": "node scripts/harness/dpo-kto-dataset-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-013-INV-002",
+      "statement": "DPO/KTO preference dataset unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-dpo-kto-dataset.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-013-INV-003",
+      "statement": "Python curriculum preference dataset module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_preferences.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-013-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-013",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dpo-kto-dataset-builder.mjs",
+      "sha256": "b92451f94c5ce7835af783d29ee80a91743e3d028502a78fb14177afcdb555f4"
+    },
+    {
+      "path": "code/ml/src/curriculum/preference_dataset.py",
+      "sha256": "c8fed0475362ad1700dc1fe00bc933e710b5152e14b59cc3e7f466fa79713f1b"
+    },
+    {
+      "path": "artifacts/curriculum/stage5_preferences/manifest.json",
+      "sha256": "1150f50aa63d57dbac807b22f085cd7ea67485eefe6b982fbcc880a069ecc294"
+    },
+    {
+      "path": "tests/unit/test-dpo-kto-dataset.mjs",
+      "sha256": "7503592df7b042a40799535acdf51693f660a83be9208c3d63bd63b58f2323b1"
+    },
+    {
+      "path": "scripts/harness/dpo-kto-dataset-harness.mjs",
+      "sha256": "c8a38832ed1a3539544f6eefd8b99bced276d9ec9c1560e173a08a0ab2bacab1"
+    },
+    {
+      "path": "tests/ml/test_curriculum_preferences.py",
+      "sha256": "42b69d79193bfdc2c9d0bb7b77839d548e51ba3b527e3093516b36fcb319f904"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-013.md",
+      "sha256": "4bc5d8bcb8b9c6dff64a132a5b15a7ae3a02aa7252019550ce852143d699febc"
+    }
+  ],
+  "certification": "PASS"
+}

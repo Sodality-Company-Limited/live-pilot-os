@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-010",
+  "classification": "executable_invariant",
+  "source_revision": "ff2664f2c06dec2848efcfee956abda9f4caeccd",
+  "invariants": [
+    {
+      "id": "G-AG-010-INV-001",
+      "statement": "Runtime budget parameters are loaded from repository YAML configuration with robust fallbacks and validation.",
+      "verification_command": "node --test scripts/agents/test/session-budget.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/runtime-budget.mjs",
+      "sha256": "8abb9336d70bc6f8560b5dc09bbd662451ce25aa4354c7743cb89f31d7ae9c2c"
+    },
+    {
+      "path": "scripts/agents/test/session-budget.test.mjs",
+      "sha256": "98dba4cf262332a8aad0964800fb7b10c727f97834ab889c9eb425d990b9d0a3"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:39:00.000Z"
+}

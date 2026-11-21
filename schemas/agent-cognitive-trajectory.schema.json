@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SodaAgentCognitiveTrajectoryRecord",
+  "description": "Full-fidelity prompt/response and state-action trajectory for training Liquid-EBM-JEPA and DAVE.",
+  "type": "object",
+  "required": [
+    "sessionKey",
+    "goalId",
+    "provider",
+    "model",
+    "persona",
+    "role",
+    "fullPrompt",
+    "rawResponse",
+    "status",
+    "changedFiles",
+    "inputTokens",
+    "outputTokens",
+    "elapsedSeconds",
+    "digest",
+    "recordedAt"
+  ],
+  "properties": {
+    "sessionKey": {
+      "type": "string"
+    },
+    "goalId": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "persona": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "mandate": {
+      "type": ["string", "null"]
+    },
+    "touchMap": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fullPrompt": {
+      "type": "string"
+    },
+    "rawResponse": {
+      "type": "string"
+    },
+    "summary": {
+      "type": ["string", "null"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["complete", "blocked", "needs-review", "idle", "rejected"]
+    },
+    "exitCode": {
+      "type": ["integer", "null"]
+    },
+    "changedFiles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "inputTokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "outputTokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "elapsedSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "turns": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": { "type": "integer" }
+    },
+    "verification": {
+      "type": ["object", "null"],
+      "properties": {
+        "command": { "type": "string" },
+        "passed": { "type": "boolean" },
+        "testsRun": { "type": "integer" },
+        "testsPassed": { "type": "integer" }
+      }
+    },
+    "initialState": {
+      "type": ["object", "null"],
+      "properties": {
+        "gitCommit": { "type": "string" },
+        "touchMap": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

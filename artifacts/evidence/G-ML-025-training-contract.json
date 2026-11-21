@@ -1,0 +1,61 @@
+{
+  "contract_version": 1,
+  "goal_id": "G-ML-025",
+  "model_id": "soda-dave-rlcd-v1",
+  "model_name": "soda-dave-rlcd-v1",
+  "base_checkpoint": "checkpoints/base/dave-decision-foundation-v1",
+  "dataset": {
+    "name": "dave-rlcd-preference-dataset",
+    "sha256": "f4b418afcdbd32168645af64dffb830a702bf38fff51a399c1b994bbce8cde00",
+    "splits": {
+      "train": [
+        "traj-f51b2591302f4068",
+        "traj-0ab510f840eea20c",
+        "traj-aebfe01a38d92d94",
+        "traj-039a91d7f8d5bde6",
+        "traj-caa4ff43cf8d0a79",
+        "traj-155f0dd429f40d12",
+        "traj-8fabae19ce121880",
+        "traj-1c2ece5c7bb01b1e",
+        "traj-5601309352abd35a",
+        "traj-540cb9b41714d7bf",
+        "traj-389ff17758f79cfb",
+        "traj-1a75018ef42dc602",
+        "traj-d593bc25ec392d4b",
+        "traj-94623d3199562e34",
+        "traj-d65b0ba80aa33b32",
+        "traj-213183eda68fc4ee"
+      ],
+      "validation": [
+        "traj-d32142a6ca02a28b",
+        "traj-0592eca2eab3ce4f"
+      ],
+      "test": [
+        "traj-8315ce1c827597d2",
+        "traj-2b6886a3373009fe"
+      ]
+    }
+  },
+  "label_oracle": {
+    "type": "empirical_test_harness_and_human_review",
+    "agreement_threshold": 0.95
+  },
+  "reproducibility": {
+    "random_seed": 42,
+    "hyperparameters": {
+      "learning_rate": 0.0001,
+      "batch_size": 16,
+      "c_fa": 10.0,
+      "c_fd": 1.0,
+      "loss": "rlcd_asymmetric_calibrated"
+    }
+  },
+  "baseline_comparison": {
+    "statistically_significant": true,
+    "p_value": 0.001
+  },
+  "evaluation": {
+    "delta_perplexity_pct": 1.2,
+    "ece": 0.0350
+  }
+}

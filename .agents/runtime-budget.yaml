@@ -1,0 +1,82 @@
+version: 1
+description: Default finite execution budget for Codex, Claude, Antigravity, and Soda subagents.
+defaults:
+  max_turns: 8
+  max_retries: 2
+  max_command_seconds: 300
+  max_output_lines: 120
+  max_child_agents: 0
+  max_context_files: 12
+  max_context_bytes: 120000
+  max_handoff_bytes: 12000
+  max_parallel_agents: 3
+  max_duplicate_attempts: 1
+  max_idle_wait_seconds: 0
+  max_input_tokens: 24000
+  max_output_tokens: 8000
+  max_session_cost_units: 1.0
+  cancellation_grace_seconds: 10
+  result_cache_ttl_seconds: 3600
+  full_repository_scan: false
+  broad_test_run: false
+  persistent_session: false
+  idle_after_checkpoint: true
+  require_scoped_command: true
+  require_compact_handoff: true
+roles:
+  coordinator:
+    max_child_agents: 3
+    max_parallel_agents: 3
+  planner:
+    max_child_agents: 0
+  implementer:
+    max_child_agents: 0
+  tester:
+    max_child_agents: 0
+  reviewer:
+    max_child_agents: 0
+  auditor:
+    max_child_agents: 0
+  challenger:
+    max_child_agents: 0
+subagent_limits:
+  worker_max_turns: 12        # Hard kill if not finished in 12 turns
+  worker_max_tokens: 30000    # Hard ceiling on cumulative context
+  auto_reap_on_handoff: true  # Mandatory termination upon terminal handoff
+telemetry:
+  record_per_session:
+    - goal_id
+    - agent_role
+    - turns_used
+    - child_agents_spawned
+    - input_context_bytes
+    - output_bytes
+    - commands_run
+    - elapsed_seconds
+    - stop_reason
+  warn_when:
+    input_context_bytes: 120000
+    output_bytes: 30000
+    turns_used: 8
+    input_tokens: 18000
+    output_tokens: 6000
+    session_cost_units: 0.8
+verification:
+  do_not_repeat_failed_stage_without_new_evidence: true
+cleanup:
+  required_before_terminal_status:
+    - stop_task_owned_processes
+    - release_task_owned_locks
+    - remove_task_temp_files
+    - report_uncommitted_changes
+stop_conditions:
+  - command_timeout
+  - retry_budget_exhausted
+  - touch_map_exceeded
+  - unresolved_dependency
+  - missing_human_decision
+  - duplicate_work_detected
+  - context_budget_exceeded
+  - token_budget_exceeded
+  - cancellation_requested
+  - repeated_failure_fingerprint

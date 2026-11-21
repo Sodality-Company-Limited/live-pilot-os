@@ -1,0 +1,28 @@
+{
+  "artifact_id": "ART-VISUAL-FIDELITY-RECEIPT",
+  "goal_id": "G-WEB-006",
+  "receipt_schema": "visual_fidelity_receipt_v1",
+  "timestamp": "2026-10-10T10:47:27.480Z",
+  "reference_id": "REF-0001",
+  "reference_uri": "data/references/REF-0001.png",
+  "reference_hash": "sha256:d7146fad2c9c3a601f8160ae2c8072285d2e41c22a39a226ee78a24e5c59cbb8",
+  "viewport": {
+    "name": "desktop",
+    "width": 1440,
+    "height": 900,
+    "devicePixelRatio": 1
+  },
+  "fonts_locked": [
+    "Inter",
+    "Fira Code"
+  ],
+  "pixelDiffRatio": 0.00007716049382716049,
+  "maxThreshold": 0.005,
+  "thresholdSatisfied": true,
+  "layoutShift": 0,
+  "layoutShiftZero": true,
+  "overflowDetected": false,
+  "overflowFree": true,
+  "status": "PASSED",
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd"
+}

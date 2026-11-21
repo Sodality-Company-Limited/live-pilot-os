@@ -1,0 +1,34 @@
+# Soda OS Goal Profile Schema: Security Profile
+# Profile ID: security
+# Description: Applied to goals handling external user input, untrusted prompts, file uploads, secrets, or tool sandbox execution.
+
+profile:
+  id: security
+  name: "Security, Threat Modeling & Sandboxing Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: threat_model
+    description: "STRIDE threat classification, attack vectors, and specific security controls."
+    type: markdown_section
+    required_elements:
+      - "Trust boundaries"
+      - "Prompt injection defense"
+      - "Data exfiltration prevention"
+      - "Supply chain integrity"
+
+  - id: sandboxing_boundary
+    description: "Containerization or WASM memory ceiling, gas budget, and syscall whitelists."
+    type: markdown_section
+    required_elements:
+      - "Memory ceiling"
+      - "Syscall whitelist"
+      - "Egress restrictions"
+
+  - id: privacy_and_pii
+    description: "Ingress PII redaction and secure egress re-hydration policies."
+    type: markdown_section
+    required_elements:
+      - "PII scrubbing"
+      - "Egress tokenization"

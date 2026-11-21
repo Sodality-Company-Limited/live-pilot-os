@@ -1,0 +1,14 @@
+{
+  "goal": "G-WEB-012",
+  "all_invariants_passed": true,
+  "invariants_verified": 1,
+  "invariants": [
+    {
+      "id": "012-INV-001",
+      "classification": "executable_invariant",
+      "passed": true
+    }
+  ],
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T10:01:35.732Z"
+}

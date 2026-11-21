@@ -1,0 +1,35 @@
+# Soda OS Goal Profile Schema: UI / UX Profile
+# Profile ID: ui
+# Description: Applied to frontend web applications, mobile screens, design systems, and user interfaces.
+
+profile:
+  id: ui
+  name: "Frontend UI/UX Component & State Machine Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: component_state_matrix
+    description: "5-state contract covering Empty, Loading, Partial, Full, and Error states for every visual component."
+    type: markdown_table
+    states:
+      - "Empty"
+      - "Loading"
+      - "Partial"
+      - "Full"
+      - "Error"
+
+  - id: design_tokens
+    description: "Semantic token mappings (color, typography, spacing, elevation) avoiding hardcoded hex values."
+    type: markdown_section
+    required_elements:
+      - "Token mapping"
+      - "Theme support"
+
+  - id: accessibility_and_responsive
+    description: "WCAG 2.1 AA accessibility checklist, keyboard navigation, and responsive viewport breakpoints."
+    type: markdown_section
+    required_elements:
+      - "WCAG 2.1 AA"
+      - "Keyboard navigation"
+      - "Breakpoints"

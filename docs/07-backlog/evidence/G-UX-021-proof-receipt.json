@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-021",
+  "generated_at": "2026-10-14T11:23:11.365Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-021-INV-001",
+      "statement": "UX expert agreement benchmark evaluates 100 gold scenarios with Cohen kappa >= 0.800 and quadratic weighted kappa >= 0.850.",
+      "verification_command": "node scripts/harness/ux-expert-agreement-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-021-INV-002",
+      "statement": "UX expert agreement benchmark Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-expert-agreement.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-021-INV-003",
+      "statement": "Python expert agreement module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "/opt/anaconda3/envs/py310/bin/python -m pytest tests/ml/test_expert_agreement.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-021-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-021",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-expert-agreement-benchmark.mjs",
+      "sha256": "956ab0321ce784a401ee769c31509a0f42728fa89e7923ea631198967bd6b728"
+    },
+    {
+      "path": "code/ml/src/eval/expert_agreement.py",
+      "sha256": "5ff2e2f27ca96887e403f608b1d72522869ce53a2a06a2d028d54f4f3f551ed2"
+    },
+    {
+      "path": "tests/unit/test-ux-expert-agreement.mjs",
+      "sha256": "47b91388315e0bb64925762fbf6ca9610c6b4ccf284bbfbc371fee66ec648816"
+    },
+    {
+      "path": "tests/ml/test_expert_agreement.py",
+      "sha256": "ad004680e705732ce96eb8b01037e51b74653e0ca3d7a3dc696bb31ddb6df2a2"
+    },
+    {
+      "path": "scripts/harness/ux-expert-agreement-harness.mjs",
+      "sha256": "23dcb4d9e7837f0d15102d4deb26a18762ccf1cf89a30ffa5dd6c993c50dab08"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-021.md",
+      "sha256": "37d2c3915f80c07817bdeababcd612e2c51e4e347e90c35e20cf82d579ac795d"
+    }
+  ],
+  "certification": "PASS"
+}

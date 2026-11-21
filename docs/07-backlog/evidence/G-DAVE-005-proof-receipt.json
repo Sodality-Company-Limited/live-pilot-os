@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-005",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "invariants": [
+    {
+      "id": "G-DAVE-005-INV-001",
+      "statement": "DAVE Confidence, Verification, and Autonomy Policy satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/routing-truth-table-harness.mjs docs/07-backlog/goals/G-DAVE-005.md",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-autonomy-router.mjs",
+      "sha256": "821e37c52986942746235abbc4aea84585a53fc4d2fc0759c57a0b2731f1574b"
+    },
+    {
+      "path": "scripts/harness/routing-truth-table-harness.mjs",
+      "sha256": "67fb1aa74646ddccad4efd08cc87ed90b89213cda796e14803859854f1a5833a"
+    },
+    {
+      "path": "tests/unit/test-dave-autonomy-router.mjs",
+      "sha256": "9d350d6a05c72c29f05cbc54b35beb1a888f381de935297dbf087b68d713333b"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-03T18:43:00.000Z"
+}

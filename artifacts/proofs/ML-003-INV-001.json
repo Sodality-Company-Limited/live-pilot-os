@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-003",
+  "goal_id": "G-ML-003",
+  "invariant": "ML-003-INV-001",
+  "invariant_id": "ML-003-INV-001",
+  "classification": "executable_property_test",
+  "passed": true,
+  "command": "node scripts/harness/confidence-calibration-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-ML-003.md": "b159876564774187edbb7715553ac3b55afbb6c89e2185da925b82ecdedccb3e",
+    "scripts/lib/confidence-calibration.mjs": "74f39783ff33b012f84f57887603746050968d576f78b7ee5dc2ff2560976cf1"
+  },
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "generated_at": "2026-10-02T02:56:55.354Z"
+}

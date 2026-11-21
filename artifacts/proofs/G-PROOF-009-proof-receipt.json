@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-009",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-009-INV-001",
+      "statement": "Epistemic verification gate enforces strict L1-L4 evidence classification, rejecting pseudo-proof claims fail-closed.",
+      "verification_command": "node scripts/harness/epistemic-classification-gate.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-009-INV-002",
+      "statement": "Abstraction boundary disclosure auditor scans all harness stubs, mocks, and environment assumptions with zero undisclosed omissions.",
+      "verification_command": "node scripts/harness/epistemic-classification-gate.mjs --audit-stubs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/epistemic-classification-gate.mjs",
+      "sha256": "4715d3de429972708cf86fcf5acb62f3f17b374c969497b6401034094b5ac275"
+    },
+    {
+      "path": "scripts/lib/epistemic-classifier.mjs",
+      "sha256": "3c5e2c1c868dfd77047e6ebc87dd30e47c3ab130c01588aa7d50f7ceb1caa903"
+    }
+  ],
+  "epistemic_metadata": {
+    "tier": "L2",
+    "disclosures": [
+      "Deterministic AST and regex inspection for abstraction disclosure verification",
+      "Zero-mock production operational logic"
+    ],
+    "assumptions": [
+      "Native ECMAScript runtime environment with node:fs, node:path, and node:crypto"
+    ],
+    "anti_pseudo_proof_verified": true,
+    "abstraction_boundaries_audited": true
+  },
+  "certification": "PASS",
+  "generated_at": "2026-10-10T17:53:58.467Z"
+}

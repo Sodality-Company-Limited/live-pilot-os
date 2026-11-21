@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sodality.app/schemas/multi-node-contract.schema.json",
+  "title": "SodaMultiNodeContract",
+  "description": "Canonical multi-node enterprise data contract linking UI, BFF, Gateway, and Microservices.",
+  "type": "object",
+  "required": [
+    "id",
+    "tenant_id",
+    "base_currency",
+    "amount_minor",
+    "scale",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique immutable resource identifier."
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Multi-tenant isolation identifier."
+    },
+    "base_currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 three-letter currency code."
+    },
+    "amount_minor": {
+      "type": "string",
+      "pattern": "^-?[0-9]+$",
+      "description": "Exact monetary minor units as decimal string to guarantee JSON serialization and zero float loss."
+    },
+    "scale": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "Declared ISO 4217 decimal scale exponent."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "pending", "active", "completed", "failed"],
+      "description": "Lifecycle state machine status."
+    }
+  },
+  "additionalProperties": false
+}

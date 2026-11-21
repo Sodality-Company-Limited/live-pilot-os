@@ -1,0 +1,53 @@
+# Soda OS Goal Profile Schema: Agent Execution Profile
+# Profile ID: agent_execution
+# Description: Applied to goals governing agent runtime execution, decision routing, tool dispatch, and autonomy bounds.
+
+profile:
+  id: agent_execution
+  name: "Agent Autonomous Execution Assurance Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: decision_contract
+    description: "Canonical decision schema schema validation (GovernedDecision) requiring confidence, evidence citations, and risk classification."
+    type: markdown_or_schema
+    required_fields:
+      - decision_id
+      - model_id
+      - confidence
+      - evidence
+      - uncertainty
+      - risk
+      - action
+      - provenance
+
+  - id: routing_contract
+    description: "Exhaustive truth table mapping Risk x Evidence x Confidence permutations deterministically to valid actions."
+    type: yaml_or_table
+    permitted_actions:
+      - proceed
+      - verify
+      - defer
+      - human_review
+    invariants:
+      - "No unhandled state permutations"
+      - "High-risk unverified actions MUST defer or require human review"
+      - "Zero low-confidence actions allowed to proceed"
+
+  - id: human_review_boundary
+    description: "Explicit trigger conditions under which autonomous execution halts and transfers control to a human operator."
+    type: markdown_section
+    required_elements:
+      - "High-risk trigger"
+      - "Verification failure trigger"
+      - "Calibration drift trigger"
+      - "SLA timeout trigger"
+
+  - id: audit_ledger_contract
+    description: "Structured session event logging with cryptographic citations and token provenance."
+    type: markdown_section
+    required_elements:
+      - "Audit log format"
+      - "Provenance hashes"
+      - "Tamper-evident verification"

@@ -1,0 +1,38 @@
+# Goal ID reservation registry — product-owned.
+# Allocate with: soda-os goal next <EPIC>
+# Filename = ID exactly. Title lives in the H1 after the colon.
+# Contract: docs/06-workflows/goal-id.md
+schema_version: "1"
+epics:
+  CORE:
+    name: Core / unscoped
+    next_seq: 44
+    reserved: []
+  DAVE:
+    name: DAVE Decision System & Governance
+    next_seq: 7
+    reserved: []
+  ML:
+    name: Machine Learning & Cognitive Calibration
+    next_seq: 33
+    reserved: []
+  OPS:
+    name: DAVE Operations & Deployment Governance
+    next_seq: 2
+    reserved: []
+  PROOF:
+    name: DAVE Mathematical Invariant & Assurance Proofs
+    next_seq: 14
+    reserved: []
+  SEC:
+    name: DAVE Multimodal Security & Privacy Controls
+    next_seq: 2
+    reserved: []
+  UX:
+    name: Multimodal UX/UI Design Decision Layer
+    next_seq: 43
+    reserved: []
+  WEB:
+    name: DAVE Exact Web Application Pipeline
+    next_seq: 16
+    reserved: []

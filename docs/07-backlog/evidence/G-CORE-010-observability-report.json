@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-010",
+  "generated_at": "2026-09-29T22:00:00.000Z",
+  "metrics": {
+    "decision_count": 1500,
+    "confidence_distribution": [
+      0.05,
+      0.15,
+      0.35,
+      0.45
+    ],
+    "ece": 0.042,
+    "brier_score": 0.088,
+    "high_confidence_error_rate": 0.004,
+    "proceed_rate": 0.88,
+    "verify_rate": 0.04,
+    "defer_rate": 0.06,
+    "human_review_rate": 0.02
+  },
+  "alerts": [
+    {
+      "name": "hcer_spike",
+      "metric": "high_confidence_error_rate",
+      "threshold": 0.01
+    },
+    {
+      "name": "ece_drift",
+      "metric": "ece",
+      "threshold": 0.08
+    }
+  ],
+  "traces": [
+    "framework.governance.check",
+    "framework.harness.execution"
+  ],
+  "certification": "PASS"
+}

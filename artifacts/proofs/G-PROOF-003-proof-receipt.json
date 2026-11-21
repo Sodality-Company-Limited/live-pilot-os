@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-003",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "INV-PROOF-003-001",
+      "statement": "Goal Contract JSON Schema validates against JSON Schema Draft 2020-12 with zero schema errors and defines universal verification fields.",
+      "verification_command": "node --test tests/unit/test-goal-contract-schema.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "INV-PROOF-003-002",
+      "statement": "Native JavaScript validator validates universal fields and all 7 verification profile schemas with fail-closed error handling and zero mocks.",
+      "verification_command": "node --test tests/unit/test-goal-contract-schema.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "schemas/goal-contract.schema.json",
+      "sha256": "bcf0d6cf304e58885cfce0952d34cd0833c5efa9ebe6e4fd8cf2add57c5de04f"
+    },
+    {
+      "path": "scripts/lib/goal-contract-schema.mjs",
+      "sha256": "12eb80500a325646d6f48861b0432074466fa351855b2ddf170db24b365698a1"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T16:45:00.000Z"
+}

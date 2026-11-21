@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-005",
+  "generated_at": "2026-10-11T07:33:49.456Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "AUTOREG-CAUSAL-001",
+      "claim": "causal autoregressive masking strictly ensures tokens at position t cannot attend to or be mutated by tokens at future positions > t",
+      "statement": "causal autoregressive masking strictly ensures tokens at position t cannot attend to or be mutated by tokens at future positions > t",
+      "verification_command": "python3 scripts/harness/property-tests/test-autoregressive-preservation.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "AUTOREG-KL-002",
+      "claim": "Kullback-Leibler divergence between calibrated student model and base reference model is non-negative and numerically stable",
+      "statement": "Kullback-Leibler divergence between calibrated student model and base reference model is non-negative and numerically stable",
+      "verification_command": "pytest tests/ml/test_language_preservation.py -k test_kl_divergence",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/src/training/losses/language_preservation.py",
+      "sha256": "d5da0d4496ca15ca018a09cc0b0e6ffb2a732b12fbc0eb20223b2afde076d095"
+    },
+    {
+      "path": "code/ml/src/training/losses/__init__.py",
+      "sha256": "ba84e540b0010e8dd4f572bc4929535b65d6f96fa17ab4e74521c7a0e2813a7f"
+    },
+    {
+      "path": "tests/ml/test_language_preservation.py",
+      "sha256": "c0e326ede8a16ce92ad6831353b6548f12e58e681d14e1d9ad580e73c308ba98"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-005.md",
+      "sha256": "c80f27576885e86b57a8706641b048a61e94ce3cc336a111530e9f8254412ada"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-005.md",
+      "sha256": "65e50e6eb9c6ac09d3efba80ad33ff7c831f3f515167635a747e9bf48c858939"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-005.md",
+      "sha256": "98073ee46004585fe49ba72f90cc4f676221791fcbdff5d25299480bbe5ba39c"
+    },
+    {
+      "path": "scripts/agentic/g-ml-005-5why-socratic-engine.mjs",
+      "sha256": "865d30343438f09d5c00591911f9ac0db99c0ba9b101168d041f6e8bd24f02dd"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-005-5why-socratic-engine.mjs",
+      "sha256": "865d30343438f09d5c00591911f9ac0db99c0ba9b101168d041f6e8bd24f02dd"
+    }
+  ],
+  "certification": "PASS"
+}

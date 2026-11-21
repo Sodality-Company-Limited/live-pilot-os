@@ -1,0 +1,17 @@
+schema_version: "1"
+status: canonical_template
+flags:
+  - key: livepilot.platform_adapter_mutations
+    type: kill_switch
+    default: false
+    environments: {local: false, ci: false, staging: false, production: false}
+    owner: execution-and-platform
+    expiry: "REQUIRED"
+    audit: required
+  - key: livepilot.realtime_job_preemption
+    type: capability
+    default: true
+    environments: {local: true, ci: true, staging: true, production: false}
+    owner: scheduling-and-runtime
+    expiry: "REQUIRED"
+    audit: required

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-006",
+  "generated_at": "2026-10-14T05:29:32.532Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-006-INV-001",
+      "statement": "Coordinate normalizer maps to [0, 1000] integer grid and derives spatial containment and alignment relations.",
+      "verification_command": "node scripts/harness/ocr-bbox-aligner-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-006-INV-002",
+      "statement": "OCR bounding box aligner unit test suite passes 8/8 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ocr-bbox-aligner.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-006-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-006",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/vision/ocr_bounding_box_aligner.py",
+      "sha256": "a1322edba4082ed6e7e2d37d5f5e13c37efa9f6720f73b4bf095a42730b0f575"
+    },
+    {
+      "path": "scripts/lib/ocr-bbox-aligner.mjs",
+      "sha256": "358c8f83ec2cceb3b84563eae5748661d279891c2cd037ebde40d0df1c6cb062"
+    },
+    {
+      "path": "tests/unit/test-ocr-bbox-aligner.mjs",
+      "sha256": "1d1e27fbab4de4ede15dc8fa67800fbc4b425f55dd3a7d00c4e1a9696dfbae73"
+    },
+    {
+      "path": "scripts/harness/ocr-bbox-aligner-harness.mjs",
+      "sha256": "ce3486c104d9ee17c7f6ca7683afd10fa1c12c71b28bbfe571954630fae2fd05"
+    },
+    {
+      "path": "tests/ml/test_ocr_bbox_aligner.py",
+      "sha256": "b4076f90a87fcdf2e94a771f8e5fc7a76d6a9f955e2f99e945240f179f7d778e"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-006.md",
+      "sha256": "e1ff2287d1ca94a8674562835a6cfb66b76793068380ad6fc20fdf065d7eb0c2"
+    }
+  ],
+  "certification": "PASS"
+}

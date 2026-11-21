@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-022",
+  "generated_at": "2026-10-02T07:33:41.178Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-022-INV-001",
+      "claim": "Soda OS project upgrade engine update synchronizing confidence-aware execution contracts, harnesses, and configurations to existing downstream projects.",
+      "statement": "Soda OS project upgrade engine update synchronizing confidence-aware execution contracts, harnesses, and configurations to existing downstream projects.",
+      "verification_command": "node tests/unit/test-upgrade-calibration.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-022-INV-002",
+      "claim": "mergeCalibrationConfig deep merges default thresholds non-destructively while preserving all custom and user-tuned keys.",
+      "statement": "mergeCalibrationConfig deep merges default thresholds non-destructively while preserving all custom and user-tuned keys.",
+      "verification_command": "node tests/unit/test-upgrade-calibration.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-022-INV-003",
+      "claim": "Dry-run upgrade execution performs zero filesystem mutations on target repository.",
+      "statement": "Dry-run upgrade execution performs zero filesystem mutations on target repository.",
+      "verification_command": "node tests/unit/test-upgrade-calibration.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-022-INV-004",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-022-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "downstream_upgrade_distribution_accuracy",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.8389,
+      "upper": 1,
+      "center": 0.9194,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "cli.js": "cdfaa1b447e7b03c0fe6b27b6c3554f49a9cc3c299c8b3ba8b21a8ba5a582587",
+    "template/framework-manifest.yml": "271c009591754708e005ba2a6f5d166059fe85b3bb50c4afb1b5498a7d124860",
+    "tests/unit/test-upgrade-calibration.mjs": "5a4bd27f9893db4f05243c8dc02e6ad58eac72ebf00b4e977f5c68360dca8fe6",
+    "template/tests/unit/test-upgrade-calibration.mjs": "5a4bd27f9893db4f05243c8dc02e6ad58eac72ebf00b4e977f5c68360dca8fe6",
+    "docs/07-backlog/goals/_archived/G-ML-022.md": "cbdba419318193c65ca7da09dfa349c62fd9da962ce8faba1a485cda8f89bcb8",
+    "docs/02-product/acceptance/G-ML-022.md": "6203ff44ef0e7e6f47b26286d2ba992468962b5e0cae1cc4126dfdc1b3b54aef",
+    "template/docs/02-product/acceptance/G-ML-022.md": "6203ff44ef0e7e6f47b26286d2ba992468962b5e0cae1cc4126dfdc1b3b54aef",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-022.md": "14a1f9015e6929cb942002179d742ca9d9b663b795b2e7c1e84efda6176aa58a",
+    "template/docs/07-backlog/clarifications/CLARIFICATION-G-ML-022.md": "14a1f9015e6929cb942002179d742ca9d9b663b795b2e7c1e84efda6176aa58a",
+    "scripts/agentic/g-ml-022-5why-socratic-engine.mjs": "eabd1a3f83be34ed6cc7bd66f469a9b872474b9591d1efdb5a337959acc7b6b5",
+    "template/scripts/agentic/g-ml-022-5why-socratic-engine.mjs": "eabd1a3f83be34ed6cc7bd66f469a9b872474b9591d1efdb5a337959acc7b6b5",
+    "scripts/agentic/g-ml-022-provenance-oracle-evaluator.mjs": "c9487290126be8c9de48e43c6dc31979fecb988f332ec2c99757e69bb841a154",
+    "template/scripts/agentic/g-ml-022-provenance-oracle-evaluator.mjs": "c9487290126be8c9de48e43c6dc31979fecb988f332ec2c99757e69bb841a154"
+  },
+  "source_files": [
+    {
+      "path": "cli.js",
+      "sha256": "cdfaa1b447e7b03c0fe6b27b6c3554f49a9cc3c299c8b3ba8b21a8ba5a582587"
+    },
+    {
+      "path": "template/framework-manifest.yml",
+      "sha256": "271c009591754708e005ba2a6f5d166059fe85b3bb50c4afb1b5498a7d124860"
+    },
+    {
+      "path": "tests/unit/test-upgrade-calibration.mjs",
+      "sha256": "5a4bd27f9893db4f05243c8dc02e6ad58eac72ebf00b4e977f5c68360dca8fe6"
+    },
+    {
+      "path": "template/tests/unit/test-upgrade-calibration.mjs",
+      "sha256": "5a4bd27f9893db4f05243c8dc02e6ad58eac72ebf00b4e977f5c68360dca8fe6"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-022.md",
+      "sha256": "cbdba419318193c65ca7da09dfa349c62fd9da962ce8faba1a485cda8f89bcb8"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-022.md",
+      "sha256": "6203ff44ef0e7e6f47b26286d2ba992468962b5e0cae1cc4126dfdc1b3b54aef"
+    },
+    {
+      "path": "template/docs/02-product/acceptance/G-ML-022.md",
+      "sha256": "6203ff44ef0e7e6f47b26286d2ba992468962b5e0cae1cc4126dfdc1b3b54aef"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-022.md",
+      "sha256": "14a1f9015e6929cb942002179d742ca9d9b663b795b2e7c1e84efda6176aa58a"
+    },
+    {
+      "path": "template/docs/07-backlog/clarifications/CLARIFICATION-G-ML-022.md",
+      "sha256": "14a1f9015e6929cb942002179d742ca9d9b663b795b2e7c1e84efda6176aa58a"
+    },
+    {
+      "path": "scripts/agentic/g-ml-022-5why-socratic-engine.mjs",
+      "sha256": "eabd1a3f83be34ed6cc7bd66f469a9b872474b9591d1efdb5a337959acc7b6b5"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-022-5why-socratic-engine.mjs",
+      "sha256": "eabd1a3f83be34ed6cc7bd66f469a9b872474b9591d1efdb5a337959acc7b6b5"
+    },
+    {
+      "path": "scripts/agentic/g-ml-022-provenance-oracle-evaluator.mjs",
+      "sha256": "c9487290126be8c9de48e43c6dc31979fecb988f332ec2c99757e69bb841a154"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-022-provenance-oracle-evaluator.mjs",
+      "sha256": "c9487290126be8c9de48e43c6dc31979fecb988f332ec2c99757e69bb841a154"
+    }
+  ],
+  "certification": "PASS"
+}
