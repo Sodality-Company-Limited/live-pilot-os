@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProductDetails } from "./product-details";
+import { ProductDetails, type StockStatus } from "./product-details";
 import { HostCue } from "./host-cue";
 import { SessionEvents } from "./session-events";
-import { DecisionTrace } from "./decision-trace";
+import { ActionLogView, DecisionTrace, type ActionReceipt } from "./decision-trace";
+import { demoOverview, initialEvents, initialReceipts } from "../lib/mock-live-os-data";
 
 type Overview = {
   session_id: string;
   status: "scheduled" | "live" | "ended" | "paused";
-  top_products: { product_id: string; name: string; interest_count: number; stock_status: string }[];
+  top_products: { product_id: string; name: string; interest_count: number; stock_status: StockStatus }[];
   host_alerts: { alert_id: string; severity: string; message: string }[];
   copilot: { suggestion_id: string; text: string; status: string };
 };
@@ -71,32 +72,35 @@ export function isLiveSessionOverview(value: unknown): value is Overview {
     && (value.copilot.status === "pending" || value.copilot.status === "approved" || value.copilot.status === "edited" || value.copilot.status === "dismissed");
 }
 
-export function SessionOverviewContent({ overview, mode, role }: { overview: Overview; mode: "local" | "simulated"; role: "host" | "ops" }) {
+export function SessionOverviewContent({ overview, mode, role, mockData = false, issued = false }: { overview: Overview; mode: "local" | "simulated"; role: "host" | "ops"; mockData?: boolean; issued?: boolean }) {
   const [selectedProductId, setSelectedProductId] = useState("");
   const product = overview.top_products.find((item) => item.product_id === selectedProductId) ?? overview.top_products[0] ?? null;
   return (
-    <section className="panel col-span-full" aria-labelledby={`overview-${role}`}>
-      <div className="section-heading"><h2 id={`overview-${role}`}>Session overview</h2><p>Status: {overview.status}</p></div>
-      <p>Mode: {mode}</p>
-      <h3>Top products</h3>
-      {overview.top_products.length > 0 && <label htmlFor={`overview-product-${role}`}>Select product<select id={`overview-product-${role}`} value={product?.product_id ?? ""} onChange={(event) => setSelectedProductId(event.target.value)}>{overview.top_products.map((item) => <option key={item.product_id} value={item.product_id}>{item.name}</option>)}</select></label>}
+    <section className="panel overview-card" aria-labelledby={`overview-${role}`}>
+      <div className="section-heading"><h2 id={`overview-${role}`}>ภาพรวมไลฟ์</h2><p>สถานะ: {overview.status === "live" ? "กำลังไลฟ์" : overview.status}</p></div>
+      <p>โหมด: {mode === "simulated" ? "จำลอง" : mode}</p>
+      <h3>สินค้าที่น่าสนใจ</h3>
+      {overview.top_products.length > 0 && <label htmlFor={`overview-product-${role}`}>เลือกสินค้า<select id={`overview-product-${role}`} value={product?.product_id ?? ""} onChange={(event) => setSelectedProductId(event.target.value)}>{overview.top_products.map((item) => <option key={item.product_id} value={item.product_id}>{item.name}</option>)}</select></label>}
       <ProductDetails product={product} />
       {role === "host" && <HostCue overview={overview} />}
-      <SessionEvents sessionId={overview.session_id} />
-      {role === "ops" && <DecisionTrace sessionId={overview.session_id} />}
-      <h3>Host alerts</h3>
-      {overview.host_alerts.length ? <ul>{overview.host_alerts.map((alert) => <li key={alert.alert_id}>{alert.severity}: {alert.message}</li>)}</ul> : <p>No host alerts.</p>}
-      <h3>Copilot</h3>
-      <p>{overview.copilot.text} ({overview.copilot.status})</p>
+      {mockData ? <section className="panel" aria-labelledby="session-events-heading"><h2 id="session-events-heading">เหตุการณ์ไลฟ์</h2><p role="status">เหตุการณ์จำลอง</p><ol aria-label="เหตุการณ์ไลฟ์">{issued && <li>อนุมัติและออกโปรครีมจำลอง · SIMULATED</li>}{initialEvents.map((event) => <li key={event.event_id}>{event.event_type} · ลำดับ {event.sequence} · {event.mode}</li>)}</ol></section> : <SessionEvents sessionId={overview.session_id} />}
+      {role === "ops" && (mockData
+        ? <ActionLogView items={initialReceipts.map(({ action_id, aggregate_id, correlation_id, occurred_at, policy_revision, mode }): ActionReceipt => ({ action_id, aggregate_id, status: issued ? "อนุมัติและออกโปรจำลอง" : "รอการตัดสินใจ", correlation_id, occurred_at, policy_revision: policy_revision ?? undefined, mode }))} state="ready" cursor={null} />
+        : <DecisionTrace sessionId={overview.session_id} />)}
+      <h3>แจ้งเตือนโฮสต์</h3>
+      {overview.host_alerts.length ? <ul>{overview.host_alerts.map((alert) => <li key={alert.alert_id}>แจ้งเตือน: {alert.message}</li>)}</ul> : <p>ไม่มีการแจ้งเตือน</p>}
+      <h3>คำแนะนำ</h3>
+      <p>{overview.copilot.text}</p>
     </section>
   );
 }
 
-export function SessionOverview({ role }: { role: "host" | "ops" }) {
+export function SessionOverview({ role, mockData = false, issued = false }: { role: "host" | "ops"; mockData?: boolean; issued?: boolean }) {
   const [view, setView] = useState<View>({ kind: "loading" });
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    if (mockData) return;
     let stale = false;
     const load = async () => {
       setView({ kind: "loading" });
@@ -125,12 +129,14 @@ export function SessionOverview({ role }: { role: "host" | "ops" }) {
     };
     void load();
     return () => { stale = true; };
-  }, [role, attempt]);
+  }, [role, attempt, mockData]);
 
-  if (view.kind === "loading") return <section className="panel col-span-full" aria-live="polite" aria-busy="true"><h2>Session overview</h2><p>Loading session overview…</p></section>;
-  if (view.kind === "empty") return <section className="panel col-span-full" aria-live="polite"><h2>Session overview</h2><p>No active session is available.</p></section>;
-  if (view.kind === "unauthorized") return <section className="panel col-span-full" aria-live="polite"><h2>Session overview</h2><p>Your session has expired. <a href="/login">Sign in again</a>.</p></section>;
-  if (view.kind === "unavailable") return <section className="panel col-span-full" aria-live="polite"><h2>Session overview</h2><p>The session overview is unavailable.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Retry</button></section>;
+  if (mockData) return <SessionOverviewContent overview={demoOverview} mode="simulated" role={role} mockData issued={issued} />;
+
+  if (view.kind === "loading") return <section className="panel col-span-full" aria-live="polite" aria-busy="true"><h2>ภาพรวมไลฟ์</h2><p>Loading session overview…</p></section>;
+  if (view.kind === "empty") return <section className="panel col-span-full" aria-live="polite"><h2>ภาพรวมไลฟ์</h2><p>No active session is available.</p></section>;
+  if (view.kind === "unauthorized") return <section className="panel col-span-full" aria-live="polite"><h2>ภาพรวมไลฟ์</h2><p>Your session has expired. <a href="/login">Sign in again</a>.</p></section>;
+  if (view.kind === "unavailable") return <section className="panel col-span-full" aria-live="polite"><h2>ภาพรวมไลฟ์</h2><p>The session overview is unavailable.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Retry</button></section>;
 
   return <SessionOverviewContent overview={view.overview} mode={view.mode} role={role} />;
 }

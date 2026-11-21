@@ -281,92 +281,66 @@ a:focus-visible,
   margin: 0;
 }
 
-/* Keep the live workspace within the viewport; individual panels retain access to long content. */
 .app-frame {
   height: 100dvh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: var(--space-4);
 }
 
 .topbar { flex: none; padding-block-end: var(--space-3); }
-.app-frame main { display: flex; flex: 1; min-height: 0; padding-block-start: var(--space-3); flex-direction: column; container-type: size; }
-.shell-grid { flex: 1; min-height: 0; container-type: size; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
-.panel { min-height: 0; overflow: auto; }
-.stage-card { grid-column: span 4; grid-row: span 2; display: grid; place-content: center; min-height: 0; width: min(100%, 56.25cqh); height: auto; aspect-ratio: 9 / 16; justify-self: center; align-self: center; }
-.topic-card { grid-column: span 4; }
-.signal-card { grid-column: span 4; }
-.cue-card { grid-column: span 8; }
-.guardrail-card { grid-column: span 4; grid-row: span 2; }
-.app-frame--ops .topic-card, .app-frame--ops .signal-card { grid-column: span 4; }
-.app-frame--ops .trace-card, .app-frame--ops .controls-card { grid-column: span 2; }
-.metrics-grid { gap: var(--space-2); }
-.metric { padding: var(--space-2); }
-.metric-value { font-size: var(--text-md); margin-top: 0; }
-.guardrail-list { gap: var(--space-2); }
-.guardrail-row { padding-block-end: var(--space-2); }
-
-.guardrail-row dd {
-  color: var(--color-text-muted);
-  text-align: end;
-}
+.app-frame main { flex: 1; min-height: 0; display: flex; flex-direction: column; padding-block-start: var(--space-3); }
+.shell-grid { flex: 1; min-height: 0; align-items: stretch; gap: var(--space-4); }
+.shell-grid > .panel { min-width: 0; min-height: 0; overflow: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+.stage-card { display: flex; flex-direction: column; width: 100%; aspect-ratio: auto; gap: var(--space-3); }
+.stage-card .section-heading { margin: 0; }
+.stage-media { position: relative; flex: 1; min-height: 0; display: flex; justify-content: center; }
+.stage-video { display: block; align-self: center; height: auto; width: auto; max-height: 100%; max-width: 100%; aspect-ratio: 9 / 16; object-fit: contain; border-radius: var(--radius-md); background: #080a0d; }
+.demo-coupon { position: absolute; inset-block-end: 3.5rem; display: grid; gap: var(--space-1); padding: var(--space-2) var(--space-3); max-width: 90%; border-radius: var(--radius-md); background: var(--color-primary); color: var(--color-primary-fg); box-shadow: var(--shadow-tile); }
+.demo-coupon strong { font-size: var(--text-lg); }
+.demo-coupon small { font-size: var(--text-sm); }
+.promotion-recommendation { display: grid; gap: var(--space-2); margin-bottom: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-primary); border-radius: var(--radius-md); background: var(--color-surface-raised); }
+.promotion-recommendation p { margin: 0; }
+.demo-action, .demo-reset { min-height: 44px; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-primary); border-radius: var(--radius-md); background: var(--color-primary); color: var(--color-primary-fg); font-weight: var(--font-semibold); cursor: pointer; }
+.demo-reset { background: var(--color-surface); color: var(--color-text); }
+.chat-list { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.chat-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-raised); overflow-wrap: anywhere; }
+.overview-card { display: flex; flex-direction: column; gap: var(--space-3); }
+.overview-card > .section-heading { align-items: flex-start; margin: 0; }
+.overview-card > p, .overview-card > h3 { margin: 0; }
+.overview-card label { display: grid; gap: var(--space-2); }
+.overview-card select { max-width: 100%; min-height: 2.75rem; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); background: var(--color-surface-raised); color: var(--color-text); }
+.overview-card > .panel { flex: none; }
+.guardrail-row dd { color: var(--color-text-muted); text-align: end; }
 
 @media (min-width: 1440px) {
-  .app-frame {
-    padding: var(--space-8);
-  }
+  .app-frame { padding: var(--space-8); }
 }
 
 @media (min-width: 1280px) {
-  .shell-grid {
-    grid-template-columns: min(40%, calc(100cqh * 9 / 16)) minmax(0, 1fr) minmax(0, 1fr);
-  }
-
-  .app-frame--host .shell-grid {
-    grid-template-areas:
-      "stage topics signals"
-      "stage cue cue";
-  }
-
+  .shell-grid { grid-template-columns: minmax(220px, min(35vw, calc((100dvh - 190px) * 9 / 16 + 34px))) minmax(360px, 1.3fr) minmax(260px, 0.85fr); grid-template-rows: repeat(3, minmax(0, 1fr)); }
+  .app-frame--host .shell-grid { grid-template-areas: "stage overview topics" "stage overview signals" "stage overview chat"; }
+  .app-frame--ops .shell-grid { grid-template-rows: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)); grid-template-areas: "stage overview guardrails" "stage overview signals" "stage overview topics" "stage chat controls"; }
+  .shell-grid > .panel:first-child { grid-area: overview; }
   .stage-card { grid-area: stage; }
-  .app-frame--host .topic-card { grid-area: topics; }
-  .app-frame--host .signal-card { grid-area: signals; }
-  .app-frame--host .cue-card { grid-area: cue; }
-
-  .app-frame--ops .shell-grid {
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.85fr);
-    grid-template-areas:
-      "stage topics guardrails"
-      "stage signals guardrails"
-      "stage trace controls";
-  }
-
-  .app-frame--ops .topic-card { grid-area: topics; }
-  .app-frame--ops .signal-card { grid-area: signals; }
-  .app-frame--ops .guardrail-card { grid-area: guardrails; }
-  .app-frame--ops .trace-card { grid-area: trace; }
-  .app-frame--ops .controls-card { grid-area: controls; }
-  .metrics-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .metric { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
-  .signal-card .section-heading { margin-block-end: var(--space-2); }
-  .signal-card .control-reason { margin-block-start: var(--space-2); }
-}
-
-@media (max-width: 1279px) {
-  .app-frame { height: auto; min-height: 100dvh; }
-  .app-frame main { container-type: normal; }
-  .shell-grid { flex: none; container-type: normal; grid-template-rows: none; }
-  .panel { overflow: visible; }
-  .stage-card { width: 100%; max-width: 25rem; height: auto; aspect-ratio: 9 / 16; }
+  .topic-card { grid-area: topics; }
+  .signal-card { grid-area: signals; }
+  .stage-chat-card { grid-area: chat; }
+  .guardrail-card { grid-area: guardrails; }
+  .controls-card { grid-area: controls; }
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
-  .shell-grid { grid-template-columns: min(45%, 25rem) minmax(0, 1fr); grid-auto-rows: min-content; }
-  .shell-grid > .stage-card { grid-column: 1; grid-row: 1 / span 5; align-self: start; }
-  .shell-grid > .panel:not(.stage-card) { grid-column: 2; }
+  .shell-grid { overflow: auto; overscroll-behavior: contain; grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr); grid-auto-rows: auto; }
+  .shell-grid > .panel { grid-column: auto; grid-row: auto; overscroll-behavior: auto; }
+  .shell-grid > .panel:first-child { grid-column: 2; grid-row: 1; }
+  .shell-grid > .stage-card { grid-column: 1; grid-row: 1; height: calc(100dvh - 7rem); }
+  .shell-grid > .panel:not(.stage-card) { max-height: calc(100dvh - 7rem); }
 }
 
 @media (max-width: 767px) {
-  .shell-grid { display: flex; flex-direction: column; }
-  .shell-grid > .stage-card { margin-inline: auto; }
+  .shell-grid { display: flex; flex-direction: column; overflow: auto; overscroll-behavior: contain; }
+  .shell-grid > .panel { flex: none; max-height: calc(100dvh - 7rem); overscroll-behavior: auto; }
+  .shell-grid > .stage-card { order: -1; max-width: 25rem; height: calc(100dvh - 7rem); margin-inline: auto; }
 }

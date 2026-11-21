@@ -68,21 +68,21 @@ export function ActionLogView({ items, state, cursor, onRetry, onLoadMore }: {
 }) {
   return (
     <section className="panel trace-card" aria-labelledby="action-log-heading">
-      <h2 id="action-log-heading">Action log</h2>
+      <h2 id="action-log-heading">บันทึกการดำเนินการ</h2>
       {state === "loading" && <p role="status">Loading action log…</p>}
-      {state === "empty" && <p role="status">No actions recorded.</p>}
+      {state === "empty" && <p role="status">ยังไม่มีการดำเนินการ</p>}
       {state === "error" && <p role="alert">Could not load the action log. <button type="button" onClick={onRetry}>Retry</button></p>}
-      {state === "inaccessible" && <p role="status">Action log unavailable for this session.</p>}
+      {state === "inaccessible" && <p role="status">บันทึกการดำเนินการ unavailable for this session.</p>}
       {state === "unauthenticated" && <p role="status">Your session has expired. <a href="/login">Sign in</a></p>}
       {items.length > 0 && (
         <ol aria-label="Actions" aria-live="polite">
           {items.map((item) => (
             <li key={item.action_id}>
-              <p>Action {item.action_id} · {item.status}</p>
-              <p>Occurred {new Date(item.occurred_at).toLocaleString()}</p>
-              <p>Correlation ID: {item.correlation_id}</p>
-              {item.policy_revision && <p>Policy revision: {item.policy_revision}</p>}
-              <p>Mode: {item.mode}</p>
+              <p>รายการ {item.action_id} · {item.status}</p>
+              <p>เวลา {new Date(item.occurred_at).toLocaleString()}</p>
+              <p>รหัสอ้างอิง: {item.correlation_id}</p>
+              {item.policy_revision && <p>นโยบาย: {item.policy_revision}</p>}
+              <p>โหมด: {item.mode}</p>
             </li>
           ))}
         </ol>

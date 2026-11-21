@@ -3,40 +3,19 @@
 import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { enUS } from "../../messages/en-US";
-import { isLoginResponse, loginErrorMessage } from "../../lib/login-contract";
 
 export default function LoginPage() {
   const router = useRouter();
   const passwordRef = useRef<HTMLInputElement>(null);
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState("");
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (pending) return;
     const form = new FormData(event.currentTarget);
     setPending(true);
-    setError("");
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-Correlation-Id": crypto.randomUUID() },
-        body: JSON.stringify({ email: form.get("email"), password: form.get("password") }),
-      });
-      if (!response.ok) {
-        setError(loginErrorMessage(response.status));
-        return;
-      }
-      const result: unknown = await response.json();
-      if (!isLoginResponse(result)) { setError(enUS.loginUnavailable); return; }
-      if (result.user.role === "HOST") router.replace("/");
-      else router.replace("/ops");
-    } catch {
-      setError(enUS.loginUnavailable);
-    } finally {
-      if (passwordRef.current) passwordRef.current.value = "";
-      setPending(false);
-    }
+    if (passwordRef.current) passwordRef.current.value = "";
+    const email = String(form.get("email") ?? "");
+    router.replace(email.toLowerCase().includes("ops") ? "/ops" : "/");
   }
 
   return (
@@ -56,7 +35,6 @@ export default function LoginPage() {
           <label htmlFor="password">{enUS.loginPassword}</label>
           <input className="min-h-12 w-full rounded-md border border-[var(--color-border-strong)] bg-liveos-raised px-3 text-liveos-text outline-offset-2 focus-visible:outline-3 focus-visible:outline-[var(--color-focus)]" id="password" name="password" type="password" autoComplete="current-password" ref={passwordRef} required />
         </div>
-        {error && <p role="alert" className="m-0 text-[var(--color-danger)]">{error}</p>}
         <button className="min-h-12 rounded-md bg-liveos-accent px-4 font-semibold text-[var(--color-primary-fg)] disabled:cursor-wait disabled:opacity-60" disabled={pending} type="submit">{pending ? enUS.loginPending : enUS.loginSubmit}</button>
       </form>
     </main>
