@@ -22,7 +22,7 @@ chmod 600 infra/.env.local
 
 ```bash
 scp infra/provision-ubuntu24.sh root@$LIVEPILOT_SSH_HOST:/root/
-ssh root@$LIVEPILOT_SSH_HOST 'bash /root/provision-ubuntu24.sh'
+ssh root@$LIVEPILOT_SSH_HOST 'LIVEPILOT_SSH_CIDR=<operator-cidr> LIVEPILOT_ADMIN_AUTHORIZED_KEYS="<ssh-public-key>" bash /root/provision-ubuntu24.sh'
 ```
 
 ## Deploy the shared foundation
@@ -35,4 +35,14 @@ LIVEPILOT_SSH_HOST=<droplet-ip> ./infra/deploy.sh deploy
 LIVEPILOT_SSH_HOST=<droplet-ip> ./infra/deploy.sh status
 ```
 
-Only localhost ports are published. Application containers should join the `livepilot-infra` Docker network; public HTTP/TLS ingress should be added only through an approved edge service. PostgreSQL and NATS backups/restore verification are still required for the production environment.
+Only localhost ports are published for the foundation. Application containers should join the `livepilot-infra` Docker network. Public ingress must terminate at the Nginx/ModSecurity edge, with TLS certificates supplied as Docker secrets; the edge is the only component allowed to publish 443. PostgreSQL and NATS backups/restore verification are still required for the production environment.
+
+The edge configuration is in [`nginx/`](nginx/). Nginx forwards only to Node 1,
+the `portal-ui` runtime. KrakenD is not an edge replacement: it belongs after the
+Portal BFF as Node 3, followed by Core BFF (Node 4) and the Internal KrakenD Mesh
+(Node 5). Those application runtimes are not yet declared in this foundation-only
+Compose file and must be added only with their real images, probes, contracts, and
+mTLS identities. The production edge image must include
+libModSecurity and the OWASP Core Rule Set and must fail deployment if the module or CRS
+is absent. Cloudflare WAF may be placed in front as an additional layer, but is not a
+replacement for the host firewall or origin TLS.
