@@ -6,6 +6,9 @@ Primary architecture document: [LivePilot OS Architecture](docs/03-architecture/
 
 Additional references: [Architecture Overview](docs/03-architecture/overview.md) · [Requirements Baseline](docs/03-architecture/live-pilot-os-requirements.md) · [Domain Model](docs/03-architecture/live-pilot-os-domain-model.md) · [Integration Boundaries](docs/03-architecture/live-pilot-os-integration-boundaries.md)
 
+DigitalOcean infrastructure scaffolding is in [`infra/`](infra/README.md). It follows the Aflovia deployment model with an Ubuntu 24.04 Droplet and private Docker Compose services.
+
+
 ## LivePilot OS — System Overview and Architecture
 
 ### Mission and Value

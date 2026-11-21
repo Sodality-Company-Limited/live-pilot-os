@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/api/auth-session.schema.json",
+  "title": "LivePilot Auth Session",
+  "type": "object",
+  "required": ["session_id", "principal_id", "role", "capabilities", "mode", "expires_at"],
+  "properties": {
+    "session_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "principal_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "tenant_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "workspace_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "role": {"type": "string", "enum": ["HOST", "LIVE_OPS", "AUDITOR", "PLATFORM_OPERATOR"]},
+    "capabilities": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,96}$"}},
+    "live_session_id": {"type": ["string", "null"]},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "mode": {"type": "string", "enum": ["local", "simulated", "production"]}
+  },
+  "additionalProperties": false
+}

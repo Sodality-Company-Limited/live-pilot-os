@@ -13,6 +13,11 @@
 > **Route Prefixing SOT:** [api/route-prefixing-and-boundary-invariant.md](api/route-prefixing-and-boundary-invariant.md)
 > **Deployment/Runtime SOT:** [deployment/README.md](deployment/README.md)
 > **Configuration/Policy SOT:** [configuration/README.md](configuration/README.md)
+> **JEV Agent Runtime SOT:** [jev-agent-runtime-sot.md](jev-agent-runtime-sot.md)
+> **AI Provider SOT:** [openai-provider-sot.md](openai-provider-sot.md) · [ai-provider-abstraction-sot.md](ai-provider-abstraction-sot.md)
+> **AI Safety/Observability SOT:** [ai-safety-defer-sot.md](ai-safety-defer-sot.md) · [ai-observability-cost-sot.md](ai-observability-cost-sot.md)
+> **Stack/Service/Provider SOT:** [technology-stack-sot.md](technology-stack-sot.md) · [service-topology-sot.md](service-topology-sot.md) · [provider-decision-sot.md](provider-decision-sot.md)
+> **Production Readiness SOT:** [production-readiness-sot.md](production-readiness-sot.md)
 
 This document consolidates the technical standards required to move LivePilot OS
 from a simulated Hackathon slice toward an enterprise production system. It does
@@ -37,9 +42,10 @@ Product / requirements
 | `SIMULATED` | Hackathon-only deterministic behavior | Visible mode label and no external mutation |
 | `VERIFIED` | Executable evidence passed for a specific revision | Proof receipt with commands, hashes, and results |
 
-The current Hackathon is `SIMULATED`, not `PRODUCTION`. The existing technology
-stack remains `PROPOSED` until identity, deployment, provider, and operational
-decisions are approved.
+The live demo uses `SIMULATED` inputs and platform adapters, but the deployed
+runtime and architecture remain production-shaped. Frontend signal injection and
+backend mock products are explicit demo boundaries; they do not disable production
+authorization, policy, persistence, audit, idempotency, or reconciliation.
 
 ## 2. System topology and trust boundaries
 

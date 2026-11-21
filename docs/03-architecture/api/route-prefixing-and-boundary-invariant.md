@@ -10,13 +10,17 @@ This document is the canonical route-prefixing contract for the six-node topolog
 It standardizes which boundary owns cookies, bearer authentication, public routing,
 internal routing, domain policy, persistence, and message transport.
 
+The six nodes are the logical boundary model. The current DigitalOcean deployment
+is a constrained Docker Compose bridge; it must preserve these route and ownership
+boundaries even when multiple logical nodes share one host.
+
 ## 1. Six-node topology
 
 ```text
 Node 1  Portal UI / Browser / LINE LIFF
    │    same-origin HTTPS + HttpOnly session cookie: /api/*
 Node 2  Portal BFF / Next.js
-   │    TLS + bearer + W3C trace: /v1/*
+   │    server-derived auth context + TLS + W3C trace: /v1/*
 Node 3  KrakenD Edge API Gateway
    │    authenticated internal ingress: /v1/*
 Node 4  Core BFF / API Engine / orchestration
@@ -35,7 +39,7 @@ between Nodes 4 and 5 unless an approved decision record changes this invariant.
 | Boundary | Prefix | Authentication | Owner | Forbidden |
 |---|---|---|---|---|
 | Node 1 → Node 2 | `/api/*` | Same-origin, Secure/HttpOnly/SameSite cookie | Portal BFF session/DTO boundary | Browser authorization or direct service calls |
-| Node 2 → Node 3 | `/v1/*` | Bearer token, TLS, W3C trace | Public versioned API contract | Persona-prefixed domain routes |
+| Node 2 → Node 3 | `/v1/*` | Same-origin cookie session at browser boundary; internal bearer only for service-to-service hops, plus TLS and W3C trace | Public versioned API contract | Persona-prefixed domain routes |
 | Node 3 → Node 4 | `/v1/*` | Gateway-authenticated service context | Edge routing, rate limits, request policy | Domain policy reimplementation |
 | Node 4 → Node 5 | `/internal/v1/*` | mTLS/workload identity, service auth | Internal ingress and schema routing | Public exposure, browser access |
 | Node 5 → Node 6 | Service route or NATS subject | mTLS/workload identity | Domain service and transaction owner | Shared database writes |
@@ -76,9 +80,10 @@ preceding identity boundary, or become a second writer for another node’s aggr
 
 ## 4. Security and session rules
 
-- Browser cookies are Secure, HttpOnly, SameSite=Strict, scoped to the approved host,
+- Browser cookies are Secure, HttpOnly, SameSite=Lax, scoped to the approved host,
   and never copied into service-to-service headers.
-- Bearer claims are validated at the edge and re-authorized by the service owner.
+- Any internal bearer or signed context is minted by the trusted BFF/edge boundary,
+  never supplied by browser JavaScript, and is re-authorized by the service owner.
 - Internal identity uses mTLS or approved workload identity; user identity is propagated
   as signed context, never as an unauthenticated header.
 - `X-Correlation-Id`, W3C trace context, tenant/session scope, and `Idempotency-Key`

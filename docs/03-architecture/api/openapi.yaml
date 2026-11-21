@@ -3,21 +3,145 @@ info:
   title: LivePilot OS Core API Contract
   version: 1.0.0
   description: >-
-    Canonical HTTP contract for the LivePilot OS boundary:
+    Draft HTTP transport contract for the LivePilot OS boundary. It becomes
+    generated/canonical only after operation-catalog reconciliation:
     Next.js Frontend <-> Next.js BFF <-> CORE BFF <-> Core Microservices.
     Domain rules remain owned by the responsible microservice; this document defines
     transport schemas, auth, correlation, idempotency, and public error semantics.
 tags:
+  - name: Authentication
+  - name: Live Session Lifecycle
   - name: Live Sessions
   - name: Promotions
 paths:
+  /v1/live-sessions:
+    post:
+      tags: [Live Session Lifecycle]
+      summary: Initialize an authorized live session
+      description: >-
+        Creates the authoritative LiveSession boundary for downstream telemetry.
+        This operation does not ingest raw chat or commerce payloads, invoke JEV,
+        mutate a marketplace, or claim that telemetry has arrived. Source
+        readiness is returned explicitly per source.
+      operationId: createLiveSession
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/Locale'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLiveSessionRequest'
+      responses:
+        '200':
+          description: Idempotent replay of an already committed live session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSessionStartResponse'
+        '201':
+          description: Live session committed and source registration receipt returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSessionStartResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ChannelNotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnsupportedSessionMode'
+        '424':
+          $ref: '#/components/responses/ChannelNotReady'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/Internal'
+        '503':
+          $ref: '#/components/responses/DependencyUnavailable'
+
+  /v1/auth/login:
+    post:
+      tags: [Authentication]
+      summary: Sign in as a seeded test user in local or simulated mode
+      operationId: loginTestUser
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated test user and created session
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+
+  /v1/auth/session:
+    get:
+      tags: [Authentication]
+      summary: Get the current authenticated test session
+      operationId: getCurrentAuthSession
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Current authenticated principal and session scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSession'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/auth/logout:
+    post:
+      tags: [Authentication]
+      summary: Revoke the current test session
+      operationId: logoutTestUser
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '204':
+          description: Session revoked and cookie cleared
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
   /v1/live-sessions/{session_id}/overview:
     get:
       tags: [Live Sessions]
       summary: Get the host and operator overview for a live session
       operationId: getLiveSessionOverview
       security:
-        - bearerAuth: []
+        - cookieAuth: []
       parameters:
         - $ref: '#/components/parameters/SessionId'
         - $ref: '#/components/parameters/CorrelationId'
@@ -41,7 +165,7 @@ paths:
       summary: Propose a promotion for policy evaluation and controlled execution
       operationId: proposePromotion
       security:
-        - bearerAuth: []
+        - cookieAuth: []
       parameters:
         - $ref: '#/components/parameters/SessionId'
         - $ref: '#/components/parameters/CorrelationId'
@@ -70,12 +194,120 @@ paths:
         '500':
           $ref: '#/components/responses/Internal'
 
+  /v1/live-sessions/{session_id}/events:
+    get:
+      tags: [Live Sessions]
+      summary: Stream authorized live-session events over SSE
+      operationId: streamLiveSessionEvents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: Last-Event-ID
+          in: header
+          required: false
+          schema: {type: string, maxLength: 128}
+      responses:
+        '200':
+          description: Server-sent event stream
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/RealtimeEvent'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409':
+          description: Replay cursor expired
+          content: {application/problem+json: {schema: {$ref: '#/components/schemas/ProblemDetails'}}}
+
+  /v1/promotions/{promotion_id}/decision:
+    post:
+      tags: [Promotions]
+      summary: Approve or reject a pending promotion
+      operationId: decidePromotion
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: promotion_id
+          in: path
+          required: true
+          schema: {type: string, minLength: 1}
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/PromotionDecisionRequest'}
+      responses:
+        '202':
+          description: Decision committed; simulated execution is asynchronous
+          content: {application/json: {schema: {$ref: '#/components/schemas/PromotionDecisionResponse'}}}
+        '400': {$ref: '#/components/responses/ValidationError'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/PolicyRejected'}
+        '503': {$ref: '#/components/responses/Internal'}
+
+  /v1/promotions/{promotion_id}:
+    get:
+      tags: [Promotions]
+      summary: Read promotion and simulated execution state
+      operationId: getPromotion
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: promotion_id
+          in: path
+          required: true
+          schema: {type: string, minLength: 1}
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Promotion state
+          content: {application/json: {schema: {$ref: '#/components/schemas/Promotion'}}}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '500': {$ref: '#/components/responses/Internal'}
+
+  /v1/live-sessions/{session_id}/actions:
+    get:
+      tags: [Live Sessions]
+      summary: Read the authorized immutable action log
+      operationId: getActionLog
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: cursor
+          in: query
+          required: false
+          schema: {type: string, maxLength: 512}
+        - name: limit
+          in: query
+          required: false
+          schema: {type: integer, minimum: 1, maximum: 100, default: 50}
+      responses:
+        '200':
+          description: Ordered action receipts
+          content: {application/json: {schema: {$ref: '#/components/schemas/ActionLogPage'}}}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '500': {$ref: '#/components/responses/Internal'}
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: livepilot_session
   parameters:
     SessionId:
       name: session_id
@@ -91,6 +323,14 @@ components:
       schema:
         type: string
         minLength: 1
+    Locale:
+      name: X-Locale
+      in: header
+      required: false
+      schema:
+        type: string
+        enum: [th, en]
+        default: en
     IdempotencyKey:
       name: Idempotency-Key
       in: header
@@ -99,6 +339,117 @@ components:
         type: string
         minLength: 8
   schemas:
+    CreateLiveSessionRequest:
+      type: object
+      required: [platform, channel_ref, mode, requested_at]
+      properties:
+        platform:
+          type: string
+          enum: [tiktok, simulator]
+        channel_ref:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Server-resolved platform channel reference; never a credential.
+        mode:
+          type: string
+          enum: [live]
+        requested_at:
+          type: string
+          format: date-time
+      additionalProperties: false
+    LiveSessionStartResponse:
+      type: object
+      required: [live_session_id, status, platform, channel_ref, source_readiness, correlation_id, schema_version]
+      properties:
+        live_session_id:
+          type: string
+          minLength: 1
+        status:
+          type: string
+          enum: [live]
+        platform:
+          type: string
+          enum: [tiktok, simulator]
+        channel_ref:
+          type: string
+        source_readiness:
+          $ref: '#/components/schemas/SourceReadiness'
+        correlation_id:
+          type: string
+        schema_version:
+          type: integer
+          const: 1
+      additionalProperties: false
+    SourceReadiness:
+      type: object
+      required: [chat, commerce, engagement]
+      properties:
+        chat:
+          $ref: '#/components/schemas/ReadinessState'
+        commerce:
+          $ref: '#/components/schemas/ReadinessState'
+        engagement:
+          $ref: '#/components/schemas/ReadinessState'
+        stock:
+          $ref: '#/components/schemas/ReadinessState'
+      additionalProperties: false
+    ReadinessState:
+      type: string
+      enum: [pending, ready, degraded, unavailable]
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+      additionalProperties: false
+    LoginResponse:
+      type: object
+      required: [user, session]
+      properties:
+        user:
+          $ref: '#/components/schemas/AuthUser'
+        session:
+          $ref: '#/components/schemas/AuthSession'
+      additionalProperties: false
+    AuthUser:
+      type: object
+      required: [user_id, role, display_name]
+      properties:
+        user_id:
+          type: string
+        role:
+          type: string
+          enum: [HOST, LIVE_OPS]
+        display_name:
+          type: string
+      additionalProperties: false
+    AuthSession:
+      type: object
+      required: [session_id, user_id, role, mode]
+      properties:
+        session_id:
+          type: string
+        user_id:
+          type: string
+        role:
+          type: string
+          enum: [HOST, LIVE_OPS]
+        live_session_id:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+        mode:
+          type: string
+          enum: [local, simulated]
+      additionalProperties: false
     LiveSessionOverview:
       type: object
       required: [session_id, status, top_products, host_alerts, copilot]
@@ -218,6 +569,50 @@ components:
           type: integer
           minimum: 0
       additionalProperties: false
+    RealtimeEvent:
+      $ref: './schemas/realtime-event.schema.json'
+    Promotion:
+      $ref: './schemas/promotion.schema.json'
+    PromotionDecisionRequest:
+      type: object
+      required: [decision, expected_resource_version, reason]
+      properties:
+        decision:
+          type: string
+          enum: [approve, reject]
+        expected_resource_version:
+          type: integer
+          minimum: 1
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+      additionalProperties: false
+    PromotionDecisionResponse:
+      type: object
+      required: [promotion_id, decision_id, status, resource_version, action_id]
+      properties:
+        promotion_id: {type: string}
+        decision_id: {type: string}
+        status:
+          type: string
+          enum: [approved, rejected, pending, unknown]
+        resource_version: {type: integer, minimum: 1}
+        action_id: {type: [string, 'null']}
+      additionalProperties: false
+    ActionReceipt:
+      $ref: './schemas/action-receipt.schema.json'
+    ActionLogPage:
+      type: object
+      required: [items, next_cursor]
+      properties:
+        items:
+          type: array
+          maxItems: 100
+          items: {$ref: '#/components/schemas/ActionReceipt'}
+        next_cursor:
+          type: [string, 'null']
+      additionalProperties: false
     InvalidParam:
       type: object
       required:
@@ -291,6 +686,18 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
+    Forbidden:
+      description: Authenticated but not authorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    RateLimited:
+      description: Too many login attempts
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
     NotFound:
       description: Resource was not found
       content:
@@ -311,6 +718,30 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
     Internal:
       description: Unexpected internal error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ChannelNotFound:
+      description: Platform channel reference is not known
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    UnsupportedSessionMode:
+      description: Requested session mode is not supported by the pilot
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ChannelNotReady:
+      description: Adapter cannot prove required source readiness
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    DependencyUnavailable:
+      description: Required dependency unavailable and session was not committed
       content:
         application/problem+json:
           schema:

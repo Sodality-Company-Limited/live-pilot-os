@@ -19,7 +19,7 @@ flows:
       - path: ../../../02-product/project-brief.md
         sha256: 88cf379a16827388204363e99daa4a54e9fe3466f7a26d6b20426db5aba06a55
       - path: ../../live-pilot-os-requirements.md
-        sha256: b89c09482479f564f8eb9354f1455c0e110ab1479dd7a9face792629266aa3ba
+        sha256: f5d20a26055a0be3d0b5aebda15c8b35be558084ec7d60884c6275f4abbe0768
       - path: ../../live-pilot-os-domain-model.md
         sha256: 3bb053b47c415e2128c11dc16349f28645fcd218da77c6d3724c2f1d1c2402f2
     verification:
@@ -51,6 +51,11 @@ feature_indexes:
     path: ../../source-of-truth-flows/features/F04-risk-operator-control/index.md
     status: detailed
     flow_glob: ../../source-of-truth-flows/features/F04-risk-operator-control/flows/*.md
+  - id: F05
+    owner: identity-and-session-access
+    path: ../../source-of-truth-flows/features/F05-test-authentication/index.md
+    status: detailed
+    flow_glob: ../../source-of-truth-flows/features/F05-test-authentication/flows/*.md
 
 contracts:
   - id: deployment-runtime.livepilot.v1
@@ -72,7 +77,7 @@ contracts:
   - id: technical-specifications.livepilot.v1
     owner: architecture-and-platform
     source: ../../technical-specifications-sot.md
-    sha256: f4a92b744fd97f2e2f18353a3f4d89ae137a3f6d5a02cc77e99a498442a41d03
+    sha256: 7c54d36bc927db13e20891d44fcdbe3a25e469d7ffa4449beb0693be939e2d2f
     status: production_readiness_target
     producers: [architecture, platform-engineering, security, sre]
     consumers: [services, deployment, release-engineering]
@@ -136,15 +141,65 @@ contracts:
   - id: http.core.v1
     owner: api-contracts
     source: ../../api/openapi.yaml
-    sha256: 4608b92df1c19607255a9c71bb92fdd709886255a1fd55936516d75bfdb0b878
-    status: canonical
+    sha256: 96d2db184895f031de32ee8ed52bc13ffaf8f22a3da534c82ab385ac14ce2de2
+    status: draft_generation_blocked
     producers: [portal-bff]
     consumers: [host-ui, live-ops-ui]
     verification: "test -f docs/03-architecture/api/openapi.yaml"
+  - id: nats.subjects.livepilot.v1
+    owner: api-contracts-and-domain-architecture
+    source: ../../api/nats-subject-catalog-sot.md
+    status: pilot_inventory_schema_tests_pending
+    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    verification: "test -f docs/03-architecture/api/nats-subject-catalog-sot.md && test -d docs/03-architecture/api/schemas/nats"
+  - id: asyncapi.livepilot.v1
+    owner: api-contracts-and-domain-architecture
+    source: ../../api/asyncapi.yaml
+    status: pilot_contract_compatibility_tests_pending
+    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    verification: "test -f docs/03-architecture/api/asyncapi.yaml"
+  - id: contract-validation.livepilot.v1
+    owner: api-governance-and-quality
+    source: ../../api/contract-validation-report.md
+    status: structural_pass_compatibility_blocked
+    producers: [api-governance, quality-engineering]
+    consumers: [portal-bff, core-bff, domain-services, release-engineering]
+    verification: "test -f docs/03-architecture/api/contract-validation-report.md"
+  - id: http.portal-bff.livepilot.v1
+    owner: portal-bff
+    source: ../../api/portal-bff/openapi.yaml
+    status: pilot_contract
+    producers: [portal-bff]
+    consumers: [host-ui, live-ops-ui, browser]
+    verification: "test -f docs/03-architecture/api/portal-bff/openapi.yaml"
+  - id: http.core-bff.livepilot.internal.v1
+    owner: core-bff
+    source: ../../api/core-bff/openapi.yaml
+    status: internal_contract
+    producers: [core-bff]
+    consumers: [portal-bff, edge-gateway, internal-mesh]
+    verification: "test -f docs/03-architecture/api/core-bff/openapi.yaml"
+  - id: deployment.service-runtime-mapping.livepilot.v1
+    owner: platform-engineering-and-architecture
+    source: ../../deployment/service-runtime-mapping-sot.md
+    status: foundation_deployed_application_runtime_pending
+    producers: [platform-engineering, architecture]
+    consumers: [deployment, api-contracts, services, sre]
+    verification: "test -f docs/03-architecture/deployment/service-runtime-mapping-sot.md"
+  - id: http.authentication.test-mode.v1
+    owner: identity-and-session-access
+    source: ../../api/authentication.md
+    sha256: 8fb0f94af9c1097e7fc38a14cf582fd3eafb54d6deecf7e6d0ad8b90f6b977
+    status: selected_hackathon_feature
+    producers: [identity-session-access]
+    consumers: [host-ui, live-ops-ui, portal-bff, audit-service]
+    verification: "test -f docs/03-architecture/api/authentication.md"
   - id: requirements.livepilot.v1
     owner: product-architecture
     source: ../../live-pilot-os-requirements.md
-    sha256: b89c09482479f564f8eb9354f1455c0e110ab1479dd7a9face792629266aa3ba
+    sha256: f5d20a26055a0be3d0b5aebda15c8b35be558084ec7d60884c6275f4abbe0768
     status: canonical
     producers: [product-discovery]
     consumers: [architecture, goals, tests]

@@ -1,0 +1,76 @@
+asyncapi: 3.0.0
+info:
+  title: LivePilot OS Internal Event Contract
+  version: 1.0.0
+  description: >-
+    NATS JetStream contract for internal commands, events, and control messages.
+    Delivery is at-least-once; consumers must be duplicate-safe. Subjects never
+    contain tenant or user values.
+servers:
+  nats:
+    host: ${NATS_URL}
+    protocol: nats
+    description: Private NATS JetStream transport; mTLS/workload identity required.
+defaultContentType: application/json
+channels:
+  sessionLifecycleRequest:
+    address: livepilot.v1.session.lifecycle.request
+    messages: {sessionLifecycleRequest: {$ref: '#/components/messages/SessionLifecycleRequest'}}
+  telemetrySignalIngest:
+    address: livepilot.v1.telemetry.signal.ingest
+    messages: {telemetrySignalIngest: {$ref: '#/components/messages/TelemetrySignalIngest'}}
+  telemetrySignalDetected:
+    address: livepilot.v1.telemetry.signal.detected
+    messages: {telemetrySignalDetected: {$ref: '#/components/messages/TelemetrySignalDetected'}}
+  copilotSuggestionCreated:
+    address: livepilot.v1.copilot.suggestion.created
+    messages: {copilotSuggestionCreated: {$ref: '#/components/messages/CopilotSuggestionCreated'}}
+  promotionProposalRequest:
+    address: livepilot.v1.promotion.proposal.request
+    messages: {promotionProposalRequest: {$ref: '#/components/messages/PromotionProposalRequest'}}
+  promotionProposed:
+    address: livepilot.v1.promotion.proposed
+    messages: {promotionProposed: {$ref: '#/components/messages/PromotionProposed'}}
+  promotionDecisionRequest:
+    address: livepilot.v1.promotion.decision.request
+    messages: {promotionDecisionRequest: {$ref: '#/components/messages/PromotionDecisionRequest'}}
+  promotionDecisionRecorded:
+    address: livepilot.v1.promotion.decision.recorded
+    messages: {promotionDecisionRecorded: {$ref: '#/components/messages/PromotionDecisionRecorded'}}
+  executionActionUpdated:
+    address: livepilot.v1.execution.action.updated
+    messages: {executionActionUpdated: {$ref: '#/components/messages/ExecutionActionUpdated'}}
+  auditReceiptAppend:
+    address: livepilot.v1.audit.receipt.append
+    messages: {auditReceiptAppend: {$ref: '#/components/messages/AuditReceiptAppend'}}
+  controlPauseRequest:
+    address: livepilot.v1.control.pause.request
+    messages: {controlPauseRequest: {$ref: '#/components/messages/ControlPauseRequest'}}
+components:
+  messages:
+    SessionLifecycleRequest: {name: SessionLifecycleRequest, payload: {$ref: './schemas/nats/session-lifecycle.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    TelemetrySignalIngest: {name: TelemetrySignalIngest, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    TelemetrySignalDetected: {name: TelemetrySignalDetected, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    CopilotSuggestionCreated: {name: CopilotSuggestionCreated, payload: {$ref: './schemas/realtime-event.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionProposalRequest: {name: PromotionProposalRequest, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionProposed: {name: PromotionProposed, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionDecisionRequest: {name: PromotionDecisionRequest, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionDecisionRecorded: {name: PromotionDecisionRecorded, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    ExecutionActionUpdated: {name: ExecutionActionUpdated, payload: {$ref: './schemas/nats/execution-update.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    AuditReceiptAppend: {name: AuditReceiptAppend, payload: {$ref: './schemas/nats/audit-receipt.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    ControlPauseRequest: {name: ControlPauseRequest, payload: {$ref: './schemas/nats/control-pause.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+  schemas:
+    MessageHeaders:
+      type: object
+      required: [Nats-Msg-Id, X-Correlation-Id, X-Tenant-Id, X-Schema-Version, X-Producer, X-Traceparent]
+      properties:
+        Nats-Msg-Id: {type: string}
+        X-Correlation-Id: {type: string}
+        X-Causation-Id: {type: string}
+        X-Idempotency-Key: {type: string}
+        X-Tenant-Id: {type: string}
+        X-Session-Id: {type: string}
+        X-Schema-Version: {type: string}
+        X-Producer: {type: string}
+        X-Traceparent: {type: string}
+        X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
