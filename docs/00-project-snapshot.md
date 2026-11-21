@@ -11,7 +11,8 @@
 
 | ID | Status | Summary |
 |----|--------|---------|
-| *(none)* | — | No active goals |
+| [`G-WEB-016`](07-backlog/goals/G-WEB-016.md) | `blocked` | Live OS Frontend and Storybook Foundation |
+| [`G-WEB-017`](07-backlog/goals/G-WEB-017.md) | `blocked` | Apply an Orange Accent to the Live OS Dark Theme |
 
 ## Constraints
 
