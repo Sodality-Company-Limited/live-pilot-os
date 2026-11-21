@@ -8,16 +8,82 @@ info:
     Domain rules remain owned by the responsible microservice; this document defines
     transport schemas, auth, correlation, idempotency, and public error semantics.
 tags:
+  - name: Authentication
   - name: Live Sessions
   - name: Promotions
 paths:
+  /v1/auth/login:
+    post:
+      tags: [Authentication]
+      summary: Sign in as a seeded test user in local or simulated mode
+      operationId: loginTestUser
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated test user and created session
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+
+  /v1/auth/session:
+    get:
+      tags: [Authentication]
+      summary: Get the current authenticated test session
+      operationId: getCurrentAuthSession
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Current authenticated principal and session scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSession'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/auth/logout:
+    post:
+      tags: [Authentication]
+      summary: Revoke the current test session
+      operationId: logoutTestUser
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '204':
+          description: Session revoked and cookie cleared
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
   /v1/live-sessions/{session_id}/overview:
     get:
       tags: [Live Sessions]
       summary: Get the host and operator overview for a live session
       operationId: getLiveSessionOverview
       security:
-        - bearerAuth: []
+        - cookieAuth: []
       parameters:
         - $ref: '#/components/parameters/SessionId'
         - $ref: '#/components/parameters/CorrelationId'
@@ -41,7 +107,7 @@ paths:
       summary: Propose a promotion for policy evaluation and controlled execution
       operationId: proposePromotion
       security:
-        - bearerAuth: []
+        - cookieAuth: []
       parameters:
         - $ref: '#/components/parameters/SessionId'
         - $ref: '#/components/parameters/CorrelationId'
@@ -76,6 +142,10 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: livepilot_session
   parameters:
     SessionId:
       name: session_id
@@ -99,6 +169,59 @@ components:
         type: string
         minLength: 8
   schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+      additionalProperties: false
+    LoginResponse:
+      type: object
+      required: [user, session]
+      properties:
+        user:
+          $ref: '#/components/schemas/AuthUser'
+        session:
+          $ref: '#/components/schemas/AuthSession'
+      additionalProperties: false
+    AuthUser:
+      type: object
+      required: [user_id, role, display_name]
+      properties:
+        user_id:
+          type: string
+        role:
+          type: string
+          enum: [HOST, LIVE_OPS]
+        display_name:
+          type: string
+      additionalProperties: false
+    AuthSession:
+      type: object
+      required: [session_id, user_id, role, mode]
+      properties:
+        session_id:
+          type: string
+        user_id:
+          type: string
+        role:
+          type: string
+          enum: [HOST, LIVE_OPS]
+        live_session_id:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+        mode:
+          type: string
+          enum: [local, simulated]
+      additionalProperties: false
     LiveSessionOverview:
       type: object
       required: [session_id, status, top_products, host_alerts, copilot]
@@ -287,6 +410,12 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
     Unauthorized:
       description: Authentication is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    RateLimited:
+      description: Too many login attempts
       content:
         application/problem+json:
           schema:

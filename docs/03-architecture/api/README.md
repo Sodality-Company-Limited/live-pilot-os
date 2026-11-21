@@ -20,6 +20,7 @@ See [.agents/skills/soda-rest-api/SKILL.md](../../../.agents/skills/soda-rest-ap
 | Contract | Status | Goal |
 |----------|--------|------|
 | [openapi.yaml](openapi.yaml) | Canonical HTTP contract | Architecture baseline |
+| [authentication.md](authentication.md) | Test-mode login, session, and logout contract | REQ-LP-017 |
 | [route-prefixing-and-boundary-invariant.md](route-prefixing-and-boundary-invariant.md) | Canonical route topology and prefixes | Architecture baseline |
 | [NATS subject/message template](nats-subject-message-template.md) | Canonical async contract template | Architecture baseline |
 | [error-codes.md](error-codes.md) + [error-codes.yaml](error-codes.yaml) | Canonical public error allocation registry | Required for every public error |
