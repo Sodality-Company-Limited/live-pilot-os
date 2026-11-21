@@ -89,6 +89,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.3-FLOW-001` | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | `projection-worker` | Dashboard projection exposes product-interest, question, purchase, engagement, sentiment, freshness, and revision; input lag, invalid window, or unavailable source is marked stale/deferred rather than empty success. |
 | `F01.3-FLOW-002` | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | `projection-worker` | Behavioral metrics remain separately defined and sourced; counter conflict or stale source revision is surfaced explicitly and never merged into a misleading aggregate. |
 | `F01.3-FLOW-003` | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | `projection-worker + intent-risk-service` | Sentiment and engagement are exposed with model/language metadata, window, confidence, freshness, and revision; unavailable or invalid inputs remain stale/deferred. |
+| `F01.3-FLOW-004` | `getLiveSessionOverview`, `streamLiveSessionEvents` | `GET /v1/live-sessions/{session_id}/overview`; `GET /v1/live-sessions/{session_id}/events` | `projection-worker` | Hype-window detection is a versioned threshold/baseline signal with evidence window, confidence, freshness, and revision; unavailable baseline or stale data is explicit. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

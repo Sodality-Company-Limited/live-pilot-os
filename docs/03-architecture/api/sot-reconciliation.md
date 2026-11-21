@@ -236,6 +236,14 @@ input window, projection revision, and freshness. `MODEL_UNAVAILABLE`,
 `LANGUAGE_COVERAGE_GAP`, and invalid input windows remain explicit stale or
 deferred states and must not be shown as measured sentiment.
 
+### Incremental result: F01.3-FLOW-004
+
+This flow is covered by the existing overview and SSE operations; no new public
+path is added. Hype windows must include baseline, threshold/config version,
+evidence window, confidence, revision, and freshness. `BASELINE_UNAVAILABLE`,
+missing threshold configuration, and stale data remain explicit degraded or
+deferred states and cannot trigger an implied action.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
