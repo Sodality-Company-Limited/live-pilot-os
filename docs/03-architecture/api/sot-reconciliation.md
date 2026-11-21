@@ -300,6 +300,14 @@ must mark pending/unknown/reconciled state and preserve action ID,
 provider-status hash, causation, and session lineage. `ACTION_ID_MISSING`,
 `UNKNOWN_OUTCOME`, and duplicate outcome remain explicit recovery states.
 
+### Incremental result: F01-SAFETY-001
+
+This safety flow is exposed only through the existing overview/SSE state; no
+public command path is added. The DTO must identify degraded/read-only mode,
+affected dependencies, freshness, and blocked-action reasons while preserving
+safe reads and audit logging. `HEALTH_SIGNAL_INVALID`,
+`MODE_TRANSITION_CONFLICT`, and audit unavailability remain explicit states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
