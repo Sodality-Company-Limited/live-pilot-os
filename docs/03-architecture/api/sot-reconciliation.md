@@ -203,6 +203,15 @@ session/window scope, evidence, revision, and freshness. `SKU_UNRESOLVED`,
 `SCORE_CONFIG_MISSING`, and stale projection data remain explicit outcomes and
 cannot be used as authoritative recommendation evidence.
 
+### Incremental result: F01.P-FLOW-008
+
+No public OpenAPI path is generated for purchase-signal inflation prevention.
+Telemetry and purchase projection jointly enforce source identity, stage
+separation, provider revision, deduplication, and monotonic revisions so replay
+cannot inflate cart, checkout, payment, voucher, or conversion counts.
+`IDEMPOTENCY_PAYLOAD_MISMATCH`, `STALE_REVISION`, and dedup-store unavailability
+remain explicit conflict/deferred states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
