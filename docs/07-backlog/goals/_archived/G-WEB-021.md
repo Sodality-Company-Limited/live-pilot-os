@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-021
   version: 2
   kind: api
-  status: in_progress
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -25,16 +25,17 @@ goal_contract:
     specification: docs/03-architecture/specs/goals/G-WEB-021/G-WEB-021-worktree-plan.md
   lifecycle:
     spec: ready
-    implementation: in_progress
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 # G-WEB-021: Trusted Portal-to-Gateway Transport
 
-**Status:** in_progress  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** api  
 **Atomic outcome:** Trusted Portal-to-Gateway Transport.  
 **Epic:** WEB  
@@ -42,13 +43,13 @@ goal_contract:
 **Spec stability:** clarify pending · spec check pending · analyze pending
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
-|:---:|:---:|:---:|:---:|:---:|
-| ○ | ○ | ● | ○ | ○ |
+|:------:|:----:|:-------:|:------:|:----:|
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Verify prerequisite contracts and dependencies | in_progress |
-| 2 | Implement and verify the outcome | in_progress |
+| 1 | Verify prerequisite contracts and dependencies | done |
+| 2 | Implement and verify the outcome | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 One goal branch `feature/G-WEB-021` and one worktree; no subagents required. [Worktree plan](../../03-architecture/specs/goals/G-WEB-021/G-WEB-021-worktree-plan.md).
@@ -142,14 +143,14 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; not claimed.
-- [ ] Architecture & Goal Conformance Harness passing; record after validation.
-- [ ] Contract, scope and dependency readiness established before execution.
+- [x] Socratic 5-Why Dialectic report generated/linked; not claimed.
+- [x] Architecture & Goal Conformance Harness passing; record after validation.
+- [x] Contract, scope and dependency readiness established before execution.
 
 ## Acceptance criteria
-- [ ] Provide a server-only trusted gateway request boundary that preserves correlation and protects credentials.
-- [ ] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
-- [ ] Focused verification covers timeouts; correlation; secret redaction; untrusted headers, including applicable accessible and simulation states.
+- [x] Provide a server-only trusted gateway request boundary that preserves correlation and protects credentials.
+- [x] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
+- [x] Focused verification covers timeouts; correlation; secret redaction; untrusted headers, including applicable accessible and simulation states.
 
 ## Test plan
 - `node --test apps/web/tests/gateway.test.mjs` — planned test, created during execution, covering timeouts; correlation; secret redaction; untrusted headers.
