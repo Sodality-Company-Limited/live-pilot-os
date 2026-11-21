@@ -39,6 +39,19 @@
 | [`G-PROMO-026`](07-backlog/goals/G-PROMO-026.md) | `review` | Promotion service-level verification matrix |
 | [`G-PROMO-027`](07-backlog/goals/G-PROMO-027.md) | `blocked` | Promotion API architecture and release gates |
 | [`G-PROMO-028`](07-backlog/goals/G-PROMO-028.md) | `blocked` | Promotion service DigitalOcean release |
+| [`G-CORE-050`](07-backlog/goals/G-CORE-050.md) | `draft` | Reconcile Feature 01 Core BFF HTTP contract |
+| [`G-CORE-051`](07-backlog/goals/G-CORE-051.md) | `draft` | Register Feature 01 NATS subjects and payload bindings |
+| [`G-CORE-052`](07-backlog/goals/G-CORE-052.md) | `draft` | Enforce Core BFF signed F01 request context |
+| [`G-CORE-053`](07-backlog/goals/G-CORE-053.md) | `draft` | Orchestrate the F01 live-session overview query |
+| [`G-CORE-054`](07-backlog/goals/G-CORE-054.md) | `draft` | Stream authorized F01 session events through Core BFF |
+| [`G-CORE-055`](07-backlog/goals/G-CORE-055.md) | `draft` | Enforce the KrakenD boundary for Feature 01 Core BFF routes |
+| [`G-CORE-056`](07-backlog/goals/G-CORE-056.md) | `draft` | Accept canonical Feature 01 telemetry ingress |
+| [`G-CORE-057`](07-backlog/goals/G-CORE-057.md) | `draft` | Normalize, deduplicate, and reconcile Feature 01 events |
+| [`G-CORE-058`](07-backlog/goals/G-CORE-058.md) | `draft` | Produce confidence-aware F01 intent and product-entity signals |
+| [`G-CORE-059`](07-backlog/goals/G-CORE-059.md) | `draft` | Produce F01 moderation risk signals |
+| [`G-CORE-060`](07-backlog/goals/G-CORE-060.md) | `draft` | Compute idempotent Feature 01 purchase signals |
+| [`G-CORE-061`](07-backlog/goals/G-CORE-061.md) | `draft` | Integrate the JEV/OpenAI adapter for F01 analysis |
+| [`G-CORE-062`](07-backlog/goals/G-CORE-062.md) | `draft` | Project and recover Feature 01 dashboard read models |
 
 ## Constraints
 
