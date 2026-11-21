@@ -352,6 +352,15 @@ safe localization metadata. Catalog revocation/version change, ambiguity,
 unsupported or medical claims, and unknown stock remain visible refusal or
 degraded states.
 
+### F02.3 Stock and Order Alerts
+
+F02.3-FLOW-001 through F02.3-FLOW-007 reuse the existing overview/SSE surfaces;
+no separate alert endpoints are generated. Alerts must include session/SKU
+scope, severity, threshold or policy version, source revision, freshness, and
+deduplication identity. Low/out stock, order volume, best-seller, voucher,
+price, promotion, and countdown states remain explicit when source truth is
+stale, unknown, revoked, or unavailable.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
