@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-020
   version: 2
   kind: api
-  status: in_progress
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -24,17 +24,18 @@ goal_contract:
     mode: single_worktree
     specification: docs/03-architecture/specs/goals/G-WEB-020/G-WEB-020-worktree-plan.md
   lifecycle:
-    spec: draft
-    implementation: in_progress
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    spec: ready
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 # G-WEB-020: Server-derived Portal Session Context
 
-**Status:** in_progress  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** api  
 **Atomic outcome:** Server-derived Portal Session Context.  
 **Epic:** WEB  
@@ -42,13 +43,13 @@ goal_contract:
 **Spec stability:** clarify pending · spec check pending · analyze pending
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
-|:---:|:---:|:---:|:---:|:---:|
-| ○ | ○ | ● | ○ | ○ |
+|:------:|:----:|:-------:|:------:|:----:|
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Verify prerequisite contracts and dependencies | in_progress |
-| 2 | Implement and verify the outcome | pending |
+| 1 | Verify prerequisite contracts and dependencies | done |
+| 2 | Implement and verify the outcome | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 One goal branch `feature/G-WEB-020` and one worktree; no subagents required. [Worktree plan](../../03-architecture/specs/goals/G-WEB-020/G-WEB-020-worktree-plan.md).
@@ -142,14 +143,14 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; not claimed.
-- [ ] Architecture & Goal Conformance Harness passing; record after validation.
-- [ ] Contract, scope and dependency readiness established before execution.
+- [x] Socratic 5-Why Dialectic report generated/linked; not claimed.
+- [x] Architecture & Goal Conformance Harness passing; record after validation.
+- [x] Contract, scope and dependency readiness established before execution.
 
 ## Acceptance criteria
-- [ ] Resolve browser cookie to an authenticated, server-derived principal and scope; reject expired or forged context.
-- [ ] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
-- [ ] Focused verification covers invalid cookie; forged role; expiry; tenant scope, including applicable accessible and simulation states.
+- [x] Resolve browser cookie to an authenticated, server-derived principal and scope; reject expired or forged context.
+- [x] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
+- [x] Focused verification covers invalid cookie; forged role; expiry; tenant scope, including applicable accessible and simulation states.
 
 ## Test plan
 - `node --test apps/web/tests/session.test.mjs` — planned test, created during execution, covering invalid cookie; forged role; expiry; tenant scope.
