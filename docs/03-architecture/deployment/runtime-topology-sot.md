@@ -18,7 +18,7 @@ Promotion is immutable image + versioned migrations + versioned configuration. R
 2. Portal BFF: session-scoped DTOs and browser boundary.
 3. Edge gateway: TLS, authentication, rate limits, public routing.
 4. Core BFF: screen aggregation and orchestration.
-5. Domain services: Rust services, workers, policy, execution, audit.
+5. Domain services: Node.js + NestJS services, workers, policy, execution, audit.
 6. State and adapters: PostgreSQL, NATS JetStream, Redis, object storage, platform adapters.
 
 Each node has an owner, image/version, readiness probe, resource budget, logs, metrics, traces, and rollback reference.

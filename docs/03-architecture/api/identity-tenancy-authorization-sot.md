@@ -9,6 +9,12 @@ Identity is established by the approved OIDC provider. The server resolves tenan
 organization, workspace, campaign, live-session, actor, role, and capability scope.
 Browser claims, route persona, and custom headers are never authority.
 
+For the selected Hackathon demo, a test-only local authentication adapter may
+establish the initial principal from seeded email/password accounts. It must be
+enabled only in `simulated` or local mode, use Argon2id password hashes, create a
+server-managed revocable session, and never be accepted as a production identity
+provider. Production authentication remains OIDC-based.
+
 ## Required context
 
 ```text

@@ -16,8 +16,8 @@ All Soda OS services adhere strictly to Domain-Driven Design (DDD) and Hexagonal
 
 | Port Direction | Interface Name | Protocol / Transport | Concrete Adapter Location | Invariant & Boundary Contract |
 |---|---|---|---|---|
-| **Driving (Inbound)** | `HttpServerPort` / `EventConsumerPort` | Axum HTTP/2 / NATS JetStream | `code/apps/services/.../src/adapters/inbound/` | Validates ingress schemas fail-closed, authenticates identity, maps DTOs to pure domain entities. |
-| **Driven (Outbound)** | `DatabasePort` / `PaymentGatewayPort` | SQLx PostgreSQL / Stripe Omise RPC | `code/apps/services/.../src/adapters/outbound/` | Enforces zero float math, transactional atomicity, idempotent writebacks, and saga compensation rollbacks. |
+| **Driving (Inbound)** | `HttpServerPort` / `EventConsumerPort` | NestJS HTTP adapter / NATS JetStream | `code/apps/services/.../src/adapters/inbound/` | Validates ingress schemas fail-closed, authenticates identity, maps DTOs to pure domain entities. |
+| **Driven (Outbound)** | `DatabasePort` / `PaymentGatewayPort` | PostgreSQL adapter / external platform RPC | `code/apps/services/.../src/adapters/outbound/` | Enforces zero float math, transactional atomicity, idempotent writebacks, and saga compensation rollbacks. |
 
 ---
 

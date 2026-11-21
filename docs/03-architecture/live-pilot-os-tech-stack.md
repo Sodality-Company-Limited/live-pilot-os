@@ -22,7 +22,12 @@
 | Operator and host UI | **Next.js App Router + TypeScript** | One production web surface for the Operator Console, Streamer Co-pilot HUD, onboarding, and audit views. Use server rendering for secure reads and client components only for live interaction. |
 | Agentic decision layer | **LivePilot Decision Engine + JEV System One model via TypeSafe AI** | Converts typed intent/risk signals into structured, evidence-linked recommendations. JEV is a model provider inside the Decision Engine, not an authorization or execution authority. |
 | Public API boundary | **KrakenD API Gateway** | Stateless edge gateway for OIDC/JWT validation, rate limits, aggregation, contract versioning, and routing to internal services. It must not contain margin or inventory business rules. |
-| Domain and policy services | **Rust** with Axum, Tokio, SQLx, and typed domain modules | Strong fit for deterministic financial arithmetic, high-concurrency event handling, explicit error paths, and low-latency services. |
+| Domain and policy services | **Node.js LTS + NestJS + TypeScript** with typed domain modules | Shared TypeScript contracts with the Next.js surface, mature dependency ecosystem, structured modules/DI, explicit error paths, and efficient I/O-bound service execution. |
+| NestJS HTTP runtime | **NestJS Node adapter** | Keeps the service runtime on Node.js LTS without introducing a second HTTP framework runtime. |
+| HTTP DTO validation | **NestJS ValidationPipe + class-validator/class-transformer** | Validates request and response DTOs at the transport boundary while keeping domain validation independent. |
+| Event schema validation | **Ajv + checked-in JSON Schema** | Validates versioned NATS/JetStream envelopes and event payloads at runtime. |
+| PostgreSQL access | **node-postgres (`pg`) + Kysely** | Typed SQL and explicit transactions for money, inventory, outbox, RLS, and audit writes without coupling the domain core to an ORM. |
+| NestJS testing | **Jest + Supertest + fast-check** | Unit, HTTP contract, integration, property-based, idempotency, replay, and failure-path coverage. |
 | Internal service communication | **NATS request/reply + JetStream** | Versioned service commands, queries, immutable events, durable consumers, replay, and at-least-once delivery. |
 | External/client API | **HTTPS REST + OpenAPI** | Stable consumer contract for the Next.js app, partner integrations, and operational tooling. |
 | Live UI updates | **SSE first; WebSocket only where bidirectional control is required** | SSE is simpler for one-way telemetry, alerts, audit entries, and co-pilot suggestions. Use WebSocket for operator control or platform sessions that genuinely need bidirectional traffic. |
@@ -35,6 +40,44 @@
 | Identity | **OIDC provider** + gateway validation + session-scoped service authorization | Host, operator, moderator, and service identities without embedding authorization logic in every UI route. |
 | Observability | **OpenTelemetry**, Prometheus, Grafana, centralized logs, trace backend | Correlate live event, policy verdict, worker execution, platform adapter call, and operator decision with one trace ID. |
 | Runtime | **Containers on Kubernetes** with Helm/Argo CD or an equivalent GitOps runtime | Separate API, event, workflow, and adapter scaling; support rolling deploys, health checks, graceful shutdown, and isolation of platform credentials. |
+
+### 1.1 NestJS implementation baseline
+
+The implementation uses one TypeScript language across Next.js and backend services.
+NestJS is the composition and transport framework; it is not the domain model.
+
+```text
+NestJS module/controller/consumer
+  → application use case
+  → domain ports and deterministic policies
+  → infrastructure adapter
+      → pg/Kysely
+      → nats
+      → Temporal TypeScript SDK
+      → Redis client
+      → platform adapter
+```
+
+Required package responsibilities:
+
+| Concern | Selected implementation |
+|---|---|
+| NestJS composition | `@nestjs/common`, `@nestjs/core`, `@nestjs/config` |
+| HTTP transport | NestJS Node adapter, controllers, guards, pipes, interceptors, and exception filters |
+| OpenAPI | `@nestjs/swagger` checked against the canonical OpenAPI contract |
+| Runtime HTTP validation | `ValidationPipe`, `class-validator`, and `class-transformer` |
+| Event validation | Ajv with versioned JSON Schema |
+| PostgreSQL | `pg` connection pools and Kysely repositories |
+| NATS | Official `nats` TypeScript client with durable JetStream consumers |
+| Temporal | `@temporalio/client` and `@temporalio/worker` for long-running workflows only |
+| Redis | Official Node Redis client for reconstructable cache, deduplication, and rate limits |
+| Observability | OpenTelemetry Node SDK plus NestJS request/consumer interceptors |
+| Tests | Jest, Supertest, fast-check, and real boundary fixtures where available |
+
+NestJS modules must not place margin, inventory, approval, or audit truth in
+controllers, decorators, pipes, or framework callbacks. Those rules belong to
+application services and domain ports. Database, broker, workflow, cache, and
+platform SDKs are infrastructure adapters injected behind those ports.
 
 ## 2. Recommended service topology
 
@@ -64,7 +107,7 @@
                                 │ NATS
                                 ▼
 ┌────────────────────────────────────────────────────────────┐
-│ Rust application services                                  │
+│ Node.js + NestJS application services                      │
 │ session • catalog • telemetry • decision • policy        │
 │ inventory • promotion • execution • audit                │
 └───────────────┬──────────────────────────────┬─────────────┘
@@ -77,7 +120,7 @@
        └──────┬──────────┘              └────────────────────┘
               │
      ┌────────▼─────────┐       ┌─────────────────────────────┐
-     │ Rust event       │       │ Temporal workflows          │
+     │ NestJS event     │       │ Temporal workflows          │
      │ workers          │       │ voucher / approval / retry   │
      │ classify/project │       │ and compensation workers     │
      └────────┬─────────┘       └──────────────┬──────────────┘
@@ -207,7 +250,7 @@ PromotionWorkflow
   → append audit receipt
 ```
 
-The workflow orchestrates; the Rust domain services remain authoritative for calculations and
+The workflow orchestrates; the NestJS domain services remain authoritative for calculations and
 transactions. Temporal activities must call those services rather than reimplement policies.
 
 ## 5. Data and consistency rules
@@ -264,7 +307,7 @@ These are initial budgets to verify with load tests, not claims of achieved perf
 - Do not put margin, inventory, or approval logic in Next.js Server Actions or KrakenD plugins.
 - Do not use Redis as the inventory ledger or as the only job queue.
 - Do not use Kafka, ClickHouse, service mesh, or a dozen microservices on day one without a
-  measured need; NATS + PostgreSQL + a small set of Rust services is the baseline.
+  measured need; NATS + PostgreSQL + a small set of NestJS services is the baseline.
 - Do not make every event synchronous or require every consumer to be online for a live signal.
 - Do not let JEV or any LLM directly issue platform mutations; the path must be
   structured proposal → deterministic policy verdict → approval/control → idempotent
@@ -272,7 +315,7 @@ These are initial budgets to verify with load tests, not claims of achieved perf
 
 ## 10. Delivery sequence
 
-1. **Foundation:** Next.js, KrakenD, one Rust API, PostgreSQL, OIDC, OpenTelemetry.
+1. **Foundation:** Next.js, KrakenD, one NestJS API, PostgreSQL, OIDC, OpenTelemetry.
 2. **Live loop:** NATS JetStream, telemetry ingestion, intent/risk workers, Decision Engine with
    JEV adapter, and SSE co-pilot feed.
 3. **Guardrails:** Margin Policy, Inventory, Approval & Control, audit receipts, Emergency Pause.

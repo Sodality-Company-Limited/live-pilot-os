@@ -14,8 +14,44 @@ This document groups LivePilot OS sub-features so they align with the four core 
 | 2. Streamer Co-pilot HUD | Help the host make decisions and sell | AI Host Copilot, Product Q&A Assistant, Stock & Order Alert for the Host screen |
 | 3. StreamPilot Agent | Automate back-office actions | Auto Product Pinning, Smart Voucher Engine, Margin Protection, Scenario Automation, Stock & Order Alert for sales control |
 | 4. Compliance & Operator Control | Control risk, approvals, and system stops | Action Log & Approval Control, Emergency Pause, Moderation Escalation, Execution Audit |
+| 5. Test Authentication & Access Gate | Authenticate demo users and establish session context | Test Login, Session Check, Logout, Role-Based Demo Access |
 
 > Core principle: Feature 1 analyzes the situation, Feature 2 recommends actions to the host, Feature 3 executes actions, and Feature 4 controls risk and provides oversight.
+
+---
+
+## 5. Test Authentication & Access Gate
+
+**Requirement:** [REQ-LP-017](./live-pilot-os-requirements.md#requirements)<br>
+**Feature flow:** [F05 Feature Index](./source-of-truth-flows/features/F05-test-authentication/index.md)
+
+### Goal
+
+Provide a simple, server-enforced login gate for the simulated Hackathon demo so
+test users must authenticate before entering the Host or Live Ops experience.
+
+### Scope
+
+- Test-only email/password login for seeded Host and Live Ops users.
+- Server-managed, revocable session with expiry and idle timeout.
+- Role-aware route access for Host and Live Ops views.
+- Logout and current-session inspection.
+- Authentication audit events without storing passwords or raw session tokens.
+
+### Safety boundary
+
+The test-login adapter is enabled only in local/simulated mode. Production mode
+must fail closed if the test adapter is enabled or if the required OIDC provider
+configuration is missing. Passwords are supplied through local test configuration,
+stored only as Argon2id hashes, and never committed to the repository.
+
+### Output events
+
+```text
+auth.login.succeeded
+auth.login.failed
+auth.session.revoked
+```
 
 ---
 
