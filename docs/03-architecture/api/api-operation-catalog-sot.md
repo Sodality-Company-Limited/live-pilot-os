@@ -75,6 +75,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.2-FLOW-002` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Off-platform detection emits a risk signal with pattern evidence and confidence; unsupported language, unavailable pattern set, and low confidence remain explicit non-actionable states. |
 | `F01.2-FLOW-003` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Scam-pattern detection emits redacted risk evidence and confidence under a versioned pattern set; pattern mismatch, model outage, or redaction failure cannot be treated as clear/safe content. |
 | `F01.2-FLOW-004` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Coordinated-bot detection emits an aggregate risk signal keyed by session/window/fingerprint; invalid windows, unavailable fingerprints, and aggregation lag remain explicit stale/deferred states. |
+| `F01.2-FLOW-005` | None by design | `risk.severity.ranked.v1` | `intent-risk-service` | Risk ranking produces severity and recommended handling from a versioned policy; missing policy, out-of-range scores, or missing context cannot produce a trusted severity. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

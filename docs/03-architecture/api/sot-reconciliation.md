@@ -195,3 +195,11 @@ moderation aggregate is bounded by live session, time window, and fingerprint
 version, with redacted evidence and correlation lineage. `WINDOW_INVALID`,
 `FINGERPRINT_UNAVAILABLE`, and `AGGREGATION_LAG` must remain visible as
 rejected/deferred/stale states rather than being silently treated as no risk.
+
+### Incremental result: F01.2-FLOW-005
+
+No public OpenAPI path is generated for risk-severity ranking. The
+`intent-risk-service` owns the versioned policy verdict and emits severity,
+recommended handling, score evidence, and lineage only after validation.
+`POLICY_NOT_FOUND`, `SCORE_OUT_OF_RANGE`, and `CONTEXT_MISSING` remain explicit
+rejected/deferred outcomes; the ranking event requires NATS catalog coverage.
