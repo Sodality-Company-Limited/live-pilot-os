@@ -179,6 +179,14 @@ cart and checkout as separate source measures. Invalid windows, undefined
 division, and stale projection data remain explicit rejected/deferred/stale
 states rather than fabricated zero or success values.
 
+### Incremental result: F01.P-FLOW-005
+
+No public OpenAPI path is generated for high-interest/low-conversion detection.
+The purchase projection emits the signal with threshold version, source counts,
+window, revision, and freshness only when the window is complete. Missing
+threshold configuration, incomplete windows, and stale data remain explicit
+rejected/deferred/stale outcomes.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
