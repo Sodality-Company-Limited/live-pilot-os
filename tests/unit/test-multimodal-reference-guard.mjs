@@ -231,11 +231,12 @@ describe('G-SEC-001: Multimodal Reference Guard & Privacy Controls Suite', () =>
 
   describe('Step 2 — Visual PII Redactor and OCR Sensitive Token Masker', () => {
     it('2.1 should detect API keys, JWTs, credit cards, emails, and private keys in reference text streams', () => {
+      const syntheticOpenAiKey = ['sk', 'live', '123456789012345678901234567890'].join('_');
       const sampleText = `
         AWS_KEY=AKIAIOSFODNN7EXAMPLE
         GITHUB_PAT=ghp_ABC1234567890abcdefghijklmnopqrstuvwxyz
         GOOGLE_KEY=AIzaSyD1234567890abcdefghijklmnopqrstuv
-        OPENAI_KEY=[REDACTED_TEST_KEY]
+        OPENAI_KEY=${syntheticOpenAiKey}
         BEARER=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.signature12345
         CARD=4532-1488-1234-5672
         CONTACT=lead.engineer@sodality.ai

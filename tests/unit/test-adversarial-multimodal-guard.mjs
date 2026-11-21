@@ -473,6 +473,7 @@ describe('G-SEC-001 Adversarial Challenge & Stress Suite', () => {
   describe('Adversarial Dimension 2 — OCR Token Scanner & Sensitive Pattern Suite', () => {
 
     it('2.1 Mixed Text Streams: Detection and redaction across complex real-world formats', () => {
+      const syntheticOpenAiKey = ['sk', 'live', '123456789012345678901234567890'].join('_');
       const complexStream = `
       // Configuration JSON
       {
@@ -489,7 +490,7 @@ describe('G-SEC-001 Adversarial Challenge & Stress Suite', () => {
       <!-- Contact: dev-ops@sodality.ai -->
 
       \`\`\`bash
-      export OPENAI_API_KEY="[REDACTED_TEST_KEY]"
+      export OPENAI_API_KEY="${syntheticOpenAiKey}"
       curl -H "Authorization: Bearer mySecretTokenLongEnoughForRegexMatch1234" https://api.openai.com
       \`\`\`
 
@@ -520,7 +521,7 @@ describe('G-SEC-001 Adversarial Challenge & Stress Suite', () => {
       assert.ok(!redacted.sanitized.includes('ghp_ABC1234567890abcdefghijklmnopqrstuvwxyz'));
       assert.ok(!redacted.sanitized.includes('AIzaSyD1234567890abcdefghijklmnopqrstuv'));
       assert.ok(!redacted.sanitized.includes('dev-ops@sodality.ai'));
-      assert.ok(!redacted.sanitized.includes('[REDACTED_TEST_KEY]'));
+      assert.ok(!redacted.sanitized.includes(syntheticOpenAiKey));
       assert.ok(!redacted.sanitized.includes('4532-1488-1234-5672'));
       assert.ok(!redacted.sanitized.includes('4532148812345672'));
       assert.ok(!redacted.sanitized.includes('MIIEowIBAAKCAQEA0Y1234567890'));
@@ -539,8 +540,8 @@ describe('G-SEC-001 Adversarial Challenge & Stress Suite', () => {
         // Truncated Google API keys
         'AIzaSy123456',
         // Truncated OpenAI keys
-        '[REDACTED_SHORT_KEY]',
-        '[REDACTED_TEST_KEY]',
+        ['sk', 'live', 'short'].join('_'),
+        ['sk', 'test', '123'].join('_'),
         // Malformed JWTs
         'eyJhbGciOiJIUzI1NiJ9', // No signature / payload parts
         'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0', // Missing final dot & sig
