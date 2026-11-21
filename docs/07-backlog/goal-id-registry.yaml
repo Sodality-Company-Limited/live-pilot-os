@@ -6,7 +6,7 @@ schema_version: "1"
 epics:
   CORE:
     name: Core / unscoped
-    next_seq: 44
+    next_seq: 103
     reserved: []
   DAVE:
     name: DAVE Decision System & Governance
