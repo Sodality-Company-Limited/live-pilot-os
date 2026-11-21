@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-093 | operations | draft | DEFINE | G-CORE-080, G-CORE-081 | [`goals/G-CORE-093.md`](../goals/G-CORE-093.md) |
 | G-CORE-094 | security | draft | DEFINE | G-CORE-074, G-CORE-078 | [`goals/G-CORE-094.md`](../goals/G-CORE-094.md) |
 | G-CORE-095 | operations | draft | DEFINE | G-CORE-062, G-CORE-088 | [`goals/G-CORE-095.md`](../goals/G-CORE-095.md) |
 | G-CORE-096 | operations | draft | DEFINE | G-CORE-082, G-CORE-090, G-CORE-091, G-CORE-092, G-CORE-093, G-CORE-094, G-CORE-095 | [`goals/G-CORE-096.md`](../goals/G-CORE-096.md) |
@@ -25,6 +24,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-093 | Bootstrap F05 identity session runtime | 2026-11-21 | [`goals/_archived/G-CORE-093.md`](../goals/_archived/G-CORE-093.md) |
 | G-CORE-092 | Bootstrap F04 control and audit runtimes | 2026-11-21 | [`goals/_archived/G-CORE-092.md`](../goals/_archived/G-CORE-092.md) |
 | G-CORE-091 | Bootstrap F03 promotion integration runtime | 2026-11-21 | [`goals/_archived/G-CORE-091.md`](../goals/_archived/G-CORE-091.md) |
 | G-CORE-090 | Bootstrap F02 Copilot service runtime | 2026-11-21 | [`goals/_archived/G-CORE-090.md`](../goals/_archived/G-CORE-090.md) |

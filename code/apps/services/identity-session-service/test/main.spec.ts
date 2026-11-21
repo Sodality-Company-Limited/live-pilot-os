@@ -27,12 +27,12 @@ describe('G-CORE-093: Bootstrap F05 identity session runtime', () => {
     await new Promise<void>((resolve) => server.listen(0, resolve));
     const address = server.address() as { port: number };
 
-    // Login
+    // Login with valid test domain
     const loginRes = await fetch(`http://localhost:${address.port}/api/v1/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: 'host@livepilot.io',
+        email: 'host@livepilot.test',
         role: 'HOST',
         tenantId: 'tenant_1',
         isTestRequest: false,
