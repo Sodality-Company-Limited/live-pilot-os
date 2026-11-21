@@ -37,7 +37,7 @@ goal_contract:
   learning: done
 ---
 
-# G-PAY-001: [Title]
+# G-CORE-040: Implement conversational output scrubber and anti-slop filter
 
 **Status:** done  
 **Closed:** 2026-10-25  

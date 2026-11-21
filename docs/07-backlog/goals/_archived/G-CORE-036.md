@@ -37,7 +37,7 @@ goal_contract:
   learning: done
 ---
 
-# G-PAY-001: [Title]
+# G-CORE-036: Implement behavior call-graph tracer
 
 **Status:** done  
 **Closed:** 2026-10-25  

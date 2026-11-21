@@ -11,7 +11,6 @@
 
 | Goal | Title | Status | Depends On | File |
 |------|-------|--------|------------|------|
-| G-SEC-002 | Identity/session persistence contract | ready | — | [`goals/G-SEC-002.md`](../goals/G-SEC-002.md) |
 | G-SEC-003 | Local credential verification | planned | G-SEC-002 | [`goals/G-SEC-003.md`](../goals/G-SEC-003.md) |
 | G-SEC-004 | Server-managed session lifecycle | planned | G-SEC-002, G-SEC-003 | [`goals/G-SEC-004.md`](../goals/G-SEC-004.md) |
 | G-SEC-005 | Authorization context resolution | planned | G-SEC-004 | [`goals/G-SEC-005.md`](../goals/G-SEC-005.md) |
@@ -22,4 +21,5 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-SEC-002 | Identity/session persistence contract | 2026-11-21 | [`goals/_archived/G-SEC-002.md`](../goals/_archived/G-SEC-002.md) |
 | G-SEC-001 | Multimodal Reference Privacy and Security Controls | 2026-11-21 | [`goals/_archived/G-SEC-001.md`](../goals/_archived/G-SEC-001.md) |

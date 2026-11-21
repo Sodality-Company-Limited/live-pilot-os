@@ -9,6 +9,7 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | Epic | Queue | Notes |
 |------|-------|-------|
 | CORE | [queues/CORE.md](queues/CORE.md) | Core / unscoped |
+| AG | [queues/AG.md](queues/AG.md) | Agent Runtime and Subagent Governance |
 | APPR | [queues/APPR.md](queues/APPR.md) | Approval and Control Service |
 | AUDI | [queues/AUDI.md](queues/AUDI.md) | Audit Service & Immutable Decision Ledger |
 | CATA | [queues/CATA.md](queues/CATA.md) | Catalog Service |

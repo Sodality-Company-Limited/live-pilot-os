@@ -227,5 +227,255 @@ Register in [docs/04-agents/skills-library.md](docs/04-agents/skills-library.md)
 
 ---
 
+## Wrap Up
+
+### What LivePilot OS is
+
+LivePilot OS is a real-time, policy-governed live-commerce control room. It gives
+Hosts grounded guidance during a live session and gives Live Ops the evidence,
+controls, and approval boundaries required to protect margin, inventory,
+promotion state, and consequential platform actions.
+
+The system is intentionally designed around a complete causal chain:
+
+```text
+source signal
+  → typed interpretation
+  → evidence-grounded recommendation
+  → deterministic policy verdict
+  → human or authorized approval
+  → controlled execution
+  → reconciliation
+  → immutable audit receipt
+```
+
+AI is an advisory component inside a governed workflow. It may classify signals
+or propose an action, but it may not directly issue vouchers, pin products,
+reserve inventory, or mutate an external marketplace.
+
+### Delivery status
+
+The repository contains the canonical product, architecture, API, event, data,
+deployment, quality, testing, and governance authorities. It also contains the
+Soda Agent OS workflow and the atomic goal backlog required to implement the
+Core BFF and its dependent service wave.
+
+Architecture and contract artifacts are not, by themselves, evidence that the
+entire runtime has been implemented or deployed. Core BFF runtime work, dependent
+service bootstraps, container composition, CI integration gates, end-to-end smoke
+evidence, DigitalOcean release configuration, rollback verification, and final
+production-readiness evidence remain implementation and verification work unless
+the relevant goal contains passing evidence.
+
+### Completion standard
+
+A capability is complete only when its source code, contract tests, failure-path
+tests, authorization checks, idempotency behavior, timeout and unknown-result
+handling, audit evidence, observability, container/runtime configuration, and
+release evidence are present and reproducible. A generated goal or document is
+planning evidence; it is not a substitute for executable verification.
+
+The final handoff should include implemented services and adapters, migration and
+persistence evidence, contract and integration test evidence, security and
+quality-gate receipts, local production-shaped runtime evidence, deployment and
+rollback evidence, and a revision-bound summary of simulated behavior and known
+limitations.
+
+## Project Write Up
+
+### Executive summary
+
+Live commerce moves quickly, but the actions that protect conversion can also
+create financial, inventory, compliance, and platform risk. LivePilot OS addresses
+that tension by combining real-time signal processing with deterministic policy
+controls and explicit operator authority.
+
+The Host receives concise, evidence-grounded guidance. Live Ops receives the
+decision context needed to approve or reject a consequential action. The backend
+preserves the relationship between the original signal, the AI recommendation,
+the policy decision, the approval, the adapter result, and the final audit record.
+
+### Problem and solution
+
+Operators need a reliable view of product facts, margin, inventory, moderation
+risk, and action status while responding to audience demand. A model-only design
+is unsafe because confidence is not authorization. A direct browser-to-marketplace
+design is unsafe because browser state is untrusted and external results may be
+delayed, duplicated, or unknown.
+
+LivePilot OS addresses these problems through bounded services, explicit contracts,
+server-authoritative context, durable events, isolated adapters, reconciliation,
+and append-only audit receipts.
+
+### Architecture and runtime boundaries
+
+The canonical six-node topology is:
+
+```text
+Host / Live Ops UI
+  → Portal BFF
+  → KrakenD API Gateway
+  → Core BFF
+  → Internal KrakenD mesh
+  → Domain services and adapter workers
+  → PostgreSQL, NATS JetStream, Redis, and external adapters
+```
+
+The Portal BFF owns presentation-facing session and DTO concerns. KrakenD owns
+edge authentication, rate limiting, and routing. The Core BFF owns use-case
+orchestration and screen aggregation; it is not the owner of domain policy or
+another service's database. Domain services own their contracts, state
+transitions, persistence boundaries, and failure behavior. Platform adapters form
+an anti-corruption layer that translates canonical actions into platform-specific
+protocols.
+
+PostgreSQL is the authoritative transactional store. NATS JetStream provides
+durable events, replay, jobs, and dead-letter handling. Redis is used for
+reconstructable cache, deduplication windows, coordination, and rate limits; it
+must not become the sole source of truth for business state. Temporal is the
+target authority for durable timers, retries, approvals, and compensation where
+workflow orchestration is required.
+
+### Product capabilities and service decomposition
+
+The project defines five capability areas:
+
+1. Live Chat and Purchase Signal Analysis: normalize chat and telemetry into typed
+   intent, engagement, product, and risk signals.
+2. Streamer Co-pilot HUD: present approved product facts, grouped topics, talking
+   points, Q&A drafts, and alerts to the Host.
+3. StreamPilot Agent: propose bounded promotion, pin, voucher, or inventory actions
+   without bypassing policy or approval.
+4. Compliance and Operator Control: enforce margin rules, approval modes,
+   Emergency Pause, moderation escalation, and auditability.
+5. Test Authentication and Access Gate: provide server-managed test sessions and
+   explicit separation between test credentials, simulated behavior, and any
+   future production identity integration.
+
+These capabilities are implemented through independently bounded services:
+session and catalog; telemetry, intent-risk, decision-engine, and copilot;
+margin-policy, inventory, and promotion; and approval-control, execution,
+platform-adapter, and audit. Each service retains its own contract, persistence
+boundary, lifecycle, and failure behavior.
+
+### Decision and safety model
+
+The decision engine retrieves bounded context, invokes JEV through the approved
+provider boundary, validates the structured result, evaluates confidence and
+uncertainty, and routes the recommendation to deterministic policy. Margin,
+inventory, approval, execution, and audit services retain authority over
+consequential outcomes.
+
+The system must preserve these safety laws:
+
+- financial values use integer minor units and explicit ISO 4217 currency data;
+- every consequential mutation has an idempotency key;
+- timeout and unknown external results require reconciliation before retry;
+- stale authorization, missing evidence, policy failure, or Emergency Pause fail
+  closed for consequential actions;
+- every hop preserves actor identity, session scope, role or capability,
+  correlation ID, trace context, contract version, idempotency key, and locale;
+- service code does not read another service's tables directly; and
+- simulated, sandbox, and production modes remain visibly distinct.
+
+### Verification and operational posture
+
+Performance values in the architecture are verification targets, not confirmed
+claims. They must be demonstrated with reproducible tests or load experiments.
+Operational readiness includes health and readiness checks, graceful shutdown,
+structured logs with redaction, OpenTelemetry traces, durable event replay,
+dead-letter handling, backup and restore procedures, feature flags, rollback, and
+recovery evidence.
+
+A deployment artifact is not considered ready merely because a container starts;
+it must prove contract compatibility, failure behavior, security boundaries, and
+recoverability.
+
+### Demonstration boundary
+
+The Hackathon baseline uses a simulated live session, simulated chat, a fictional
+catalog, and a simulated platform adapter. It does not connect to Shopee, TikTok,
+or another real marketplace, does not process real payments, and does not mutate
+real inventory. These limits are deliberate: they make the control flow
+demonstrable while preserving the production safety contracts required for a
+future integration.
+
+## Declarations
+
+### Scope declaration
+
+This repository describes and implements LivePilot OS within the product scope
+defined by its requirements, architecture, API, event, data, testing, quality,
+deployment, and configuration source-of-truth documents. New product behavior,
+platform capability, or cross-boundary contract requires an explicit goal and
+corresponding specification update.
+
+### Architecture declaration
+
+The architecture overview and its linked source-of-truth documents are the
+authoritative basis for topology, service ownership, safety laws, integration
+boundaries, and runtime behavior. Lower-level code, generated artifacts, or route
+names must not silently override those authorities. A conflict is a contract gap
+that must be resolved through the governed workflow.
+
+### AI and provider declaration
+
+JEV and any approved OpenAI provider integration are used for bounded,
+schema-validated recommendations. They are not granted direct mutation authority.
+The system must preserve model version, uncertainty, evidence references, policy
+verdict, approval context, adapter mode, and outcome in the relevant trace and
+audit records. Provider availability, model output, or model confidence never
+overrides deterministic policy or human approval requirements.
+
+### Simulation declaration
+
+Simulation is a declared operating mode, not an exemption from engineering
+controls. Simulated adapters must still validate inputs, authorization,
+lifecycle, idempotency, timeout, unknown-result, reconciliation, audit, and mode
+labels. Simulated results must never be represented as confirmed marketplace
+effects.
+
+### Security and privacy declaration
+
+Browser state is untrusted. Authorization, session scope, actor identity, and
+capabilities are enforced server-side. Secrets, credentials, tokens, personally
+identifiable information, cost data, and supplier data must not appear in ordinary
+logs, prompts, fixtures, or committed configuration. Public and private route
+boundaries, service identity, redaction, rate limits, and auditability are part of
+the security contract.
+
+### Data and financial integrity declaration
+
+PostgreSQL remains the authoritative store for transactional business state.
+Redis-backed projections and caches must be reconstructable. Money is represented
+with integer minor units and explicit currency metadata. Inventory reservations,
+promotion state, approvals, and external actions must be idempotent and
+reconcilable so that retries cannot silently duplicate consequential effects.
+
+### Evidence declaration
+
+A claim of completion requires revision-bound, reproducible evidence from the
+applicable contract, unit, integration, end-to-end, security, quality, and release
+checks. Architecture documents, goal cards, generated prompts, and test fixtures
+may define intent or provide planning evidence; they do not prove that executable
+runtime behavior is available.
+
+### Deployment declaration
+
+DigitalOcean and the production-shaped Docker Compose topology are deployment
+targets governed by the deployment source of truth. The presence of infrastructure
+scaffolding or deployment configuration must not be read as proof of a successful
+deployment. Production release, rollback, recovery, and external platform access
+require passing release evidence and the approvals required by repository
+governance.
+
+### Non-claim declaration
+
+This README does not claim that every planned service, Core BFF route, adapter,
+integration, performance target, production deployment, or marketplace mutation is
+currently available. Current availability must be established from executable
+source code, passing verification, runtime evidence, and the status of the
+corresponding governed goal.
+
 Maintained by **Sodality**.  
 GitHub: [Sodality-Company-Limited/soda-os](https://github.com/Sodality-Company-Limited/soda-os)

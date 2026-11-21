@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-017",
+  "classification": "executable_invariant",
+  "source_revision": "18fcddf085346e392c027a85e50258926ed23473",
+  "invariants": [
+    {
+      "id": "017-INV-AA",
+      "statement": "Theme text/background pairs meet WCAG 2.2 AA 4.5:1; measured ratios are 4.90:1, 5.31:1, 7.41:1, 14.16:1.",
+      "verification_command": "Current-revision acceptance contrast calculation and token guardrail harness",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "017-INV-AXE",
+      "statement": "Host and Live Ops report zero Storybook axe violations at the reviewed responsive sizes.",
+      "verification_command": "Storybook accessibility addon scan at 390x896, 834x1112, 1280x1024, 1440x1024",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "apps/web/src/components/live-shell.tsx",
+      "sha256": "9f56d1a10b383c1bc5c772fad21b580b88ea7771ccf01895d3263ce3230c687b"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "1aa7eef13898c367b9dd9f1711c3c87e6e3c87f63784b00d826c29cf0a12e93e"
+    },
+    {
+      "path": "docs/02-product/design/live-os-ui-specification.md",
+      "sha256": "f339df8915abc2ea39cbc163e25dd1e7dd0b0702dd14c445984b5b1cd9cb48f1"
+    },
+    {
+      "path": "docs/03-architecture/localization-sot.md",
+      "sha256": "79006e954eeddb91a48df0ba7f86abd54c10e99f8c8ae1a3d41d290173697204"
+    },
+    {
+      "path": "docs/03-architecture/ux/live-os-design-tokens.md",
+      "sha256": "d09fd8e2a53c8e1bdb2ced7ac4f8eb964fe466035ac6cce05edf12f475cdb612"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-WEB-017.md",
+      "sha256": "5f0e2363f21dfea6b240c3adb5cc1179a7c54a6c42e4ab94851aa9d6b00981e6"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-017.md",
+      "sha256": "122fc739cc538139955a41e68c0e3a3f6e9ceaa0f2d0336f0524a992fe70717e"
+    },
+    {
+      "path": "docs/03-architecture/specs/goals/G-WEB-017/design.md",
+      "sha256": "3fc67c70c6797ed6d7ff42f072a69c4af834d12a9d002d6a9e9a6695d02223a5"
+    },
+    {
+      "path": "docs/03-architecture/specs/goals/G-WEB-017/G-WEB-017-architecture-spec.md",
+      "sha256": "0aeb4b1610a5f182e396e6de16d0ae0fe6aa34ebbfa4b7481bcacef2f6dc86cf"
+    },
+    {
+      "path": "docs/03-architecture/specs/goals/G-WEB-017/G-WEB-017-invariants-formal-spec.md",
+      "sha256": "f4ec306c6bb8e0c324c7788de3c19d1e43d83d1ae91ee67384ce68ea35741c2e"
+    },
+    {
+      "path": "docs/03-architecture/specs/goals/G-WEB-017/G-WEB-017-threat-model.md",
+      "sha256": "a3e68752850494567b79dd7c4304429cf99c2d4d293d1da95f5f3eb993c40276"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-21T08:04:43.178Z"
+}

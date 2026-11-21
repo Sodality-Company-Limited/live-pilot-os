@@ -1,15 +1,22 @@
 # Live OS information architecture and UX flow
 
-**Status:** Design draft · awaiting product/design approval<br>
+**Status:** IA, high-level journey, and UI behavior approved on 2026-11-21<br>
 **Pain:** [P-001](../../02-product/knowledge-map.json) · **Evidence:** E-001<br>
 
 **User & job:** Host needs to understand audience interest and respond while presenting; Live Ops needs to monitor the same session and assess offers.<br>
 **Success:** In one demo scenario, a chat message becomes an audience topic and product signal, Live Ops makes an offer decision, and the corresponding Host cue appears in the shared session.<br>
-**Constraints:** Shopee warm-dark visual direction; simulated 9:16 live video and chat; separate Host and Live Ops views; responsive bento layout; do not imply a real platform connection.
+**Constraints:** Warm dark surfaces with a clear orange primary accent; simulated 9:16 live video and chat; separate Host and Live Ops views; responsive bento layout; do not imply a real platform connection.
+
+## IA review decision
+
+- **Decision:** Approved by the requester on 2026-11-21.
+- **Approved scope:** The separate Host and Live Ops views over one shared simulated session, the screen regions summarized for each role, and the high-level journey from session/chat signals through Live Ops review to the resulting Host cue.
+- **Follow-up visual direction:** The requester asked for a clearer orange accent on the existing dark theme on 2026-11-21; G-WEB-017 records the token and app accent refinement without changing IA or behavior.
+- **Still draft:** Design-token changes and any behavior outside the approved [UI specification](../../02-product/design/live-os-ui-specification.md) require a separate review.
 
 ## Flow
 
-1. Live Ops opens a scenario and starts, pauses, replays, or resets the shared simulation.
+1. Live Ops opens a scenario and starts, pauses/resumes, replays, or resets the shared simulation.
 2. Both roles see the same 9:16 mock video and chat stream; chat is overlaid on the video.
 3. A chat message contributes to the persistent audience-topic log and the related product signals.
 4. Live Ops reviews the offer against price/discount, margin, threshold, and stock guardrails.
@@ -32,15 +39,18 @@ The live stage is the dominant bento tile. Supporting tiles contain audience top
 
 | Viewport | Reflow |
 |---|---|
-| **sm — 640px** | One-column reading order. Stage first; controls and primary action next; topics and product signals follow. Operations details can be disclosed in a labeled collapsible section. |
-| **md — 768px** | Stage remains prominent; supporting tiles can form a second column where space permits. Keep offer check and result together. |
-| **lg — 1024px and up** | Variable-size bento canvas. Preserve video prominence and keep the topic log, product signals, and Host cue visible without scrolling where the target viewport allows. |
+| **compact — under 768px** | One-column priority view; stage first, then primary controls, topics, and product signals. Secondary operations panels become labeled drawers. Minimum supported viewport is 390px; no horizontal scrolling. |
+| **tablet — 768–1279px** | Two-column layout; collapse chat and evidence panels by priority while keeping offer checks and results together. |
+| **desktop — 1280px and up** | Full bento layout with stage, signals, controls, and trace visible. |
+| **wide — 1440px and up** | Expand evidence/trace columns without changing information hierarchy. |
+
+These breakpoints follow the canonical [Responsive Layout SOT](responsive-layout-sot.md).
 
 DOM, screen-reader, and keyboard order: session header → live stage/chat → audience topics → product signals → Host cue (Host) / offer guardrails → decision trace (Live Ops) → secondary controls. Each control has an accessible name and visible focus; state changes are announced without repeatedly announcing the whole log. Respect `prefers-reduced-motion`.
 
 ## Decisions carried forward
 
-- One warm dark theme with Shopee orange accent.
+- One warm dark theme with a clear orange primary accent.
 - Host and Live Ops are separate role views over one shared simulated session.
 - Video and chat are mocked for the pitch; no live platform integration is claimed.
 - Audience topics remain in a log; repeated chat does not replace prior topics.
@@ -49,4 +59,4 @@ DOM, screen-reader, and keyboard order: session header → live stage/chat → a
 
 ## Gate
 
-This is an unapproved design draft. Treat it as a reference until Product/Design reviews it.
+The IA, high-level journey, component anatomy, control behavior, screen states, and responsive behavior are approved as recorded in this document and the UI specification. Changes to design tokens or behavior beyond that approved scope require a separate review.

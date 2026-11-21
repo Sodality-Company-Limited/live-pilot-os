@@ -73,6 +73,7 @@ mutate business state.
 - Localized status changes must retain `aria-live` semantics and accessible names.
 - Meet the repository accessibility target: WCAG 2.2 AAA for supported surfaces,
   including 7:1 normal-text contrast and 44×44px touch targets.
+- **Live OS Hackathon exception, approved 2026-11-21:** The Host and Live Ops surfaces target WCAG 2.2 AA, including 4.5:1 normal-text contrast, while retaining the 44×44px touch target. This exception permits the requested consistent Shopee orange; it does not change the target for other surfaces.
 
 ## 6. Catalog lifecycle and ownership
 
