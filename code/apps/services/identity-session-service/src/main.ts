@@ -5,16 +5,23 @@
  */
 
 import http from 'node:http';
-import { createServerSession, resolveServerSession, revokeServerSession, InMemorySessionStore } from './session.js';
-import { enforceTestModeIsolation, isTestEmail } from './test-mode.js';
+import {
+  createTestSession,
+  verifyTestSession,
+  revokeTestSession,
+  TestSessionRecord,
+  SessionRole,
+  SessionAuthStatus,
+} from './session.js';
+import { evaluateTestModeGuard } from './test-mode.js';
 
 export class IdentitySessionRuntime {
   private server: http.Server;
-  private sessionStore = new InMemorySessionStore();
+  private sessionStore = new Map<string, TestSessionRecord>();
   private isShuttingDown = false;
 
   constructor(port = 4006) {
-    this.server = http.createServer(async (req, res) => {
+    this.server = http.createServer((req, res) => {
       const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
 
       if (url.pathname === '/health' || url.pathname === '/healthz') {
@@ -26,7 +33,7 @@ export class IdentitySessionRuntime {
       if (url.pathname === '/api/v1/auth/login' && req.method === 'POST') {
         let body = '';
         req.on('data', (c) => (body += c));
-        req.on('end', async () => {
+        req.on('end', () => {
           try {
             const parsed = JSON.parse(body || '{}');
             const { email, role, tenantId, isTestRequest } = parsed;
@@ -38,34 +45,42 @@ export class IdentitySessionRuntime {
             }
 
             // Enforce Test Mode Isolation
-            const nodeEnv = (process.env.NODE_ENV || 'development') as 'development' | 'production' | 'test';
-            const allowTestMode = process.env.ALLOW_TEST_MODE === 'true';
+            const isProduction = process.env.NODE_ENV === 'production';
+            const allowSimulatedLogins = process.env.ALLOW_TEST_MODE === 'true' || !isProduction;
 
-            try {
-              enforceTestModeIsolation({
-                isTestRequest: Boolean(isTestRequest),
-                email,
-                nodeEnv,
-                allowTestMode,
-              });
-            } catch (authErr) {
+            const decision = evaluateTestModeGuard({
+              isProductionEnv: isProduction,
+              allowSimulatedLogins,
+              requestedMode: isTestRequest ? 'SIMULATED' : 'LOCAL',
+              tenantId,
+              email,
+            });
+
+            if (!decision.allowed) {
               res.writeHead(403, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ code: 'LP04003', message: (authErr as Error).message }));
+              res.end(JSON.stringify({ code: decision.code, message: decision.reason }));
               return;
             }
 
-            const session = await createServerSession(
-              {
-                userId: `usr_${Date.now()}`,
-                tenantId,
-                role,
-                isTest: Boolean(isTestRequest),
-              },
-              this.sessionStore
-            );
+            const session = createTestSession({
+              principalId: `usr_${Date.now()}`,
+              tenantId,
+              role: role as SessionRole,
+              mode: 'local',
+            });
+
+            this.sessionStore.set(session.tokenHash, session);
 
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(session));
+            res.end(
+              JSON.stringify({
+                sessionId: session.sessionId,
+                token: session.rawToken,
+                role: session.role,
+                tenantId: session.tenantId,
+                expiresAt: session.expiresAt.toISOString(),
+              })
+            );
           } catch (err) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ code: 'LP03002', message: (err as Error).message }));
@@ -77,7 +92,7 @@ export class IdentitySessionRuntime {
       if (url.pathname === '/api/v1/auth/session' && req.method === 'POST') {
         let body = '';
         req.on('data', (c) => (body += c));
-        req.on('end', async () => {
+        req.on('end', () => {
           try {
             const parsed = JSON.parse(body || '{}');
             const token = parsed.token;
@@ -87,15 +102,22 @@ export class IdentitySessionRuntime {
               return;
             }
 
-            const resolved = await resolveServerSession(token, this.sessionStore);
-            if (!resolved) {
+            const result = verifyTestSession(token, this.sessionStore);
+            if (result.status !== SessionAuthStatus.AUTHENTICATED) {
               res.writeHead(401, { 'Content-Type': 'application/json' });
               res.end(JSON.stringify({ code: 'LP04001', message: 'Invalid or expired session' }));
               return;
             }
 
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(resolved));
+            res.end(
+              JSON.stringify({
+                sessionId: result.session.sessionId,
+                principalId: result.session.principalId,
+                role: result.session.role,
+                tenantId: result.session.tenantId,
+              })
+            );
           } catch (err) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ code: 'LP03002', message: (err as Error).message }));

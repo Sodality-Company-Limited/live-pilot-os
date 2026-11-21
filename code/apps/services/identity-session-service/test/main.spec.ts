@@ -41,13 +41,13 @@ describe('G-CORE-093: Bootstrap F05 identity session runtime', () => {
 
     assert.equal(loginRes.status, 200);
     const sessionData = await loginRes.json();
-    assert.ok(sessionData.sessionToken);
+    assert.ok(sessionData.token);
 
     // Resolve Session
     const resolveRes = await fetch(`http://localhost:${address.port}/api/v1/auth/session`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: sessionData.sessionToken }),
+      body: JSON.stringify({ token: sessionData.token }),
     });
 
     assert.equal(resolveRes.status, 200);
