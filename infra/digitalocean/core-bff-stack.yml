@@ -1,0 +1,73 @@
+# DigitalOcean Core BFF & Service Stack Specification
+# Target topology: Private VPC, isolated non-root containers, internal droplet networking.
+
+version: '3.8'
+
+networks:
+  livepilot-internal:
+    driver: bridge
+    internal: true
+  livepilot-public:
+    driver: bridge
+
+services:
+  nats:
+    image: nats:2.10-alpine
+    container_name: do-livepilot-nats
+    restart: always
+    networks:
+      - livepilot-internal
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:8222/healthz']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  redis:
+    image: redis:7-alpine
+    container_name: do-livepilot-redis
+    restart: always
+    networks:
+      - livepilot-internal
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  core-bff:
+    image: registry.digitalocean.com/livepilot/core-bff:latest
+    container_name: do-livepilot-core-bff
+    restart: always
+    ports:
+      - '4000:4000'
+    networks:
+      - livepilot-internal
+      - livepilot-public
+    env_file:
+      - /etc/livepilot/core-bff.env
+    depends_on:
+      nats:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:4000/health']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M

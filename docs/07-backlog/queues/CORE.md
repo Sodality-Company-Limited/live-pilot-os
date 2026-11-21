@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-100 | release | draft | DEFINE | G-CORE-096, G-CORE-097, G-CORE-098 | [`goals/G-CORE-100.md`](../goals/G-CORE-100.md) |
 | G-CORE-101 | release | draft | DEFINE | G-CORE-099, G-CORE-100 | [`goals/G-CORE-101.md`](../goals/G-CORE-101.md) |
 | G-CORE-102 | release | draft | DEFINE | G-CORE-098, G-CORE-099, G-CORE-101 | [`goals/G-CORE-102.md`](../goals/G-CORE-102.md) |
 
@@ -18,6 +17,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-100 | Prepare DigitalOcean deployment configuration | 2026-11-21 | [`goals/_archived/G-CORE-100.md`](../goals/_archived/G-CORE-100.md) |
 | G-CORE-099 | Add end-to-end Core BFF smoke evidence | 2026-11-21 | [`goals/_archived/G-CORE-099.md`](../goals/_archived/G-CORE-099.md) |
 | G-CORE-098 | Add Core BFF contract and integration CI gates | 2026-11-21 | [`goals/_archived/G-CORE-098.md`](../goals/_archived/G-CORE-098.md) |
 | G-CORE-097 | Wire local production-shaped Compose runtime | 2026-11-21 | [`goals/_archived/G-CORE-097.md`](../goals/_archived/G-CORE-097.md) |
