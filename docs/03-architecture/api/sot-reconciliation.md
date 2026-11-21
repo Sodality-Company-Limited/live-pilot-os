@@ -179,3 +179,11 @@ internal risk signal retains pattern-set version, language handling, confidence,
 redacted evidence, and session lineage. `PATTERN_SET_UNAVAILABLE`,
 `LANGUAGE_UNSUPPORTED`, and low confidence remain explicit outcomes and do not
 become automatic enforcement or commerce actions.
+
+### Incremental result: F01.2-FLOW-003
+
+No public OpenAPI path is generated for scam-pattern detection. The internal
+risk signal preserves pattern version, redacted evidence, confidence, and
+correlation lineage. `PATTERN_VERSION_MISMATCH`, model unavailability, and
+`EVIDENCE_REDACTION_FAILED` remain explicit rejected/deferred outcomes and never
+become a clean-content assertion.

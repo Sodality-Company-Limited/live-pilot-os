@@ -73,6 +73,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.1-FLOW-008` | None by design | `telemetry.intent.deferred.v1` | `intent-risk-service` | Uncertain intent is explicitly deferred to review with confidence/evidence and no action trigger; missing threshold configuration or unavailable review queue cannot become success. |
 | `F01.2-FLOW-001` | None by design | `moderation.screen.requested.v1 → telemetry.risk.detected.v1` | `intent-risk-service` | Spam/toxic detection emits a typed risk signal with confidence, policy version, and redacted evidence; model or policy unavailability remains deferred/stale, not safe success. |
 | `F01.2-FLOW-002` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Off-platform detection emits a risk signal with pattern evidence and confidence; unsupported language, unavailable pattern set, and low confidence remain explicit non-actionable states. |
+| `F01.2-FLOW-003` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Scam-pattern detection emits redacted risk evidence and confidence under a versioned pattern set; pattern mismatch, model outage, or redaction failure cannot be treated as clear/safe content. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
