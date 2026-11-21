@@ -292,6 +292,14 @@ freshness, and lineage. `STOCK_SNAPSHOT_STALE`, `SKU_UNRESOLVED`, and
 `INVENTORY_UNAVAILABLE` remain explicit unknown/deferred states and cannot
 authorize promotion.
 
+### Incremental result: F01-INTEGRATION-005
+
+No new public OpenAPI path is generated. Action outcomes return to telemetry via
+internal `telemetry.action_outcome.recorded.v1`; any overview/SSE representation
+must mark pending/unknown/reconciled state and preserve action ID,
+provider-status hash, causation, and session lineage. `ACTION_ID_MISSING`,
+`UNKNOWN_OUTCOME`, and duplicate outcome remain explicit recovery states.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
