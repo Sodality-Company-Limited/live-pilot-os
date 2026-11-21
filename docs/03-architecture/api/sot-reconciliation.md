@@ -154,3 +154,12 @@ representative question, product/time-window context, and evidence IDs. Invalid
 input, invalid windows, or model unavailability remain rejected/deferred states;
 the `chat.question.clustered.v1` event schema still needs canonical registry
 coverage.
+
+### Incremental result: F01.1-FLOW-008
+
+No public OpenAPI path is generated for uncertain-intent escalation. The
+`intent-risk-service` publishes a deferred/review-needed outcome with confidence,
+evidence, correlation, and policy metadata; it must not trigger commerce action.
+`THRESHOLD_CONFIG_MISSING`, `REVIEW_QUEUE_UNAVAILABLE`, and low confidence stay
+explicitly observable, and `telemetry.intent.deferred.v1` requires NATS catalog
+registration.
