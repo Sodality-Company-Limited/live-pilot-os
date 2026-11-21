@@ -14,12 +14,19 @@ Promotion is immutable image + versioned migrations + versioned configuration. R
 
 ## Six-node runtime mapping
 
+The six nodes below are application boundaries. Nginx/ModSecurity is infrastructure
+in front of Node 1; PostgreSQL, NATS, Redis, and adapters are dependencies of Node 6,
+not substitute nodes.
+
 1. UI: Next.js Host and Live Ops UI.
 2. Portal BFF: session-scoped DTOs and browser boundary.
-3. Edge gateway: TLS, authentication, rate limits, public routing.
-4. Core BFF: screen aggregation and orchestration.
-5. Domain services: Node.js + NestJS services, workers, policy, execution, audit.
-6. State and adapters: PostgreSQL, NATS JetStream, Redis, object storage, platform adapters.
+3. External KrakenD API Gateway: authenticated public `/v1/*` routing and rate limits.
+4. Core BFF: screen aggregation and orchestration over private `/internal/v1/*`.
+5. Internal KrakenD Mesh: mTLS service routing and schema policy.
+6. Domain services: independently owned services, workers, policy, execution, and audit.
+
+Node 6 uses PostgreSQL for authoritative state, NATS JetStream for events/jobs/DLQ,
+Redis only for reconstructable cache/coordination, and isolated platform adapter workers.
 
 Each node has an owner, image/version, readiness probe, resource budget, logs, metrics, traces, and rollback reference.
 
