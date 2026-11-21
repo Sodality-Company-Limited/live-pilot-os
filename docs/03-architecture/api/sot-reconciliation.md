@@ -308,6 +308,14 @@ affected dependencies, freshness, and blocked-action reasons while preserving
 safe reads and audit logging. `HEALTH_SIGNAL_INVALID`,
 `MODE_TRANSITION_CONFLICT`, and audit unavailability remain explicit states.
 
+### Incremental result: F01-SAFETY-002
+
+No public pause command path is generated for this F01 flow. Pause activation
+propagates internally via `control.emergency_pause.activated.v1`; overview/SSE
+may expose only authorized pause state and propagation receipt. `FORBIDDEN`,
+`PAUSE_PROPAGATION_TIMEOUT`, and `PAUSE_STATE_CONFLICT` remain explicit failure
+or reconciliation states, while telemetry and audit continue safely.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
