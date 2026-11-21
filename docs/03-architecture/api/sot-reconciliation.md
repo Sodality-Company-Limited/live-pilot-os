@@ -113,3 +113,11 @@ internal signal carries the question entity, confidence, catalog/SKU status,
 correlation lineage, and evidence. Low confidence, unresolved catalog context,
 and `UNSUPPORTED_QUESTION_TYPE` remain explicit outcomes; the shared intent
 command/event pair still requires NATS catalog registration.
+
+### Incremental result: F01.1-FLOW-003
+
+No public OpenAPI path is generated for promotion-request classification. The
+output is a typed `DISCOUNT_REQUEST` or `VOUCHER_REQUEST` signal and never a
+promotion mutation. Low confidence, catalog uncertainty, and
+`UNSUPPORTED_PROMOTION_TERM` must remain explicit and non-actionable until a
+downstream policy/approval flow handles them.
