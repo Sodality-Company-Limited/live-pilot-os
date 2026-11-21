@@ -212,6 +212,14 @@ cannot inflate cart, checkout, payment, voucher, or conversion counts.
 `IDEMPOTENCY_PAYLOAD_MISMATCH`, `STALE_REVISION`, and dedup-store unavailability
 remain explicit conflict/deferred states.
 
+### Incremental result: F01.3-FLOW-001
+
+This flow is covered by the existing public `getLiveSessionOverview` operation;
+no duplicate endpoint is generated. The overview DTO must expose projection
+revision, window, freshness, and explicit stale/deferred state for product
+interest metrics. `PROJECTION_INPUT_LAG`, invalid windows, and source
+unavailability cannot be represented as healthy empty metrics.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
