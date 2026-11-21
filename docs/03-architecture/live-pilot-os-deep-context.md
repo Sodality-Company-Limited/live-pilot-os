@@ -207,7 +207,7 @@ The repository currently defines a proposed production baseline with:
 - Next.js Host HUD and Live Ops Console;
 - KrakenD API Gateway;
 - Core BFF for screen aggregation and use-case orchestration;
-- Rust domain services;
+- Node.js LTS + NestJS domain services;
 - NATS JetStream for durable events and replay;
 - PostgreSQL as transactional source of truth;
 - Redis for cache, deduplication windows, and rate limits;

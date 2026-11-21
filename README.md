@@ -61,7 +61,9 @@ Node 6  PostgreSQL + NATS JetStream + Redis + Temporal + Platform Adapters
         Reconciliation + Audit + OpenTelemetry
 ```
 
-The proposed production baseline includes Next.js for the Host HUD and Live Ops Console, Rust domain services, the KrakenD API Gateway, PostgreSQL as the transactional source of truth, NATS JetStream for durable events and replay, Redis for caching, deduplication windows, and rate limits, Temporal for timer/retry/approval/compensation workflows, JEV through the LivePilot Decision Engine, and OpenTelemetry tracing across signal → decision → policy → execution → audit. This is an architecture baseline that requires runtime verification; it does not claim that every service or production integration is already deployed.
+The proposed production baseline includes Next.js for the Host HUD and Live Ops Console, Node.js LTS + NestJS domain services, the KrakenD API Gateway, PostgreSQL as the transactional source of truth, NATS JetStream for durable events and replay, Redis for caching, deduplication windows, and rate limits, Temporal for timer/retry/approval/compensation workflows, JEV through the LivePilot Decision Engine, and OpenTelemetry tracing across signal → decision → policy → execution → audit. This is an architecture baseline that requires runtime verification; it does not claim that every service or production integration is already deployed.
+
+The selected Node/NestJS implementation baseline uses the NestJS Node adapter, `class-validator`/`class-transformer` for HTTP DTOs, Ajv with JSON Schema for events, `pg` + Kysely for PostgreSQL, the official `nats` client for JetStream, the Temporal TypeScript SDK for durable workflows, and Jest + Supertest + fast-check for verification.
 
 ### Domain Model and Service Ownership
 
