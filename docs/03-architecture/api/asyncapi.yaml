@@ -52,10 +52,10 @@ components:
     TelemetrySignalIngest: {name: TelemetrySignalIngest, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     TelemetrySignalDetected: {name: TelemetrySignalDetected, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     CopilotSuggestionCreated: {name: CopilotSuggestionCreated, payload: {$ref: './schemas/realtime-event.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
-    PromotionProposalRequest: {name: PromotionProposalRequest, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
-    PromotionProposed: {name: PromotionProposed, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
-    PromotionDecisionRequest: {name: PromotionDecisionRequest, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
-    PromotionDecisionRecorded: {name: PromotionDecisionRecorded, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionProposalRequest: {name: PromotionProposalRequest, title: "Promotion proposal command v1", description: "Fail closed on missing scope, capability, deadline, schema version, stale resource/policy revision, duplicate-conflict, or unknown payload.", x-schema-version: "1.0.0", x-schema-sha256: "f18f0d50abd4ec0b7f191d460646907854ec324114fc263bfb9cb48afb8bc126", payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/PromotionCommandHeaders'}}
+    PromotionProposed: {name: PromotionProposed, title: "Promotion proposed fact v1", description: "Published after the promotion transaction commits; consumers deduplicate by message ID and idempotency fingerprint.", x-schema-version: "1.0.0", x-schema-sha256: "f18f0d50abd4ec0b7f191d460646907854ec324114fc263bfb9cb48afb8bc126", payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/PromotionEventHeaders'}}
+    PromotionDecisionRequest: {name: PromotionDecisionRequest, title: "Promotion decision command v1", description: "Approval is server-authorized and separation-of-duties checked; stale or duplicate-conflict decisions fail closed.", x-schema-version: "1.0.0", x-schema-sha256: "b7259f7ea332af63ba22654619d11ad9cf870711b7cb3a2133b7f163619457ea", payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/PromotionCommandHeaders'}}
+    PromotionDecisionRecorded: {name: PromotionDecisionRecorded, title: "Promotion decision fact v1", description: "Published after the approval decision commits; it cannot claim issuance without observed adapter state.", x-schema-version: "1.0.0", x-schema-sha256: "b7259f7ea332af63ba22654619d11ad9cf870711b7cb3a2133b7f163619457ea", payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/PromotionEventHeaders'}}
     ExecutionActionUpdated: {name: ExecutionActionUpdated, payload: {$ref: './schemas/nats/execution-update.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     AuditReceiptAppend: {name: AuditReceiptAppend, payload: {$ref: './schemas/nats/audit-receipt.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     ControlPauseRequest: {name: ControlPauseRequest, payload: {$ref: './schemas/nats/control-pause.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
@@ -74,3 +74,21 @@ components:
         X-Producer: {type: string}
         X-Traceparent: {type: string}
         X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
+    PromotionCommandHeaders:
+      allOf:
+        - {$ref: '#/components/schemas/MessageHeaders'}
+        - type: object
+          required: [X-Idempotency-Key, X-Session-Id, X-Mode]
+          properties:
+            X-Idempotency-Key: {type: string, minLength: 8, maxLength: 256}
+            X-Session-Id: {type: string, minLength: 1, maxLength: 128}
+            X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
+    PromotionEventHeaders:
+      allOf:
+        - {$ref: '#/components/schemas/MessageHeaders'}
+        - type: object
+          required: [X-Causation-Id, X-Session-Id, X-Mode]
+          properties:
+            X-Causation-Id: {type: string, minLength: 1, maxLength: 128}
+            X-Session-Id: {type: string, minLength: 1, maxLength: 128}
+            X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}

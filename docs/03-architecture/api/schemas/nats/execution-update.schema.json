@@ -1,1 +1,61 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.livepilot.invalid/nats/execution-update.schema.json","type":"object","required":["action_id","aggregate_id","status","mode"],"properties":{"action_id":{"type":"string","minLength":8},"aggregate_id":{"type":"string","minLength":1},"status":{"type":"string","enum":["requested","accepted","pending","succeeded","failed","unknown","reconciled"]},"mode":{"type":"string","enum":["SIMULATED","SANDBOX","CONFIRMED"]},"error_code":{"type":["string","null"]},"observed_at":{"type":["string","null"],"format":"date-time"}},"additionalProperties":false}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/execution-update.schema.json",
+  "title": "LivePilot Execution Action Update v1",
+  "description": "Safe execution observation contract. It carries references and evidence only; dispatch never implies issuance.",
+  "type": "object",
+  "required": [
+    "schema_version", "message_kind", "event_type", "action_id", "promotion_id",
+    "aggregate_id", "status", "mode", "policy_revision", "approval_revision",
+    "inventory_reservation_id", "execution_safety_authorization_id", "expected_resource_version",
+    "resource_version", "idempotency_key", "idempotency_fingerprint", "correlation_id",
+    "causation_id", "fencing_token"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "message_kind": {"type": "string", "const": "event"},
+    "event_type": {"type": "string", "const": "execution.action.updated"},
+    "action_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "promotion_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "aggregate_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "status": {"type": "string", "enum": ["requested", "accepted", "pending", "succeeded", "failed", "unknown", "reconciled"]},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]},
+    "policy_revision": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "approval_revision": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "inventory_reservation_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "execution_safety_authorization_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "expected_resource_version": {"type": "integer", "minimum": 1},
+    "resource_version": {"type": "integer", "minimum": 1},
+    "idempotency_key": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{8,256}$"},
+    "idempotency_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "causation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "fencing_token": {"type": "integer", "minimum": 1},
+    "control_revision": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "error_code": {"type": ["string", "null"], "pattern": "^[A-Z0-9_]{1,64}$"},
+    "observed_at": {"type": ["string", "null"], "format": "date-time"},
+    "deadline_at": {"type": ["string", "null"], "format": "date-time"},
+    "reconciliation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "safe_reason": {"type": ["string", "null"], "maxLength": 500, "pattern": "^[^\\r\\n]*$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"enum": ["unknown", "reconciled"]}}},
+      "then": {
+        "required": ["reconciliation_id", "safe_reason"],
+        "properties": {
+          "reconciliation_id": {"type": "string", "minLength": 1},
+          "safe_reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "succeeded"}}},
+      "then": {
+        "required": ["observed_at"],
+        "properties": {"observed_at": {"type": "string", "format": "date-time"}}
+      }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -10,7 +10,7 @@ epics:
     reserved: []
   CORE:
     name: Core / unscoped
-    next_seq: 44
+    next_seq: 103
     reserved: []
   DAVE:
     name: DAVE Decision System & Governance
@@ -23,6 +23,10 @@ epics:
   OPS:
     name: DAVE Operations & Deployment Governance
     next_seq: 2
+    reserved: []
+  PROMO:
+    name: Promotion Service
+    next_seq: 29
     reserved: []
   PROOF:
     name: DAVE Mathematical Invariant & Assurance Proofs

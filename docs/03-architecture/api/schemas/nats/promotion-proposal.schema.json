@@ -1,1 +1,30 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.livepilot.invalid/nats/promotion-proposal.schema.json","type":"object","required":["promotion_id","session_id","product_id","discount_percent","claim_limit","policy_revision"],"properties":{"promotion_id":{"type":"string","minLength":8},"session_id":{"type":"string","minLength":1},"product_id":{"type":"string","minLength":1},"discount_percent":{"type":"number","minimum":0,"maximum":100},"claim_limit":{"type":"integer","minimum":1},"policy_revision":{"type":"string","minLength":1}},"additionalProperties":false}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/promotion-proposal.schema.json",
+  "title": "LivePilot Promotion Proposal v1",
+  "description": "Versioned command/fact payload. Transport headers carry tenant and session scope; consumers reject unknown major versions before business logic.",
+  "type": "object",
+  "required": ["schema_version", "message_kind", "event_type", "promotion_id", "session_id", "product_id", "discount_percent", "claim_limit", "policy_revision", "expected_resource_version", "resource_version", "actor_ref", "capability", "idempotency_key", "idempotency_fingerprint", "correlation_id", "causation_id", "lifecycle_state"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "message_kind": {"type": "string", "enum": ["command", "event"]},
+    "event_type": {"type": "string", "enum": ["promotion.proposal.requested", "promotion.proposed"]},
+    "promotion_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{8,128}$"},
+    "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$"},
+    "product_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$"},
+    "discount_percent": {"type": "number", "minimum": 0, "maximum": 100},
+    "claim_limit": {"type": "integer", "minimum": 1},
+    "policy_revision": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "expected_resource_version": {"type": "integer", "minimum": 0},
+    "resource_version": {"type": "integer", "minimum": 0},
+    "actor_ref": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "capability": {"type": "string", "const": "promotion.propose"},
+    "idempotency_key": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{8,256}$"},
+    "idempotency_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "causation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9._:-]{1,128}$"},
+    "lifecycle_state": {"type": "string", "enum": ["proposed", "pending", "rejected", "expired", "cancelled", "unknown"]},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]}
+  },
+  "additionalProperties": false
+}

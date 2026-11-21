@@ -163,6 +163,16 @@ paths:
     post:
       tags: [Promotions]
       summary: Propose a promotion for policy evaluation and controlled execution
+      description: >-
+        Records one session-scoped promotion proposal in promotion-service. The
+        authenticated server session and proposal capability are authoritative;
+        the caller cannot provide tenant, actor, margin, inventory, approval,
+        provider credentials, or provider payloads. The service durably binds
+        Idempotency-Key to a canonical request fingerprint. A same-key/same-
+        fingerprint replay returns the original outcome; a mismatch, stale
+        dependency, invalid transition, or unavailable dependency fails closed.
+        A successful proposal enters `proposed` and then `pending`; it never
+        implies approval, issuance, or marketplace mutation.
       operationId: proposePromotion
       security:
         - cookieAuth: []
@@ -177,8 +187,20 @@ paths:
             schema:
               $ref: '#/components/schemas/PromotionProposalRequest'
       responses:
+        '200':
+          description: Idempotent replay of the committed proposal outcome
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromotionProposalResponse'
         '202':
           description: Proposal accepted for policy evaluation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
           content:
             application/json:
               schema:
@@ -187,10 +209,16 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '409':
           $ref: '#/components/responses/Conflict'
         '422':
           $ref: '#/components/responses/PolicyRejected'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/DependencyUnavailable'
         '500':
           $ref: '#/components/responses/Internal'
 
@@ -255,6 +283,19 @@ paths:
     get:
       tags: [Promotions]
       summary: Read promotion and simulated execution state
+      description: >-
+        Returns the promotion aggregate only when the authenticated principal
+        has visibility to its server-resolved live session and tenant scope.
+        `status` and `resource_version` are the authoritative state and version;
+        `resource_version` is also returned as an ETag for cache and concurrency
+        checks. The read model reports projection status, version lag, and
+        reconciliation metadata separately. A projection can never advance
+        beyond the authoritative version: duplicate/older events are ignored,
+        while gaps or mismatches are stale and require reconciliation. Missing
+        or untrusted projections are never presented as current. Linked policy,
+        inventory, approval, or adapter state is marked pending/unknown when it
+        is not durably observed; no provider credential or raw provider payload
+        is returned. Reads are side-effect free and never mutate the aggregate.
       operationId: getPromotion
       security:
         - cookieAuth: []
@@ -266,10 +307,16 @@ paths:
         - $ref: '#/components/parameters/CorrelationId'
       responses:
         '200':
-          description: Promotion state
+          description: Authoritative promotion state with non-authoritative projection health
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
           content: {application/json: {schema: {$ref: '#/components/schemas/Promotion'}}}
         '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
         '404': {$ref: '#/components/responses/NotFound'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/DependencyUnavailable'}
         '500': {$ref: '#/components/responses/Internal'}
 
   /v1/live-sessions/{session_id}/actions:
@@ -338,6 +385,13 @@ components:
       schema:
         type: string
         minLength: 8
+  headers:
+    ETag:
+      description: Strong representation validator derived from promotion resource_version.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 128
   schemas:
     CreateLiveSessionRequest:
       type: object
@@ -511,10 +565,12 @@ components:
       additionalProperties: false
     PromotionProposalRequest:
       type: object
-      required: [product_id, promotion_type, discount_percent, claim_limit]
+      required: [product_id, promotion_type, discount_percent, claim_limit, policy_context_version]
       properties:
         product_id:
           type: string
+          minLength: 1
+          maxLength: 128
         promotion_type:
           type: string
           enum: [FLASH_VOUCHER, PRODUCT_PIN]
@@ -525,16 +581,46 @@ components:
         claim_limit:
           type: integer
           minimum: 1
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+        policy_context_version:
+          type: string
+          minLength: 1
+          maxLength: 128
       additionalProperties: false
     PromotionProposalResponse:
       type: object
-      required: [promotion_id, status, margin, inventory, next_action]
+      required: [promotion_id, session_id, status, resource_version, policy_revision, audit_receipt_id, correlation_id, mode, next_action]
       properties:
         promotion_id:
           type: string
+        session_id:
+          type: string
         status:
           type: string
-          enum: [PENDING_POLICY, PENDING_APPROVAL, APPROVED, REJECTED, EXECUTED]
+          enum: [proposed, pending, approved, rejected, issued, expired, cancelled, unknown]
+        resource_version:
+          type: integer
+          minimum: 1
+        policy_revision:
+          type: string
+          minLength: 1
+        audit_receipt_id:
+          type: string
+          minLength: 1
+        correlation_id:
+          type: string
+          minLength: 1
+        causation_id:
+          type: [string, 'null']
+        mode:
+          type: string
+          enum: [SIMULATED, SANDBOX, CONFIRMED]
+        idempotency_fingerprint:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
         margin:
           $ref: '#/components/schemas/MarginResult'
         inventory:

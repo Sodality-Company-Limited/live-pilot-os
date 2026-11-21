@@ -14,6 +14,7 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | ML | [queues/ML.md](queues/ML.md) | Machine Learning & Cognitive Calibration |
 | OPS | [queues/OPS.md](queues/OPS.md) | DAVE Operations & Deployment Governance |
 | PAY | [queues/PAY.md](queues/PAY.md) | Active queue |
+| PROMO | [queues/PROMO.md](queues/PROMO.md) | Promotion Service |
 | PROOF | [queues/PROOF.md](queues/PROOF.md) | DAVE Mathematical Invariant & Assurance Proofs |
 | SEC | [queues/SEC.md](queues/SEC.md) | DAVE Multimodal Security & Privacy Controls |
 | TEMPLATE | [queues/TEMPLATE.md](queues/TEMPLATE.md) | Active queue |
