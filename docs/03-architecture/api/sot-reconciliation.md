@@ -78,3 +78,12 @@ internal telemetry-service transformation from an accepted source event to a
 canonical event. The flow's `telemetry.normalize.requested.v1` and
 `telemetry.normalized.v1` subjects are not present in the canonical NATS subject
 catalog yet, so the async schema/subject reconciliation remains open.
+
+### Incremental result: F01-FLOW-004
+
+No public OpenAPI path is generated for duplicate suppression. The provider
+event ID, session ID, and payload fingerprint must be checked atomically by
+`telemetry-service`; a matching retry returns the original receipt with
+`duplicate=true`, while a mismatched fingerprint produces a conflict. The
+flow's `telemetry.duplicate.detected.v1` fact and its schema are not yet in the
+canonical NATS catalog, so async contract generation remains open.

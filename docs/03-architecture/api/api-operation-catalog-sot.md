@@ -61,6 +61,7 @@ source-fact persistence inside the telemetry owner.
 |---|---|---|---|---|
 | `F01-FLOW-002` | None by design | `livepilot.v1.telemetry.signal.ingest` → telemetry service; durable telemetry event after commit | `telemetry-service` | Flow SOT names `telemetry.ingest.requested.v1 → telemetry.source.received.v1`, while the canonical NATS catalog names the command `livepilot.v1.telemetry.signal.ingest` and the event `livepilot.v1.telemetry.signal.detected`; Async contract reconciliation is required before generation is considered complete. |
 | `F01-FLOW-003` | None by design | `telemetry.normalize.requested.v1 → telemetry.normalized.v1` (internal NATS contract) | `telemetry-service` | The normalization command/event pair and canonical payload schema are not yet registered in the NATS catalog; no HTTP route is generated. |
+| `F01-FLOW-004` | None by design | `telemetry.duplicate.detected.v1` (internal deduplication fact) | `telemetry-service` | Deduplication is an atomic no-op/receipt decision inside the telemetry owner; the flow subject and duplicate-result schema are not yet registered in the NATS catalog. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
