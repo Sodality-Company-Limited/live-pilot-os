@@ -163,3 +163,11 @@ evidence, correlation, and policy metadata; it must not trigger commerce action.
 `THRESHOLD_CONFIG_MISSING`, `REVIEW_QUEUE_UNAVAILABLE`, and low confidence stay
 explicitly observable, and `telemetry.intent.deferred.v1` requires NATS catalog
 registration.
+
+### Incremental result: F01.2-FLOW-001
+
+No public OpenAPI path is generated for spam/toxic screening. The
+`intent-risk-service` owns the moderation signal and preserves redacted evidence,
+confidence, policy version, and session lineage. Invalid input, model outage,
+and risk-policy unavailability remain explicit rejected/deferred states; the
+moderation command/event pair requires NATS catalog registration.

@@ -71,6 +71,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.1-FLOW-006` | None by design | `telemetry.claim.unsupported.v1` | `intent-risk-service` | Unsupported claims produce a redacted `UNSUPPORTED_CLAIM` signal with review-needed status; policy/evidence uncertainty cannot become verified product guidance. |
 | `F01.1-FLOW-007` | None by design | `chat.question.clustered.v1` | `intent-risk-service` | Clustering produces a `QuestionCluster` with count, representative question, time window, product context, and evidence IDs; it is a rebuildable projection, not a source-fact writer. |
 | `F01.1-FLOW-008` | None by design | `telemetry.intent.deferred.v1` | `intent-risk-service` | Uncertain intent is explicitly deferred to review with confidence/evidence and no action trigger; missing threshold configuration or unavailable review queue cannot become success. |
+| `F01.2-FLOW-001` | None by design | `moderation.screen.requested.v1 → telemetry.risk.detected.v1` | `intent-risk-service` | Spam/toxic detection emits a typed risk signal with confidence, policy version, and redacted evidence; model or policy unavailability remains deferred/stale, not safe success. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
