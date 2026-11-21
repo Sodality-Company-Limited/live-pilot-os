@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soda.dev/schemas/ui-taxonomy.schema.json",
+  "title": "Soda OS UI Taxonomy & Standard Labeling Specification Schema",
+  "description": "Canonical schema governing the 32-element component hierarchy, 6 functional categories, allowed interaction states, ARIA accessibility attributes, and visual requirements.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "taxonomy_version",
+    "categories",
+    "elements",
+    "interaction_states",
+    "aria_roles",
+    "wcag_touch_targets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "taxonomy_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "categories": {
+      "type": "object",
+      "required": ["container", "control", "input", "display", "data_feedback", "navigation"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "description", "element_count", "classes"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "element_count": { "type": "integer", "minimum": 1 },
+          "classes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "elements": {
+      "type": "object",
+      "minProperties": 32,
+      "maxProperties": 32,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "class_name",
+          "category",
+          "description",
+          "is_interactive",
+          "keyboard_focusable",
+          "allowed_states",
+          "allowed_aria_roles",
+          "wcag_touch_target_px",
+          "typical_parents",
+          "typical_children"
+        ],
+        "properties": {
+          "class_name": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["container", "control", "input", "display", "data_feedback", "navigation"]
+          },
+          "description": { "type": "string" },
+          "is_interactive": { "type": "boolean" },
+          "keyboard_focusable": { "type": "boolean" },
+          "allowed_states": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["default", "hover", "focus", "active", "disabled", "error", "loading"]
+            },
+            "minItems": 1
+          },
+          "allowed_aria_roles": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "wcag_touch_target_px": {
+            "type": "object",
+            "required": ["min_width", "min_height"],
+            "properties": {
+              "min_width": { "type": "integer", "minimum": 0 },
+              "min_height": { "type": "integer", "minimum": 0 }
+            },
+            "additionalProperties": false
+          },
+          "typical_parents": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "typical_children": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "interaction_states": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["default", "hover", "focus", "active", "disabled", "error", "loading"]
+      },
+      "minItems": 7,
+      "maxItems": 7
+    },
+    "aria_roles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 10
+    },
+    "wcag_touch_targets": {
+      "type": "object",
+      "required": ["minimum_aaa_px", "minimum_aa_px"],
+      "properties": {
+        "minimum_aaa_px": { "type": "integer", "const": 44 },
+        "minimum_aa_px": { "type": "integer", "const": 24 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

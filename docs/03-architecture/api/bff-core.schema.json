@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sodality.app/schemas/bff-core.schema.json",
+  "title": "BFFCoreContract",
+  "description": "BFF Core API contract for internal gateway consumption.",
+  "type": "object",
+  "required": [
+    "id",
+    "tenant_id",
+    "base_currency",
+    "amount_minor",
+    "scale",
+    "status"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "tenant_id": { "type": "string" },
+    "base_currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "amount_minor": { "type": "string", "pattern": "^-?[0-9]+$" },
+    "scale": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "status": { "type": "string", "enum": ["draft", "pending", "active", "completed", "failed"] }
+  },
+  "additionalProperties": false
+}

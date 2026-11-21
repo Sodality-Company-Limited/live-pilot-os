@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0.0",
+  "goal_id": "G-WEB-013",
+  "artifact_id": "ART-DETERMINISTIC-VISUAL-ENV-SPEC",
+  "generated_at": "2026-10-03T21:27:00.000Z",
+  "title": "Deterministic Visual Execution Environment Specification",
+  "description": "Containerized visual execution harness specification locking 15 rendering dimensions and establishing 8-layer visual acceptance decomposition for zero-variance pixel-diff captures.",
+  "locked_dimensions_count": 15,
+  "locked_dimensions": {
+    "viewport_width": {
+      "desktop": 1440,
+      "tablet": 1024,
+      "mobile": 390,
+      "unit": "px",
+      "invariant": "strictly_positive_integer"
+    },
+    "viewport_height": {
+      "desktop": 900,
+      "tablet": 768,
+      "mobile": 844,
+      "unit": "px",
+      "invariant": "strictly_positive_integer"
+    },
+    "device_scale_factor": {
+      "value": 1.0,
+      "invariant": "fixed_dpr_1_0"
+    },
+    "timezone": {
+      "value": "UTC",
+      "iana_identifier": "Etc/UTC",
+      "invariant": "zero_offset_utc"
+    },
+    "locale": {
+      "value": "en-US",
+      "language": "en",
+      "region": "US",
+      "invariant": "en_us_formatting"
+    },
+    "font_antialiasing": {
+      "value": "subpixel",
+      "hinting": "medium",
+      "fonts_locked": ["Inter", "Fira Code"],
+      "invariant": "deterministic_text_rasterization"
+    },
+    "animation_clock": {
+      "state": "paused",
+      "timestamp_ms": 0,
+      "invariant": "time_zero_frozen"
+    },
+    "transition_duration": {
+      "value": "0s",
+      "delay": "0s",
+      "invariant": "instant_style_transition"
+    },
+    "color_profile": {
+      "profile": "srgb",
+      "depth": "8bpc",
+      "invariant": "standard_srgb_profile"
+    },
+    "color_scheme": {
+      "preferred": "dark",
+      "forced_colors": "none",
+      "invariant": "dark_token_palette"
+    },
+    "reduced_motion": {
+      "preference": "reduce",
+      "invariant": "prefers_reduced_motion_enforced"
+    },
+    "media_type": {
+      "value": "screen",
+      "invariant": "screen_media_query"
+    },
+    "scrollbars": {
+      "visibility": "hidden",
+      "scrollbar_width": "none",
+      "invariant": "zero_scrollbar_gutter"
+    },
+    "javascript_date_clock": {
+      "epoch_iso": "2026-10-01T00:00:00.000Z",
+      "epoch_ms": 1790812800000,
+      "invariant": "deterministic_system_clock"
+    },
+    "network_idle": {
+      "state": "document_fonts_ready",
+      "max_pending_requests": 0,
+      "network_idle_ms": 500,
+      "invariant": "quiescent_dom_render"
+    }
+  },
+  "chromium_launch_args": [
+    "--headless=new",
+    "--disable-gpu",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--force-color-profile=srgb",
+    "--font-render-hinting=medium",
+    "--enable-font-antialiasing",
+    "--hide-scrollbars",
+    "--mute-audio",
+    "--disable-extensions",
+    "--disable-background-networking",
+    "--disable-component-update",
+    "--disable-sync",
+    "--metrics-recording-only",
+    "--disable-default-apps",
+    "--disable-hang-monitor",
+    "--disable-prompt-on-repost",
+    "--disable-client-side-phishing-detection",
+    "--password-store=basic",
+    "--use-mock-keychain"
+  ],
+  "acceptance_layers_count": 8,
+  "acceptance_layers": [
+    {
+      "layer_id": 1,
+      "layer_key": "dom_structure",
+      "layer_name": "DOM structure",
+      "description": "Verifies element tree hierarchy, node counts, tag ordering, semantic landmarks, and absence of unexpected nodes.",
+      "severity": "critical",
+      "evaluation_type": "structural_tree_integrity"
+    },
+    {
+      "layer_id": 2,
+      "layer_key": "layout_geometry",
+      "layer_name": "layout geometry",
+      "description": "Verifies bounding box dimensions, element coordinates (x, y, w, h), margins, paddings, flex/grid tracks, and zero horizontal overflow.",
+      "severity": "critical",
+      "evaluation_type": "spatial_box_model_coordinates"
+    },
+    {
+      "layer_id": 3,
+      "layer_key": "typography",
+      "layer_name": "typography",
+      "description": "Verifies font family, font size, line height, letter spacing, font weight, text alignment, and absence of text overflow/clipping.",
+      "severity": "critical",
+      "evaluation_type": "computed_font_metrics"
+    },
+    {
+      "layer_id": 4,
+      "layer_key": "colors_and_tokens",
+      "layer_name": "colors and tokens",
+      "description": "Verifies background, foreground, border color token adherence, contrast ratios, and strict zero-raw-hex invariant.",
+      "severity": "critical",
+      "evaluation_type": "computed_color_token_adherence"
+    },
+    {
+      "layer_id": 5,
+      "layer_key": "image_crop_and_assets",
+      "layer_name": "image crop and assets",
+      "description": "Verifies aspect ratios, object-fit properties, natural vs rendered dimensions, and content-addressed asset SHA-256 integrity.",
+      "severity": "serious",
+      "evaluation_type": "asset_geometry_and_integrity"
+    },
+    {
+      "layer_id": 6,
+      "layer_key": "interaction_states",
+      "layer_name": "interaction states",
+      "description": "Verifies pseudo-class styling across default, hover, focus-visible, active, and disabled states without layout disruption.",
+      "severity": "moderate",
+      "evaluation_type": "stateful_pseudoclass_validation"
+    },
+    {
+      "layer_id": 7,
+      "layer_key": "motion_frames",
+      "layer_name": "motion frames",
+      "description": "Verifies animation state paused at t=0, transition durations zeroed, transform matrices at rest, and prefers-reduced-motion compliance.",
+      "severity": "moderate",
+      "evaluation_type": "deterministic_motion_clock"
+    },
+    {
+      "layer_id": 8,
+      "layer_key": "accessibility",
+      "layer_name": "accessibility",
+      "description": "Verifies WCAG 2.2 AA color contrast ratios (>= 4.5:1 normal, >= 3:1 large), touch targets >= 44x44px, and ARIA roles.",
+      "severity": "critical",
+      "evaluation_type": "wcag_2_2_aa_compliance"
+    }
+  ],
+  "fidelity_thresholds": {
+    "pixel_diff_ratio": 0.0050,
+    "layout_shift": 0,
+    "horizontal_overflow": false,
+    "text_overflow": false,
+    "accessibility_standard": "wcag_2_2_aa"
+  },
+  "pre_render_injection": {
+    "style_override": "*, *::before, *::after { -webkit-animation-play-state: paused !important; animation-play-state: paused !important; -webkit-animation-delay: 0s !important; animation-delay: 0s !important; -webkit-transition-duration: 0s !important; transition-duration: 0s !important; -webkit-transition-delay: 0s !important; transition-delay: 0s !important; scroll-behavior: auto !important; } html, body { overflow-x: hidden !important; scrollbar-width: none !important; } ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }",
+    "date_mock_epoch": "2026-10-01T00:00:00.000Z",
+    "prng_seed": 5298693,
+    "fonts_ready_await": true
+  }
+}

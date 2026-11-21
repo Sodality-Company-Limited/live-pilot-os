@@ -1,0 +1,23 @@
+{
+  "artifact_id": "ART-DETERMINISTIC-VISUAL-RECEIPT",
+  "goal_id": "G-WEB-013",
+  "receipt_schema": "deterministic_visual_receipt_v1",
+  "timestamp": "2026-10-10T10:47:27.499Z",
+  "status": "PASSED",
+  "certification": "PASS",
+  "pixel_diff_ratio": 0.00007716049382716049,
+  "max_threshold": 0.005,
+  "pixel_diff_satisfied": true,
+  "layout_shift": 0,
+  "layout_shift_zero": true,
+  "overflow_detected": false,
+  "overflow_free": true,
+  "reference_hash": "sha256:d7146fad2c9c3a601f8160ae2c8072285d2e41c22a39a226ee78a24e5c59cbb8",
+  "deterministic_capture_hash": "sha256:aa042e43de5290616f0a6292024156cd6ab5d1b0489e3b3b45faad5bd4b67660",
+  "capture_variance": 0,
+  "locked_dimensions_verified": 15,
+  "layers_evaluated": 8,
+  "layers_passed": 8,
+  "failing_layers": [],
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-002",
+  "generated_at": "2026-10-14T04:58:27.080Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-002-INV-001",
+      "statement": "10-state UX decision runtime lifecycle state machine and dynamic doubt router satisfy 16-permutation truth table with zero mocks and exit code 0.",
+      "verification_command": "node scripts/harness/ux-lifecycle-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-002-INV-002",
+      "statement": "UX Decision Lifecycle unit test suite passes 19/19 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ux-decision-lifecycle.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-002-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-002",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/ux-decision-lifecycle.mjs",
+      "sha256": "2f6d55dcf5d02d240fa5db62c514edfc1ff89006080b2384dc1f7c6bc80598c9"
+    },
+    {
+      "path": "tests/unit/test-ux-decision-lifecycle.mjs",
+      "sha256": "607fdeb8bf051f58f9d1966dde3c41475aca88ef2ca3df12a3ae89fe78c977a7"
+    },
+    {
+      "path": "scripts/harness/ux-lifecycle-harness.mjs",
+      "sha256": "c07e40c7d5b81588922d210e713c16413e689afc40523ff5218cee794696f6ae"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-002.md",
+      "sha256": "f23bbf4f474a1e23a94531735d38f38ce035f42254d22c4fc9f1fa9155d9e2a6"
+    }
+  ],
+  "certification": "PASS"
+}

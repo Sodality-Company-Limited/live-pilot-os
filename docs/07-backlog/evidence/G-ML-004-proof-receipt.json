@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-004",
+  "generated_at": "2026-10-11T07:32:28.713Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "DUALHEAD-SHAPE-001",
+      "claim": "dual-head forward pass produces [batch, seq_len, vocab_size] for language logits and [batch, 1] for scalar confidence",
+      "statement": "dual-head forward pass produces [batch, seq_len, vocab_size] for language logits and [batch, 1] for scalar confidence",
+      "verification_command": "pytest tests/ml/test_dual_head_model.py -k test_dual_head_shapes",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "DUALHEAD-GRAD-002",
+      "claim": "gradient backpropagation through confidence head loss strictly preserves frozen language model backbone with zero gradient leakage",
+      "statement": "gradient backpropagation through confidence head loss strictly preserves frozen language model backbone with zero gradient leakage",
+      "verification_command": "pytest tests/ml/test_dual_head_model.py -k test_gradient_isolation",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "conformance_pass_rate",
+    "population": "framework_test_suites",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "method": "wilson_score",
+      "confidence_level": 0.95,
+      "lower_bound": 0.9568233464896543,
+      "upper_bound": 1
+    },
+    "mutation_kill_rate": {
+      "sample_count": 8,
+      "killed": 8,
+      "kill_rate": 1,
+      "lower_bound": 0.8986239820275204,
+      "upper_bound": 1
+    }
+  },
+  "touch_map_digests": [
+    {
+      "path": "code/ml/src/models/dual_head_model.py",
+      "sha256": "a1271ea014debc44fba159aeb45981426763ae92e5da09933cfba9ece00fb099"
+    },
+    {
+      "path": "code/ml/src/models/__init__.py",
+      "sha256": "ac6809c825e5da1dc2d206c0f1f63d7b25666fdbb7c90477a05b6de119c89e1a"
+    },
+    {
+      "path": "tests/ml/test_dual_head_model.py",
+      "sha256": "cbfe9a6205fb5b7704668d6e855e07ec3f4bdaf141156ce495e6befe33861f65"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-004.md",
+      "sha256": "2961e31510ad833e1d7cd6857763421019a1999dbb408fc6ce64911d96bb6dc5"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-004.md",
+      "sha256": "182ab0b2f182162cee5b7ab317f68c553e8e058d7c81749aca126f1797fd0789"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-004.md",
+      "sha256": "2b6c550a1084169b53ea8619805b33e01808431360e2ac381b12b751afb6a107"
+    },
+    {
+      "path": "scripts/agentic/g-ml-004-5why-socratic-engine.mjs",
+      "sha256": "4f63798eadc9f1d690ad3587d1538dc2dfe5fc617b08a80f2fe8211ed3b3f84d"
+    },
+    {
+      "path": "template/scripts/agentic/g-ml-004-5why-socratic-engine.mjs",
+      "sha256": "4f63798eadc9f1d690ad3587d1538dc2dfe5fc617b08a80f2fe8211ed3b3f84d"
+    }
+  ],
+  "certification": "PASS"
+}

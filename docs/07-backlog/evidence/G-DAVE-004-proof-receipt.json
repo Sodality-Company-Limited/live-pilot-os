@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-004",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-DAVE-004-INV-001",
+      "statement": "DAVE Reference Evidence Graph satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-trace-harness.mjs --verify-full-chain",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-evidence-graph.mjs",
+      "sha256": "36caf33bfe4c76bfa3037f5f82cd38f4d02dd7dbde903f9b455d40bfc8b5f9b5"
+    },
+    {
+      "path": "scripts/harness/dave-decision-trace-harness.mjs",
+      "sha256": "97971efd424fec33030f263f6fae559d676f32de9b8e790d5a734d0290fd786c"
+    },
+    {
+      "path": "tests/unit/test-dave-evidence-graph.mjs",
+      "sha256": "37403821107b3d4096dc383ce32d34e6b6e837975b6360b264cc6d2a947f934d"
+    },
+    {
+      "path": "artifacts/proofs/G-DAVE-004-trace-graph.json",
+      "sha256": "4f4fcd0636657363c9b8b1c4aed391f92a2fb54b75304335fc324370bf44355f"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T08:06:40.000Z"
+}

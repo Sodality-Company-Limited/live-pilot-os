@@ -1,0 +1,19 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-WEB-010",
+  "goal_id": "G-WEB-010",
+  "invariant": "010-INV-001",
+  "invariant_id": "010-INV-001",
+  "classification": "executable_invariant",
+  "passed": true,
+  "command": "node scripts/harness/asset-harness.mjs",
+  "exit_code": 0,
+  "assumptions": [],
+  "sample_count": 100,
+  "source_hashes": {
+    "docs/07-backlog/goals/G-WEB-010.md": "39632f992792323f8e1a712600fb08ab2f16ae8bda612f4def921ae192b0292a",
+    "scripts/lib/confidence-calibration.mjs": "cfcb9c637ec90cfed0ed414e3ee534f70c21d567cae71478ece8a241acc77770"
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-10T10:01:35.617Z"
+}

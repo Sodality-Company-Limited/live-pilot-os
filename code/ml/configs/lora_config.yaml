@@ -1,0 +1,36 @@
+# LoRA / QLoRA Configuration for Parameter-Efficient Dual-Head Training
+# Goal Reference: G-ML-007
+# Epic: ML (Machine Learning & Cognitive Calibration)
+
+peft_lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  modules_to_save:
+    - "confidence_head"
+
+quantization:
+  load_in_4bit: false
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 1
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  warmup_ratio: 0.05
+  lr_scheduler_type: "cosine"
+  mixed_precision: "bfloat16"
+  gamma_calibration: 1.0
+  checkpoint_dir: "checkpoints/g-ml-007"
+  save_safetensors: true

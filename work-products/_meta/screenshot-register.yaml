@@ -1,0 +1,35 @@
+# ISO 29110 — screen shots for work products that require figures
+# Fill via `iso scan` / `iso screenshots`. Do not invent URLs or MCP names.
+# Skill: .agents/skills/soda-iso29110/SKILL.md
+# Images land in: work-products/_assets/screens/
+
+schema_version: "1"
+
+# Staging or local only. Do not put production here unless a human allows it on the WP.
+preview_url: ""
+
+# Name of the Chrome / browser MCP. Prefer mcp-register.yaml chrome_browser.mcp_named.
+# Leave empty → iso scan copies from mcp-register or reports a HUMAN gap.
+mcp_named: ""
+
+# How to reach a demo session without pasting secrets into MCP args.
+auth_note: ""
+
+# WPs that keep `***[Insert diagram or screenshot here]***` until shots are captured or waived.
+screenshot_wps:
+  - WP18   # Software User Document — one shot per user-facing step / F-xx
+  - WP16   # Software Design — architecture / UX frames when UI exists
+  - WP08   # Product Operation Guideline
+  - WP06   # Maintenance Documentation (cover / ops console if any)
+  - WP05   # Implementation Environment
+  - WP01   # Acceptance Record (signed evidence / UAT screens)
+
+# One row per placeholder. `iso screenshots` / `iso generate WP18` fills `file` + status.
+shots: []
+  # - id: WP18-F-01-home
+  #   wp: WP18
+  #   feature: F-01
+  #   title: Home — daily compass
+  #   path: /
+  #   file: work-products/_assets/screens/WP18-F-01-home.png
+  #   status: missing   # missing | captured | waived

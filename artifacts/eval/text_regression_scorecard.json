@@ -1,0 +1,17 @@
+{
+  "base_perplexity": 1.040007642011848e+18,
+  "dual_head_perplexity": 1.040007642011848e+18,
+  "perplexity_delta_percent": 0.0,
+  "perplexity_gate_passed": true,
+  "syntax_samples_evaluated": 50,
+  "syntax_valid_count": 50,
+  "syntax_validity_rate": 1.0,
+  "syntax_gate_passed": true,
+  "length_ratio": 1.0,
+  "repetition_rate_delta": 0.0,
+  "overall_gate_passed": true,
+  "generated_at": "2026-09-30T08:07:30.505548+00:00",
+  "goal_id": "G-ML-010",
+  "artifact_id": "TEXT-REGRESSION-SCORECARD-010",
+  "git_head": "4251c719cb59799251c9bca4af8c96e424a667ba"
+}

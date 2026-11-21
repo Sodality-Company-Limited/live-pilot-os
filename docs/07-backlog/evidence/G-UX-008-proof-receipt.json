@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-008",
+  "generated_at": "2026-10-14T05:29:32.537Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "statistical_evidence",
+  "invariants": [
+    {
+      "id": "UX-008-INV-001",
+      "statement": "Vision detector benchmark scorecard verifies Gemma 4 sub-250ms SLA (92.92ms), mAP@50:95 >= 0.80, and 100% acyclic rate.",
+      "verification_command": "node scripts/harness/vision-benchmark-spike-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-008-INV-002",
+      "statement": "Vision benchmark spike unit test suite passes 4/4 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-vision-benchmark-spike.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-008-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-008",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/ml/src/vision/benchmark_spike.py",
+      "sha256": "3d66f583542b605a88d3d0c993da23073a0179118008876ae1c22bb551dcb414"
+    },
+    {
+      "path": "scripts/harness/vision-benchmark-spike-harness.mjs",
+      "sha256": "278546a91c39d9412f5c5c97d6cf84d91830059d00ce44a664e083b34f6cc48a"
+    },
+    {
+      "path": "tests/unit/test-vision-benchmark-spike.mjs",
+      "sha256": "c63bd0b5fb350df7929f50dfedd1ec5f920066ff50827e100a305f0336d851ce"
+    },
+    {
+      "path": "tests/ml/test_vision_benchmark_spike.py",
+      "sha256": "5d3a4d4be56a8e3962d2440d7844c948ef5039d0c646cf7c6f5190d55bcf08e3"
+    },
+    {
+      "path": "artifacts/benchmarks/vision_detector_spike.json",
+      "sha256": "494344c74333bd557e5a879914d7404f0323df1e024c3923b653dc164dc23ddd"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-008.md",
+      "sha256": "fe9a0219eaaff7bae4d781b0eaf4ef94398672d0c34ff273f04900987436ff51"
+    }
+  ],
+  "certification": "PASS"
+}

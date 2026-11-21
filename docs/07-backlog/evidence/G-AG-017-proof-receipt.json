@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-017",
+  "classification": "executable_invariant",
+  "source_revision": "42d0138fd9c198a57204192fa31c16343b0737a9",
+  "invariants": [
+    {
+      "id": "G-AG-017-INV-001",
+      "statement": "Duplicate step-context packet hashes are accurately detected and flagged per goal execution context.",
+      "verification_command": "node --test scripts/agents/test/step-context-harness.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/step-context-harness.mjs",
+      "sha256": "c1f91d94656d4a58e6a2ad8a97c1008005df92870cd8458dd2c0131c45e60ef2"
+    },
+    {
+      "path": "scripts/agents/test/step-context-harness.test.mjs",
+      "sha256": "11ef2837b66be3cebf62cfd445c675d7eac483e53bafe1b8eddc9ac7c70cbe8c"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:40:00.000Z"
+}

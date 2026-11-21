@@ -1,0 +1,30 @@
+schema_version: "1"
+status: canonical
+invariants:
+  - id: INV-TDD-001
+    claim: money uses integer minor units and never floating-point arithmetic
+    applies_to: [margin, inventory, promotion, billing]
+  - id: INV-TDD-002
+    claim: inventory cannot become negative or be reserved twice
+    applies_to: [inventory]
+  - id: INV-TDD-003
+    claim: same idempotency fingerprint cannot create duplicate consequential effects
+    applies_to: [all-mutations, jobs, adapters]
+  - id: INV-TDD-004
+    claim: unauthorized or cross-tenant access fails closed
+    applies_to: [all-boundaries]
+  - id: INV-TDD-005
+    claim: invalid lifecycle transitions do not mutate authoritative state
+    applies_to: [domain-services]
+  - id: INV-TDD-006
+    claim: stale leases and resource versions cannot commit
+    applies_to: [jobs, reservations, workflows]
+  - id: INV-TDD-007
+    claim: unknown external outcomes are reconciled before retry
+    applies_to: [platform-adapters, execution]
+  - id: INV-TDD-008
+    claim: every consequential effect has append-only audit lineage
+    applies_to: [commands, approvals, adapters]
+  - id: INV-TDD-009
+    claim: localization changes presentation only and never business truth
+    applies_to: [money, dates, numbers, errors, ui]

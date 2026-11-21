@@ -1,0 +1,43 @@
+{
+  "goal_id": "G-DAVE-019",
+  "git_head_sha": "23dfd6c3c028a8b7420e4680f204ee054ae8dc7d",
+  "timestamp_utc": "2026-10-11T06:11:59Z",
+  "out_of_sample_evaluation": {
+    "sample_count": 500,
+    "net_return_annualized": 0.445,
+    "annualized_volatility": 0.1889,
+    "net_sharpe_ratio": 2.3559,
+    "sortino_ratio": 2.5671,
+    "calmar_ratio": 2.9864,
+    "max_drawdown": 0.149,
+    "skewness": 0.1944,
+    "kurtosis": 3.2512,
+    "deflated_sharpe_ratio": 0.9905,
+    "dsr_threshold_satisfied": true,
+    "friction_deducted_usd": 425.5
+  },
+  "bootstrap_confidence_intervals_95": {
+    "sharpe": {
+      "metric_name": "Net Sharpe Ratio",
+      "point_estimate": 2.3559,
+      "ci_lower": 0.8365,
+      "ci_upper": 3.7676,
+      "std_error": 0.7609
+    },
+    "sortino": {
+      "metric_name": "Sortino Ratio",
+      "point_estimate": 2.5671,
+      "ci_lower": 0.8838,
+      "ci_upper": 4.3464,
+      "std_error": 0.8848
+    },
+    "calmar": {
+      "metric_name": "Calmar Ratio",
+      "point_estimate": 2.9864,
+      "ci_lower": 0.7817,
+      "ci_upper": 7.6577,
+      "std_error": 1.8415
+    }
+  },
+  "exit_code": 0
+}

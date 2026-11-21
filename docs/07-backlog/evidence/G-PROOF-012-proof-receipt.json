@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-012",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-012-INV-001",
+      "statement": "Unified verification orchestrator coordinates profile-selected test harnesses with zero mock stubs and exits code 0.",
+      "verification_command": "node scripts/harness/verification-orchestrator-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-012-INV-002",
+      "statement": "Standard exit code mapping (0: PASS, 1: FAIL_ASSERTION, 2: TIMEOUT, 3: SCHEMA_ERROR, 4: REPLAY_DIFF) deterministically enforced across child processes.",
+      "verification_command": "node --test tests/unit/test-verification-orchestrator.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-012-INV-003",
+      "statement": "Lifecycle state machine gatekeeper strictly enforces fail-closed pre-ready and pre-done transition gates blocking invalid status promotions.",
+      "verification_command": "node scripts/harness/verification-orchestrator-harness.mjs --lifecycle-check ready --goal G-PROOF-012",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/verification-orchestrator-harness.mjs",
+      "sha256": "035e173d2ca6c446e610210166052a40c45bc36e4855426f087ad9e79ee6d678"
+    },
+    {
+      "path": "scripts/lib/verification-orchestrator.mjs",
+      "sha256": "fe609514d0d9c28d686771c686120f99ea0f83b44430cf393038f009a43504f6"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-14T12:50:00.000Z"
+}

@@ -1,0 +1,16 @@
+schema_version: "1"
+status: production_readiness_target
+minimums:
+  unit_line_percent: 90
+  unit_branch_percent: 85
+  mutation_score_percent: 80
+  api_operation_coverage_percent: 100
+  error_code_coverage_percent: 100
+  consequential_failure_path_coverage_percent: 100
+  requirement_traceability_percent: 100
+rules:
+  - coverage must be measured on the exact release revision
+  - generated or ignored files must not inflate coverage
+  - mutation survivors require a defect or explicit waiver
+  - percentages never replace invariant, contract, security, or E2E evidence
+  - any missing consequential branch blocks production certification

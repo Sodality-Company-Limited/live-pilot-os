@@ -1,0 +1,22 @@
+{
+  "goal_id": "G-DAVE-005",
+  "invariants": {
+    "INV-DAVE-005-MOE-WEIGHT-CONVEXITY": true,
+    "INV-DAVE-005-LATENCY-P99-SUB-200US": true
+  },
+  "benchmark": {
+    "iterations": 2000,
+    "avg_latency_us": 18.273,
+    "p95_latency_us": 19.166,
+    "p99_latency_us": 22.625,
+    "latency_sla_target_us": 200.0,
+    "sla_passed": true
+  },
+  "registered_experts": [
+    "TrendFollower",
+    "MeanReversion",
+    "VolatilityBreakout",
+    "CashPreservation"
+  ],
+  "certified_at": "2026-10-09T07:51:00Z"
+}

@@ -1,0 +1,25 @@
+# Soda OS Goal Profile Schema: API Profile
+# Profile ID: api
+# Description: Applied to HTTP/REST, GraphQL, gRPC, and event-driven API contract specifications.
+
+profile:
+  id: api
+  name: "API Contract & Schema Compatibility Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: contract_specification
+    description: "OpenAPI, AsyncAPI, or CloudEvents schema specification."
+    type: markdown_or_file
+    required_elements:
+      - "Schema file path"
+      - "Contract version"
+      - "Backward compatibility policy"
+
+  - id: rate_limiting_and_auth
+    description: "Authentication requirements, scopes, and token bucket rate limits."
+    type: markdown_section
+    required_elements:
+      - "Authentication method"
+      - "Rate limit thresholds"

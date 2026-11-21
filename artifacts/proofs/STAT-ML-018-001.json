@@ -1,0 +1,18 @@
+{
+  "receipt_version": "1.0.0",
+  "goal": "G-ML-018",
+  "goal_id": "G-ML-018",
+  "invariant": "STAT-ML-018-001",
+  "classification": "statistical_evidence",
+  "passed": true,
+  "sample_count": 20,
+  "successes": 20,
+  "point_estimate": 1,
+  "wilson_ci_95": {
+    "lower": 0.8388753915139584,
+    "upper": 1,
+    "center": 0.9194376957569792
+  },
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "generated_at": "2026-10-11T00:38:25.141Z"
+}

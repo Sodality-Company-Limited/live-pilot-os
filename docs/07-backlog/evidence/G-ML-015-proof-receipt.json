@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-015",
+  "generated_at": "2026-10-11T07:39:08.159Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "ML-015-INV-001",
+      "claim": "Structured metadata ledger module recording decision evidence citations, token spans, uncertainty metrics, and reasoning provenance into the session audit log.",
+      "statement": "Structured metadata ledger module recording decision evidence citations, token spans, uncertainty metrics, and reasoning provenance into the session audit log.",
+      "verification_command": "node scripts/harness/confidence-calibration-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-015-INV-002",
+      "claim": "Evidence citation verification probes physical filesystem and invalidates missing citations.",
+      "statement": "Evidence citation verification probes physical filesystem and invalidates missing citations.",
+      "verification_command": "node tests/unit/test-decision-ledger.mjs -k test_citation_verification",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-015-INV-003",
+      "claim": "Append-only JSONL session audit log integrity maintained across high-concurrency writes.",
+      "statement": "Append-only JSONL session audit log integrity maintained across high-concurrency writes.",
+      "verification_command": "node tests/unit/test-decision-ledger.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "ML-015-INV-004",
+      "claim": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "statement": "All 8 adversarial mutation tests killed and 20 measured domain episodes verified.",
+      "verification_command": "node scripts/agentic/g-ml-015-provenance-oracle-evaluator.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "statistical_evidence": {
+    "metric": "decision_ledger_operation_pass_rate",
+    "population": "measured_domain_episodes",
+    "sample_count": 20,
+    "successes": 20,
+    "pass_rate": 1,
+    "confidence_interval": {
+      "lower": 0.9568233464896543,
+      "upper": 1,
+      "center": 0.9784116732448271,
+      "confidence_level": 0.95
+    }
+  },
+  "touch_map_digests": {
+    "scripts/lib/decision-ledger.mjs": "9a6af6e67690bf230cf4fedd74f8277227e0bb788ec3a21361cc2ba5f763356a",
+    "template/scripts/lib/decision-ledger.mjs": "9a6af6e67690bf230cf4fedd74f8277227e0bb788ec3a21361cc2ba5f763356a",
+    "tests/unit/test-decision-ledger.mjs": "41146ac40566ec67f08d94ed3991109b40da5bf4512fdfeb0aee5afee4c309c2",
+    "template/tests/unit/test-decision-ledger.mjs": "41146ac40566ec67f08d94ed3991109b40da5bf4512fdfeb0aee5afee4c309c2",
+    "docs/07-backlog/goals/_archived/G-ML-015.md": "ec3dc25f451a4c9cfb5cbe99bb81a0f94d3f30377378924ac7b06efae03a182a",
+    "docs/02-product/acceptance/G-ML-015.md": "fe7920c03c3758d62a1667cad00e7f18a131835d82acb6afe93b37e2a7225fdc",
+    "docs/07-backlog/clarifications/CLARIFICATION-G-ML-015.md": "59fde85ed483f7afc2c0c75a80138739c31dac08e709f3dd6e46d0f022576bd9",
+    "scripts/agentic/g-ml-015-5why-socratic-engine.mjs": "71461e2e0a5e5dae2e277ee75d954803f9eb304a066a64f1e1d963bf82a01b35"
+  },
+  "certification": "PASS"
+}

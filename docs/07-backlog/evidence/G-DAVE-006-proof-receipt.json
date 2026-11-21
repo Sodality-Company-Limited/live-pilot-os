@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-DAVE-006",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "invariants": [
+    {
+      "id": "G-DAVE-006-INV-001",
+      "statement": "DAVE Human Review Outcome and Learning Loop satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/lib/dave-cli.mjs show-review-packet G-WEB-001",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-review-learner.mjs",
+      "sha256": "121bcb1392469e96e6aeeec1c9c377798e862bd51e39c47720adfbb7b3b9ea68"
+    },
+    {
+      "path": "scripts/harness/learning-loop-harness.mjs",
+      "sha256": "7123d59bba066450b9c845a61e29b2de510fdbe7676aad23d61276b2394dd3bc"
+    },
+    {
+      "path": "tests/unit/test-dave-review-learner.mjs",
+      "sha256": "c4408637896a4197b673dd061cab11467e84dad46d8aa53fc93819a6364ccff1"
+    },
+    {
+      "path": "artifacts/rlcd/human_corrections.jsonl",
+      "sha256": "b9dec0990c1e1dd95179ae7a7f28a7f796abb13c242a9d2afe17d11705d4bb9d"
+    },
+    {
+      "path": "artifacts/review/DAVE-REVIEW-PACKET.md",
+      "sha256": "37a53b92b560abe6b1e882246b73f2cee244c3a4ec60f6d8e73c1c9122f5e897"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-03T18:50:00.000Z"
+}

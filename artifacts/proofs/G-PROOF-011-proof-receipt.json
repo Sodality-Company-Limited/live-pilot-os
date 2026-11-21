@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-PROOF-011",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-PROOF-011-INV-001",
+      "statement": "Concurrency verification harness validating atomic compare-and-swap operations, tagged pointer ABA immunity, and deterministic thread interleavings for concurrency targets.",
+      "verification_command": "node scripts/harness/concurrency-schedule-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-011-INV-002",
+      "statement": "Deterministic schedule sequentializer permutes all valid task interleavings up to bounded depth K with zero lost updates and complete deadlocks detection.",
+      "verification_command": "node scripts/harness/concurrency-schedule-harness.mjs --depth 6",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-011-INV-003",
+      "statement": "64-bit packed atomic tagged pointer guarantees 100% fail-closed rejection of stale version tag updates under simulated ABA mutation trials.",
+      "verification_command": "node scripts/harness/concurrency-schedule-harness.mjs --aba-trials 100",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-PROOF-011-INV-004",
+      "statement": "Distributed storage engine enforces strict monotonic fencing tokens (t_fence > t_last) and rejects 100% of stale out-of-order writes.",
+      "verification_command": "node scripts/harness/concurrency-schedule-harness.mjs --fencing-trials 50",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/schedule-sequentializer.mjs",
+      "sha256": "c653677f92d00a0de76322db29aa2af32b68b03d1683003c848bb6fbb222ed26"
+    },
+    {
+      "path": "scripts/harness/concurrency-schedule-harness.mjs",
+      "sha256": "94c55dc2f061b00cc412587f71248f07590efd0b7f4aa9158203e1a9d8ab8943"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T17:24:46.721Z"
+}

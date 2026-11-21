@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-003",
+  "generated_at": "2026-09-29T04:55:55.924Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-003-INV-001",
+      "statement": "Upgrade Agent OS Goal Contracts, Proof Assurance, and Runtime Governance satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-CORE-003",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/07-backlog/goals/_template.md",
+      "sha256": "7f056da6e3c3492c89266cbe18745ef5cb12f4ea2ae7a87a993112bce1246d37"
+    },
+    {
+      "path": "template/docs/07-backlog/goals/_template.md",
+      "sha256": "7f056da6e3c3492c89266cbe18745ef5cb12f4ea2ae7a87a993112bce1246d37"
+    },
+    {
+      "path": "template/framework-manifest.yml",
+      "sha256": "271c009591754708e005ba2a6f5d166059fe85b3bb50c4afb1b5498a7d124860"
+    },
+    {
+      "path": "scripts/harness/goal-template-conformance-harness.mjs",
+      "sha256": "605a24f3aac8124e20e4f815fd0c62157df3057af1a49301132ceaf2d59b1d62"
+    }
+  ],
+  "certification": "PASS"
+}

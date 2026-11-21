@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "artifact_id": "ART-RESPONSIVE-LAYOUT-RECEIPT",
+  "goal_id": "G-WEB-007",
+  "receipt_schema": "responsive_layout_receipt_v1",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "007-INV-001",
+      "statement": "Multi-Viewport Responsive Verification satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/visual-regression-harness.mjs --verify-responsive",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/src/styles/responsive.css",
+      "sha256": "62a0fe75a03cc5aa8b1cd4a17f529a52fce6582351a0c8464a9a5ce9d01ea03c"
+    },
+    {
+      "path": "code/src/tokens/index.css",
+      "sha256": "e8652aa197d23393342196f83c573aee1f142179ebc73577615406c2150e2b7c"
+    },
+    {
+      "path": "tests/unit/test-responsive-layout.mjs",
+      "sha256": "0a15dad8bcce964b0ccf4df354fad9408f8d0b46aa23134ff2c5f86c26228159"
+    }
+  ],
+  "certification": "PASS",
+  "timestamp": "2026-10-10T10:47:27.490Z",
+  "status": "PASSED",
+  "overall_overflow_detected": false,
+  "overall_overflow_free": true,
+  "overall_layout_shift": 0,
+  "overall_layout_shift_zero": true,
+  "git_head": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "responsive_css_path": "/Users/batrarethsudprasert/projects/soda-os/code/src/styles/responsive.css",
+  "responsive_css_hash": "sha256:62a0fe75a03cc5aa8b1cd4a17f529a52fce6582351a0c8464a9a5ce9d01ea03c",
+  "token_guardrails_satisfied": true,
+  "supported_viewports": [
+    "desktop",
+    "tablet",
+    "mobile"
+  ],
+  "viewports": {
+    "desktop": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "layoutShift": 0,
+      "layoutShiftZero": true,
+      "overflowDetected": false,
+      "overflowFree": true,
+      "characteristics": {
+        "viewportType": "desktop",
+        "gridColumns": "minmax(720px, 1fr) var(--layout-drawer-width, 360px)",
+        "commandRailMode": "expanded",
+        "commandRailHeight": 64,
+        "evidenceMode": "in-flow",
+        "evidenceWidth": 360,
+        "decisionCanvasFluid": true,
+        "decisionCanvasReachable": true,
+        "sideBySidePanels": true,
+        "overflowDetected": false,
+        "layoutShift": 0
+      },
+      "status": "PASSED"
+    },
+    "tablet": {
+      "name": "tablet",
+      "width": 1024,
+      "height": 768,
+      "devicePixelRatio": 1,
+      "layoutShift": 0,
+      "layoutShiftZero": true,
+      "overflowDetected": false,
+      "overflowFree": true,
+      "characteristics": {
+        "viewportType": "tablet",
+        "gridColumns": "1fr",
+        "commandRailMode": "collapsed-compact",
+        "commandRailHeight": 64,
+        "evidenceMode": "off-canvas-drawer",
+        "evidenceWidth": 360,
+        "decisionCanvasFluid": true,
+        "decisionCanvasReachable": true,
+        "sideBySidePanels": false,
+        "overflowDetected": false,
+        "layoutShift": 0
+      },
+      "status": "PASSED"
+    },
+    "mobile": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 1,
+      "layoutShift": 0,
+      "layoutShiftZero": true,
+      "overflowDetected": false,
+      "overflowFree": true,
+      "characteristics": {
+        "viewportType": "mobile",
+        "gridColumns": "1fr",
+        "commandRailMode": "compact-header",
+        "commandRailHeight": 56,
+        "evidenceMode": "bottom-sheet-drawer",
+        "evidenceWidth": 390,
+        "decisionCanvasFluid": true,
+        "decisionCanvasReachable": true,
+        "sideBySidePanels": false,
+        "singleColumnStacked": true,
+        "overflowDetected": false,
+        "layoutShift": 0
+      },
+      "status": "PASSED"
+    }
+  }
+}

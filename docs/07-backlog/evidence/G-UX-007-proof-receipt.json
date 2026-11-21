@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-007",
+  "generated_at": "2026-10-14T05:29:32.534Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-007-INV-001",
+      "statement": "Deterministic acyclic UI scene graph generator verifies 32-class taxonomy and Kahn topological sort acyclicity.",
+      "verification_command": "node scripts/harness/ui-scene-graph-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-007-INV-002",
+      "statement": "UI scene graph generator unit test suite passes 5/5 tests cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-ui-scene-graph.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-007-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-007",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "schemas/ui-scene-graph.schema.json",
+      "sha256": "efd00ce71976d3e4f20f9e1190da037eaba2562f2aad4e8265df45eeb7150c14"
+    },
+    {
+      "path": "code/ml/src/vision/scene_graph_generator.py",
+      "sha256": "b403b68df6716f5711c769e955ff640d34bf534309bbc34519f6a79d83817af7"
+    },
+    {
+      "path": "scripts/lib/ui-scene-graph.mjs",
+      "sha256": "14bfd23d0ebf591c29c0b0821af2bd52228b8ab25a2c391d0543d36348e7b804"
+    },
+    {
+      "path": "tests/unit/test-ui-scene-graph.mjs",
+      "sha256": "34ec07e471fe4b2fd243bfc535408dc6bf7bfbb9b9c5ec4efe0eb42f31854e72"
+    },
+    {
+      "path": "scripts/harness/ui-scene-graph-harness.mjs",
+      "sha256": "441867dc978c3042bb4a414d8c3fe4fefa89a0df33b5594c79a22c3347980bea"
+    },
+    {
+      "path": "tests/ml/test_scene_graph_generator.py",
+      "sha256": "3287ff7fa64cc8eb2f886e4cd6d8495f9fd5112b81c59c43e644d146882511c5"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-007.md",
+      "sha256": "39129fb34dfdd8a0c1c3a40fc7230f7578bf8ee2d9002c2c5980cd85e9e95c46"
+    }
+  ],
+  "certification": "PASS"
+}

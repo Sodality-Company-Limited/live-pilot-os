@@ -1,0 +1,66 @@
+rules:
+  openapi-version-3-1:
+    description: "OpenAPI document must declare version 3.1.x"
+    given: "$"
+    severity: error
+    then:
+      field: "openapi"
+      function: pattern
+      functionOptions:
+        match: "^3\\.1\\."
+  info-title-defined:
+    description: "OpenAPI document must provide an API title"
+    given: "$.info"
+    severity: error
+    then:
+      field: "title"
+      function: defined
+  info-version-defined:
+    description: "OpenAPI document must declare a semantic version"
+    given: "$.info"
+    severity: error
+    then:
+      field: "version"
+      function: defined
+  paths-defined:
+    description: "OpenAPI document must define path endpoints"
+    given: "$"
+    severity: error
+    then:
+      field: "paths"
+      function: defined
+  components-schemas-defined:
+    description: "OpenAPI document must define component schemas"
+    given: "$.components"
+    severity: error
+    then:
+      field: "schemas"
+      function: defined
+  async-crawl-intake-202-defined:
+    description: "Asynchronous crawl intake endpoint must specify 202 Accepted response"
+    given: "$.paths['/v1/crawl-jobs'].post.responses"
+    severity: error
+    then:
+      field: "202"
+      function: defined
+  async-verification-intake-202-defined:
+    description: "Asynchronous clip verification intake endpoint must specify 202 Accepted response"
+    given: "$.paths['/v1/clip-verification-jobs'].post.responses"
+    severity: error
+    then:
+      field: "202"
+      function: defined
+  job-status-200-defined:
+    description: "Job status endpoint must specify 200 OK response"
+    given: "$.paths['/v1/jobs/{job_id}'].get.responses"
+    severity: error
+    then:
+      field: "200"
+      function: defined
+  webhooks-defined:
+    description: "OpenAPI document must define webhook notifications"
+    given: "$"
+    severity: error
+    then:
+      field: "webhooks"
+      function: defined

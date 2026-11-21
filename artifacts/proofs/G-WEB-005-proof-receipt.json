@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-005",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "invariants": [
+    {
+      "id": "005-INV-001",
+      "statement": "Component-First Implementation satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/token-guardrail-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/src/components/CommandRail.tsx",
+      "sha256": "d47359a0cbc8c1a6cd4c978446d71a87a16f22e3070c17159d3a3d3bbefac26a"
+    },
+    {
+      "path": "code/src/components/DecisionCanvas.tsx",
+      "sha256": "3c7cf857545997d61f52d5b3278f2f284affe80ad64e6c908a826d4d3d7ee889"
+    },
+    {
+      "path": "code/src/components/EvidencePanel.tsx",
+      "sha256": "e7d587cba26ef9e947b1b7d41713bee8d3e54ca4e3458a149a64100114cc9b1f"
+    },
+    {
+      "path": "code/src/components/fixtures/workspaceFixtures.ts",
+      "sha256": "31374b81a5e2cf7eab426d1e8695b6f114e18bb24bda7d2c7be566733c024bef"
+    },
+    {
+      "path": "tests/unit/test-workspace-components.mjs",
+      "sha256": "6c39c29080d2b0bc85081459fdcd2054694c95b1bc4719a7b455ef04b27e38a7"
+    },
+    {
+      "path": "docs/05-decisions/DAVE-FE-0002.json",
+      "sha256": "64d827d7d61bf886001b05fd071b4edf4a98ff141b6f1fdc08e3cd3ab7abce92"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-03T11:45:48.543Z"
+}

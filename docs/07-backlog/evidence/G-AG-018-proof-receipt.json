@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-018",
+  "classification": "executable_invariant",
+  "source_revision": "a668ddf9076aba85f9d63ea4a58785990ef47df0",
+  "invariants": [
+    {
+      "id": "G-AG-018-INV-001",
+      "statement": "Subprocess execution failure evidence is captured and redacted from non-zero process exits with zero secret leakage.",
+      "verification_command": "node --test scripts/agents/test/bounded-run.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/bounded-run.mjs",
+      "sha256": "ce4c0dcc00748cad2c20eb95510a779cc3da1f18155fd298f85b1273e8403533"
+    },
+    {
+      "path": "scripts/agents/test/bounded-run.test.mjs",
+      "sha256": "2ec5bb4a34268d7a24f233652ba2322ac9f2d86bcea045d84a1c6099c249c54e"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T06:42:00.000Z"
+}

@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0.0",
+  "model_version": "v1.0.0",
+  "goal_id": "G-ML-012",
+  "git_commit": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "git_branch": "feature/poc",
+  "created_at": "2026-09-30T08:28:36.150702+00:00",
+  "base_model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "base_model_digest": "da7f3071feae354f99655c704fcb0d201b40e6ee760fb546cb11fd6db2d02574",
+  "training_recipe_hash": "88cd0494962673a3297b90c575bbd0c54e7247e89baf9903538639aade1bc7d1",
+  "adapter_sha256": "d4b3bfb1840ca12f90db72e84567b936ae7eac4b30d4055a0aa69aff63f9ae2f",
+  "value_head_sha256": "6a0f45bc7cf607d9685229282043804bed06d20b1f5dcf48fd417b3c39b5ec0d",
+  "artifacts": {
+    "adapter_model.safetensors": {
+      "sha256": "d4b3bfb1840ca12f90db72e84567b936ae7eac4b30d4055a0aa69aff63f9ae2f",
+      "size_bytes": 25184,
+      "format": "safetensors",
+      "tensors": [
+        {
+          "name": "base_model.model.q_proj.lora_A.weight",
+          "shape": [
+            8,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "base_model.model.q_proj.lora_B.weight",
+          "shape": [
+            128,
+            8
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "base_model.model.v_proj.lora_A.weight",
+          "shape": [
+            8,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "base_model.model.v_proj.lora_B.weight",
+          "shape": [
+            128,
+            8
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "base_model.model.o_proj.lora_A.weight",
+          "shape": [
+            8,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "base_model.model.o_proj.lora_B.weight",
+          "shape": [
+            128,
+            8
+          ],
+          "dtype": "torch.float32"
+        }
+      ]
+    },
+    "value_head.safetensors": {
+      "sha256": "6a0f45bc7cf607d9685229282043804bed06d20b1f5dcf48fd417b3c39b5ec0d",
+      "size_bytes": 50364,
+      "format": "safetensors",
+      "tensors": [
+        {
+          "name": "fc1.weight",
+          "shape": [
+            64,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "fc1.bias",
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "fc2.weight",
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "fc2.bias",
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "out_proj.weight",
+          "shape": [
+            1,
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        {
+          "name": "out_proj.bias",
+          "shape": [
+            1
+          ],
+          "dtype": "torch.float32"
+        }
+      ]
+    },
+    "config.json": {
+      "sha256": "e0f79c21d9011821e509d39e8ce8ea1a63ca0fa2b7161932b20c8315f0629709",
+      "size_bytes": 505,
+      "format": "json"
+    },
+    "calibration_config.json": {
+      "sha256": "d0097e0210595792794e05aa5d8629e71aab12181406c72a698d337cf950cb3f",
+      "size_bytes": 370,
+      "format": "json"
+    },
+    "tokenizer_config.json": {
+      "sha256": "21eea3c8181bc1a0c243654c233d848b4da879a3c29275425ab211aa53c27667",
+      "size_bytes": 211,
+      "format": "json"
+    }
+  },
+  "checksums": {
+    "adapter_model.safetensors": "d4b3bfb1840ca12f90db72e84567b936ae7eac4b30d4055a0aa69aff63f9ae2f",
+    "value_head.safetensors": "6a0f45bc7cf607d9685229282043804bed06d20b1f5dcf48fd417b3c39b5ec0d",
+    "config.json": "e0f79c21d9011821e509d39e8ce8ea1a63ca0fa2b7161932b20c8315f0629709",
+    "calibration_config.json": "d0097e0210595792794e05aa5d8629e71aab12181406c72a698d337cf950cb3f",
+    "tokenizer_config.json": "21eea3c8181bc1a0c243654c233d848b4da879a3c29275425ab211aa53c27667"
+  },
+  "calibration_metrics": {
+    "ece": 0.028,
+    "brier_score": 0.065,
+    "safe_deferral_rate": 0.9999,
+    "high_confidence_error_rate": 0.0
+  },
+  "provenance": {
+    "packaged_by": "Soda OS Model Packaging Engine",
+    "provenance_standard": "RFC 8259 Exact-HEAD Immutable Ledger",
+    "security_signature": "e056fc1818c995ea033d3c8e2832aa08be767b6118eff14860ebf461e3ff47a5"
+  }
+}

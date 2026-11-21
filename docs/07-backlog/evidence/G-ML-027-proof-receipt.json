@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-ML-027",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-ML-027-INV-001",
+      "statement": "DAVE Domain-Specific MoE Expert Routing satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-schema-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-moe-router.mjs",
+      "sha256": "f942b6977ef9bdf80cbd699e7f83303d1b6fafa89b981bab7ce149c07d6b95f4"
+    },
+    {
+      "path": "tests/unit/test-dave-moe-router.mjs",
+      "sha256": "18e24662aef82d7c51b7de29eea848b4851a47f96778051203ae48155feec09a"
+    },
+    {
+      "path": "artifacts/proofs/G-ML-027-moe-dispatch-eval.json",
+      "sha256": "77284ad70db8bb4466c36ce150b1c8930befbfefd579b80a66bd31533153ef9d"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-ML-027.md",
+      "sha256": "5e323ca7798dcae2751555efbfc9c5a98fbee5582a710fe1e7ebb9448aa0b455"
+    },
+    {
+      "path": "docs/07-backlog/clarifications/CLARIFICATION-G-ML-027.md",
+      "sha256": "ee1e6304c8278be1ac48e9e69a96b7d89d39db0b00f343f7e2e99ad4024f87e4"
+    },
+    {
+      "path": "docs/07-backlog/goals/_archived/G-ML-027.md",
+      "sha256": "24b7dffd983eefc8309ac153c0bc66c5dd3ac8de27f7035cb34fb4113eb368dc"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T15:00:00.000Z"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-007",
+  "generated_at": "2026-09-29T14:20:00.000Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-007-INV-001",
+      "statement": "Statistical Evidence and Benchmark Harness satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/statistical-evidence-harness.mjs docs/07-backlog/goals/G-CORE-007.md",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/statistical-evidence-harness.mjs",
+      "sha256": "8a26f715e1b188637a784830a1236b558116b2f05765f78670e59f2ef3bc2b2f"
+    },
+    {
+      "path": "docs/03-architecture/statistical-evidence.md",
+      "sha256": "5b159041edce0d07006f9b8cce16955336ee778d491a2720d10faff1d9a59573"
+    },
+    {
+      "path": ".agents/rules/model-training-governance.md",
+      "sha256": "23ec582eac1ccaeb67538ac3b71a883da5b527f069739b8bc00784143f4c4479"
+    }
+  ],
+  "certification": "PASS"
+}

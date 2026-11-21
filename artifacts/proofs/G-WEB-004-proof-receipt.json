@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-004",
+  "classification": "executable_invariant",
+  "source_revision": "9e5ea4e7eb864090399aedb377fc3da23d923978",
+  "invariants": [
+    {
+      "id": "004-INV-001",
+      "statement": "Frontend Implementation Decision satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/dave-decision-schema-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/03-architecture/frontend-decision-G-WEB-004.md",
+      "sha256": "54b34d786a6af7e39bf98ff0f7b0c3a62c96e733d12d0ea6e8c88273e9098250"
+    },
+    {
+      "path": "code/src/components/layout/WorkspaceLayout.tsx",
+      "sha256": "7035372fabf890a4eecdd059e9001478e589be5cef8ffb11b7c08d4fcaa02bc9"
+    },
+    {
+      "path": "scripts/lib/dave-engine.mjs",
+      "sha256": "1ad0f287ce998907b324f3f9c2a51c4deab2eb18ba4323ba8e44713b60256cdf"
+    },
+    {
+      "path": ".agents/audit/decisions.jsonl",
+      "sha256": "ecba5af8bed9f1c367a4bfa0b12df9970eb700c50d12aced9ba8ddf926ba848b"
+    },
+    {
+      "path": "docs/05-decisions/DAVE-FE-0001.json",
+      "sha256": "b185ff7f0a544c2ce78c06e70038cdfe23bdb31bdca69f38f57efb2a0034e2e6"
+    },
+    {
+      "path": "tests/unit/test-frontend-decision.mjs",
+      "sha256": "4cea226998ac0b63c708e9ae9dabd5194a8647e57df42773e53bcad3563368c5"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-03T11:35:44.316Z"
+}

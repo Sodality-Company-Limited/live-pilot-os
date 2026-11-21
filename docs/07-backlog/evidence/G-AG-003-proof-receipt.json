@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AG-003",
+  "classification": "executable_invariant",
+  "source_revision": "08c382ffb6d6bcc7c870f0ef58f5b92bd9cbd409",
+  "invariants": [
+    {
+      "id": "G-AG-003-INV-001",
+      "statement": "Reject duplicate input prompts for the same goal via SHA-256 prompt hashing.",
+      "verification_command": "node --test scripts/agents/test/session-budget.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/agents/lib/session-budget.mjs",
+      "sha256": "876773dc10dc8165aa16a49d84f2862a2237edae4370572a081369ac52efa493"
+    },
+    {
+      "path": "scripts/agents/test/session-budget.test.mjs",
+      "sha256": "98dba4cf262332a8aad0964800fb7b10c727f97834ab889c9eb425d990b9d0a3"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-17T04:20:14.489Z"
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-010",
+  "generated_at": "2026-10-14T06:18:02.302Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-010-INV-001",
+      "statement": "Stage 2 UI scene graph dataset generates 5,000 paired records across 3 viewports with 80/10/10 split and 0 leakage.",
+      "verification_command": "node scripts/harness/scene-graph-dataset-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-010-INV-002",
+      "statement": "Scene graph dataset unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-scene-graph-dataset.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-010-INV-003",
+      "statement": "Python curriculum scene graph module passes pytest in conda py310 cleanly with exit code 0.",
+      "verification_command": "conda run -n py310 pytest tests/ml/test_curriculum_scene_graph.py",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-010-INV-004",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-010",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/scene-graph-dataset-generator.mjs",
+      "sha256": "9eb49e6f1b8c1077d731cc53974d0fc4adfd1d9d88a7b016417db6537772f4b8"
+    },
+    {
+      "path": "code/ml/src/curriculum/scene_graph_dataset.py",
+      "sha256": "11c925809b300f991fa8383d73e724b0214f9a99c63440254367c758ac5a56ef"
+    },
+    {
+      "path": "artifacts/curriculum/stage2_scene_graphs/manifest.json",
+      "sha256": "84e64c946553ad1b5f081793299ed7bf5a65ec01468c40db3dd0ddd1c2bf8cbd"
+    },
+    {
+      "path": "tests/unit/test-scene-graph-dataset.mjs",
+      "sha256": "7ec24902cf7ff46c189ca71596947b4d8d64562672b856391f2d6d1c9d495af6"
+    },
+    {
+      "path": "scripts/harness/scene-graph-dataset-harness.mjs",
+      "sha256": "9209f633a2c0ab401fa6b8c4d8af733d6f21074cd11d1113bed7340c79dbfab9"
+    },
+    {
+      "path": "tests/ml/test_curriculum_scene_graph.py",
+      "sha256": "02eb1a79ad1edf0337c0350698fddb5c4adef76ef02ebd9acf58931ca00a93c6"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-010.md",
+      "sha256": "61a1c69289d1d5b4b8f66900a24d99fc22420764fbbf6cafb70f7b503e268d46"
+    }
+  ],
+  "certification": "PASS"
+}

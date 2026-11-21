@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-009",
+  "generated_at": "2026-09-29T21:45:00.000Z",
+  "source_revision": "4251c719cb59799251c9bca4af8c96e424a667ba",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "CORE-009-INV-001",
+      "statement": "Artifact and Model Provenance Harness satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/artifact-provenance-harness.mjs docs/07-backlog/goals/G-CORE-009.md",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/harness/artifact-provenance-harness.mjs",
+      "sha256": "ef5c41daee5e64158db4cfb3480e1a60d3228b32c59753f4c0eb4d17d2aef782"
+    },
+    {
+      "path": "scripts/harness/model-provenance-harness.mjs",
+      "sha256": "1a62ecdaa112753acf3a45fad4c254a3899606417993ef8f341dca5fa1cde787"
+    },
+    {
+      "path": "docs/03-architecture/model-provenance.md",
+      "sha256": "5df3cd488263f5398c8a2c217f2da52eabc6c0959d6cc7f7fde8b8baeadaef27"
+    },
+    {
+      "path": ".agents/rules/artifact-provenance.md",
+      "sha256": "0ba541e5e99d4c5f5e0d529dd4df8cb2aea9aa2754d535dc70ba9cedef98dee6"
+    }
+  ],
+  "certification": "PASS"
+}

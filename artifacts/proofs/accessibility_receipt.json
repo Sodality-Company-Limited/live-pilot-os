@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-008",
+  "artifact_id": "ART-ACCESSIBILITY-RECEIPT",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "wcag_standard": "WCAG_2_2_AA",
+  "status": "PASSED",
+  "violations": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "contrast_audit": {
+    "passed": true,
+    "total_evaluated": 16,
+    "minimum_ratio_found": 3.36,
+    "required_normal_text_ratio": 4.5,
+    "required_ui_component_ratio": 3,
+    "pairs_audited": 16
+  },
+  "keyboard_focus_audit": {
+    "passed": true,
+    "focus_visible_outline_width_px": 2,
+    "focus_visible_offset_px": 2,
+    "skip_link_present": true,
+    "keyboard_traps_detected": 0,
+    "reduced_motion_supported": true,
+    "forced_colors_supported": true
+  },
+  "aria_semantics_audit": {
+    "passed": true,
+    "screen_reader_utilities_present": true,
+    "live_regions_supported": true,
+    "verified_components_count": 4
+  },
+  "invariants": [
+    {
+      "id": "008-INV-001",
+      "statement": "Accessibility Verification satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/ui-spec-conformance-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/src/styles/a11y.css",
+      "sha256": "05a8536ff96b1be0e5a667aba1aad756cf6d1bd62c1faa29cc2b9d7dc5ab7457"
+    },
+    {
+      "path": "scripts/harness/ui-spec-conformance-harness.mjs",
+      "sha256": "fc26d1adf1a7fb1b30182fd6b771e68b3d92979b2beec9a2b86d67d4fba24512"
+    },
+    {
+      "path": "code/src/tokens/index.css",
+      "sha256": "e8652aa197d23393342196f83c573aee1f142179ebc73577615406c2150e2b7c"
+    },
+    {
+      "path": "docs/02-product/design/ui-spec.json",
+      "sha256": "44258d3ecde384839188faa70fc1d9145b751d79617a0208eb07241db6128c38"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-11T06:54:09.594Z"
+}

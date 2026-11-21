@@ -1,0 +1,112 @@
+{
+  "goal_id": "G-DAVE-043",
+  "git_head_sha": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "timestamp_utc": "2026-10-11T06:52:18Z",
+  "total_scenarios_evaluated": 14,
+  "scenarios_passed_fail_closed": 14,
+  "fail_closed_rate": 1.0,
+  "total_spurious_orders": 0,
+  "total_unhandled_exceptions": 0,
+  "scenario_results": {
+    "chaos_01_absent_daemon": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.05
+    },
+    "chaos_02_stale_contract": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.02
+    },
+    "chaos_03_malformed_payload": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.02
+    },
+    "chaos_04_unsupported_capability": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.0
+    },
+    "chaos_05_ipc_timeout": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 1.88
+    },
+    "chaos_06_replayed_decision": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.17
+    },
+    "chaos_07_mismatched_hash": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.09
+    },
+    "chaos_08_stale_market_state": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.0
+    },
+    "chaos_09_missing_outcome": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.01
+    },
+    "chaos_10_corrupted_ledger": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.34
+    },
+    "chaos_11_model_version_mismatch": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.0
+    },
+    "chaos_12_venue_disconnect": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.04
+    },
+    "chaos_13_partial_fill": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.02
+    },
+    "chaos_14_position_drift": {
+      "status": "PASS",
+      "behavior": "FAIL_CLOSED_VERIFIED",
+      "spurious_orders": 0,
+      "unhandled_exceptions": 0,
+      "duration_ms": 0.03
+    }
+  },
+  "exit_code": 0,
+  "sha256_signature": "cad71444d49a36ef0f647d28a276b2903fb5b36c44a5fbdbd27dca0dbb01946d"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-UX-025",
+  "generated_at": "2026-10-14T12:28:00.000Z",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "classification": "executable_invariant",
+  "invariants": [
+    {
+      "id": "UX-025-INV-001",
+      "statement": "HITL review packet formatter verifies zero-opacity Markdown formatting across 9-class taxonomy and parses corrections with 100% accuracy.",
+      "verification_command": "node scripts/harness/hitl-review-packet-harness.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-025-INV-002",
+      "statement": "HITL review packet formatter Node.js unit test suite passes all assertions cleanly with exit code 0.",
+      "verification_command": "node --test tests/unit/test-hitl-review-packet.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "id": "UX-025-INV-003",
+      "statement": "Goal template conformance harness verifies 51/51 sections and invariants with 100% pass.",
+      "verification_command": "node scripts/harness/goal-template-conformance-harness.mjs G-UX-025",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/hitl-review-packet.mjs",
+      "sha256": "16f46624be49cd979b8cba3b08a4bb36e87b8000932ddf2c8f2dcdbd08c993ed"
+    },
+    {
+      "path": "tests/unit/test-hitl-review-packet.mjs",
+      "sha256": "368152d885f2ff739f8a6a1cac4bb574c19bdc233d163c82c3d2c2bbca3c365e"
+    },
+    {
+      "path": "scripts/harness/hitl-review-packet-harness.mjs",
+      "sha256": "218136a178e1bae1df35229031e027d55c6644251531595274763f17916c7213"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-UX-025.md",
+      "sha256": "9e7ab281802139bc0654567883a09d1e5bf9b1a3c07fccd32e5fa0aee3cf25d7"
+    }
+  ],
+  "certification": "PASS"
+}

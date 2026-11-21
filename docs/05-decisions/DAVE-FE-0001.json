@@ -1,0 +1,43 @@
+{
+  "decision_id": "DAVE-FE-0001",
+  "decision_type": "frontend_implementation",
+  "goal_id": "G-WEB-004",
+  "decision": {
+    "summary": "Formal DAVE-FE decision contract defining DOM structure, CSS layout strategy, token bindings, and allowed files touch map",
+    "primary_action": "implement_workspace_layout",
+    "component_tree": "WorkspaceLayout > (CommandRail, DecisionCanvas, EvidencePanel, ReviewModal)",
+    "css_strategy": "CSS Grid layout with zero CLS, semantic landmarks, and design token bindings exclusively",
+    "breakpoints": {
+      "desktop": "1440px",
+      "tablet": "1024px",
+      "mobile": "390px"
+    }
+  },
+  "confidence": 0.94,
+  "risk": "medium",
+  "evidence": [
+    "docs/03-architecture/frontend-decision-G-WEB-004.md",
+    "docs/02-product/design/component-inventory.md",
+    "code/src/tokens/index.css"
+  ],
+  "references": [
+    "REF-0001",
+    "REF-0004"
+  ],
+  "assumptions": [
+    "Target viewport is locked at 1440x900 desktop @ 1.0 DPR with Inter font",
+    "Zero expected cumulative layout shift (CLS = 0) via explicit grid template reservations",
+    "Strict token compliance with zero raw hex values or arbitrary bracketed spacing"
+  ],
+  "alternatives_rejected": [
+    "Ad-hoc freeform implementation without reference citations",
+    "Float or absolute positioning layouts rejected due to layout shift and responsive clipping",
+    "Tailwind arbitrary values (e.g. mt-[37px]) rejected to preserve design system consistency"
+  ],
+  "verification": [
+    "dave-decision-schema-harness.mjs",
+    "token-guardrail-harness.mjs",
+    "tests/unit/test-frontend-decision.mjs"
+  ],
+  "human_action": "approve"
+}

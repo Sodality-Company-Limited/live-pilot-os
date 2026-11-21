@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-OPS-001",
+  "classification": "executable_invariant",
+  "source_revision": "c960e7d8fb2daa110feaead40f33b785c7e345bd",
+  "invariants": [
+    {
+      "id": "G-OPS-001-INV-001",
+      "statement": "DAVE Runtime Deployment and Disaster Recovery satisfies all declared invariants and test suites with zero mocks and exits code 0.",
+      "verification_command": "node scripts/harness/failure-rollback-harness.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/lib/dave-runtime-daemon.mjs",
+      "sha256": "1b12d1ea74c4be52506b12006776e721a849c35a22fc2146bd549dfb5f37dd7b"
+    },
+    {
+      "path": "scripts/harness/failure-rollback-harness.mjs",
+      "sha256": "ba7feeb4ecf20578f0b5f91dfd7b851786ba9b3e1b81b5b3b4c4be2fc2cde033"
+    },
+    {
+      "path": "tests/unit/test-dave-runtime-daemon.mjs",
+      "sha256": "431b8e31d7592699ee30df5d4a82b472fd82a01912eb077231f3a86c8b644ec4"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-10-10T14:23:45.000Z"
+}

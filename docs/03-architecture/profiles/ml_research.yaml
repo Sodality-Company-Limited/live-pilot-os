@@ -1,0 +1,67 @@
+# Soda OS Goal Profile Schema: ML / Research Profile
+# Profile ID: ml_research
+# Description: Applied to goals involving machine learning models, RLCD, fine-tuning, calibration, and neural datasets.
+
+profile:
+  id: ml_research
+  name: "Machine Learning & Research Assurance Profile"
+  version: "2.0.0"
+  mandatory: false
+
+required_sections:
+  - id: model_identity
+    description: "Exact model family, base checkpoint, hash, tokenizer, context length, license, and quantization."
+    type: markdown_section
+    required_elements:
+      - "Model family"
+      - "Checkpoint revision"
+      - "Tokenizer"
+      - "Context length"
+      - "License"
+      - "Intended runtime"
+
+  - id: dataset_identity
+    description: "Dataset source, license, version, collection date, schema, train/val/test splits, contamination and deduplication checks."
+    type: markdown_section
+    required_elements:
+      - "Dataset ID"
+      - "Source & License"
+      - "Train/Validation/Test split"
+      - "Contamination check"
+      - "Deduplication method"
+
+  - id: label_oracle
+    description: "Definition of ground truth correctness, verification oracle, handling of ambiguity, partial credit, and abstention scoring."
+    type: markdown_section
+    required_elements:
+      - "Correctness definition"
+      - "Oracle evaluator"
+      - "Ambiguity handling"
+      - "Abstention policy"
+      - "Disagreement resolution"
+
+  - id: training_contract
+    description: "Loss formulations, RLCD reward functions, KL reference constraints, optimizer, learning rate, and precision."
+    type: markdown_section
+    required_elements:
+      - "Objective"
+      - "Loss formulation"
+      - "RLCD reward formulation"
+      - "KL constraint"
+      - "Hyperparameters"
+
+  - id: model_quality_gates
+    description: "Independent gates for text quality, task accuracy, ECE, Brier score, high-confidence error rate (HCER), and latency."
+    type: table_or_yaml
+    required_metrics:
+      - expected_calibration_error
+      - brier_score
+      - high_confidence_error_rate
+      - text_quality_perplexity
+      - inference_latency_p95
+
+  - id: statistical_claim_registry
+    description: "Statistical claims specifying population, sample count, test split, baseline, estimator, confidence level, and interval method."
+    type: yaml_block
+    schema:
+      statistical_claims: array[object]
