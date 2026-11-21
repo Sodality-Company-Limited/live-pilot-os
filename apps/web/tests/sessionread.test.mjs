@@ -41,7 +41,7 @@ test("returns 200 with principal when valid session cookie provided", async () =
   }, "livepilot-local-dev-session-secret-01");
 
   const req = new Request("http://localhost/api/auth/session", {
-    headers: { cookie: `livepilot_session=${cookie}` },
+    headers: { cookie: `lp_session=${cookie}` },
   });
 
   const res = await GET(req);

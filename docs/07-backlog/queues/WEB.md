@@ -13,8 +13,6 @@
 |------|-------|--------|------------|------|
 | G-WEB-018 | Serve an Authorized Session Overview through Portal BFF | blocked | G-WEB-020 | [`goals/G-WEB-018.md`](../goals/G-WEB-018.md) |
 | G-WEB-019 | Render Host Product Signals from a Validated Snapshot | blocked | G-WEB-016, G-WEB-018 | [`goals/G-WEB-019.md`](../goals/G-WEB-019.md) |
-| G-WEB-023 | Portal Session Read Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-023.md`](../goals/G-WEB-023.md) |
-| G-WEB-024 | Portal Logout Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-024.md`](../goals/G-WEB-024.md) |
 | G-WEB-025 | Portal Session Event Stream | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-025.md`](../goals/G-WEB-025.md) |
 | G-WEB-026 | Portal Promotion Proposal Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-026.md`](../goals/G-WEB-026.md) |
 | G-WEB-027 | Portal Promotion Decision Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-027.md`](../goals/G-WEB-027.md) |
@@ -42,6 +40,8 @@
 | G-WEB-032 | Session Logout Control | 2026-11-21 | [`goals/_archived/G-WEB-032.md`](../goals/_archived/G-WEB-032.md) |
 | G-WEB-031 | Role-Scoped UI Access Gate | 2026-11-21 | [`goals/_archived/G-WEB-031.md`](../goals/_archived/G-WEB-031.md) |
 | G-WEB-030 | Host and Live Ops Login Screen | 2026-11-21 | [`goals/_archived/G-WEB-030.md`](../goals/_archived/G-WEB-030.md) |
+| G-WEB-024 | Portal Logout Route | 2026-11-21 | [`goals/_archived/G-WEB-024.md`](../goals/_archived/G-WEB-024.md) |
+| G-WEB-023 | Portal Session Read Route | 2026-11-21 | [`goals/_archived/G-WEB-023.md`](../goals/_archived/G-WEB-023.md) |
 | G-WEB-022 | Portal Login Route | 2026-11-21 | [`goals/_archived/G-WEB-022.md`](../goals/_archived/G-WEB-022.md) |
 | G-WEB-021 | Trusted Portal-to-Gateway Transport | 2026-11-21 | [`goals/_archived/G-WEB-021.md`](../goals/_archived/G-WEB-021.md) |
 | G-WEB-020 | Server-derived Portal Session Context | 2026-11-21 | [`goals/_archived/G-WEB-020.md`](../goals/_archived/G-WEB-020.md) |

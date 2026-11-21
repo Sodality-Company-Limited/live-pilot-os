@@ -35,6 +35,6 @@ test("clears session cookie on logout", async () => {
   const res = await POST(req);
   assert.equal(res.status, 200);
   const cookieHeader = res.headers.get("set-cookie") || "";
-  assert.ok(cookieHeader.includes("livepilot_session="));
+  assert.ok(cookieHeader.includes("lp_session="));
   assert.ok(cookieHeader.includes("Max-Age=0"));
 });

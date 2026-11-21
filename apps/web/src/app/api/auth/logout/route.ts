@@ -10,7 +10,7 @@ export async function POST(request: Request): Promise<Response> {
     status: 200,
     headers: {
       "Content-Type": "application/json",
-      "Set-Cookie": "livepilot_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0",
+      "Set-Cookie": "lp_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0",
     },
   });
 }
