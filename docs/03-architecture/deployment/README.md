@@ -28,6 +28,10 @@
 
 For the current LivePilot stage, local development is the only non-production environment. DigitalOcean is the production runtime. There is no separate staging environment or staging promotion step. The production runtime remains production-shaped; the live demo injects frontend signals and backend mock products, while `PLATFORM_ADAPTER_MODE=simulated` prevents real marketplace mutation.
 
+The current Compose deployment contains the shared foundation only (PostgreSQL,
+Redis, and NATS). Logical application services and their API contracts are defined
+separately; see [service-runtime-mapping-sot.md](service-runtime-mapping-sot.md).
+
 ## Decision boundary
 
 The technical baseline proposes Kubernetes. This SOT adds DigitalOcean Droplets as a constrained target for local-to-cloud progression. It does not silently replace Kubernetes: the deployment decision must record whether Droplets are a hackathon/staging target, a production target, or an interim bridge.

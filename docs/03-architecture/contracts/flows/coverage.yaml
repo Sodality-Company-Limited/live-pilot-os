@@ -167,6 +167,13 @@ contracts:
     producers: [core-bff]
     consumers: [portal-bff, edge-gateway, internal-mesh]
     verification: "test -f docs/03-architecture/api/core-bff/openapi.yaml"
+  - id: deployment.service-runtime-mapping.livepilot.v1
+    owner: platform-engineering-and-architecture
+    source: ../../deployment/service-runtime-mapping-sot.md
+    status: foundation_deployed_application_runtime_pending
+    producers: [platform-engineering, architecture]
+    consumers: [deployment, api-contracts, services, sre]
+    verification: "test -f docs/03-architecture/deployment/service-runtime-mapping-sot.md"
   - id: http.authentication.test-mode.v1
     owner: identity-and-session-access
     source: ../../api/authentication.md
