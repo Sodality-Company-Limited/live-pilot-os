@@ -137,3 +137,11 @@ No public OpenAPI path is generated for product-entity resolution. The
 multiple candidates, or an explicit unresolved result with catalog version and
 evidence. `CATALOG_UNAVAILABLE`, `AMBIGUOUS_ENTITY`, and
 `CATALOG_VERSION_MISMATCH` must not be converted into an inferred product.
+
+### Incremental result: F01.1-FLOW-006
+
+No public OpenAPI path is generated for unsupported-claim rejection. The
+intent-risk/compliance boundary emits a redacted `UNSUPPORTED_CLAIM` signal and
+review-needed status, preserving evidence and policy lineage without presenting
+the claim as verified guidance. `POLICY_UNAVAILABLE`, `CLAIM_SCOPE_UNKNOWN`,
+and low confidence remain explicit non-success outcomes.
