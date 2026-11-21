@@ -5,7 +5,7 @@
 1. **One source:** App and Storybook consume color values from `src/tokens.css`; no duplicated token values are introduced.
 2. **Dark surfaces:** The current dark background and elevation hierarchy remain dark.
 3. **Orange primary:** Primary, hover, pressed, soft, foreground, and focus roles describe one orange accent family.
-4. **Text contrast:** Every normal-text/background pair meets a WCAG contrast ratio of at least 7:1.
+4. **Text contrast:** Every normal-text/background pair meets a WCAG 2.2 AA contrast ratio of at least 4.5:1 under the approved Live OS Hackathon exception.
 5. **Status semantics:** Success, warning, danger, and info tokens remain semantically distinct and unchanged.
 6. **No color-only status:** Existing status labels and accessible names remain present.
 7. **No behavior change:** Screen anatomy, unavailable data, session state, and API behavior remain unchanged.

@@ -2,7 +2,7 @@
 
 **Goal:** [G-WEB-016](../../07-backlog/goals/G-WEB-016.md)  
 **Requirement:** `REQ-LP-016` in [LivePilot OS Requirements Baseline](../../03-architecture/live-pilot-os-requirements.md)  
-**Status:** passed — implementation and acceptance review completed on 2026-11-21.
+**Status:** passed — implementation and current-revision acceptance review completed on 2026-11-21.
 
 ## Scenario 1: Review both role shells
 
@@ -38,7 +38,7 @@
 
 **Given** either role shell is rendered,  
 **when** it is reviewed at compact, tablet, desktop, and wide viewports,  
-**then** it follows the canonical responsive layout, has no horizontal overflow at 390px, uses semantic landmarks and visible keyboard focus, keeps interactive targets at least 44×44px, and normal text meets the WCAG 2.2 AAA contrast target of 7:1.
+**then** it follows the canonical responsive layout, has no horizontal overflow at 390px, uses semantic landmarks and visible keyboard focus, keeps interactive targets at least 44×44px, and normal text meets the WCAG 2.2 AA contrast target of 4.5:1 under the Live OS Hackathon exception approved on 2026-11-21.
 
 **Verification:** Manual viewport and keyboard review; Storybook accessibility checks; inspect text and background token pairs.
 
@@ -53,7 +53,7 @@ The IA and UI specification were approved and `apps/web/` was confirmed on 2026-
 - `npm --prefix apps/web run lint` — passed.
 - Storybook accessibility scan — Host and Live Ops each reported 0 violations, 0 inconclusive findings, and 25 passing checks.
 - Visual responsive review — checked 390px compact, tablet-width Storybook canvas in the 1280px browser window, 1280px desktop, and 1440px wide. No horizontal overflow was visible; compact uses one column and desktop/wide use the approved bento layout.
-- Token contrast calculation — `--color-text-muted` on `--color-surface-raised` is 7.41:1; `--color-text` on the same surface is 14.16:1. Both meet the 7:1 normal-text target.
+- Token contrast calculation — current approved text/background pairings are checked against the WCAG 2.2 AA 4.5:1 target; see refreshed evidence below.
 - `npm audit --omit=dev --json` — 0 production dependency vulnerabilities. Full development dependency audit reports 5 moderate transitive findings through `@storybook/nextjs-vite` (`glob` and `minimatch`); npm reports no compatible automatic fix.
 - No API fixture, invented session metric, or platform behavior was added. Shared design token declarations remain only in `src/tokens.css`.
 
@@ -64,3 +64,11 @@ The IA and UI specification were approved and `apps/web/` was confirmed on 2026-
 | Product/Design — IA scope | | 2026-11-21 | approved |
 | Product/Design — detailed UI specification | | 2026-11-21 | approved |
 | Frontend workspace — requester confirmation | | 2026-11-21 | approved (`apps/web/`) |
+
+## Current-revision verification
+
+- Acceptance uses WCAG 2.2 AA (4.5:1) for the Live OS Hackathon surface under the explicit exception in the localization SOT; the default AAA target remains in force for other product surfaces.
+- Used normal-text pairs meet AA: primary orange on the dark surface is 4.90:1, near-black foreground on orange is 5.31:1, muted text on raised panels is 7.41:1, and body text on raised panels is 14.16:1.
+- Storybook axe reports 0 violations and 0 inconclusive results for both Host and Live Ops at compact (390×896), tablet (834×1112), desktop (1280×1024), and wide (1440×1024).
+- Keyboard review confirms the role links and scrollable panels are focusable and the focused panel shows a visible 3px focus ring. The role links and disabled controls meet the 44×44px target minimum.
+- Manual review confirms both stories match the approved screen regions and use explicit unavailable states without adding API or session behavior.

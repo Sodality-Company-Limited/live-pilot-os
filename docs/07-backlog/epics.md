@@ -10,6 +10,7 @@ Register a slug here **before** `soda-os goal next <EPIC>`. Slug = 2–8 letters
 | Epic | Name | Notes |
 |------|------|-------|
 | CORE | Core / unscoped | Implicit home of legacy `G-001`. New unscoped work: `soda-os goal next CORE` |
+| AG | Agent Runtime and Subagent Governance | Bounded agent sessions and coordination |
 | DAVE | DAVE Decision System & Governance | Domain-Adaptive, Evidence-Grounded, Confidence-Calibrated SYSTEM 1 decision engine |
 | ML | Machine Learning & Cognitive Calibration | Autoregressive model training with RLCD calibrated rewards & Soda OS integration |
 | OPS | DAVE Operations & Deployment Governance | Active queue |

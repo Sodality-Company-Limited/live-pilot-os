@@ -53,7 +53,7 @@ Trade-off: one extra web package and Storybook configuration are accepted to giv
 
 - Use canonical viewport classes from `docs/03-architecture/ux/responsive-layout-sot.md`: compact `<768px`, tablet `768–1279px`, desktop `≥1280px`, wide `≥1440px`; minimum width `390px`, no horizontal scroll.
 - Use semantic landmarks, accessible names, visible focus, logical CSS properties, reduced-motion behavior, and 44×44px minimum interactive targets.
-- Meet the localization SOT target of WCAG 2.2 AAA normal-text contrast (7:1). Use the orange token as an accent; do not put normal-sized text on a token pairing that misses 7:1.
+- Meet WCAG 2.2 AA normal-text contrast (4.5:1) under the approved Live OS Hackathon exception in the localization SOT; this exception does not change the default AAA target for other surfaces.
 - Put all visible Thai labels in typed `th-TH` message keys. Do not add localized currency or date data because no session values are present.
 
 ## Acceptance Test & TDD Verification Strategy
@@ -61,7 +61,7 @@ Trade-off: one extra web package and Storybook configuration are accepted to giv
 1. `npm --prefix apps/web run build` passes TypeScript/Next production compilation.
 2. `npm --prefix apps/web run storybook:build` passes and includes both role stories.
 3. Review stories at 390px, tablet, desktop, and wide viewports; check no horizontal overflow, semantic order, disabled preview controls, and unavailable values.
-4. Run Storybook accessibility checks and inspect text contrast against the AAA target.
+4. Run Storybook accessibility checks and inspect every text/background pair against the approved AA target.
 5. Run the goal and architecture conformance harnesses; record exact revision and outputs before review.
 
 No unit-test suite is added for static layout-only components; automated builds, Storybook accessibility checks, and the acceptance review are the finite evidence for this Goal.

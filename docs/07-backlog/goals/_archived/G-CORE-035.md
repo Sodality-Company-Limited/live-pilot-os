@@ -37,7 +37,7 @@ goal_contract:
   learning: done
 ---
 
-# G-PAY-001: [Title]
+# G-CORE-035: Implement Build-the-Lever invariant and automation guard
 
 **Status:** done  
 **Closed:** 2026-10-25  

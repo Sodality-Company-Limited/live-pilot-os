@@ -4,6 +4,10 @@
 # Contract: docs/06-workflows/goal-id.md
 schema_version: "1"
 epics:
+  AG:
+    name: Agent Runtime and Subagent Governance
+    next_seq: 21
+    reserved: []
   CORE:
     name: Core / unscoped
     next_seq: 44
@@ -34,5 +38,5 @@ epics:
     reserved: []
   WEB:
     name: DAVE Exact Web Application Pipeline
-    next_seq: 18
+    next_seq: 47
     reserved: []

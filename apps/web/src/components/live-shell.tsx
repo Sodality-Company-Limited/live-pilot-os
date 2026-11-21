@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { enUS } from "../messages/en-US";
+import { SessionOverview } from "./session-overview";
+import { LiveStage } from "./live-stage";
 
 type Role = "host" | "ops";
 
@@ -29,7 +31,7 @@ function EmptyPanel({
   note: string;
 }) {
   return (
-    <section className={`panel ${className}`} aria-label={title}>
+    <section className={`panel ${className}`} aria-label={title} tabIndex={0}>
       <div className="section-heading">
         <h2>{title}</h2>
       </div>
@@ -40,20 +42,9 @@ function EmptyPanel({
   );
 }
 
-function Stage() {
-  return (
-    <section className="panel stage-card stage" aria-label={enUS.stageTitle}>
-      <div className="stage__content">
-        <span className="stage__mark" aria-hidden="true">▶</span>
-        <p className="empty-note">{enUS.stageEmpty}</p>
-      </div>
-    </section>
-  );
-}
-
 function Signals() {
   return (
-    <section className="panel signal-card" aria-labelledby="signals-heading">
+    <section className="panel signal-card" aria-labelledby="signals-heading" tabIndex={0}>
       <div className="section-heading">
         <h2 id="signals-heading">{enUS.signalsTitle}</h2>
       </div>
@@ -75,7 +66,7 @@ function Signals() {
 
 function DisabledControls() {
   return (
-    <section className="panel controls-card" aria-labelledby="controls-heading">
+    <section className="panel controls-card" aria-labelledby="controls-heading" tabIndex={0}>
       <div className="section-heading">
         <h2 id="controls-heading">{enUS.controlsTitle}</h2>
       </div>
@@ -93,7 +84,7 @@ function DisabledControls() {
 
 function Guardrails() {
   return (
-    <section className="panel guardrail-card" aria-labelledby="guardrails-heading">
+    <section className="panel guardrail-card" aria-labelledby="guardrails-heading" tabIndex={0}>
       <div className="section-heading">
         <h2 id="guardrails-heading">{enUS.guardrailsTitle}</h2>
       </div>
@@ -126,24 +117,13 @@ export function LiveShell({ role }: { role: Role }) {
       <main>
         <h1 className="visually-hidden">{isHost ? enUS.hostRole : enUS.opsRole}</h1>
         <div className="shell-grid">
-          <Stage />
+          <SessionOverview role={role} />
+          <LiveStage />
           <EmptyPanel className="topic-card" title={enUS.topicsTitle} note={enUS.topicsEmpty} />
           <Signals />
-          {isHost ? (
-            <section className="panel cue-card" aria-labelledby="cue-heading">
-              <div className="section-heading">
-                <h2 id="cue-heading">{enUS.cueTitle}</h2>
-              </div>
-              <p className="empty-note">{enUS.cueEmpty}</p>
-              <button className="disabled-control" disabled type="button">
-                {enUS.ignoreCue}
-              </button>
-              <p className="control-reason">{enUS.noCueToIgnore}</p>
-            </section>
-          ) : (
+          {!isHost ? (
             <>
               <Guardrails />
-              <EmptyPanel className="trace-card" title={enUS.traceTitle} note={enUS.traceEmpty} />
               <DisabledControls />
             </>
           )}

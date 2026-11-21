@@ -27,6 +27,8 @@ Ratios below are calculated from the CSS colors using the WCAG relative-luminanc
 | Text / canvas | 17.10:1 |
 | Muted / canvas | 8.95:1 |
 | Subtle / canvas | 7.10:1 |
+| Text / raised surface | 14.16:1 |
+| Muted / raised surface | 7.41:1 |
 | Orange primary / canvas | 5.31:1 |
 | Orange primary / surface | 4.90:1 |
 | Lighter orange / surface | 7.26:1 |

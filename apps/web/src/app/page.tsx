@@ -1,5 +1,5 @@
-import { LiveShell } from "../components/live-shell";
+import { SessionAccessGate } from "../lib/session-access";
 
 export default function Home() {
-  return <LiveShell role="host" />;
+  return <SessionAccessGate role="host" />;
 }

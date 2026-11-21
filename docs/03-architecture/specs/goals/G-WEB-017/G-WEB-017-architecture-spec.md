@@ -10,7 +10,7 @@ Make the Live OS Host and Live Ops surfaces visibly orange-accented while retain
 - [Architecture overview](../../../overview.md) and [technical specifications](../../../technical-specifications-sot.md).
 - [UX flow](../../../ux/live-os-ux-flow.md), [UI specification](../../../../02-product/design/live-os-ui-specification.md), and [token guide](../../../ux/live-os-design-tokens.md).
 - [Canonical web tokens](../../../../../src/tokens.css).
-- [Localization SOT](../../../localization-sot.md) — WCAG 2.2 AAA normal-text target.
+- [Localization SOT](../../../localization-sot.md) — WCAG 2.2 AA normal-text target for the approved Live OS Hackathon exception.
 
 ## Boundary
 

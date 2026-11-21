@@ -1,5 +1,5 @@
-import { LiveShell } from "../../components/live-shell";
+import { SessionAccessGate } from "../../lib/session-access";
 
 export default function OpsPage() {
-  return <LiveShell role="ops" />;
+  return <SessionAccessGate role="ops" />;
 }

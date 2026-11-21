@@ -23,7 +23,7 @@ Make the existing warm dark Live OS interface read clearly as orange-accented. T
 
 ## Selected Approach & Trade-off Analysis
 
-Set the primary family to orange around HSL 27°, with near-black foreground on orange fills. Change the brand mark from the muted soft surface to the primary fill so the theme is immediately visible; the existing focus rule already consumes the semantic focus token. The orange fill and foreground pair must meet 7:1, including hover and pressed states. This keeps the high-contrast target while retaining the current dark surfaces.
+Use Shopee orange `#EE4D2D` for the primary accent, headings, live frame, and selected view, with near-black foreground on orange fills. Following the request on 2026-11-21, this surface targets WCAG 2.2 AA (4.5:1 for normal text) under the exception in the localization SOT. Keyboard focus uses a lighter orange token.
 
 ## Bounded Context & Touch Map Invariants
 
@@ -41,7 +41,7 @@ No page region, copy, session state, or interaction changes. The brand mark beco
 1. `npm --prefix apps/web run build` and `npm --prefix apps/web run storybook:build` must pass.
 2. `npm --prefix apps/web run lint` must pass.
 3. `node scripts/harness/token-guardrail-harness.mjs` and `node scripts/harness/ui-spec-conformance-harness.mjs` must pass.
-4. Calculate relative luminance for primary, hover, and pressed fills against the near-black primary foreground; require at least 7:1.
+4. Calculate relative luminance for primary, hover, and pressed fills against the near-black primary foreground; require at least 4.5:1.
 5. Review Host and Live Ops stories for visible orange accent, visible keyboard focus, no horizontal overflow, and zero Storybook accessibility violations.
 
 These checks verify the visual theme only; they do not verify API or platform behavior.

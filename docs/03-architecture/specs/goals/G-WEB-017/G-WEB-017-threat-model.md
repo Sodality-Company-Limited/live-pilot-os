@@ -11,7 +11,7 @@
 
 | Threat | Control | Residual limit |
 |---|---|---|
-| Orange foreground/background pairing is hard to read | Require 7:1 normal-text contrast and verify focus contrast | Evidence applies to inspected color pairings only |
+| Orange foreground/background pairing is hard to read | Require WCAG 2.2 AA normal-text contrast (4.5:1) and verify focus contrast | Evidence applies to inspected color pairings only |
 | Color alone conveys status | Preserve semantic status colors, text labels, and accessible names | Full product accessibility review remains separate |
 | App and Storybook diverge | Keep one imported token source and compare both renderers | Build success alone does not prove visual parity |
 | Theme work expands into behavior or external claims | Restrict changes to tokens, global app styling, and visual documentation | Later session work needs its own goal |

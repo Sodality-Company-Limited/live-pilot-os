@@ -40,7 +40,8 @@ button {
 }
 
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+.panel:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
@@ -79,6 +80,9 @@ a:focus-visible {
 
 .brand-name {
   margin: 0;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
   font-size: var(--text-2xl);
   font-weight: var(--font-semibold);
   color: var(--color-primary);
