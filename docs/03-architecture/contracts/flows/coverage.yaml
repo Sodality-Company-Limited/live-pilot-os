@@ -146,6 +146,13 @@ contracts:
     producers: [portal-bff]
     consumers: [host-ui, live-ops-ui]
     verification: "test -f docs/03-architecture/api/openapi.yaml"
+  - id: nats.subjects.livepilot.v1
+    owner: api-contracts-and-domain-architecture
+    source: ../../api/nats-subject-catalog-sot.md
+    status: pilot_inventory_schema_tests_pending
+    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    verification: "test -f docs/03-architecture/api/nats-subject-catalog-sot.md && test -d docs/03-architecture/api/schemas/nats"
   - id: http.authentication.test-mode.v1
     owner: identity-and-session-access
     source: ../../api/authentication.md

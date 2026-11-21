@@ -92,6 +92,24 @@ F01 classifier, F02 JEV, F03 workflow, and F04 control flows that are not listed
 as public operations are covered by the NATS subjects in the subject catalog and
 must not be exposed through browser-originated routes.
 
+### Endpoint error allocation
+
+| Operation | 400 | 401 | 403/404 | 409 | 422 | 429 | 503/504 | 202/unknown |
+|---|---|---|---|---|---|---|---|---|
+| `loginTestUser` | `REQUEST_INVALID` | `AUTHENTICATION_INVALID` | — | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
+| `getCurrentAuthSession` | — | `AUTHENTICATION_REQUIRED` | — | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
+| `logoutTestUser` | — | `AUTHENTICATION_REQUIRED` | — | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
+| `getLiveSessionOverview` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` / privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | partial fields marked stale/unknown |
+| `streamLiveSessionEvents` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` / privacy-safe not found | `REPLAY_WINDOW_EXPIRED` | — | `RATE_LIMITED` | `DEPENDENCY_TIMEOUT` | disconnected/stale event |
+| `proposePromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` | `IDEMPOTENCY_KEY_CONFLICT` / `RESOURCE_VERSION_CONFLICT` | `POLICY_REJECTED` / `APPROVAL_REQUIRED` | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | `ACTION_PENDING` |
+| `decidePromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | capability denial / privacy-safe not found | `IDEMPOTENCY_KEY_CONFLICT` / `RESOURCE_VERSION_CONFLICT` | `POLICY_REJECTED` | `RATE_LIMITED` | `DEPENDENCY_TIMEOUT` | `ACTION_PENDING` / `ACTION_UNKNOWN` |
+| `getPromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | linked state marked unknown |
+| `getActionLog` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | capability denial / privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
+
+`REPLAY_WINDOW_EXPIRED` must be added to the public error registry before the SSE
+contract is frozen. Every response uses the canonical ProblemDetails schema and
+the error registry's `LP` code, localization key, retry policy, and correlation ID.
+
 ### `POST /v1/auth/login` — `loginTestUser`
 
 - **Does:** creates a server-managed test session for the selected pilot user.
