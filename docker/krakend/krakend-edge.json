@@ -1,0 +1,149 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.8/krakend.json",
+  "version": 3,
+  "name": "LivePilot Edge API Gateway (Node 3)",
+  "port": 8080,
+  "timeout": "5s",
+  "cache_ttl": "300s",
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND-EDGE]",
+      "syslog": false,
+      "stdout": true
+    },
+    "security/cors": {
+      "allow_origins": ["*"],
+      "allow_methods": ["GET", "POST", "PUT", "DELETE"],
+      "allow_headers": ["Origin", "Authorization", "Content-Type", "Idempotency-Key", "X-Correlation-Id", "X-Traceparent"]
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/v1/live-sessions",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "Idempotency-Key", "X-Correlation-Id", "X-Traceparent", "Content-Type"],
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 50,
+          "client_max_rate": 10,
+          "strategy": "ip"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/live-sessions",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/live-sessions/{session_id}/overview",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "X-Correlation-Id", "X-Traceparent"],
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 200,
+          "client_max_rate": 30,
+          "strategy": "ip"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/live-sessions/{session_id}/overview",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/live-sessions/{session_id}/events",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "X-Correlation-Id", "X-Traceparent", "Last-Event-ID", "Accept"],
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/live-sessions/{session_id}/events",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/live-sessions/{session_id}/promotions",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "Idempotency-Key", "X-Correlation-Id", "X-Traceparent", "Content-Type"],
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 30,
+          "client_max_rate": 5,
+          "strategy": "ip"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/live-sessions/{session_id}/promotions",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/promotions/{promotion_id}/decision",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "Idempotency-Key", "X-Correlation-Id", "X-Traceparent", "Content-Type"],
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 30,
+          "client_max_rate": 5,
+          "strategy": "ip"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/promotions/{promotion_id}/decision",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/promotions/{promotion_id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/promotions/{promotion_id}",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/live-sessions/{session_id}/actions",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/internal/v1/core/live-sessions/{session_id}/actions",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://core-bff:8080"]
+        }
+      ]
+    }
+  ]
+}

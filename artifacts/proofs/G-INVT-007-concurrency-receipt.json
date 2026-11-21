@@ -1,0 +1,12 @@
+{
+  "receipt_id": "9fdcd969-575c-433c-8dd2-5a0250c3f7f7",
+  "goal_id": "G-INVT-007",
+  "timestamp": "2026-11-21T08:24:33.509Z",
+  "invariant": "Zero-Overselling Concurrency & Conservation Law",
+  "initial_stock": 10,
+  "concurrent_requests": 50,
+  "successful_reservations": 10,
+  "rejected_reservations": 40,
+  "final_available_stock": 0,
+  "status": "VERIFIED_ZERO_BUGS"
+}

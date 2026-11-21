@@ -12,7 +12,7 @@ ssh_cidr="${LIVEPILOT_SSH_CIDR:-}"
 [[ -n "$ssh_cidr" ]] || { echo 'Set LIVEPILOT_SSH_CIDR to the approved operator CIDR before provisioning.' >&2; exit 1; }
 if ! id "$admin_user" >/dev/null 2>&1; then
   adduser --disabled-password --gecos '' "$admin_user"
-  usermod -aG sudo,docker "$admin_user"
+  usermod -aG sudo "$admin_user"
 fi
 install -d -m 0700 -o "$admin_user" -g "$admin_user" "/home/$admin_user/.ssh"
 if [[ -n "${LIVEPILOT_ADMIN_AUTHORIZED_KEYS:-}" ]]; then
@@ -23,6 +23,16 @@ else
   echo 'LIVEPILOT_ADMIN_AUTHORIZED_KEYS is required to install the admin key.' >&2
   exit 1
 fi
+
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+codename="$(. /etc/os-release && echo "$VERSION_CODENAME")"
+printf 'deb [arch=%s signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu %s stable\n' "$(dpkg --print-architecture)" "$codename" > /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+systemctl enable --now docker
+usermod -aG docker "$admin_user"
 
 install -m 0644 /dev/null /etc/ssh/sshd_config.d/99-livepilot-hardening.conf
 cat >/etc/ssh/sshd_config.d/99-livepilot-hardening.conf <<EOF
@@ -37,15 +47,6 @@ AllowTcpForwarding no
 EOF
 sshd -t
 systemctl reload ssh
-
-install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-chmod a+r /etc/apt/keyrings/docker.asc
-codename="$(. /etc/os-release && echo "$VERSION_CODENAME")"
-printf 'deb [arch=%s signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu %s stable\n' "$(dpkg --print-architecture)" "$codename" > /etc/apt/sources.list.d/docker.list
-apt-get update
-apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-systemctl enable --now docker
 
 cat >/etc/sysctl.d/99-livepilot.conf <<'EOF'
 vm.overcommit_memory=1

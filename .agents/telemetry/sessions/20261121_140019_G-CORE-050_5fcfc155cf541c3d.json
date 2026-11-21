@@ -1,0 +1,27 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-4o",
+  "sessionKey": "5fcfc155cf541c3d",
+  "turns": 1,
+  "inputTokens": 195,
+  "outputTokens": 736,
+  "childAgents": 0,
+  "elapsedSeconds": 4,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "{\"type\":\"thread.started\",\"thread_id\":\"01a1fce7-dd06-7671-8b66-8035ae2fe87f\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Model metadata for `gpt-4o` not found. Defaulting to fallback metadata; this can degrade performance and cause issues.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"error\",\"message\":\"{\\\"type\\\":\\\"error\\\",\\\"status\\\":400,\\\"error\\\":{\\\"type\\\":\\\"invalid_request_error\\\",\\\"message\\\":\\\"The 'gpt-4o' model is not supported when using Codex with a ChatGPT account.\\\",\\\"code\\\":\\\"model_not_found\\\"}}\"}\n{\"type\":\"turn.failed\",\"error\":{\"message\":\"{\\\"type\\\":\\\"error\\\",\\\"status\\\":400,\\\"error\\\":{\\\"type\\\":\\\"invalid_request_error\\\",\\\"message\\\":\\\"The 'gpt-4o' model is not supported when using Codex with a ChatGPT account.\\\",\\\"code\\\":\\\"model_not_found\\\"}}\"}}",
+  "mandate": "Review the current G-CORE-050 step-1 diff only. Do not modify files and do not read the full goal card. Inspect only the declared contract touch map and verify lifecycle contract, NATS semantics, coverage linkage, and the two SOT commands. Return evidence-based approval or rejection with changed files, tests, blockers, next action.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml",
+    "docs/03-architecture/specs/goals/G-CORE-050"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

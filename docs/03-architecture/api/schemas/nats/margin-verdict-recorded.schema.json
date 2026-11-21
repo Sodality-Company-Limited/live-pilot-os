@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/margin-verdict-recorded.schema.json",
+  "title": "MarginVerdictRecorded",
+  "description": "Versioned NATS JetStream domain event published when a margin verdict is recorded.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "occurred_at",
+    "producer",
+    "schema_version",
+    "tenant_id",
+    "live_session_id",
+    "verdict_id",
+    "proposal_id",
+    "sku",
+    "policy_id",
+    "policy_version",
+    "status",
+    "currency",
+    "scale",
+    "price_minor",
+    "candidate_discount_minor",
+    "net_selling_price_minor",
+    "total_costs_minor",
+    "net_margin_minor",
+    "margin_bps",
+    "floor_bps",
+    "review_band_bps",
+    "input_hash",
+    "correlation_id",
+    "causation_id"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Unique domain event identifier"
+    },
+    "event_type": {
+      "type": "string",
+      "const": "livepilot.v1.margin.verdict.recorded",
+      "description": "Canonical event type name"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp when event occurred"
+    },
+    "producer": {
+      "type": "string",
+      "const": "margin-policy-service",
+      "description": "Authoritative producing service"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "description": "Payload schema version"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant scope identifier"
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Live session identifier"
+    },
+    "verdict_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Unique identifier of the margin verdict (UUIDv7)"
+    },
+    "proposal_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Unique promotion or proposal identifier"
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Product Stock Keeping Unit"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Applied margin policy identifier"
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonic version of the applied margin policy"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["APPROVED", "NEEDS_APPROVAL", "REJECTED", "UNKNOWN"],
+      "description": "Deterministic economic verdict status"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 three-letter currency code"
+    },
+    "scale": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "ISO 4217 minor unit exponent scale"
+    },
+    "price_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Base selling price before discount in integer minor units"
+    },
+    "candidate_discount_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Evaluated candidate discount in integer minor units"
+    },
+    "net_selling_price_minor": {
+      "type": "integer",
+      "description": "Net selling price in integer minor units"
+    },
+    "total_costs_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sum of direct costs in integer minor units"
+    },
+    "net_margin_minor": {
+      "type": "integer",
+      "description": "Net contribution margin in integer minor units"
+    },
+    "margin_bps": {
+      "type": "integer",
+      "description": "Calculated margin ratio in basis points"
+    },
+    "floor_bps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Margin floor threshold in basis points"
+    },
+    "review_band_bps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Review band threshold in basis points"
+    },
+    "safer_alternative_discount_minor": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Maximum safe discount preserving floor_bps when status is REJECTED"
+    },
+    "safer_alternative_margin_bps": {
+      "type": ["integer", "null"],
+      "description": "Projected margin in basis points if safer alternative discount is adopted"
+    },
+    "breakdown": {
+      "type": "object",
+      "required": ["cogs_minor", "platform_fee_minor", "shipping_fee_minor"],
+      "properties": {
+        "cogs_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "platform_fee_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shipping_fee_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "giveaway_cost_minor": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Cryptographic SHA-256 digest of input parameters"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "End-to-end trace correlation ID"
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Direct causal trigger ID"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"],
+      "description": "Runtime operational mode"
+    }
+  },
+  "additionalProperties": false
+}

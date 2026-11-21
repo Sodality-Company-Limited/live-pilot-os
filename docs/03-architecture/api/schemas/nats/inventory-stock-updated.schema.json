@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.livepilot.io/nats/inventory-stock-updated.schema.json",
+  "title": "InventoryStockUpdatedEvent",
+  "description": "Published event when inventory stock changes",
+  "type": "object",
+  "required": [
+    "event_id",
+    "timestamp",
+    "tenant_id",
+    "sku",
+    "total_stock",
+    "reserved_stock",
+    "available_stock",
+    "version",
+    "reason"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "tenant_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "sku": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "total_stock": { "type": "integer", "minimum": 0 },
+    "reserved_stock": { "type": "integer", "minimum": 0 },
+    "available_stock": { "type": "integer", "minimum": 0 },
+    "version": { "type": "integer", "minimum": 1 },
+    "reason": {
+      "type": "string",
+      "enum": ["reserved", "released", "committed", "expired", "adjusted"]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,42 @@
+{
+  "sessionKey": "26be8d1f908cb57b",
+  "goalId": "G-CORE-050",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "persona": "security-code-reviewer",
+  "role": "reviewer",
+  "mandate": "Review only the repaired G-CORE-050 Step 1 session contract diff. Do not edit files. Confirm only session.lifecycle.livepilot.v1 is added in coverage, required lifecycle headers are consistent, SIMULATED mode/DLQ/replay metadata is explicit, schema hash is recorded, and both SOT checks pass. Return strict compact handoff with approve or request-changes decision.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml"
+  ],
+  "fullPrompt": "=== SODA OS SUBAGENT BOUNDED EXECUTION CONTRACT ===\nGoal ID: G-CORE-050\nRole: reviewer\nPersona: security-code-reviewer\nPersona Directives: Perform rigorous zero-trust audit; verify memory safety; fail-closed on any unauthorized boundary crossing or plaintext secrets.\nMandate: Review only the repaired G-CORE-050 Step 1 session contract diff. Do not edit files. Confirm only session.lifecycle.livepilot.v1 is added in coverage, required lifecycle headers are consistent, SIMULATED mode/DLQ/replay metadata is explicit, schema hash is recorded, and both SOT checks pass. Return strict compact handoff with approve or request-changes decision.\nDeclared Touch Map: docs/03-architecture/api/services/session-service.md, docs/03-architecture/api/asyncapi.yaml, docs/03-architecture/contracts/flows/coverage.yaml\nAcceptance Criteria: Follow canonical goal card specifications\nVerification Commands: node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs\n--- Mandatory Constitutional Invariants ---\n1. Act strictly as the declared single persona; never switch or adopt additional personas.\n2. Zero mocks, zero stubs, zero dummy fallbacks. Write 100% production-ready code.\n3. Do not create, modify, or delete files outside the declared touch map.\n4. Do not spawn child agents; execute commands bounded by timeout.\n5. Stop execution at the verification checkpoint and return a concise handoff.\n--- MANDATORY EPHEMERAL WORKER CONTRACT ---\n1. You are an ephemeral worker. You exist only to complete this single task.\n2. Perform your assigned file edit, run the verification command once.\n3. Emit your compact handoff JSON and CEASE calling tools immediately.\n4. Do not await user response or ask follow-up questions.\n--- Expected Handoff Format ---\nReturn: Status (complete|blocked|needs-review), changed files, tests, failures, blockers, and next action.",
+  "rawResponse": "Using the repository’s code-review playbook to audit only the declared G-CORE-050 Step 1 contract diff, then I’ll run the two required SOT checks once.\nThe two required SOT checks pass. The contract diff is narrowly scoped, but I found one consistency defect: the service contract’s required-header list omits `X-Mode`, while the AsyncAPI `MessageHeaders` schema requires it.\n{\n  \"status\": \"needs-review\",\n  \"decision\": \"request-changes\",\n  \"changed_files\": [],\n  \"tests\": {\n    \"check-sot\": \"PASS\",\n    \"api-sot-traceability\": \"PASS\"\n  },\n  \"failures\": [\n    \"session-service.md omits required X-Mode header, inconsistent with AsyncAPI MessageHeaders.\"\n  ],\n  \"blockers\": [\"Required lifecycle headers are not fully consistent.\"],\n  \"next_action\": \"Add X-Mode to session-service.md required headers and rerun both SOT checks.\"\n}",
+  "summary": "Using the repository’s code-review playbook to audit only the declared G-CORE-050 Step 1 contract diff, then I’ll run the two required SOT checks once.\nThe two required SOT checks pass. The contract diff is narrowly scoped, but I found one consistency defect: the service contract’s required-header list omits `X-Mode`, while the AsyncAPI `MessageHeaders` schema requires it.\n{\n  \"status\": \"needs-review\",\n  \"decision\": \"request-changes\",\n  \"changed_files\": [],\n  \"tests\": {\n    \"check-sot\": \"PASS\",\n    \"api-sot-traceability\": \"PASS\"\n  },\n  \"failures\": [\n    \"session-service.md omits required X-Mode header, inconsistent with AsyncAPI MessageHeaders.\"\n  ],\n  \"blockers\": [\"Required lifecycle headers are not fully consistent.\"],\n  \"next_action\": \"Add X-Mode to session-service.md required headers and rerun both SOT checks.\"\n}",
+  "status": "needs-review",
+  "exitCode": 0,
+  "changedFiles": [],
+  "inputTokens": 119164,
+  "outputTokens": 909,
+  "elapsedSeconds": 27,
+  "turns": 1,
+  "tools": {
+    "commands": 1
+  },
+  "verification": {
+    "command": "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs",
+    "passed": false,
+    "testsRun": 1,
+    "testsPassed": 0
+  },
+  "initialState": {
+    "touchMap": [
+      "docs/03-architecture/api/services/session-service.md",
+      "docs/03-architecture/api/asyncapi.yaml",
+      "docs/03-architecture/contracts/flows/coverage.yaml"
+    ]
+  },
+  "recordedAt": "2026-11-21T07:22:02.221Z",
+  "digest": "80e48bbf47b08ac4172e87bd2f6aae2c986ea1e6a5276e45618b9483f47a231b"
+}

@@ -1,0 +1,27 @@
+{
+  "goalId": "G-CORE-058",
+  "role": "reviewer",
+  "persona": "core-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "4d1e3442deba88cc",
+  "turns": 1,
+  "inputTokens": 96707,
+  "outputTokens": 1070,
+  "childAgents": 0,
+  "elapsedSeconds": 27,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to perform the bounded independent review, then I’ll run the four required gates once and stop at the verification checkpoint.\nThe contract, registry entry, schema hash, and NATS catalog are internally aligned on ownership, subject, retry/DLQ, and payload hash. The worktree is broadly dirty with unrelated changes, so I’m checking the goal-specific evidence paths and required conformance gates now.\n{\n  \"status\": \"complete\",\n  \"decision\": \"approve\",\n  \"changed_files\": [\n    \"docs/03-architecture/api/services/telemetry-service.md\",\n    \"docs/03-architecture/contracts/flows/coverage.yaml\"\n  ],\n  \"tests\": [\n    \"check-sot.mjs: PASS\",\n    \"check-api-sot-traceability.mjs: PASS\",\n    \"goal-template-conformance-harness G-CORE-058: PASS (51/51)\",\n    \"architecture-design-conformance-harness G-CORE-058: PASS (9/9)\",\n    \"Schema hash and NATS catalog consistency: PASS\"\n  ],\n  \"failures\": [],\n  \"blockers\": [],\n  \"next_action\": \"Advance G-CORE-058 to approved/done per workflow.\"\n}",
+  "mandate": "Perform a fresh independent approval review of the repaired G-CORE-058 Step 1 Telemetry contract. Do not edit files. Review only docs/03-architecture/api/services/telemetry-service.md and its registration in docs/03-architecture/contracts/flows/coverage.yaml, while checking the existing telemetry-signal schema and NATS catalog for consistency. Verify ownership, version/hash, additive compatibility, retry/DLQ, duplicate idempotency, ack-after-commit, unknown-outcome handling, and that no unrelated files are part of this goal evidence. Run node scripts/architecture/check-sot.mjs, node scripts/api/check-api-sot-traceability.mjs, node scripts/harness/goal-template-conformance-harness.mjs G-CORE-058, and node scripts/harness/architecture-design-conformance-harness.mjs G-CORE-058. Return strict compact handoff with status, decision approve or request-changes, changed_files, tests, failures, blockers, and next_action.",
+  "touchMap": [
+    "docs/03-architecture/api/services/telemetry-service.md",
+    "docs/03-architecture/contracts/flows/coverage.yaml",
+    "docs/03-architecture/api/schemas/nats/telemetry-signal.schema.json",
+    "docs/03-architecture/api/nats-subject-catalog-sot.md",
+    "docs/03-architecture/specs/goals/G-CORE-058/"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs && node scripts/harness/goal-template-conformance-harness.mjs G-CORE-058 && node scripts/harness/architecture-design-conformance-harness.mjs G-CORE-058"
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/jev-suggestion-proposed.schema.json",
+  "title": "livepilot.v1.copilot.suggestion.proposed",
+  "description": "NATS JetStream event emitted when jev-copilot-service generates and grounds a new real-time host recommendation with evidence refs, confidence, and freshness expiration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "suggestion_id",
+    "tenant_id",
+    "live_session_id",
+    "suggestion_type",
+    "status",
+    "content_payload",
+    "evidence_refs",
+    "confidence_basis_points",
+    "freshness_expires_at",
+    "aggregate_version",
+    "provider_receipt",
+    "created_at"
+  ],
+  "properties": {
+    "suggestion_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "suggestion_type": {
+      "type": "string",
+      "enum": [
+        "product_highlight",
+        "chat_response_cue",
+        "promotion_recommendation",
+        "urgency_cue",
+        "objection_handling",
+        "retention_prompt"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "grounded",
+        "delivered"
+      ]
+    },
+    "content_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "cue_text",
+        "suggested_action"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "cue_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "suggested_action": {
+          "type": "string",
+          "enum": [
+            "speak_cue",
+            "pin_product",
+            "propose_promotion",
+            "answer_faq",
+            "acknowledge_viewer"
+          ]
+        },
+        "action_parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "product_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "sku": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "discount_percent": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "duration_seconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3600
+            }
+          }
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "kind",
+          "digest",
+          "status"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "catalog_fact",
+              "telemetry_signal",
+              "chat_aggregate",
+              "margin_policy"
+            ]
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "APPROVED",
+              "FRESH",
+              "VERIFIED"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 512
+          }
+        }
+      }
+    },
+    "confidence_basis_points": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "freshness_expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "aggregate_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "provider_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_id",
+        "provider_name",
+        "model_version",
+        "prompt_template_id",
+        "outcome",
+        "input_tokens",
+        "output_tokens",
+        "latency_ms",
+        "cost_minor",
+        "cost_currency",
+        "cost_scale",
+        "raw_input_digest",
+        "raw_output_digest"
+      ],
+      "properties": {
+        "receipt_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "provider_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "model_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "prompt_template_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "outcome": {
+          "type": "string",
+          "const": "accepted"
+        },
+        "input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cost_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cost_currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3
+        },
+        "cost_scale": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "raw_input_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "raw_output_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -11,7 +11,7 @@
 
 | Goal | Title | Status | Depends On | File |
 |------|-------|--------|------------|------|
-| *(none)* | — | — | — | — |
+| G-OPS-002 | Deploy identity/session service to DigitalOcean | planned | G-SEC-007 | [`goals/G-OPS-002.md`](../goals/G-OPS-002.md) |
 
 ## Archived
 

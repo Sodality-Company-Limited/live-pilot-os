@@ -1,0 +1,350 @@
+{
+  "schema_id": "https://schemas.livepilot.invalid/nats/telemetry-signal.schema.json",
+  "contract_id": "telemetry.signal.livepilot.v1",
+  "fixtures": [
+    {
+      "id": "invalid-missing-tenant-id",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "tenant_id",
+      "description": "Missing required tenant_id fails closed.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0101",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0101-inv",
+        "idempotency_key": "idem-01JCPZ0101-inv",
+        "mode": "CONFIRMED",
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-missing-session-id",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "session_id",
+      "description": "Missing required session_id fails closed.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0102",
+        "tenant_id": "tenant-alpha-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0102-inv",
+        "idempotency_key": "idem-01JCPZ0102-inv",
+        "mode": "CONFIRMED",
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-empty-tenant-id",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["minLength"],
+      "expected_path_substring": "/tenant_id",
+      "description": "Empty tenant_id violates minLength >= 1.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0103",
+        "tenant_id": "",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0103-inv",
+        "idempotency_key": "idem-01JCPZ0103-inv",
+        "mode": "CONFIRMED",
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-occurred-at-timestamp",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["format"],
+      "expected_path_substring": "/occurred_at",
+      "description": "Non-ISO-8601 date-time string in occurred_at fails closed.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0104",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "engagement",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-13-45T99:99:99Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0104-inv",
+        "idempotency_key": "idem-01JCPZ0104-inv",
+        "mode": "CONFIRMED",
+        "payload": { "kind": "like" }
+      }
+    },
+    {
+      "id": "invalid-occurred-at-ms-float",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "/occurred_at_ms",
+      "description": "Floating-point occurred_at_ms violates integer type and zero-float invariant.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0105",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "engagement",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "occurred_at_ms": 1795248600000.75,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0105-inv",
+        "idempotency_key": "idem-01JCPZ0105-inv",
+        "mode": "CONFIRMED",
+        "payload": { "kind": "like" }
+      }
+    },
+    {
+      "id": "invalid-malformed-payload-hash",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["pattern"],
+      "expected_path_substring": "/payload_hash",
+      "description": "Non-SHA-256 hex string in payload_hash fails pattern check.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0106",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0106-inv",
+        "idempotency_key": "idem-01JCPZ0106-inv",
+        "mode": "CONFIRMED",
+        "payload_hash": "INVALID_HASH_XYZ_123",
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-illegal-payload-type",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "/payload",
+      "description": "String payload instead of JSON object fails type check.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0107",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "order",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0107-inv",
+        "idempotency_key": "idem-01JCPZ0107-inv",
+        "mode": "CONFIRMED",
+        "payload": "illegal-raw-string-payload"
+      }
+    },
+    {
+      "id": "invalid-illegal-payload-array",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "/payload",
+      "description": "Array payload instead of JSON object fails type check.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0108",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "order",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0108-inv",
+        "idempotency_key": "idem-01JCPZ0108-inv",
+        "mode": "CONFIRMED",
+        "payload": ["not", "an", "object"]
+      }
+    },
+    {
+      "id": "invalid-unsupported-signal-type",
+      "expected_error_code": "LP12003",
+      "expected_keywords": ["enum"],
+      "expected_path_substring": "/signal_type",
+      "description": "Unregistered signal_type outside frozen enum fails closed.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0109",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "unversioned_custom_signal",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0109-inv",
+        "idempotency_key": "idem-01JCPZ0109-inv",
+        "mode": "CONFIRMED",
+        "payload": { "custom": true }
+      }
+    },
+    {
+      "id": "invalid-unexpected-root-field",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["additionalProperties"],
+      "expected_path_substring": "unexpected_unversioned_field",
+      "description": "Unversioned extra property at envelope root violates additionalProperties: false.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0110",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0110-inv",
+        "idempotency_key": "idem-01JCPZ0110-inv",
+        "mode": "CONFIRMED",
+        "payload": { "text": "hello" },
+        "unexpected_unversioned_field": "bypass"
+      }
+    },
+    {
+      "id": "invalid-unexpected-header-field",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["additionalProperties"],
+      "expected_path_substring": "/headers/X-Debug-Override",
+      "description": "Unexpected transport header fails additionalProperties: false on MessageHeaders.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0111",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0111-inv",
+        "idempotency_key": "idem-01JCPZ0111-inv",
+        "mode": "CONFIRMED",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-inv-0111",
+          "X-Correlation-Id": "corr-01JCPZ0111-inv",
+          "X-Idempotency-Key": "idem-01JCPZ0111-inv",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED",
+          "X-Debug-Override": "true"
+        },
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-malformed-traceparent",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["pattern"],
+      "expected_path_substring": "/headers/X-Traceparent",
+      "description": "Malformed W3C X-Traceparent header fails pattern check.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0112",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0112-inv",
+        "idempotency_key": "idem-01JCPZ0112-inv",
+        "mode": "CONFIRMED",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-inv-0112",
+          "X-Correlation-Id": "corr-01JCPZ0112-inv",
+          "X-Idempotency-Key": "idem-01JCPZ0112-inv",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "not-a-w3c-traceparent",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": { "text": "hello" }
+      }
+    },
+    {
+      "id": "invalid-breaking-schema-version",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["pattern"],
+      "expected_path_substring": "/schema_version",
+      "description": "Major version bump 2.0.0 is rejected on v1 subject.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0113",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "viewer_count",
+        "schema_version": "2.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0113-inv",
+        "idempotency_key": "idem-01JCPZ0113-inv",
+        "mode": "CONFIRMED",
+        "payload": { "concurrent_viewers": 100 }
+      }
+    },
+    {
+      "id": "invalid-dlq-metadata-replay-owner",
+      "expected_error_code": "LP12002",
+      "expected_keywords": ["const", "maximum"],
+      "expected_path_substring": "/dlq_metadata",
+      "description": "Invalid dlq_metadata replay_owner and attempts > 5 fail closed.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0114",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "order",
+        "state": "dead_lettered",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "telemetry-service",
+        "correlation_id": "corr-01JCPZ0114-inv",
+        "idempotency_key": "idem-01JCPZ0114-inv",
+        "mode": "CONFIRMED",
+        "payload": { "order_id": "ord-1" },
+        "dlq_metadata": {
+          "original_subject": "livepilot.v1.telemetry.signal.ingest",
+          "attempts": 6,
+          "failure_code": "LP12005",
+          "failed_at": "2026-11-21T08:10:05.000Z",
+          "replay_owner": "unauthorized-service"
+        }
+      }
+    },
+    {
+      "id": "invalid-header-tenant-mismatch",
+      "expected_error_code": "LP02001",
+      "expected_keywords": ["envelopeHeaderMismatch"],
+      "expected_path_substring": "/headers/X-Tenant-Id",
+      "schema_valid_only": true,
+      "description": "Cross-tenant mismatch between envelope tenant_id and X-Tenant-Id header fails envelope verification.",
+      "signal": {
+        "signal_id": "sig_inv_01JCPZ0115",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:10:00.000Z",
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0115-inv",
+        "idempotency_key": "idem-01JCPZ0115-inv",
+        "mode": "CONFIRMED",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-inv-0115",
+          "X-Correlation-Id": "corr-01JCPZ0115-inv",
+          "X-Idempotency-Key": "idem-01JCPZ0115-inv",
+          "X-Tenant-Id": "tenant-spoofed-99",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": { "text": "spoof attempt" }
+      }
+    }
+  ]
+}

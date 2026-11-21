@@ -1,0 +1,25 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "26be8d1f908cb57b",
+  "turns": 1,
+  "inputTokens": 119164,
+  "outputTokens": 909,
+  "childAgents": 0,
+  "elapsedSeconds": 27,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to audit only the declared G-CORE-050 Step 1 contract diff, then I’ll run the two required SOT checks once.\nThe two required SOT checks pass. The contract diff is narrowly scoped, but I found one consistency defect: the service contract’s required-header list omits `X-Mode`, while the AsyncAPI `MessageHeaders` schema requires it.\n{\n  \"status\": \"needs-review\",\n  \"decision\": \"request-changes\",\n  \"changed_files\": [],\n  \"tests\": {\n    \"check-sot\": \"PASS\",\n    \"api-sot-traceability\": \"PASS\"\n  },\n  \"failures\": [\n    \"session-service.md omits required X-Mode header, inconsistent with AsyncAPI MessageHeaders.\"\n  ],\n  \"blockers\": [\"Required lifecycle headers are not fully consistent.\"],\n  \"next_action\": \"Add X-Mode to session-service.md required headers and rerun both SOT checks.\"\n}",
+  "mandate": "Review only the repaired G-CORE-050 Step 1 session contract diff. Do not edit files. Confirm only session.lifecycle.livepilot.v1 is added in coverage, required lifecycle headers are consistent, SIMULATED mode/DLQ/replay metadata is explicit, schema hash is recorded, and both SOT checks pass. Return strict compact handoff with approve or request-changes decision.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

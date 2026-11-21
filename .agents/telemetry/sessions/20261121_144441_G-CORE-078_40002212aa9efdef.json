@@ -1,0 +1,24 @@
+{
+  "goalId": "G-CORE-078",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "40002212aa9efdef",
+  "turns": 1,
+  "inputTokens": 280053,
+  "outputTokens": 1776,
+  "childAgents": 0,
+  "elapsedSeconds": 50,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to audit only the declared G-CORE-078 scaffold diff, with static evidence separated from unavailable runtime database evidence.\n{\n  \"status\": \"needs-review\",\n  \"changed_files\": [],\n  \"tests\": [\"npm run typecheck — passed\"],\n  \"failures\": [],\n  \"blockers\": [\n    \"Runtime PostgreSQL migration verification is unproven: Docker/PostgreSQL is unavailable, so verify:migrations could not be evidenced against a real database.\"\n  ],\n  \"next_action\": \"Run DATABASE_URL=... npm run verify:migrations against PostgreSQL, then re-review. Static NestJS/TypeScript, pg/Kysely wiring, migration SQL, scope, and secret checks passed.\"\n}",
+  "mandate": "Review only the current G-CORE-078 scaffold diff. Do not edit files. Verify NestJS/TypeScript package, pg plus Kysely wiring, migration correctness, migration verification behavior, scope compliance, and absence of secrets. Note that Docker/PostgreSQL is unavailable in this environment; distinguish static/typecheck evidence from runtime migration evidence. Return approve only if the goal acceptance is fully evidenced; otherwise request-changes with exact blockers.",
+  "touchMap": [
+    "code/services/session-service",
+    "docs/03-architecture/specs/goals/G-CORE-078"
+  ],
+  "commands": [
+    "npm run typecheck; inspect migration verifier; report runtime database evidence status"
+  ]
+}

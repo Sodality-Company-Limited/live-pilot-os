@@ -16,6 +16,45 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-078 | Establish the NestJS session-service scaffold | 2026-11-21 | [`goals/_archived/G-CORE-078.md`](../goals/_archived/G-CORE-078.md) |
+| G-CORE-077 | Deploy Catalog service to DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-077.md`](../goals/_archived/G-CORE-077.md) |
+| G-CORE-076 | Catalog authorization and idempotency | 2026-11-21 | [`goals/_archived/G-CORE-076.md`](../goals/_archived/G-CORE-076.md) |
+| G-CORE-075 | G-CORE-075 | 2026-11-21 | [`goals/_archived/G-CORE-075.md`](../goals/_archived/G-CORE-075.md) |
+| G-CORE-074 | Catalog persistence and RLS | 2026-11-21 | [`goals/_archived/G-CORE-074.md`](../goals/_archived/G-CORE-074.md) |
+| G-CORE-073 | Catalog service contract | 2026-11-21 | [`goals/_archived/G-CORE-073.md`](../goals/_archived/G-CORE-073.md) |
+| G-CORE-070 | Verify the Intent/Risk service release on DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-070.md`](../goals/_archived/G-CORE-070.md) |
+| G-CORE-069 | Package the Intent/Risk service for DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-069.md`](../goals/_archived/G-CORE-069.md) |
+| G-CORE-068 | Wire the Intent/Risk service handler | 2026-11-21 | [`goals/_archived/G-CORE-068.md`](../goals/_archived/G-CORE-068.md) |
+| G-CORE-067 | Establish Intent/Risk durable facts and outbox | 2026-11-21 | [`goals/_archived/G-CORE-067.md`](../goals/_archived/G-CORE-067.md) |
+| G-CORE-066 | Implement deterministic intent and risk domain decisions | 2026-11-21 | [`goals/_archived/G-CORE-066.md`](../goals/_archived/G-CORE-066.md) |
+| G-CORE-065 | Freeze the Intent/Risk service contract | 2026-11-21 | [`goals/_archived/G-CORE-065.md`](../goals/_archived/G-CORE-065.md) |
+| G-CORE-064 | Telemetry DigitalOcean release | 2026-11-21 | [`goals/_archived/G-CORE-064.md`](../goals/_archived/G-CORE-064.md) |
+| G-CORE-063 | Telemetry runtime package | 2026-11-21 | [`goals/_archived/G-CORE-063.md`](../goals/_archived/G-CORE-063.md) |
+| G-CORE-062 | Telemetry safety and audit | 2026-11-21 | [`goals/_archived/G-CORE-062.md`](../goals/_archived/G-CORE-062.md) |
+| G-CORE-061 | Telemetry projections and replay | 2026-11-21 | [`goals/_archived/G-CORE-061.md`](../goals/_archived/G-CORE-061.md) |
+| G-CORE-060 | Telemetry ingestion | 2026-11-21 | [`goals/_archived/G-CORE-060.md`](../goals/_archived/G-CORE-060.md) |
+| G-CORE-059 | Telemetry persistence | 2026-11-21 | [`goals/_archived/G-CORE-059.md`](../goals/_archived/G-CORE-059.md) |
+| G-CORE-058 | Telemetry service contract | 2026-11-21 | [`goals/_archived/G-CORE-058.md`](../goals/_archived/G-CORE-058.md) |
+| G-CORE-057 | Define the JEV/Copilot proposal contract | 2026-11-21 | [`goals/_archived/G-CORE-057.md`](../goals/_archived/G-CORE-057.md) |
+| G-CORE-056 | Deploy session-service to DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-056.md`](../goals/_archived/G-CORE-056.md) |
+| G-CORE-055 | Prepare the session-service runtime package | 2026-11-21 | [`goals/_archived/G-CORE-055.md`](../goals/_archived/G-CORE-055.md) |
+| G-CORE-054 | Enforce session-service safety guards | 2026-11-21 | [`goals/_archived/G-CORE-054.md`](../goals/_archived/G-CORE-054.md) |
+| G-CORE-053 | Wire the live-session lifecycle transport | 2026-11-21 | [`goals/_archived/G-CORE-053.md`](../goals/_archived/G-CORE-053.md) |
+| G-CORE-052 | Implement the live-session lifecycle engine | 2026-11-21 | [`goals/_archived/G-CORE-052.md`](../goals/_archived/G-CORE-052.md) |
+| G-CORE-051 | Add service-owned live-session persistence | 2026-11-21 | [`goals/_archived/G-CORE-051.md`](../goals/_archived/G-CORE-051.md) |
+| G-CORE-050 | Define the live-session lifecycle contract | 2026-11-21 | [`goals/_archived/G-CORE-050.md`](../goals/_archived/G-CORE-050.md) |
+| G-CORE-012 | New Proof, ML, Runtime-Governance, and Observability Skills | 2026-11-21 | [`goals/_archived/G-CORE-012.md`](../goals/_archived/G-CORE-012.md) |
+| G-CORE-011 | Framework-Source Versus Downstream-Project Upgrade Mode | 2026-11-21 | [`goals/_archived/G-CORE-011.md`](../goals/_archived/G-CORE-011.md) |
+| G-CORE-010 | Agent Observability and Resource-Budget Contracts | 2026-11-21 | [`goals/_archived/G-CORE-010.md`](../goals/_archived/G-CORE-010.md) |
+| G-CORE-009 | Artifact and Model Provenance Harness | 2026-11-21 | [`goals/_archived/G-CORE-009.md`](../goals/_archived/G-CORE-009.md) |
+| G-CORE-008 | Failure, Rollback, and Fail-Closed Harness | 2026-11-21 | [`goals/_archived/G-CORE-008.md`](../goals/_archived/G-CORE-008.md) |
+| G-CORE-007 | Statistical Evidence and Benchmark Harness | 2026-11-21 | [`goals/_archived/G-CORE-007.md`](../goals/_archived/G-CORE-007.md) |
+| G-CORE-006 | Mathematical Invariant and Proof-Receipt Harness | 2026-11-21 | [`goals/_archived/G-CORE-006.md`](../goals/_archived/G-CORE-006.md) |
+| G-CORE-005 | Dependency Graph and Scope-Drift Harness | 2026-11-21 | [`goals/_archived/G-CORE-005.md`](../goals/_archived/G-CORE-005.md) |
+| G-CORE-004 | Machine-Readable Goal Contract and Profile Registry | 2026-11-21 | [`goals/_archived/G-CORE-004.md`](../goals/_archived/G-CORE-004.md) |
+| G-CORE-003 | Upgrade Agent OS Goal Contracts, Proof Assurance, and Runtime Governance | 2026-11-21 | [`goals/_archived/G-CORE-003.md`](../goals/_archived/G-CORE-003.md) |
+| G-CORE-002 | Confidence-Aware Agent Execution, Scoring & Routing Governance | 2026-11-21 | [`goals/_archived/G-CORE-002.md`](../goals/_archived/G-CORE-002.md) |
+| G-CORE-001 | Synchronize Ecosystem Governance Rules, Goal-Partitioned Clarification Engine, and CI Harnesses | 2026-11-21 | [`goals/_archived/G-CORE-001.md`](../goals/_archived/G-CORE-001.md) |
 | G-CORE-041 | Programmatic Video Proof-Receipt Generator & Release Card Synthesizer | 2026-10-25 | [`goals/_archived/G-CORE-041.md`](../goals/_archived/G-CORE-041.md) |
 | G-CORE-040 | [Title] | 2026-10-25 | [`goals/_archived/G-CORE-040.md`](../goals/_archived/G-CORE-040.md) |
 | G-CORE-039 | [Title] | 2026-10-25 | [`goals/_archived/G-CORE-039.md`](../goals/_archived/G-CORE-039.md) |
@@ -36,6 +75,14 @@
 | G-CORE-024 | Two-Stage Subagent Review Gate for Specification Compliance and Code Quality | 2026-10-25 | [`goals/_archived/G-CORE-024.md`](../goals/_archived/G-CORE-024.md) |
 | G-CORE-023 | Executable Micro-Task Action Schema and Checkable Step Verification DAG | 2026-10-25 | [`goals/_archived/G-CORE-023.md`](../goals/_archived/G-CORE-023.md) |
 | G-CORE-022 | Mandatory Pre-Execution Design Specification Protocol and Automated Alignment Gate | 2026-10-25 | [`goals/_archived/G-CORE-022.md`](../goals/_archived/G-CORE-022.md) |
+| G-CORE-049 | Implement soda-release-readiness-verifier skill and pre-PR certifier | 2026-10-18 | [`goals/_archived/G-CORE-049.md`](../goals/_archived/G-CORE-049.md) |
+| G-CORE-048 | Implement soda-ast-type-invariants skill and type contract linter | 2026-10-18 | [`goals/_archived/G-CORE-048.md`](../goals/_archived/G-CORE-048.md) |
+| G-CORE-047 | Implement soda-semantic-refactor-engine skill and refactor analyzer | 2026-10-18 | [`goals/_archived/G-CORE-047.md`](../goals/_archived/G-CORE-047.md) |
+| G-CORE-046 | Implement soda-intent-playbook-router skill and task intent classifier | 2026-10-18 | [`goals/_archived/G-CORE-046.md`](../goals/_archived/G-CORE-046.md) |
+| G-CORE-045 | Implement soda-empirical-eval-runner skill and multi-trial benchmark evaluator | 2026-10-18 | [`goals/_archived/G-CORE-045.md`](../goals/_archived/G-CORE-045.md) |
+| G-CORE-044 | Implement soda-skill-authoring-compiler skill and skill validation engine | 2026-10-18 | [`goals/_archived/G-CORE-044.md`](../goals/_archived/G-CORE-044.md) |
+| G-CORE-043 | Implement soda-concept-doc-extractor skill and mental model documentation engine | 2026-10-18 | [`goals/_archived/G-CORE-043.md`](../goals/_archived/G-CORE-043.md) |
+| G-CORE-042 | Implement soda-live-stream-scrubber skill and streaming token buffer cleaner | 2026-10-18 | [`goals/_archived/G-CORE-042.md`](../goals/_archived/G-CORE-042.md) |
 | G-AG-020 | Validate end-to-end coordinator-to-subagent dispatch lifecycle | 2026-10-17 | [`goals/_archived/G-AG-020.md`](../goals/_archived/G-AG-020.md) |
 | G-AG-019 | Enforce exclusive single-owner lease for LLM Wiki retrieval | 2026-10-17 | [`goals/_archived/G-AG-019.md`](../goals/_archived/G-AG-019.md) |
 | G-AG-018 | Capture and redact process execution failure evidence | 2026-10-17 | [`goals/_archived/G-AG-018.md`](../goals/_archived/G-AG-018.md) |
@@ -45,26 +92,14 @@
 | G-AG-014 | Report token budget warning and hard limit states | 2026-10-17 | [`goals/_archived/G-AG-014.md`](../goals/_archived/G-AG-014.md) |
 | G-AG-013 | Normalize provider token counters with fallback estimation | 2026-10-17 | [`goals/_archived/G-AG-013.md`](../goals/_archived/G-AG-013.md) |
 | G-AG-012 | Track mid-session token accumulation and limit halting | 2026-10-17 | [`goals/_archived/G-AG-012.md`](../goals/_archived/G-AG-012.md) |
-| G-CORE-012 | New Proof, ML, Runtime-Governance, and Observability Skills | 2026-09-29 | [`goals/_archived/G-CORE-012.md`](../goals/_archived/G-CORE-012.md) |
 | G-AG-011 | Prune expired and oversized telemetry files | 2026-10-17 | [`goals/_archived/G-AG-011.md`](../goals/_archived/G-AG-011.md) |
-| G-CORE-011 | Framework-Source Versus Downstream-Project Upgrade Mode | 2026-09-29 | [`goals/_archived/G-CORE-011.md`](../goals/_archived/G-CORE-011.md) |
 | G-AG-010 | Load runtime budget parameters from YAML configuration | 2026-10-17 | [`goals/_archived/G-AG-010.md`](../goals/_archived/G-AG-010.md) |
-| G-CORE-010 | Agent Observability and Resource-Budget Contracts | 2026-09-29 | [`goals/_archived/G-CORE-010.md`](../goals/_archived/G-CORE-010.md) |
 | G-AG-009 | Abort streaming provider sessions on budget limits | 2026-10-17 | [`goals/_archived/G-AG-009.md`](../goals/_archived/G-AG-009.md) |
-| G-CORE-009 | Artifact and Model Provenance Harness | 2026-09-29 | [`goals/_archived/G-CORE-009.md`](../goals/_archived/G-CORE-009.md) |
 | G-AG-008 | Prepare provider-neutral bounded session contracts | 2026-10-17 | [`goals/_archived/G-AG-008.md`](../goals/_archived/G-AG-008.md) |
-| G-CORE-008 | Failure, Rollback, and Fail-Closed Harness | 2026-09-29 | [`goals/_archived/G-CORE-008.md`](../goals/_archived/G-CORE-008.md) |
 | G-AG-007 | Execute bounded subprocess commands with line clamping | 2026-10-17 | [`goals/_archived/G-AG-007.md`](../goals/_archived/G-AG-007.md) |
-| G-CORE-007 | Statistical Evidence and Benchmark Harness | 2026-09-29 | [`goals/_archived/G-CORE-007.md`](../goals/_archived/G-CORE-007.md) |
 | G-AG-006 | Record compact session telemetry and failure fingerprints | 2026-10-17 | [`goals/_archived/G-AG-006.md`](../goals/_archived/G-AG-006.md) |
-| G-CORE-006 | Mathematical Invariant and Proof-Receipt Harness | 2026-09-29 | [`goals/_archived/G-CORE-006.md`](../goals/_archived/G-CORE-006.md) |
 | G-AG-005 | Reject full-goal context in step packets | 2026-10-17 | [`goals/_archived/G-AG-005.md`](../goals/_archived/G-AG-005.md) |
-| G-CORE-005 | Dependency Graph and Scope-Drift Harness | 2026-09-29 | [`goals/_archived/G-CORE-005.md`](../goals/_archived/G-CORE-005.md) |
 | G-AG-004 | Compile step-scoped partial context packets | 2026-10-17 | [`goals/_archived/G-AG-004.md`](../goals/_archived/G-AG-004.md) |
-| G-CORE-004 | Machine-Readable Goal Contract and Profile Registry | 2026-09-29 | [`goals/_archived/G-CORE-004.md`](../goals/_archived/G-CORE-004.md) |
 | G-AG-003 | Reject duplicate input prompts for the same goal | 2026-10-17 | [`goals/_archived/G-AG-003.md`](../goals/_archived/G-AG-003.md) |
-| G-CORE-003 | Upgrade Agent OS Goal Contracts, Proof Assurance, and Runtime Governance | 2026-09-29 | [`goals/_archived/G-CORE-003.md`](../goals/_archived/G-CORE-003.md) |
 | G-AG-002 | Enforce independent input and output token ceiling gates | 2026-10-17 | [`goals/_archived/G-AG-002.md`](../goals/_archived/G-AG-002.md) |
-| G-CORE-002 | Confidence-Aware Agent Execution, Scoring & Routing Governance | 2026-10-14 | [`goals/_archived/G-CORE-002.md`](../goals/_archived/G-CORE-002.md) |
 | G-AG-001 | Enforce single-persona and touch-map contracts | 2026-10-17 | [`goals/_archived/G-AG-001.md`](../goals/_archived/G-AG-001.md) |
-| G-CORE-001 | Synchronize Ecosystem Governance Rules, Goal-Partitioned Clarification Engine, and CI Harnesses | 2026-10-14 | [`goals/_archived/G-CORE-001.md`](../goals/_archived/G-CORE-001.md) |

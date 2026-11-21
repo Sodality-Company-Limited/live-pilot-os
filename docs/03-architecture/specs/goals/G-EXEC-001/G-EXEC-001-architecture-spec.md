@@ -1,0 +1,2 @@
+# Architecture Spec: G-EXEC-001
+Execution & Platform Adapter Safety service owns `livepilot.v1.execution.action.updated` and the canonical execution action payload family. It manages durable action dispatch, adapter protocol isolation, timeout/retry policies, reconciliation, and adapter receipts. It does not own margin calculation, inventory reservations, approval mode governance, or the append-only audit ledger.

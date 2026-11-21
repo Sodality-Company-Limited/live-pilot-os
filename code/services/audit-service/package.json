@@ -1,0 +1,17 @@
+{
+  "name": "@livepilot/audit-service",
+  "version": "1.0.0",
+  "description": "LivePilot Audit Ledger Service with immutable hash-chaining and tenant isolation",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/verify-migrations.mjs",
+    "test:unit": "node --test test/unit/*.spec.ts",
+    "test:integration": "node --test test/integration/*.spec.ts",
+    "test:e2e": "node --test test/e2e/*.spec.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

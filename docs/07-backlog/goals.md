@@ -9,12 +9,17 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | Epic | Queue | Notes |
 |------|-------|-------|
 | CORE | [queues/CORE.md](queues/CORE.md) | Core / unscoped |
+| APPR | [queues/APPR.md](queues/APPR.md) | Approval and Control Service |
+| AUDI | [queues/AUDI.md](queues/AUDI.md) | Audit Service & Immutable Decision Ledger |
 | CATA | [queues/CATA.md](queues/CATA.md) | Catalog Service |
 | DAVE | [queues/DAVE.md](queues/DAVE.md) | DAVE Decision System & Governance |
+| EXEC | [queues/EXEC.md](queues/EXEC.md) | Execution & Platform Adapter Safety |
 | IDEN | [queues/IDEN.md](queues/IDEN.md) | Identity and Session Service |
 | INTE | [queues/INTE.md](queues/INTE.md) | Intent/Risk Service |
+| INVT | [queues/INVT.md](queues/INVT.md) | Inventory Service |
 | JEVC | [queues/JEVC.md](queues/JEVC.md) | JEV/Copilot Service |
 | LIVE | [queues/LIVE.md](queues/LIVE.md) | Live-session service |
+| MARG | [queues/MARG.md](queues/MARG.md) | Margin Policy Service |
 | ML | [queues/ML.md](queues/ML.md) | Machine Learning & Cognitive Calibration |
 | OPS | [queues/OPS.md](queues/OPS.md) | DAVE Operations & Deployment Governance |
 | PAY | [queues/PAY.md](queues/PAY.md) | Active queue |

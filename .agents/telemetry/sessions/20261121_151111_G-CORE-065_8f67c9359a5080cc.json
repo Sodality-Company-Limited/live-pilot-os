@@ -1,0 +1,24 @@
+{
+  "goalId": "G-CORE-065",
+  "role": "implementer",
+  "persona": "Systems Reliability & Verification Engineer",
+  "provider": "Antigravity CLI",
+  "model": "gemini-2.5-flash",
+  "sessionKey": "8f67c9359a5080cc",
+  "turns": 1,
+  "inputTokens": 1,
+  "outputTokens": 1,
+  "childAgents": 0,
+  "elapsedSeconds": 1,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "",
+  "mandate": "Verify intent-risk contract schemas and SOT traceability for G-CORE-065",
+  "touchMap": [
+    "docs/03-architecture/api/services/intent-risk-service.md",
+    "docs/03-architecture/api/schemas/nats/intent-risk*.schema.json"
+  ],
+  "commands": [
+    "node docs/03-architecture/specs/goals/G-CORE-065/contract-validation.test.mjs && node scripts/architecture/check-sot.mjs"
+  ]
+}

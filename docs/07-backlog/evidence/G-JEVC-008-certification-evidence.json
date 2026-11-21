@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-JEVC-008",
+  "service": "jev-copilot-service",
+  "contract_id": "jev.copilot.livepilot.v1",
+  "classification": "executable_contract_certification",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "certified_at": "2026-11-21T08:47:15.000Z",
+  "verdict": "PASS-CERTIFIED",
+  "evidence_binding": "Binds G-JEVC-008 service-level contract certification verdicts to the exact git revision, verification commands, exit codes, and physical SHA-256 digests of touched source, test, schema, spec, and SOT files.",
+  "invariants_certified": [
+    {
+      "invariant_id": "INV-01",
+      "name": "Multi-Tenant & Session Isolation Enforced",
+      "status": "PASS",
+      "mechanism": "Physical isolation via RLS and tenant assertions in queries"
+    },
+    {
+      "invariant_id": "INV-02",
+      "name": "Universal Multi-Currency & Zero-Float Token Accounting",
+      "status": "PASS",
+      "mechanism": "Money Value Object with exact BigInt minor integer arithmetic and ceiling division"
+    },
+    {
+      "invariant_id": "INV-03-04",
+      "name": "Evidence Grounding and Calibrated Confidence Threshold",
+      "status": "PASS",
+      "mechanism": "Confidence threshold (7500 bps) and verified hash matching or fail-closed refusal"
+    },
+    {
+      "invariant_id": "INV-05",
+      "name": "Fail-Closed Inference Adapter on Provider Outage",
+      "status": "PASS",
+      "mechanism": "Timeout ceiling and error mapping to degraded mode alerts (LP05005)"
+    },
+    {
+      "invariant_id": "INV-06",
+      "name": "Strict Monotonic FSM State Machine & Invalid Transition Rejection",
+      "status": "PASS",
+      "mechanism": "Deterministic transition matrix and RFC 7807 SuggestionStateTransitionError (LP04001)"
+    },
+    {
+      "invariant_id": "INV-07",
+      "name": "PostgreSQL Optimistic Concurrency Control Locking",
+      "status": "PASS",
+      "mechanism": "Monotonic version bump with optimistic version lock conflict detection"
+    },
+    {
+      "invariant_id": "INV-08",
+      "name": "Transactional Outbox Atomicity (Zero Outbox Orphans)",
+      "status": "PASS",
+      "mechanism": "Atomic commit of suggestion state and outbox events in same transaction"
+    },
+    {
+      "invariant_id": "INV-09",
+      "name": "Distributed Idempotency and Payload Conflict Detection",
+      "status": "PASS",
+      "mechanism": "Semantic fingerprinting, cached replay, and collision detection (IDEMPOTENCY_PAYLOAD_MISMATCH)"
+    },
+    {
+      "invariant_id": "INV-10",
+      "name": "Strict JetStream Ordering Key Propagation",
+      "status": "PASS",
+      "mechanism": "Deterministic header injection: X-Ordering-Key: tenant_id:live_session_id"
+    },
+    {
+      "invariant_id": "INV-11",
+      "name": "Comprehensive PII & Secret Redaction",
+      "status": "PASS",
+      "mechanism": "Recursive redaction of emails, phones, national IDs, credentials, and margins"
+    },
+    {
+      "invariant_id": "INV-12",
+      "name": "Adversarial Prompt Injection Defense Fail-Closed",
+      "status": "PASS",
+      "mechanism": "Prompt sanitizer intercepting jailbreaks and delimiter breakouts (LP05001)"
+    },
+    {
+      "invariant_id": "INV-13",
+      "name": "Emergency Pause Circuit Breaker Fail-Closed",
+      "status": "PASS",
+      "mechanism": "PauseGuard sub-millisecond assertion throwing LP05004 when paused"
+    },
+    {
+      "invariant_id": "INV-14",
+      "name": "Cryptographic Merkle Audit Ledger & Proof Verification",
+      "status": "PASS",
+      "mechanism": "SHA-256 chained ledger with binary Merkle tree inclusion proof validation"
+    },
+    {
+      "invariant_id": "INV-15",
+      "name": "Zero Consequential Mutation Boundary",
+      "status": "PASS",
+      "mechanism": "Advisory proposal boundary with zero direct promotion or inventory execution mutation"
+    }
+  ],
+  "verification_commands": [
+    {
+      "name": "serviceContractsTest",
+      "command": "node code/services/jev-copilot-service/test/service-contracts.test.mjs",
+      "exit_code": 0,
+      "passed": true,
+      "tests_total": 15,
+      "tests_passed": 15,
+      "tests_failed": 0
+    },
+    {
+      "name": "errorCodeRegistryCheck",
+      "command": "node scripts/contract-check/error-code-registry.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "apiSotTraceabilityCheck",
+      "command": "node scripts/api/check-api-sot-traceability.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "architectureSotCheck",
+      "command": "node scripts/architecture/check-sot.mjs",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "tddTraceabilityCheck",
+      "command": "node scripts/testing/check-tdd-traceability.mjs",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "file_digests": {
+    "code/services/jev-copilot-service/test/service-contracts.test.mjs": "2b75078cb794b0bde53fa9da82a34c6b011d182072261a096656982da9062eb0",
+    "code/services/jev-copilot-service/src/domain/suggestion-aggregate.mjs": "86c09e09259c53983820f0ecd378a686ff3d80cf22f3f1c12a0040f12d8c3920",
+    "code/services/jev-copilot-service/src/persistence/suggestion-repository.mjs": "e02bd74bb1d1e1f78fa98773674f2b898e61fdb0975ce9616154625deae7e878",
+    "code/services/jev-copilot-service/src/persistence/outbox-repository.mjs": "4a4172647782738e07d9143dc51dceb92037a20a3b800e4d08cade582a1740a1",
+    "code/services/jev-copilot-service/src/persistence/idempotency-store.mjs": "2a78762b8db20f6aeca04a0ea5e4061ae7a5536e4bc1c5d11d9118c198265915",
+    "code/services/jev-copilot-service/src/provider/inference-adapter.mjs": "201b9f4736d2f32d0f80108fa0c351980217b4cc3a7ec130a6cadd539b2b03a1",
+    "code/services/jev-copilot-service/src/security/pii-redactor.mjs": "ddb232db362792dca0c17c5e5aa09b48e160531ea9d39e795da724ae70368e2c",
+    "code/services/jev-copilot-service/src/security/prompt-sanitizer.mjs": "9c0a982876f1063520dbe20d267051435e95bde8a8b29807ee4705dc1f838669",
+    "code/services/jev-copilot-service/src/security/pause-guard.mjs": "060dbbfd754e9043c86969b4f1e355ebd1bf6a6e06b50c0cf48356d0475bb89d",
+    "code/services/jev-copilot-service/src/audit/merkle-audit-logger.mjs": "9203fa92d4d42f212bd25accb287117d8d0de72350ca5d7e212685497a0df052",
+    "code/services/jev-copilot-service/src/nats/nats-publisher.mjs": "d25078dda0c061a787a1d5896c3f112ae7eba932d3903abdf11266245febb595",
+    "docs/03-architecture/contracts/flows/coverage.yaml": "f570ea02a243d1a6f69976b15501fe5e2da354757f5ccfc3008f1b5bff74d8b2",
+    "docs/03-architecture/api/services/jev-copilot-service.md": "5a845320e2cdbdd2e9686fee42d847ad865b56e95752b5b2b9eaa59f4f3512ab"
+  }
+}

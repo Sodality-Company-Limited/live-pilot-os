@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/margin-evaluation-reply.schema.json",
+  "title": "MarginEvaluationReply",
+  "description": "Versioned NATS reply envelope and payload contract for margin evaluation.",
+  "type": "object",
+  "required": [
+    "verdict_id",
+    "tenant_id",
+    "live_session_id",
+    "proposal_id",
+    "sku",
+    "policy_id",
+    "policy_version",
+    "status",
+    "currency",
+    "scale",
+    "price_minor",
+    "candidate_discount_minor",
+    "net_selling_price_minor",
+    "total_costs_minor",
+    "net_margin_minor",
+    "margin_bps",
+    "floor_bps",
+    "review_band_bps",
+    "correlation_id",
+    "causation_id",
+    "evaluated_at"
+  ],
+  "properties": {
+    "verdict_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Unique identifier of the margin verdict (UUIDv7)"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant scope identifier"
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Live session identifier"
+    },
+    "proposal_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Unique promotion or proposal identifier"
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Product Stock Keeping Unit"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Applied margin policy identifier"
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonic version of the applied margin policy"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["APPROVED", "NEEDS_APPROVAL", "REJECTED", "UNKNOWN"],
+      "description": "Deterministic economic verdict status"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 three-letter currency code"
+    },
+    "scale": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "ISO 4217 minor unit exponent scale"
+    },
+    "price_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Base selling price before discount in integer minor units"
+    },
+    "candidate_discount_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Evaluated candidate discount in integer minor units"
+    },
+    "net_selling_price_minor": {
+      "type": "integer",
+      "description": "Net selling price (price_minor - candidate_discount_minor) in integer minor units"
+    },
+    "total_costs_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sum of COGS, platform fee, shipping fee, and giveaway cost in integer minor units"
+    },
+    "net_margin_minor": {
+      "type": "integer",
+      "description": "Net contribution margin (net_selling_price_minor - total_costs_minor) in integer minor units"
+    },
+    "margin_bps": {
+      "type": "integer",
+      "description": "Calculated margin ratio in basis points (10000 bps = 100.00%) using Banker's Rounding Half-Even"
+    },
+    "floor_bps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Minimum required margin floor threshold in basis points"
+    },
+    "review_band_bps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Review threshold in basis points; margin between floor and review band triggers NEEDS_APPROVAL"
+    },
+    "safer_alternative_discount_minor": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Maximum safe discount preserving floor_bps when status is REJECTED"
+    },
+    "safer_alternative_margin_bps": {
+      "type": ["integer", "null"],
+      "description": "Projected margin in basis points if safer alternative discount is adopted"
+    },
+    "breakdown": {
+      "type": "object",
+      "required": ["cogs_minor", "platform_fee_minor", "shipping_fee_minor"],
+      "properties": {
+        "cogs_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "platform_fee_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shipping_fee_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "giveaway_cost_minor": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Cryptographic SHA-256 digest of input parameters for tamper resistance"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "End-to-end trace correlation ID"
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Direct causal trigger ID"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp of evaluation"
+    },
+    "error_code": {
+      "type": "string",
+      "pattern": "^LP[0-9]{5}$",
+      "description": "Standard LivePilot error code when verdict is REJECTED or UNKNOWN"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Safe descriptive explanation when error_code is present"
+    }
+  },
+  "additionalProperties": false
+}

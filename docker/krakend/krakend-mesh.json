@@ -1,0 +1,88 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.8/krakend.json",
+  "version": 3,
+  "name": "LivePilot Internal Service Mesh Gateway (Node 5)",
+  "port": 8080,
+  "timeout": "5s",
+  "cache_ttl": "60s",
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND-INTERNAL-MESH]",
+      "syslog": false,
+      "stdout": true
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/internal/v1/identity/session/validate",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Content-Type", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/sessions/validate",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["http://livepilot-identity-session:3000"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/internal/v1/sessions/{session_id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Content-Type", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/sessions/{session_id}",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://session-service:3000"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/internal/v1/catalog/products/{product_id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Content-Type", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/products/{product_id}",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://catalog-service:3000"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/internal/v1/inventory/items/{item_id}/availability",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": ["Content-Type", "X-Correlation-Id", "X-Traceparent"],
+      "backend": [
+        {
+          "url_pattern": "/inventory/{item_id}",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["http://inventory-service:3000"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/internal/v1/margin/evaluations",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Content-Type", "X-Correlation-Id", "X-Traceparent", "Idempotency-Key"],
+      "backend": [
+        {
+          "url_pattern": "/evaluations",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["http://margin-policy-service:3000"]
+        }
+      ]
+    }
+  ]
+}

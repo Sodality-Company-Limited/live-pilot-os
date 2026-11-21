@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/jev-copilot-delivery-degraded.schema.json",
+  "title": "livepilot.v1.copilot.delivery.degraded",
+  "description": "NATS JetStream event emitted when jev-copilot-service enters or updates a degraded mode due to provider timeout, circuit-breaker open, or telemetry stream backpressure.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "tenant_id",
+    "live_session_id",
+    "degraded_mode",
+    "reason_code",
+    "observed_at",
+    "consecutive_failures",
+    "circuit_state",
+    "hud_fallback_state"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "degraded_mode": {
+      "type": "string",
+      "enum": [
+        "PROVIDER_OUTAGE",
+        "PROVIDER_LATENCY_EXCEEDED",
+        "GROUNDING_FACT_UNAVAILABLE",
+        "CIRCUIT_OPEN",
+        "RATE_LIMITED"
+      ]
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "LP05001",
+        "LP05002",
+        "LP05003",
+        "LP05004",
+        "LP05005"
+      ]
+    },
+    "detail": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "consecutive_failures": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "circuit_state": {
+      "type": "string",
+      "enum": [
+        "HALF_OPEN",
+        "OPEN",
+        "DEGRADED"
+      ]
+    },
+    "hud_fallback_state": {
+      "type": "string",
+      "enum": [
+        "READ_ONLY_LAST_KNOWN_GOOD",
+        "STATIC_SAFETY_CUES_ONLY",
+        "HUD_ADVISORY_HIDDEN"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "deb97a05b7a95129",
+  "turns": 1,
+  "inputTokens": 127455,
+  "outputTokens": 1024,
+  "childAgents": 0,
+  "elapsedSeconds": 27,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to audit only the declared G-CORE-050 Step 1 diff and verification evidence.\n{\n  \"status\": \"needs-review\",\n  \"changed_files\": [\n    \"docs/03-architecture/api/services/session-service.md\",\n    \"docs/03-architecture/api/asyncapi.yaml\",\n    \"docs/03-architecture/contracts/flows/coverage.yaml\"\n  ],\n  \"tests\": [\n    \"node scripts/architecture/check-sot.mjs — PASS\",\n    \"node scripts/api/check-api-sot-traceability.mjs — PASS\"\n  ],\n  \"failures\": [\n    \"AsyncAPI MessageHeaders does not require X-Idempotency-Key and X-Session-Id, despite the lifecycle contract declaring them required.\",\n    \"AsyncAPI metadata omits explicit lifecycle fact/DLQ/replay metadata and SIMULATED mode semantics required by G-CORE-050.\",\n    \"Coverage addition references a schema hash in the completion gate, but no schema hash is recorded.\"\n  ],\n  \"blockers\": [\n    \"Contract and AsyncAPI metadata are not fully consistent with the goal acceptance criteria.\"\n  ],\n  \"next_action\": \"Align AsyncAPI headers and lifecycle/DLQ/mode metadata with session-service.md, record the schema hash, then rerun both verification commands.\"\n}",
+  "mandate": "Review only the repaired current G-CORE-050 Step 1 diff. Do not edit files. Confirm coverage.yaml contains only the session.lifecycle.livepilot.v1 addition for this step, and review lifecycle contract correctness, AsyncAPI metadata, SOT traceability, and verification evidence. Return strict compact handoff with approve or request-changes decision.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

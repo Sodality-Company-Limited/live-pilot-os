@@ -1,0 +1,22 @@
+# Subagent Dispatch: G-MARG-007 Implementation
+
+- **Assigned Worker:** `worker-marg-007`
+- **Role:** `implementer`
+- **Persona:** `Lead Cloud Architect & SRE Specialist`
+- **Goal:** `G-MARG-007` (Deploy Margin Policy Service to DigitalOcean and Verify Readiness)
+- **Touch Map Boundary (Strictly Enforced):**
+  - `code/services/margin-policy-service/Dockerfile`
+  - `code/services/margin-policy-service/src/server.mjs`
+  - `infra/docker-compose.yml`
+  - `docs/03-architecture/deployment/margin-policy-service-runbook.md`
+  - `docs/07-backlog/goals/G-MARG-007.md`
+  - `docs/07-backlog/queues/MARG.md`
+- **Verification Command:**
+  - `node code/services/margin-policy-service/test/health-probes.test.mjs`
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-MARG-007.md`
+- **Completion Gate:**
+  - Multi-stage Dockerfile authored with unprivileged user and minimal slim base.
+  - HTTP Server entrypoint authored supporting `/healthz` and `/readyz` probes.
+  - Service added to infra/docker-compose.yml with ports, environment, healthcheck, and network wiring.
+  - DigitalOcean deployment runbook documented at `docs/03-architecture/deployment/margin-policy-service-runbook.md`.
+  - Health probes test suite passes 100%.

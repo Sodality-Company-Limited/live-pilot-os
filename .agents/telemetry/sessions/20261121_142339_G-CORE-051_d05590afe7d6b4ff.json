@@ -1,0 +1,25 @@
+{
+  "goalId": "G-CORE-051",
+  "role": "implementer",
+  "persona": "backend-api-engineer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "d05590afe7d6b4ff",
+  "turns": 1,
+  "inputTokens": 155269,
+  "outputTokens": 1095,
+  "childAgents": 0,
+  "elapsedSeconds": 27,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "I’m executing step 1 within the declared touch map, inspecting only the service migration/tests and the scoped G-CORE-051 specification, then I’ll run the recorded migration verification once and stop.\n{\n  \"status\": \"blocked\",\n  \"changed_files\": [],\n  \"tests\": [],\n  \"failures\": [\n    \"Declared service paths do not exist.\",\n    \"No migration/test framework or recorded service migration verification command is present.\"\n  ],\n  \"blockers\": [\n    \"Cannot implement production-ready persistence safely without the service scaffold and executable verification command.\"\n  ],\n  \"next_action\": \"Provide or establish the session-service implementation scaffold and its migration test command, then rerun step 1.\"\n}",
+  "mandate": "Execute only step 1 of G-CORE-051. Add the service-owned live-session persistence migration and tests within the declared touch map. Do not read the full goal card. Preserve unrelated changes. Implement expand/contract safety, tenant/session isolation, optimistic versioning, idempotency uniqueness, and transactional outbox invariants. Return strict compact handoff and stop at the verification checkpoint.",
+  "touchMap": [
+    "code/services/session-service/migrations",
+    "code/services/session-service/tests",
+    "docs/03-architecture/specs/goals/G-CORE-051"
+  ],
+  "commands": [
+    "service migration test command recorded by the implementation repository"
+  ]
+}

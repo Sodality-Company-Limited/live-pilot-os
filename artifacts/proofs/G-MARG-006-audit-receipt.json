@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-MARG-006",
+  "classification": "executable_invariant",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "invariants": [
+    {
+      "id": "G-MARG-006-INV-001",
+      "statement": "Algebraic conservation law: net_margin + cogs + platform_fee + shipping_fee + candidate_discount == original_price holds across 10,000 randomized property trials.",
+      "verification_command": "node tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-MARG-006-INV-002",
+      "statement": "Monotonicity law: For fixed prices and costs, net margin decreases monotonically with increasing candidate discount across 10,000 trials.",
+      "verification_command": "node tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-MARG-006-INV-003",
+      "statement": "Floor soundness: No candidate discount resulting in margin_bps < floor_bps can receive an APPROVED verdict.",
+      "verification_command": "node tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-MARG-006-INV-004",
+      "statement": "Safer alternative boundedness: Recomputed safer discount guarantees margin_bps >= floor_bps and is bounded within [0, original_price].",
+      "verification_command": "node tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "G-MARG-006-INV-005",
+      "statement": "Article V zero-float immunity: All non-integer, float, NaN, and Infinity currency inputs fail closed immediately with TypeError.",
+      "verification_command": "node tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/services/margin-policy-service/src/domain/margin-calculator.mjs",
+      "sha256": "d735214d838d152503571130e491355adca7effaaf74625f4522b59c00c07226"
+    },
+    {
+      "path": "code/services/margin-policy-service/src/margin-policy-service.mjs",
+      "sha256": "a1dea34f091a31b1a3b4b72772988096b8004c122d93a4634887ce5a6d019424"
+    },
+    {
+      "path": "tests/margin-policy-service/margin-property-invariants.test.mjs",
+      "sha256": "59d04858d8db01f2e91f474c14852a27da689bfed17744d2fa18f2e1c74a5aca"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-21T08:41:20.000Z"
+}
