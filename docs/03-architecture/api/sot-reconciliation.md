@@ -87,3 +87,12 @@ event ID, session ID, and payload fingerprint must be checked atomically by
 `duplicate=true`, while a mismatched fingerprint produces a conflict. The
 flow's `telemetry.duplicate.detected.v1` fact and its schema are not yet in the
 canonical NATS catalog, so async contract generation remains open.
+
+### Incremental result: F01-FLOW-005
+
+No public OpenAPI path is generated for late or out-of-order handling. The
+telemetry source fact remains immutable; `occurred_at` drives event-time metrics,
+`received_at` is retained for audit, and reconciliation creates a monotonic
+projection revision. The flow's `telemetry.late.received.v1` and
+`projection.reconciled.v1` contracts are not yet registered in the canonical
+NATS catalog, so async schema generation remains open.
