@@ -171,3 +171,11 @@ No public OpenAPI path is generated for spam/toxic screening. The
 confidence, policy version, and session lineage. Invalid input, model outage,
 and risk-policy unavailability remain explicit rejected/deferred states; the
 moderation command/event pair requires NATS catalog registration.
+
+### Incremental result: F01.2-FLOW-002
+
+No public OpenAPI path is generated for off-platform-attempt detection. The
+internal risk signal retains pattern-set version, language handling, confidence,
+redacted evidence, and session lineage. `PATTERN_SET_UNAVAILABLE`,
+`LANGUAGE_UNSUPPORTED`, and low confidence remain explicit outcomes and do not
+become automatic enforcement or commerce actions.
