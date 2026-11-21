@@ -1,7 +1,7 @@
 # LivePilot OS — SOT Reconciliation Before API Generation
 
-> **Status:** reconciliation gate; API generation is blocked until the blockers in
-> this document are resolved or explicitly approved as pilot decisions.
+> **Status:** incremental reconciliation gate; generation proceeds one approved
+> flow at a time. Unreconciled operations remain blocked.
 > **Scope:** local development and DigitalOcean production only. The production
 > topology remains production-shaped; the live demo injects frontend signals,
 > backend products, and simulated platform actions.
@@ -32,10 +32,10 @@ Generated artifacts cannot introduce behavior absent from a higher authority.
 
 ## Current blockers
 
-1. The operation catalog is a schema/template, not an inventory. The five paths
-   currently present in `openapi.yaml` are not fully traceable to requirement,
+1. Most existing paths in `openapi.yaml` are not fully traceable to requirement,
    acceptance, flow, authorization, state transition, error, event, idempotency,
-   and verification records.
+   and verification records. `createLiveSession` is the first reconciled
+   operation for `F01-FLOW-001`; remaining paths stay draft until generated.
 2. Production identity is still unresolved: OIDC provider, claim mapping, tenant
    authority, service identity, role/capability registry, expiry, and rotation.
    The seeded test-login contract is pilot-only and must not be presented as
@@ -62,3 +62,11 @@ Generation may begin only when each proposed operation has a catalog row contain
 
 The existing API traceability and SOT hierarchy scripts are necessary gates, but
 they do not prove that an empty catalog is semantically complete.
+
+### Incremental result: F01-FLOW-002
+
+No public OpenAPI path is generated for this flow. The service ownership SOT
+explicitly gives `telemetry-service` no public exposure; ingestion remains an
+adapter-to-NATS contract. The flow and NATS catalog still require reconciliation
+of command/event names and payload coverage before the async contract can be
+marked complete.

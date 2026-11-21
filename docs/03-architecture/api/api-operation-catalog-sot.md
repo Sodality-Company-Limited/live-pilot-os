@@ -3,10 +3,10 @@
 > **Status:** Required inventory before OpenAPI generation.
 > **Output:** OpenAPI paths, schemas, examples, contract tests, and coverage registry entries.
 
-> **Current state:** This file defines the required operation record but contains
-> no approved operation inventory yet. `openapi.yaml` remains a transport draft
-> until every path is registered below with complete traceability. See
-> [SOT reconciliation](sot-reconciliation.md).
+> **Current state:** Incremental generation is active. `createLiveSession` is the
+> first approved operation for F01-FLOW-001; remaining operations are generated
+> one flow at a time. `openapi.yaml` remains draft for operations not yet
+> reconciled. See [SOT reconciliation](sot-reconciliation.md).
 
 Every operation is registered using this record:
 
@@ -37,6 +37,29 @@ Every operation is registered using this record:
 No path may be added to OpenAPI without a catalog record and owning flow reference.
 
 ## Recommended pilot operation inventory
+
+## Generated operation inventory — F01-FLOW-001
+
+| Operation ID | Requirement / flow | Route | Owner | Actor/capability | Request / response | Events/jobs | Errors | Idempotency | Verification |
+|---|---|---|---|---|---|---|---|---|---|
+| `createLiveSession` | `BR-F01-001`; `F01-FLOW-001` | `POST /v1/live-sessions` | `session-service`; PostgreSQL `live_sessions` + transactional outbox | Authenticated Host or Operator with `live_session.start`; server-authoritative channel/session scope | `CreateLiveSessionRequest` (`platform`, `channel_ref`, `mode`, `requested_at`); `201` `LiveSessionStartResponse` with `status`, per-source readiness, correlation, schema version | NATS request/reply `session.start.requested.v1`; durable facts `live.session.started.v1`; audit `audit.session.lifecycle.record.v1`; no JEV invocation | `401 AUTHENTICATION_REQUIRED`; `403 SESSION_SCOPE_DENIED`; `404 CHANNEL_NOT_FOUND`; `409 IDEMPOTENCY_KEY_CONFLICT`, `SESSION_ALREADY_LIVE`; `422 UNSUPPORTED_SESSION_MODE`; `424 CHANNEL_NOT_READY`; `429 RATE_LIMITED`; `503 DEPENDENCY_UNAVAILABLE`; `500 INTERNAL_ERROR` | Required `Idempotency-Key`; fingerprint binds actor/session scope, platform, channel, mode, requested time; same key + same fingerprint returns the committed result; mismatch returns `IDEMPOTENCY_PAYLOAD_MISMATCH` | `F01-FLOW-001` authorized/forged actor, idempotent retry, payload mismatch, adapter unavailable/readiness, outbox failure, audit trace; `node scripts/api/check-api-sot-traceability.mjs` |
+
+The flow's internal command and event subjects are deliberately not represented
+as public OpenAPI paths. OpenAPI covers the UI/BFF boundary; NATS schemas govern
+Core BFF → Session Service and durable event delivery. Raw chat/commerce input is
+also excluded from this operation and belongs to F01-FLOW-002.
+
+## Flow boundary decision — F01-FLOW-002
+
+`F01-FLOW-002` produces no public OpenAPI operation. The authoritative service
+ownership matrix declares `telemetry-service` as `Public exposure: none`; the
+platform adapter sends a versioned NATS command to the telemetry boundary. This
+prevents browser/public clients from submitting raw provider payloads and keeps
+source-fact persistence inside the telemetry owner.
+
+| Flow | Public OpenAPI operation | Internal contract | Owner | Current gap |
+|---|---|---|---|---|
+| `F01-FLOW-002` | None by design | `livepilot.v1.telemetry.signal.ingest` → telemetry service; durable telemetry event after commit | `telemetry-service` | Flow SOT names `telemetry.ingest.requested.v1 → telemetry.source.received.v1`, while the canonical NATS catalog names the command `livepilot.v1.telemetry.signal.ingest` and the event `livepilot.v1.telemetry.signal.detected`; Async contract reconciliation is required before generation is considered complete. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
@@ -78,6 +101,7 @@ schemas still require the NATS catalog before AsyncAPI generation.
 
 | Operation | Requirement / detailed flow authorities |
 |---|---|
+| `createLiveSession` | `BR-F01-001`; `F01-FLOW-001` |
 | `loginTestUser` | `REQ-LP-017`; `F05.1-FLOW-001`, `F05.1-FLOW-002` |
 | `getCurrentAuthSession` | `REQ-LP-017`; `F05.1-FLOW-003` |
 | `logoutTestUser` | `REQ-LP-017`; `F05.1-FLOW-004` |
