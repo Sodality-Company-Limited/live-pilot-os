@@ -1,9 +1,11 @@
-# G-CORE-070: Threat Model
+# G-CORE-070 Threat Model
 
-| Threat | Boundary | Mitigation |
+| Threat | Control | Evidence |
 |---|---|---|
-| forged actor/session | gateway/service | signed context and capability checks |
-| duplicate/replay | NATS/inbox | event identity and fingerprint deduplication |
-| stale/unknown dependency | service/adapter | explicit pending/unknown and reconciliation |
-| PII/secret leakage | logs/events/provider | redaction and allow-listed schemas |
-| unsafe external mutation | adapter/control | pause, approval, idempotency, observed-state gates |
+| forged session/tenant/role | server-authoritative authorization and scope checks | negative auth tests |
+| duplicate/replay | idempotency key plus request fingerprint and unique constraint | replay/conflict tests |
+| poison or oversized payload | schema validation, bounded retry, DLQ | contract/chaos tests |
+| sensitive text leakage | minimization, hashing/redaction, safe errors | redaction tests |
+| public infrastructure exposure | private binding and firewall matrix | hardening scan |
+| stale/unknown release | immutable digest and rollback receipt | release evidence |
+

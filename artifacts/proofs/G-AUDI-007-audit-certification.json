@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-AUDI-007",
+  "classification": "executable_invariant",
+  "certification": "PASS",
+  "generated_at": "2026-11-21T08:56:21.756Z",
+  "prr_metrics": {
+    "total_requests": 2000,
+    "tenant_count": 4,
+    "total_duration_ms": 58,
+    "throughput_ops_per_sec": 34482,
+    "latencies_ms": {
+      "p50": 0.078,
+      "p95": 0.136,
+      "p99": 0.663
+    },
+    "sla_p95_target_ms": 50,
+    "sla_p99_target_ms": 100,
+    "lost_or_corrupted_receipts": 0,
+    "hash_chain_splits": 0
+  },
+  "invariants": [
+    {
+      "id": "G-AUDI-007-INV-001",
+      "statement": "All concurrent audit receipt append operations achieve p95 latency < 50ms and p99 < 100ms under load.",
+      "passed": true,
+      "measured_p95_ms": 0.136
+    },
+    {
+      "id": "G-AUDI-007-INV-002",
+      "statement": "Monotonic cryptographic SHA-256 hash chaining serialization guarantees zero forks or hash splits across all tenant partitions.",
+      "passed": true,
+      "hash_chain_integrity": "100% verified"
+    },
+    {
+      "id": "G-AUDI-007-INV-003",
+      "statement": "Tamper-detection invariant asserts any payload modification invalidates hash-chain continuity and triggers rejection.",
+      "passed": true,
+      "tamper_detected": true
+    }
+  ],
+  "source_files": [
+    {
+      "path": "code/services/audit-service/src/application/audit-append.service.ts",
+      "sha256": "786652539e1089052815c7afc97ea4d9026f30d7d2b666eaaf85feb094dafa42"
+    },
+    {
+      "path": "code/services/audit-service/src/application/action-log-query.service.ts",
+      "sha256": "dcbaabecc861c23757431feadb87539a5c402a65ac35ba3c41f7314f1fc670a6"
+    },
+    {
+      "path": "code/services/audit-service/src/infrastructure/audit-record.repository.ts",
+      "sha256": "1fde49514b874c59d3005950c99cc240b0a8cd02c25c7ca7a291508f5bfaee69"
+    },
+    {
+      "path": "code/services/audit-service/test/certification/audit-certification.spec.ts",
+      "sha256": "f1d2c52680cab5264f4c0475813805ac54b5721e86776f0df0f1013bde341a1b"
+    }
+  ]
+}

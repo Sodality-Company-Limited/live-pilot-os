@@ -1,0 +1,21 @@
+{
+  "name": "@livepilot/execution-service",
+  "version": "1.0.0",
+  "description": "LivePilot OS Execution & Platform Adapter Safety Service",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "node test/slice/executionVerticalSliceTest.mjs && node test/reliability/executionReliabilityTest.mjs"
+  },
+  "dependencies": {
+    "nats": "^2.28.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,9 +1,25 @@
-# G-CORE-061: Threat Model
+# G-CORE-061 runtime specification
 
-| Threat | Boundary | Mitigation |
-|---|---|---|
-| forged actor/session | gateway/Core BFF | signed context and server-side capability validation |
-| duplicate/replay | NATS/inbox | event identity and fingerprint deduplication |
-| stale or unknown dependency | service/adapter | explicit pending/unknown and reconciliation |
-| PII/secret leakage | logs/events/provider | redaction and schema allow-list |
-| public Core BFF exposure | KrakenD | private route-prefix and boundary test |
+Goal-specific authority for G-CORE-061.
+
+## Binding invariant
+
+NATS runtime with durable-before-ack and duplicate safety.
+
+## Evidence
+- Architecture: docs/03-architecture/overview.md
+- Technical constraints: docs/03-architecture/technical-specifications-sot.md
+- Quality: docs/03-architecture/software-quality-sot.md
+- Testing: docs/03-architecture/testing-sot.md
+- JEV boundary: docs/03-architecture/jev-agent-runtime-sot.md
+
+## Verification
+The goal's listed command is the minimum reproducible gate; failures block promotion.
+
+## Threats and controls
+- forged tenant/session scope -> authenticate and authorize before read/write;
+- replay/duplicate delivery -> fingerprinted idempotency;
+- prompt/provider leakage -> minimum context, secret isolation, redacted telemetry;
+- unsafe recommendation -> typed validation, evidence/confidence/expiry, deterministic downstream policy;
+- public internal ports -> private binding and deployment scan.
+

@@ -1,0 +1,19 @@
+{
+  "name": "@livepilot/identity-session-service",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.json --outDir dist",
+    "test": "node --test test/*.test.ts src/**/*.test.ts",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.7.2"
+  }
+}

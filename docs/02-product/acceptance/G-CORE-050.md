@@ -1,7 +1,29 @@
-# G-CORE-050 Acceptance Contract
+# Acceptance Contract: G-CORE-050
 
-- **Goal:** Reconcile the approved F01 Core BFF HTTP contract
-- **Feature authority:** F01 Live Chat and Purchase-Signal Analysis.
-- **Requirement authority:** REQ-LP-001 through REQ-LP-006 and F01 flow evidence.
-- **Acceptance:** the declared atomic outcome is observable, session-scoped, contract-valid, fail-closed, auditable, and verified by the goal's test command.
-- **Out of scope:** Portal UI/BFF, domain ownership outside the goal, real marketplace mutation, and production deployment.
+**Goal:** [G-CORE-050](../../07-backlog/goals/G-CORE-050.md)  
+**Title:** Define the live-session lifecycle contract  
+**Status:** in_progress  
+**Assigned:** `developer`  
+**Atomic Outcome:** A versioned, executable lifecycle contract for `session-service`.
+
+## Given-When-Then Specification
+
+### Scenario 1: Nominal Feature Execution
+- **Given** the system environment and runtime configuration are healthy
+- **When** `G-CORE-050` operations are invoked within declared touch map
+- **Then** outcome "A versioned, executable lifecycle contract for `session-service`." is verified with zero errors
+
+### Scenario 2: Zero-Mock & Fail-Closed Invariant
+- **Given** any invalid input, missing dependency, or boundary edge case
+- **When** execution occurs
+- **Then** system fails closed cleanly with informative error, zero mocks, and zero stubs
+
+## Traceability Matrix
+- **Goal Card:** [`G-CORE-050.md`](../../07-backlog/goals/G-CORE-050.md)
+- **Primary Queue:** [queues/CORE.md](../../07-backlog/queues/CORE.md)
+- **Touch Map Boundaries:**
+  - `docs/03-architecture/api/services/session-service.md`
+  - `docs/03-architecture/api/schemas/nats/session-lifecycle.schema.json`
+  - `docs/03-architecture/api/asyncapi.yaml`
+  - `docs/03-architecture/contracts/flows/coverage.yaml`
+  - `docs/03-architecture/specs/goals/G-CORE-050/`

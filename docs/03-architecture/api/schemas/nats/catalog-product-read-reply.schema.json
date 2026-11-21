@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/catalog-product-read-reply.schema.json",
+  "title": "livepilot.v1.catalog.product.read.reply",
+  "description": "Versioned NATS deterministic reply envelope and payload/error contract for livepilot.v1.catalog.product.read.reply.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message_id",
+    "in_reply_to",
+    "message_kind",
+    "subject",
+    "status",
+    "resolution_status",
+    "schema_version",
+    "occurred_at",
+    "producer",
+    "tenant_id",
+    "correlation_id",
+    "mode"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "in_reply_to": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "message_kind": {
+      "type": "string",
+      "const": "reply"
+    },
+    "subject": {
+      "type": "string",
+      "const": "livepilot.v1.catalog.product.read.reply"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "rejected"]
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": ["resolved", "ambiguous", "unresolved"]
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "const": "catalog-service"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+    },
+    "headers": {
+      "$ref": "#/$defs/MessageHeaders"
+    },
+    "data": {
+      "$ref": "#/$defs/ProductFact"
+    },
+    "error": {
+      "$ref": "#/$defs/ReplyError"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "status": { "const": "accepted" },
+        "resolution_status": { "const": "resolved" }
+      },
+      "required": ["data"]
+    },
+    {
+      "properties": {
+        "status": { "const": "rejected" },
+        "resolution_status": { "enum": ["ambiguous", "unresolved"] }
+      },
+      "required": ["error"]
+    }
+  ],
+  "$defs": {
+    "MessageHeaders": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Nats-Msg-Id",
+        "X-Correlation-Id",
+        "X-Tenant-Id",
+        "X-Schema-Version",
+        "X-Producer",
+        "X-Traceparent",
+        "X-Mode"
+      ],
+      "properties": {
+        "Nats-Msg-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Correlation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Causation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Idempotency-Key": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256
+        },
+        "X-Tenant-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Session-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Schema-Version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "X-Producer": {
+          "type": "string",
+          "const": "catalog-service"
+        },
+        "X-Traceparent": {
+          "type": "string",
+          "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-0[0-3]$"
+        },
+        "X-Mode": {
+          "type": "string",
+          "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+        }
+      }
+    },
+    "ProductFact": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "tenant_id",
+        "correlation_id",
+        "causation_id",
+        "schema_version",
+        "producer",
+        "occurred_at",
+        "product_id",
+        "sku",
+        "name",
+        "size",
+        "selling_points",
+        "usage",
+        "price_minor",
+        "currency",
+        "stock_display",
+        "catalog_version",
+        "fact_revision",
+        "freshness_expires_at",
+        "freshness_state",
+        "status",
+        "mode"
+      ],
+      "properties": {
+        "tenant_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "correlation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "causation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "schema_version": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+        "producer": { "type": "string", "const": "catalog-service" },
+        "occurred_at": { "type": "string", "format": "date-time" },
+        "product_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sku": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "size": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "selling_points": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "usage": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "price_minor": { "type": "integer", "minimum": 0 },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "currency_scale": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "stock_display": { "type": "integer", "minimum": 0 },
+        "catalog_version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "fact_revision": { "type": "integer", "minimum": 1 },
+        "freshness_expires_at": { "type": "string", "format": "date-time" },
+        "freshness_state": { "type": "string", "enum": ["fresh", "stale", "unknown"] },
+        "as_of": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["approved", "stale", "withdrawn"] },
+        "approved_claims": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "mode": { "type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"] }
+      }
+    },
+    "ReplyError": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "code",
+        "symbol",
+        "http_status",
+        "type",
+        "title",
+        "message_key",
+        "retry_policy",
+        "retryable",
+        "correlation_id"
+      ],
+      "properties": {
+        "code": { "type": "string", "pattern": "^LP\\d{5}$" },
+        "symbol": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$" },
+        "http_status": { "type": "integer", "minimum": 200, "maximum": 599 },
+        "type": { "type": "string", "format": "uri" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "message_key": { "type": "string", "pattern": "^errors\\.[A-Za-z0-9_.-]+$" },
+        "detail": { "type": "string", "maxLength": 500 },
+        "retry_policy": {
+          "type": "string",
+          "enum": ["never", "retry", "retry_after", "reconcile", "request_new_credential"]
+        },
+        "retryable": { "type": "boolean" },
+        "retry_after_seconds": { "type": ["integer", "null"], "minimum": 0 },
+        "correlation_id": { "type": "string", "minLength": 8, "maxLength": 128 },
+        "details": { "type": "object", "additionalProperties": true }
+      }
+    }
+  }
+}

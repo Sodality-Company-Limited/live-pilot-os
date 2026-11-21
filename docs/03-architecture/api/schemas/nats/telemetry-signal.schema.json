@@ -1,1 +1,235 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.livepilot.invalid/nats/telemetry-signal.schema.json","type":"object","required":["signal_id","session_id","signal_type","occurred_at","payload"],"properties":{"signal_id":{"type":"string","minLength":8},"session_id":{"type":"string","minLength":1},"signal_type":{"type":"string","enum":["chat","viewer_count","product_click","cart_add","payment","order"]},"occurred_at":{"type":"string","format":"date-time"},"payload":{"type":"object","additionalProperties":true}},"additionalProperties":false}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/telemetry-signal.schema.json",
+  "title": "LivePilot Telemetry Signal v1",
+  "description": "Canonical versioned envelope and payload schema for livepilot.v1.telemetry.signal.ingest, livepilot.v1.telemetry.signal.detected, and livepilot.v1.telemetry.signal.dlq.",
+  "type": "object",
+  "required": [
+    "signal_id",
+    "tenant_id",
+    "session_id",
+    "signal_type",
+    "schema_version",
+    "occurred_at",
+    "producer",
+    "correlation_id",
+    "idempotency_key",
+    "mode",
+    "payload"
+  ],
+  "properties": {
+    "signal_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "signal_type": {
+      "type": "string",
+      "enum": [
+        "chat",
+        "viewer_count",
+        "product_click",
+        "cart_add",
+        "checkout",
+        "payment",
+        "order",
+        "engagement",
+        "voucher",
+        "stock"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "persisted",
+        "dispatched",
+        "failed",
+        "dead_lettered"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "provider_event_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "occurred_at_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+    },
+    "payload_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "headers": {
+      "$ref": "#/$defs/MessageHeaders"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "dlq_metadata": {
+      "$ref": "#/$defs/DlqMetadata"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "MessageHeaders": {
+      "type": "object",
+      "required": [
+        "Nats-Msg-Id",
+        "X-Correlation-Id",
+        "X-Idempotency-Key",
+        "X-Tenant-Id",
+        "X-Session-Id",
+        "X-Schema-Version",
+        "X-Producer",
+        "X-Traceparent",
+        "X-Mode"
+      ],
+      "properties": {
+        "Nats-Msg-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Correlation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Causation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Idempotency-Key": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256
+        },
+        "X-Tenant-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Session-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Schema-Version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "X-Producer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Traceparent": {
+          "type": "string",
+          "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-0[0-3]$"
+        },
+        "X-Mode": {
+          "type": "string",
+          "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "DlqMetadata": {
+      "type": "object",
+      "required": [
+        "original_subject",
+        "attempts",
+        "failure_code",
+        "failed_at",
+        "replay_owner"
+      ],
+      "properties": {
+        "original_subject": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "failure_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "failure_detail": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "failed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "replay_owner": {
+          "type": "string",
+          "const": "telemetry-service"
+        },
+        "replay_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

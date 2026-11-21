@@ -1,7 +1,25 @@
-# G-CORE-062: Invariants and Formal Specification
+# G-CORE-062 deployment specification
 
-- INV-001: every result carries tenant/workspace/session, correlation, causation, schema version, and producer lineage.
-- INV-002: duplicate or replayed input is idempotent; conflicting fingerprints are rejected.
-- INV-003: stale, unavailable, low-confidence, pending, or unknown state never becomes verified success.
-- INV-004: no raw PII, credentials, or unverified provider output crosses a public boundary.
-- Proof class: executable contract, property, security, and replay tests; no unsupported theorem claim.
+Goal-specific authority for G-CORE-062.
+
+## Binding invariant
+
+Constrained DigitalOcean runtime with human-approved release evidence.
+
+## Evidence
+- Architecture: docs/03-architecture/overview.md
+- Technical constraints: docs/03-architecture/technical-specifications-sot.md
+- Quality: docs/03-architecture/software-quality-sot.md
+- Testing: docs/03-architecture/testing-sot.md
+- JEV boundary: docs/03-architecture/jev-agent-runtime-sot.md
+
+## Verification
+The goal's listed command is the minimum reproducible gate; failures block promotion.
+
+## Invariants
+- tenant and session scope are preserved;
+- unknown, stale, unauthorized, malformed, timed-out, or unreconciled work fails closed;
+- idempotency is stable for the same key and fingerprint;
+- audit lineage is retained;
+- simulated behavior is visibly labeled.
+

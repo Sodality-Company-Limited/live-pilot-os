@@ -1,0 +1,301 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/catalog-product-updated.schema.json",
+  "title": "livepilot.v1.catalog.product.updated",
+  "description": "Versioned NATS JetStream event and DLQ envelope schema for livepilot.v1.catalog.product.updated and livepilot.v1.catalog.product.updated.dlq.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message_id",
+    "message_kind",
+    "subject",
+    "event_type",
+    "schema_version",
+    "occurred_at",
+    "producer",
+    "tenant_id",
+    "aggregate_type",
+    "aggregate_id",
+    "ordering_key",
+    "correlation_id",
+    "causation_id",
+    "idempotency_key",
+    "mode",
+    "data"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "message_kind": {
+      "type": "string",
+      "enum": ["event", "dlq"]
+    },
+    "subject": {
+      "type": "string",
+      "enum": [
+        "livepilot.v1.catalog.product.updated",
+        "livepilot.v1.catalog.product.updated.dlq"
+      ]
+    },
+    "event_type": {
+      "type": "string",
+      "const": "catalog.product.updated"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "const": "catalog-service"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "aggregate_type": {
+      "type": "string",
+      "const": "catalog_product_fact"
+    },
+    "aggregate_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "ordering_key": {
+      "type": "string",
+      "pattern": "^[^:\\s]+:[^:\\s]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+    },
+    "headers": {
+      "$ref": "#/$defs/MessageHeaders"
+    },
+    "data": {
+      "$ref": "#/$defs/ProductFact"
+    },
+    "dlq_metadata": {
+      "$ref": "#/$defs/DlqMetadata"
+    }
+  },
+  "if": {
+    "anyOf": [
+      { "properties": { "message_kind": { "const": "dlq" } } },
+      { "properties": { "subject": { "const": "livepilot.v1.catalog.product.updated.dlq" } } }
+    ]
+  },
+  "then": {
+    "required": ["dlq_metadata"],
+    "properties": {
+      "message_kind": { "const": "dlq" },
+      "subject": { "const": "livepilot.v1.catalog.product.updated.dlq" }
+    }
+  },
+  "$defs": {
+    "MessageHeaders": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Nats-Msg-Id",
+        "X-Correlation-Id",
+        "X-Idempotency-Key",
+        "X-Tenant-Id",
+        "X-Schema-Version",
+        "X-Producer",
+        "X-Traceparent",
+        "X-Mode"
+      ],
+      "properties": {
+        "Nats-Msg-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Correlation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Causation-Id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "X-Idempotency-Key": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256
+        },
+        "X-Tenant-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Session-Id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "X-Schema-Version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "X-Producer": {
+          "type": "string",
+          "const": "catalog-service"
+        },
+        "X-Traceparent": {
+          "type": "string",
+          "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-0[0-3]$"
+        },
+        "X-Mode": {
+          "type": "string",
+          "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]
+        }
+      }
+    },
+    "ProductFact": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "tenant_id",
+        "correlation_id",
+        "causation_id",
+        "schema_version",
+        "producer",
+        "occurred_at",
+        "product_id",
+        "sku",
+        "name",
+        "size",
+        "selling_points",
+        "usage",
+        "price_minor",
+        "currency",
+        "stock_display",
+        "catalog_version",
+        "fact_revision",
+        "freshness_expires_at",
+        "freshness_state",
+        "status",
+        "mode"
+      ],
+      "properties": {
+        "tenant_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "correlation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "causation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "schema_version": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+        "producer": { "type": "string", "const": "catalog-service" },
+        "occurred_at": { "type": "string", "format": "date-time" },
+        "product_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sku": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "size": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "selling_points": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "usage": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "price_minor": { "type": "integer", "minimum": 0 },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "currency_scale": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "stock_display": { "type": "integer", "minimum": 0 },
+        "catalog_version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "fact_revision": { "type": "integer", "minimum": 1 },
+        "freshness_expires_at": { "type": "string", "format": "date-time" },
+        "freshness_state": { "type": "string", "enum": ["fresh", "stale", "unknown"] },
+        "as_of": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["approved", "stale", "withdrawn"] },
+        "approved_claims": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "mode": { "type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"] }
+      }
+    },
+    "DlqMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_subject",
+        "attempts",
+        "failure_code",
+        "failed_at",
+        "replay_owner",
+        "replay_authorized"
+      ],
+      "properties": {
+        "original_subject": {
+          "type": "string",
+          "const": "livepilot.v1.catalog.product.updated"
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "failure_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "failed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "replay_owner": {
+          "type": "string",
+          "const": "catalog-service"
+        },
+        "replay_authorized": {
+          "type": "boolean"
+        },
+        "replay_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "audit_receipt_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        }
+      }
+    }
+  }
+}

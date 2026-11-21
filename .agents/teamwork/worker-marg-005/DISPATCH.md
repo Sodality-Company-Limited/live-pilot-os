@@ -1,0 +1,21 @@
+# Subagent Dispatch: G-MARG-005 Implementation
+
+- **Assigned Worker:** `worker-marg-005`
+- **Role:** `implementer`
+- **Persona:** `Lead Reliability & Edge-Case Resilience Engineer`
+- **Goal:** `G-MARG-005` (Implement Safer Alternatives, Re-evaluation, and Reliability Engine)
+- **Touch Map Boundary (Strictly Enforced):**
+  - `code/services/margin-policy-service/src/**`
+  - `code/services/margin-policy-service/test/**`
+  - `docs/07-backlog/goals/G-MARG-005.md`
+  - `docs/07-backlog/queues/MARG.md`
+- **Verification Command:**
+  - `npm test --prefix code/services/margin-policy-service`
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-MARG-005.md`
+- **Completion Gate:**
+  - Implementation of F03.3-FLOW-004 through FLOW-008:
+    - Bounded safer discount alternatives and Duo bundle suggestions.
+    - Stale economics detector and auto-reevaluation listener (`catalog.product.updated`).
+    - Idempotency deduplication guard (cached verdicts for duplicate keys).
+    - DLQ interceptor and error classifier.
+    - Zero mocks: unit and resilience tests run 100% green.

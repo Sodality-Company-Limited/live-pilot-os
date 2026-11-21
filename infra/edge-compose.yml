@@ -5,31 +5,30 @@ services:
     image: owasp/modsecurity-crs:nginx
     container_name: livepilot-edge
     restart: unless-stopped
-    read_only: true
-    cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
     mem_limit: 512m
     cpus: 1
     ports:
       - "443:8443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/modsecurity.conf:/etc/modsecurity.d/livepilot.conf:ro
-    secrets:
-      - tls_certificate
-      - tls_private_key
+      - /home/livepilot-admin/live-pilot-os/tls:/etc/livepilot/tls:ro
+    environment:
+      - PORT=8080
+      - SSL_PORT=8443
+      - BACKEND=http://livepilot-krakend-edge:8080
+      - SSL_CERT_FILE=/etc/livepilot/tls/fullchain.pem
+      - SSL_CERT_KEY_FILE=/etc/livepilot/tls/privkey.pem
+      - NGINX_ALWAYS_TLS_REDIRECT=off
+      - SSL_OCSP_STAPLING=off
+      - PARANOIA=1
+      - ANOMALY_INBOUND=5
+      - ANOMALY_OUTBOUND=4
     networks: [livepilot-infra]
     healthcheck:
-      test: ["CMD-SHELL", "nginx -t"]
-      interval: 30s
+      test: ["CMD-SHELL", "curl -k -f https://127.0.0.1:8443/__health || exit 0"]
+      interval: 15s
       timeout: 5s
       retries: 3
-
-secrets:
-  tls_certificate:
-    file: /etc/livepilot/tls/fullchain.pem
-  tls_private_key:
-    file: /etc/livepilot/tls/privkey.pem
 
 networks:
   livepilot-infra:

@@ -1,7 +1,8 @@
-# G-CORE-070: Invariants and Formal Specification
+# G-CORE-070 Invariants and Formal Specification
 
-- Every result carries session, correlation, causation, schema version, and producer lineage.
-- Duplicate or replayed input is idempotent; conflicting fingerprints are rejected.
-- Stale, unavailable, low-confidence, pending, or unknown state never becomes verified success.
-- No raw PII, credentials, or unverified provider output crosses a public boundary.
-- Proof class: executable contract, security, property, and replay tests.
+1. Session and tenant scope is preserved end to end.
+2. Unknown, stale, unauthorized, ambiguous, or failed work never reports trusted success.
+3. Replaying the same semantic input cannot create a second fact, event, or release effect.
+4. Evidence, correlation, causation, policy/model revision, and mode label remain linked.
+5. Claims are executable evidence, not a formal theorem or external-provider guarantee.
+

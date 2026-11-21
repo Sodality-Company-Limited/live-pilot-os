@@ -23,6 +23,7 @@ See [.agents/skills/soda-rest-api/SKILL.md](../../../.agents/skills/soda-rest-ap
 | [portal-bff/openapi.yaml](portal-bff/openapi.yaml) | Browser same-origin `/api/*` contract | Portal BFF |
 | [core-bff/openapi.yaml](core-bff/openapi.yaml) | Private `/internal/v1/core/*` orchestration contract | Core BFF |
 | [services/README.md](services/README.md) | Microservice ownership and NATS contract boundary | Domain services |
+| [services/catalog-service.md](services/catalog-service.md) | Catalog authoritative writer and NATS product-read/update contract (`catalog.product-read.livepilot.v1`) | G-CORE-073 / G-CATA-001 |
 | [asyncapi.yaml](asyncapi.yaml) | NATS JetStream subjects and messages | Internal service contracts |
 | [sdk/livepilot-contracts.ts](sdk/livepilot-contracts.ts) | Typed consumer model surface | UI/BFF/services |
 | [contract-validation-report.md](contract-validation-report.md) | Contract gate results and release blocker | API governance |
@@ -56,6 +57,7 @@ See [.agents/skills/soda-rest-api/SKILL.md](../../../.agents/skills/soda-rest-ap
 - [Error and ProblemDetails SOT](error-problem-details-sot.md)
 - [Error-code SOT](error-codes.md)
 - [Error-code registry](error-codes.yaml)
+- [Service contracts](services/README.md) ([catalog-service](services/catalog-service.md))
 - [Realtime transport SOT](realtime-transport-sot.md)
 - [NATS subject catalog SOT](nats-subject-catalog-sot.md)
 - [Integration adapter contract SOT](integration-adapter-contract-sot.md)
@@ -70,6 +72,7 @@ Run the hierarchy gate from the repository root:
 
 ```bash
 node scripts/architecture/check-sot.mjs
+node scripts/api/check-api-sot-traceability.mjs
 node scripts/contract-check/error-code-registry.mjs
 ```
 

@@ -1,0 +1,24 @@
+# Subagent Dispatch: G-MARG-003 Implementation
+
+- **Assigned Worker:** `worker-marg-003`
+- **Role:** `implementer`
+- **Persona:** `API Gateway & Schema Contract Architect`
+- **Goal:** `G-MARG-003` (Register Margin NATS Schemas, AsyncAPI channels, and Contract Tests)
+- **Touch Map Boundary (Strictly Enforced):**
+  - `docs/03-architecture/api/schemas/nats/margin-evaluation-request.schema.json`
+  - `docs/03-architecture/api/schemas/nats/margin-evaluation-reply.schema.json`
+  - `docs/03-architecture/api/schemas/nats/margin-verdict-recorded.schema.json`
+  - `docs/03-architecture/api/asyncapi.yaml`
+  - `docs/03-architecture/api/nats-subject-catalog-sot.md`
+  - `docs/03-architecture/api/error-codes.yaml`
+  - `tests/contracts/margin/**`
+  - `docs/07-backlog/goals/G-MARG-003.md`
+  - `docs/07-backlog/queues/MARG.md`
+- **Verification Command:**
+  - `node scripts/contract-check/error-code-registry.mjs`
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-MARG-003.md`
+- **Completion Gate:**
+  - JSON schemas for margin evaluation request/reply and verdict recorded event pass draft-07 validation.
+  - AsyncAPI and NATS subject catalog updated with DLQ, ordering keys, and schema references.
+  - Error codes registered in error-codes.yaml.
+  - Contract test suite in tests/contracts/margin/ executes and verifies schema compatibility.

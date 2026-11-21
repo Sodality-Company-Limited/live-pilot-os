@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CATA-007",
+  "service": "catalog-service",
+  "classification": "deployment_readiness_bundle",
+  "source_revision": "7dcd829e6b0b622e4f20df4599a3cf81a81f707d",
+  "generated_at": "2026-11-21T08:38:30.000Z",
+  "verdict": "PASS-SIMULATED",
+  "approval_boundary": {
+    "production_apply_status": "HELD_FOR_HUMAN_APPROVAL",
+    "human_approval_required": true,
+    "autonomous_apply_executed": false,
+    "authorized_scope": "DigitalOcean deployment bundle preparation and non-apply verification only; infra/deploy.sh and terraform apply require explicit Tech Lead / operator sign-off."
+  },
+  "runtime_contract": {
+    "image": "livepilot/catalog-service:latest",
+    "base_image": "node:24-alpine",
+    "multi_stage_build": true,
+    "non_root_user": "node",
+    "init_process": "dumb-init",
+    "internal_port": 3006,
+    "public_ports_published": [],
+    "network": "livepilot-infra",
+    "dependencies": ["postgres", "nats"],
+    "health_endpoints": {
+      "liveness": "/healthz",
+      "readiness": "/readyz"
+    },
+    "simulated_mode_visibility": {
+      "PLATFORM_ADAPTER_MODE": "simulated",
+      "CATALOG_EXECUTION_MODE": "SIMULATED",
+      "visible_in_probes": true
+    }
+  },
+  "verification_checks": [
+    {
+      "name": "dockerfile_and_runtime_probe_check",
+      "command": "python3 embedded Dockerfile + runtime.mjs node --check & HTTP /healthz (200) /readyz (503 fail-closed) probe",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Verified multi-stage node:24-alpine Dockerfile, non-root USER node, dumb-init PID 1, /healthz 200 OK with mode=SIMULATED, and fail-closed /readyz 503 when PostgreSQL/NATS are unreachable."
+    },
+    {
+      "name": "docker_compose_config_validation",
+      "command": "POSTGRES_USER=ci POSTGRES_PASSWORD=ci POSTGRES_DB=ci REDIS_PASSWORD=ci NATS_TOKEN=ci docker compose -f infra/docker-compose.yml config --quiet",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Validated infra/docker-compose.yml YAML syntax, service interpolation, zero public ports on catalog-service, and depends_on service_healthy for postgres and nats."
+    },
+    {
+      "name": "catalog_smoke_static_and_service_suites",
+      "command": "bash infra/catalog-smoke.sh --static-only",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Verified Compose topology/private-network assertions, Dockerfile security directives, and all 4 isolated catalog-service suites (catalogProductFacts, catalogContractCompatibility, catalogQueryVerticalSlice, catalogReliabilityMutation)."
+    },
+    {
+      "name": "infra_hardening_check",
+      "command": "bash infra/verify-hardening.sh",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "LivePilot infrastructure hardening checks passed (SSH hardening, ModSecurity OWASP CRS, edge read_only/cap_drop, and 127.0.0.1-only postgres/redis/nats port bindings)."
+    },
+    {
+      "name": "deployment_doc_links_check",
+      "command": "python3 markdown relative link verification on docs/03-architecture/deployment/catalog-service-release-runbook.md",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Verified all 21 relative file links in catalog-service-release-runbook.md (20 existing deployment/infra/service files + G-CATA-007 evidence receipt)."
+    },
+    {
+      "name": "git_diff_whitespace_check",
+      "command": "git diff --check -- code/services/catalog-service/Dockerfile infra/ docs/03-architecture/deployment/ docs/07-backlog/evidence/G-CATA-007-catalog-deployment-readiness.json",
+      "exit_code": 0,
+      "passed": true,
+      "summary": "Zero whitespace or conflict marker issues in G-CATA-007 touch map artifacts."
+    }
+  ],
+  "governance_check_observation": {
+    "command": "bash scripts/ci/governance-check.sh",
+    "exit_code": 1,
+    "secret_path_scan": "OK",
+    "g_cata_007_status": "clean (no errors attributed to G-CATA-007 artifacts)",
+    "preexisting_repo_issues_outside_touch_map": [
+      "Unrelated historical commit subjects outside G-xxx format",
+      "Unregistered epic AG in docs/07-backlog/goals/G-AG-001..020.md",
+      "Archived G-CORE-034..040 H1 formatting",
+      "Duplicate G-TELM-001 active/archived files"
+    ]
+  },
+  "evidence_limitations": [
+    "No running Docker daemon is available in this workspace (docker info exited non-zero), so full docker build and live container startup against running PostgreSQL/NATS containers could not be executed locally.",
+    "DigitalOcean Droplet apply (infra/deploy.sh deploy) was intentionally NOT executed per G-CATA-007 human approval gate.",
+    "PASS-SIMULATED certifies static packaging, Compose YAML/topology validation, non-root/private-port invariants, embedded HTTP probe runtime behavior, runbook link integrity, and the 4 isolated catalog-service suites."
+  ],
+  "artifacts": [
+    {
+      "path": "code/services/catalog-service/Dockerfile",
+      "sha256": "87cb1b47e272182891e6781e394e02e4fe3730c315940508a52e2e12155f8687"
+    },
+    {
+      "path": "infra/docker-compose.yml",
+      "sha256": "325a3c66a738896971bf4a9bea85d4b232c4b5ad9a1936e2a90383e398fe3631"
+    },
+    {
+      "path": "infra/production/catalog-service.env.example",
+      "sha256": "7431d7240311de951aae51a6748480e307419641fa7c9ee3b1b98c76d77cb376"
+    },
+    {
+      "path": "infra/catalog-smoke.sh",
+      "sha256": "4343d6806721ea5c8cc6879ffeb90331ceef05a1b7f35aca282b01139e4c2127"
+    },
+    {
+      "path": "docs/03-architecture/deployment/catalog-service-release-runbook.md",
+      "sha256": "a026c696f1858da87b7c0554c71dc4092faf51982d31b6d3c0f63d04f500172e"
+    },
+    {
+      "path": "code/services/catalog-service/migrations/001_catalog_product_facts.up.sql",
+      "sha256": "72428e2a32a87ec96805f9caccfc8fd10a128dc1e3117ab4aa2b243d9fae1d65"
+    },
+    {
+      "path": "code/services/catalog-service/migrations/001_catalog_product_facts.down.sql",
+      "sha256": "6ee228100391f47a3f9bf6d8f6a7cdab9152a63c134a5d8f98f49ff8519c6fdb"
+    }
+  ]
+}

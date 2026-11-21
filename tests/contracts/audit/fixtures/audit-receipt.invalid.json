@@ -1,0 +1,184 @@
+{
+  "schema_id": "https://schemas.livepilot.invalid/nats/audit-receipt.schema.json",
+  "contract_id": "audit.receipt.livepilot.v1",
+  "fixtures": [
+    {
+      "id": "invalid-missing-receipt-id",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "receipt_id",
+      "description": "Missing mandatory receipt_id fails schema validation.",
+      "receipt": {
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-receipt-id-too-short",
+      "expected_keywords": ["minLength"],
+      "expected_path_substring": "receipt_id",
+      "description": "receipt_id shorter than 8 characters fails minLength validation.",
+      "receipt": {
+        "receipt_id": "rcpt-01",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-missing-aggregate-id",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "aggregate_id",
+      "description": "Missing mandatory aggregate_id fails schema validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-empty-aggregate-id",
+      "expected_keywords": ["minLength"],
+      "expected_path_substring": "aggregate_id",
+      "description": "aggregate_id with length 0 fails minLength validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-missing-policy-revision",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "policy_revision",
+      "description": "Missing mandatory policy_revision fails schema validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-empty-policy-revision",
+      "expected_keywords": ["minLength"],
+      "expected_path_substring": "policy_revision",
+      "description": "policy_revision with length 0 fails minLength validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-missing-result",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "result",
+      "description": "Missing mandatory result enum fails schema validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-result-enum-unrecognized",
+      "expected_keywords": ["enum"],
+      "expected_path_substring": "result",
+      "description": "Result outside frozen enum ('approved' instead of 'accepted') fails schema validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "approved",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-missing-actor-ref",
+      "expected_keywords": ["required"],
+      "expected_path_substring": "actor_ref",
+      "description": "Missing mandatory actor_ref property (must be string or null) fails schema validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-actor-ref-type-boolean",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "actor_ref",
+      "description": "actor_ref as boolean instead of string or null fails type validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": true,
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": []
+      }
+    },
+    {
+      "id": "invalid-additional-property-forbidden",
+      "expected_keywords": ["additionalProperties"],
+      "expected_path_substring": "unversioned_metadata",
+      "description": "Extra unallowed property violates additionalProperties: false invariant.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": [],
+        "unversioned_metadata": "unauthorized_bypass"
+      }
+    },
+    {
+      "id": "invalid-evidence-ids-non-array",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "evidence_ids",
+      "description": "evidence_ids as string instead of array fails type validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": "not-an-array"
+      }
+    },
+    {
+      "id": "invalid-evidence-ids-contains-non-string",
+      "expected_keywords": ["type"],
+      "expected_path_substring": "evidence_ids",
+      "description": "evidence_ids array item as number instead of string fails items type validation.",
+      "receipt": {
+        "receipt_id": "rcpt-20261121-0001",
+        "aggregate_id": "sess-live-20261121-01",
+        "actor_ref": "operator-alice",
+        "result": "accepted",
+        "policy_revision": "pol-v1.0.0",
+        "evidence_ids": [12345]
+      }
+    }
+  ]
+}

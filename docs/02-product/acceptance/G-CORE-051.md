@@ -1,7 +1,23 @@
 # G-CORE-051 Acceptance Contract
 
-- **Goal:** Register Feature 01 NATS subjects and payload bindings
-- **Feature authority:** F01 Live Chat and Purchase-Signal Analysis.
-- **Requirement authority:** REQ-LP-001 through REQ-LP-006 and F01 flow evidence.
-- **Acceptance:** the declared atomic outcome is observable, session-scoped, contract-valid, fail-closed, auditable, and verified by the goal's test command.
-- **Out of scope:** Portal UI/BFF, domain ownership outside the goal, real marketplace mutation, and production deployment.
+## Scope
+
+Add service-owned live-session persistence using the canonical NestJS/TypeScript,
+PostgreSQL via `pg` + Kysely stack. This contract covers only the migration and
+its executable verification; domain transitions, transport, Redis, and deployment
+are out of scope.
+
+## Acceptance criteria
+
+- A fresh database applies the migration successfully and repeat application is safe.
+- Session identity, tenant/workspace scope, lifecycle status/version, timestamps,
+  idempotency key, audit/outbox linkage, and required indexes are present.
+- Tenant isolation and uniqueness constraints are enforced by executable tests.
+- The expand path is rollback-safe and does not perform a destructive automatic down migration.
+- Session state and outbox records can be committed atomically.
+- Restore/recovery verification is recorded with a reproducible command.
+
+## Verification
+
+Run the service-scoped command recorded by the session-service scaffold and
+`npm test -- session-service` from the repository's supported Node.js workspace.

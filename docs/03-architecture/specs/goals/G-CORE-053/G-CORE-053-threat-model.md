@@ -1,9 +1,12 @@
-# G-CORE-053: Threat Model
+# G-CORE-053 Threat Model
 
-| Threat | Boundary | Mitigation |
+| Threat | Control | Evidence |
 |---|---|---|
-| forged actor/session | gateway/Core BFF | signed context and server-side capability validation |
-| duplicate/replay | NATS/inbox | event identity and fingerprint deduplication |
-| stale or unknown dependency | service/adapter | explicit pending/unknown and reconciliation |
-| PII/secret leakage | logs/events/provider | redaction and schema allow-list |
-| public Core BFF exposure | KrakenD | private route-prefix and boundary test |
+| forged tenant/session/role | server-authoritative context and capability matrix | negative authorization tests |
+| replay/duplicate command | idempotency and version checks | replay tests |
+| poison payload | schema validation, bounded retry, DLQ | NATS failure tests |
+| public data-plane exposure | private binding and firewall matrix | deployment scan |
+| stale release | immutable digest and revision-bound receipt | provenance check |
+
+Secrets remain external to Git and simulated mode cannot mutate a real marketplace.
+

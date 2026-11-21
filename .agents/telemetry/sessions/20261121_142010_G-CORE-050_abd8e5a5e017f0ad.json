@@ -1,0 +1,25 @@
+{
+  "goalId": "G-CORE-050",
+  "role": "reviewer",
+  "persona": "security-code-reviewer",
+  "provider": "Codex CLI",
+  "model": "gpt-5.6-luna",
+  "sessionKey": "abd8e5a5e017f0ad",
+  "turns": 1,
+  "inputTokens": 125268,
+  "outputTokens": 910,
+  "childAgents": 0,
+  "elapsedSeconds": 24,
+  "stopReason": "needs-review",
+  "changedFiles": [],
+  "summary": "Using the repository’s code-review playbook to audit only the declared G-CORE-050 Step 1 scope, then I’ll run the two required verification commands once.\nThe review already found a scope violation in the touched coverage file: an unrelated `catalog.product-read.livepilot.v1` contract was added alongside the session contract. I’m running the mandated checks once to capture the complete evidence before deciding.\n{\"status\":\"needs-review\",\"changed_files\":[],\"tests\":[\"node scripts/architecture/check-sot.mjs — PASS\",\"node scripts/api/check-api-sot-traceability.mjs — PASS\"],\"failures\":[\"Request changes: coverage.yaml adds unrelated catalog.product-read.livepilot.v1 contract outside G-CORE-050 Step 1 scope.\"],\"blockers\":[\"Remove the catalog contract addition and any related catalog files from this step/diff.\"],\"next_action\":\"Re-submit the session-only diff for review.\"}",
+  "mandate": "Review only the current G-CORE-050 Step 1 diff. Do not edit files. Check the declared touch map, scope isolation, session lifecycle contract correctness, AsyncAPI/SOT traceability, and the required verification results. Reject any unrelated change such as catalog contract additions. Return strict compact handoff with approve or request-changes decision.",
+  "touchMap": [
+    "docs/03-architecture/api/services/session-service.md",
+    "docs/03-architecture/api/asyncapi.yaml",
+    "docs/03-architecture/contracts/flows/coverage.yaml"
+  ],
+  "commands": [
+    "node scripts/architecture/check-sot.mjs && node scripts/api/check-api-sot-traceability.mjs"
+  ]
+}

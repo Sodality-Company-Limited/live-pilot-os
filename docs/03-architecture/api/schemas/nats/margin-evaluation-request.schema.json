@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/margin-evaluation-request.schema.json",
+  "title": "MarginEvaluationRequest",
+  "description": "Versioned NATS request envelope and payload contract for synchronous margin evaluation.",
+  "type": "object",
+  "required": [
+    "tenant_id",
+    "live_session_id",
+    "proposal_id",
+    "sku",
+    "currency",
+    "scale",
+    "price_minor",
+    "candidate_discount_minor",
+    "cogs_minor",
+    "platform_fee_minor",
+    "shipping_fee_minor",
+    "correlation_id",
+    "causation_id"
+  ],
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant scope identifier"
+    },
+    "live_session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Live session identifier"
+    },
+    "proposal_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Unique promotion or proposal identifier"
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Product Stock Keeping Unit"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 three-letter currency code (e.g. THB, USD, JPY)"
+    },
+    "scale": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "ISO 4217 minor unit exponent scale (e.g. 0 for JPY, 2 for THB/USD)"
+    },
+    "price_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Base selling price before discount in integer minor units (Article V zero-float invariant)"
+    },
+    "candidate_discount_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Proposed discount amount in integer minor units"
+    },
+    "cogs_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cost of goods sold in integer minor units"
+    },
+    "platform_fee_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Platform commission and transaction fees in integer minor units"
+    },
+    "shipping_fee_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Seller-subsidized shipping cost in integer minor units"
+    },
+    "giveaway_cost_minor": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Optional gift or giveaway cost in integer minor units"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "End-to-end trace correlation ID"
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Direct causal trigger ID"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256,
+      "description": "Idempotency key for deduplication and replay safety"
+    }
+  },
+  "additionalProperties": false
+}

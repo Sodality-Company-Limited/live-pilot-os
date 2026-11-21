@@ -1,0 +1,14 @@
+{
+  "name": "@livepilot/adapter-safety-service",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "node --test test/**/*.spec.ts",
+    "start": "node dist/src/main.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

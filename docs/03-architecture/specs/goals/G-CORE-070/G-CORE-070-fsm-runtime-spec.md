@@ -1,8 +1,4 @@
-# G-CORE-070: FSM Runtime Specification
+# G-CORE-070 FSM Runtime Specification
 
-| State | Trigger | Guard | Failure handling |
-|---|---|---|---|
-| accepted | valid input | scope/schema/idempotency valid | reject invalid input |
-| processing | bounded call | capability and deadline valid | timeout becomes unknown |
-| completed | durable receipt | lineage valid | append audit evidence |
-| deferred | stale/unavailable | fail-closed policy | reconcile or request review |
+Canonical lifecycle: RECEIVED → VALIDATED → PROCESSING → COMMITTED → PUBLISHED; REJECTED, DEFERRED, RECONCILIATION_REQUIRED, DRAINING, and ROLLED_BACK are explicit terminal or recovery outcomes where applicable. Invalid transitions, stale revisions, missing policy/evidence, dependency uncertainty, and failed health checks are rejected or held; they never become success.
+

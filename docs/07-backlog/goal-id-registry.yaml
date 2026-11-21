@@ -12,9 +12,49 @@ epics:
     name: Core / unscoped
     next_seq: 103
     reserved: []
+  APPR:
+    name: Approval and Control Service
+    next_seq: 8
+    reserved: []
+  AUDI:
+    name: Audit Service & Immutable Decision Ledger
+    next_seq: 9
+    reserved: []
+  CATA:
+    name: Catalog Service
+    next_seq: 8
+    reserved: []
   DAVE:
     name: DAVE Decision System & Governance
     next_seq: 7
+    reserved: []
+  EXEC:
+    name: Execution & Platform Adapter Safety
+    next_seq: 9
+    reserved: []
+  IDEN:
+    name: Identity and Session Service
+    next_seq: 10
+    reserved: []
+  INTE:
+    name: Intent/Risk Service
+    next_seq: 3
+    reserved: []
+  INVT:
+    name: Inventory Service
+    next_seq: 10
+    reserved: []
+  JEVC:
+    name: JEV/Copilot Service
+    next_seq: 10
+    reserved: []
+  LIVE:
+    name: Live-session service
+    next_seq: 7
+    reserved: []
+  MARG:
+    name: Margin Policy Service
+    next_seq: 9
     reserved: []
   ML:
     name: Machine Learning & Cognitive Calibration
@@ -22,10 +62,10 @@ epics:
     reserved: []
   OPS:
     name: DAVE Operations & Deployment Governance
-    next_seq: 2
+    next_seq: 4
     reserved: []
   PROMO:
-    name: Promotion Service
+    name: PROMO
     next_seq: 29
     reserved: []
   PROOF:
@@ -34,7 +74,11 @@ epics:
     reserved: []
   SEC:
     name: DAVE Multimodal Security & Privacy Controls
-    next_seq: 2
+    next_seq: 8
+    reserved: []
+  TELM:
+    name: Telemetry Service
+    next_seq: 9
     reserved: []
   UX:
     name: Multimodal UX/UI Design Decision Layer

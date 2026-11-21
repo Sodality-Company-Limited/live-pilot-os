@@ -1,9 +1,21 @@
-# G-CORE-059: Architecture Specification
+# G-CORE-059 domain specification
 
-- Outcome: Produce F01 moderation risk signals.
-- Requirement authority: REQ-LP-001, REQ-LP-003, REQ-LP-004, REQ-LP-016 and linked F01 flow evidence.
-- Boundary: F01 remains session-scoped; Core BFF orchestrates and services own domain state.
-- Ports: approved HTTP/NATS contracts only; no cross-service database access.
-- Safety: authorization, idempotency, timeout/unknown, audit lineage, and explicit mode/freshness are mandatory.
-- Source evidence: the goal touch map and linked F01 SOT authorities.
-- Verification: node scripts/api/check-api-sot-traceability.mjs; node scripts/architecture/check-sot.mjs
+Goal-specific authority for G-CORE-059.
+
+## Binding invariant
+
+Pure deterministic proposal validation; no I/O.
+
+## Evidence
+- Architecture: docs/03-architecture/overview.md
+- Technical constraints: docs/03-architecture/technical-specifications-sot.md
+- Quality: docs/03-architecture/software-quality-sot.md
+- Testing: docs/03-architecture/testing-sot.md
+- JEV boundary: docs/03-architecture/jev-agent-runtime-sot.md
+
+## Verification
+The goal's listed command is the minimum reproducible gate; failures block promotion.
+
+## Ports and boundary
+The service exposes only the contract named by the goal and uses explicit ports for PostgreSQL, NATS, provider, audit, and telemetry where applicable. It cannot own another service's aggregate.
+

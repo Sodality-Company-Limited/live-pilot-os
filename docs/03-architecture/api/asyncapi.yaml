@@ -46,19 +46,88 @@ channels:
   controlPauseRequest:
     address: livepilot.v1.control.pause.request
     messages: {controlPauseRequest: {$ref: '#/components/messages/ControlPauseRequest'}}
+  marginEvaluationRequest:
+    address: livepilot.v1.margin.evaluation.request
+    description: >-
+      Bounded internal NATS query from core-bff and promotion-service to margin-policy-service
+      for synchronous contribution margin arithmetic and margin floor validation.
+      Ordered by tenant_id:session_id:proposal_id; no DLQ and caller reconciles timeouts.
+    messages: {marginEvaluationRequest: {$ref: '#/components/messages/MarginEvaluationRequest'}}
+  marginEvaluationReply:
+    address: livepilot.v1.margin.evaluation.reply
+    description: >-
+      Deterministic NATS reply from margin-policy-service carrying an APPROVED, NEEDS_APPROVAL,
+      REJECTED, or UNKNOWN economic verdict with bounded safer discount alternatives.
+      Ordered by tenant_id:session_id:proposal_id; no DLQ.
+    messages: {marginEvaluationReply: {$ref: '#/components/messages/MarginEvaluationReply'}}
+  marginVerdictRecorded:
+    address: livepilot.v1.margin.verdict.recorded
+    description: >-
+      JetStream at-least-once event published by margin-policy-service only after atomic PostgreSQL
+      verdict persistence and transactional outbox commit. Ordered by tenant_id:session_id,
+      retained for 7 days, retried 5 times with bounded exponential backoff before routing to
+      livepilot.v1.margin.verdict.recorded.dlq.
+    messages: {marginVerdictRecorded: {$ref: '#/components/messages/MarginVerdictRecorded'}}
+  marginVerdictRecordedDlq:
+    address: livepilot.v1.margin.verdict.recorded.dlq
+    description: >-
+      Dead-letter subject for retry-exhausted or poison livepilot.v1.margin.verdict.recorded
+      events. Ordered by tenant_id:session_id, retained for 7 days. Replay requires operator
+      authorization and generates an immutable audit receipt.
+    messages: {marginVerdictRecordedDlq: {$ref: '#/components/messages/MarginVerdictRecordedDlq'}}
+  catalogProductReadRequest:
+    address: livepilot.v1.catalog.product.read.request
+    description: >-
+      Bounded internal NATS query from core-bff and internal services to catalog-service
+      selecting one product_id or sku. Ordered by tenant_id:product_id|sku; no DLQ and no
+      replayable stream; timeout is unknown and requires caller reconciliation.
+    messages: {catalogProductReadRequest: {$ref: '#/components/messages/CatalogProductReadRequest'}}
+  catalogProductReadReply:
+    address: livepilot.v1.catalog.product.read.reply
+    description: >-
+      Deterministic NATS reply from catalog-service to the requesting consumer carrying an
+      approved catalog product fact or an explicit ProblemDetails-compatible refusal (LP11001-LP11005).
+      Ordered by tenant_id:product_id|sku; no DLQ and no replayable stream.
+    messages: {catalogProductReadReply: {$ref: '#/components/messages/CatalogProductReadReply'}}
+  catalogProductUpdated:
+    address: livepilot.v1.catalog.product.updated
+    description: >-
+      JetStream at-least-once event published by catalog-service only after atomic PostgreSQL
+      catalog revision and transactional outbox commit. Ordered by tenant_id:product_id,
+      retained for 7 days or 10 GiB per stream, retried 5 times with bounded exponential
+      backoff before routing to livepilot.v1.catalog.product.updated.dlq. Consumers: core-bff,
+      jev-copilot-service, intent-risk-service, margin-policy-service, inventory-service,
+      promotion-service, decision-engine-service, and audit-service.
+    messages: {catalogProductUpdated: {$ref: '#/components/messages/CatalogProductUpdated'}}
+  catalogProductUpdatedDlq:
+    address: livepilot.v1.catalog.product.updated.dlq
+    description: >-
+      Dead-letter subject for retry-exhausted or poison livepilot.v1.catalog.product.updated
+      events. Ordered by tenant_id:product_id, retained for 7 days or 10 GiB. Replay is
+      disabled by default; only an operator with Catalog-owner and audit capability may
+      authorize bounded tenant-scoped replay, preserving lineage and emitting an audit receipt.
+    messages: {catalogProductUpdatedDlq: {$ref: '#/components/messages/CatalogProductUpdatedDlq'}}
 components:
   messages:
     SessionLifecycleRequest: {name: SessionLifecycleRequest, payload: {$ref: './schemas/nats/session-lifecycle.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     TelemetrySignalIngest: {name: TelemetrySignalIngest, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     TelemetrySignalDetected: {name: TelemetrySignalDetected, payload: {$ref: './schemas/nats/telemetry-signal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     CopilotSuggestionCreated: {name: CopilotSuggestionCreated, payload: {$ref: './schemas/realtime-event.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
-    PromotionProposalRequest: {name: PromotionProposalRequest, title: "Promotion proposal command v1", description: "Fail closed on missing scope, capability, deadline, schema version, stale resource/policy revision, duplicate-conflict, or unknown payload.", x-schema-version: "1.0.0", x-schema-sha256: "f18f0d50abd4ec0b7f191d460646907854ec324114fc263bfb9cb48afb8bc126", payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/PromotionCommandHeaders'}}
-    PromotionProposed: {name: PromotionProposed, title: "Promotion proposed fact v1", description: "Published after the promotion transaction commits; consumers deduplicate by message ID and idempotency fingerprint.", x-schema-version: "1.0.0", x-schema-sha256: "f18f0d50abd4ec0b7f191d460646907854ec324114fc263bfb9cb48afb8bc126", payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/PromotionEventHeaders'}}
-    PromotionDecisionRequest: {name: PromotionDecisionRequest, title: "Promotion decision command v1", description: "Approval is server-authorized and separation-of-duties checked; stale or duplicate-conflict decisions fail closed.", x-schema-version: "1.0.0", x-schema-sha256: "b7259f7ea332af63ba22654619d11ad9cf870711b7cb3a2133b7f163619457ea", payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/PromotionCommandHeaders'}}
-    PromotionDecisionRecorded: {name: PromotionDecisionRecorded, title: "Promotion decision fact v1", description: "Published after the approval decision commits; it cannot claim issuance without observed adapter state.", x-schema-version: "1.0.0", x-schema-sha256: "b7259f7ea332af63ba22654619d11ad9cf870711b7cb3a2133b7f163619457ea", payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/PromotionEventHeaders'}}
+    PromotionProposalRequest: {name: PromotionProposalRequest, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionProposed: {name: PromotionProposed, payload: {$ref: './schemas/nats/promotion-proposal.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionDecisionRequest: {name: PromotionDecisionRequest, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    PromotionDecisionRecorded: {name: PromotionDecisionRecorded, payload: {$ref: './schemas/nats/promotion-decision.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     ExecutionActionUpdated: {name: ExecutionActionUpdated, payload: {$ref: './schemas/nats/execution-update.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     AuditReceiptAppend: {name: AuditReceiptAppend, payload: {$ref: './schemas/nats/audit-receipt.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
     ControlPauseRequest: {name: ControlPauseRequest, payload: {$ref: './schemas/nats/control-pause.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    MarginEvaluationRequest: {name: MarginEvaluationRequest, payload: {$ref: './schemas/nats/margin-evaluation-request.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    MarginEvaluationReply: {name: MarginEvaluationReply, payload: {$ref: './schemas/nats/margin-evaluation-reply.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    MarginVerdictRecorded: {name: MarginVerdictRecorded, payload: {$ref: './schemas/nats/margin-verdict-recorded.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    MarginVerdictRecordedDlq: {name: MarginVerdictRecordedDlq, payload: {$ref: './schemas/nats/margin-verdict-recorded.schema.json'}, headers: {$ref: '#/components/schemas/MessageHeaders'}}
+    CatalogProductReadRequest: {name: CatalogProductReadRequest, payload: {$ref: './schemas/nats/catalog-product-read-request.schema.json'}, headers: {$ref: '#/components/schemas/CatalogMessageHeaders'}}
+    CatalogProductReadReply: {name: CatalogProductReadReply, payload: {$ref: './schemas/nats/catalog-product-read-reply.schema.json'}, headers: {$ref: '#/components/schemas/CatalogMessageHeaders'}}
+    CatalogProductUpdated: {name: CatalogProductUpdated, payload: {$ref: './schemas/nats/catalog-product-updated.schema.json'}, headers: {$ref: '#/components/schemas/CatalogMessageHeaders'}}
+    CatalogProductUpdatedDlq: {name: CatalogProductUpdatedDlq, payload: {$ref: './schemas/nats/catalog-product-updated.schema.json'}, headers: {$ref: '#/components/schemas/CatalogMessageHeaders'}}
   schemas:
     MessageHeaders:
       type: object
@@ -74,21 +143,17 @@ components:
         X-Producer: {type: string}
         X-Traceparent: {type: string}
         X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
-    PromotionCommandHeaders:
-      allOf:
-        - {$ref: '#/components/schemas/MessageHeaders'}
-        - type: object
-          required: [X-Idempotency-Key, X-Session-Id, X-Mode]
-          properties:
-            X-Idempotency-Key: {type: string, minLength: 8, maxLength: 256}
-            X-Session-Id: {type: string, minLength: 1, maxLength: 128}
-            X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
-    PromotionEventHeaders:
-      allOf:
-        - {$ref: '#/components/schemas/MessageHeaders'}
-        - type: object
-          required: [X-Causation-Id, X-Session-Id, X-Mode]
-          properties:
-            X-Causation-Id: {type: string, minLength: 1, maxLength: 128}
-            X-Session-Id: {type: string, minLength: 1, maxLength: 128}
-            X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}
+    CatalogMessageHeaders:
+      type: object
+      required: [Nats-Msg-Id, X-Correlation-Id, X-Tenant-Id, X-Schema-Version, X-Producer, X-Traceparent, X-Mode]
+      properties:
+        Nats-Msg-Id: {type: string}
+        X-Correlation-Id: {type: string}
+        X-Causation-Id: {type: string}
+        X-Idempotency-Key: {type: string}
+        X-Tenant-Id: {type: string}
+        X-Session-Id: {type: string}
+        X-Schema-Version: {type: string}
+        X-Producer: {type: string}
+        X-Traceparent: {type: string}
+        X-Mode: {type: string, enum: [SIMULATED, SANDBOX, CONFIRMED]}

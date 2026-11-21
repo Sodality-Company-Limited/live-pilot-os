@@ -10,13 +10,24 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 |------|-------|-------|
 | CORE | [queues/CORE.md](queues/CORE.md) | Core / unscoped |
 | AG | [queues/AG.md](queues/AG.md) | Agent Runtime and Subagent Governance |
+| APPR | [queues/APPR.md](queues/APPR.md) | Approval and Control Service |
+| AUDI | [queues/AUDI.md](queues/AUDI.md) | Audit Service & Immutable Decision Ledger |
+| CATA | [queues/CATA.md](queues/CATA.md) | Catalog Service |
 | DAVE | [queues/DAVE.md](queues/DAVE.md) | DAVE Decision System & Governance |
+| EXEC | [queues/EXEC.md](queues/EXEC.md) | Execution & Platform Adapter Safety |
+| IDEN | [queues/IDEN.md](queues/IDEN.md) | Identity and Session Service |
+| INTE | [queues/INTE.md](queues/INTE.md) | Intent/Risk Service |
+| INVT | [queues/INVT.md](queues/INVT.md) | Inventory Service |
+| JEVC | [queues/JEVC.md](queues/JEVC.md) | JEV/Copilot Service |
+| LIVE | [queues/LIVE.md](queues/LIVE.md) | Live-session service |
+| MARG | [queues/MARG.md](queues/MARG.md) | Margin Policy Service |
 | ML | [queues/ML.md](queues/ML.md) | Machine Learning & Cognitive Calibration |
 | OPS | [queues/OPS.md](queues/OPS.md) | DAVE Operations & Deployment Governance |
 | PAY | [queues/PAY.md](queues/PAY.md) | Active queue |
-| PROMO | [queues/PROMO.md](queues/PROMO.md) | Promotion Service |
+| PROMO | [queues/PROMO.md](queues/PROMO.md) | PROMO |
 | PROOF | [queues/PROOF.md](queues/PROOF.md) | DAVE Mathematical Invariant & Assurance Proofs |
 | SEC | [queues/SEC.md](queues/SEC.md) | DAVE Multimodal Security & Privacy Controls |
+| TELM | [queues/TELM.md](queues/TELM.md) | Telemetry Service |
 | TEMPLATE | [queues/TEMPLATE.md](queues/TEMPLATE.md) | Active queue |
 | UX | [queues/UX.md](queues/UX.md) | Multimodal UX/UI Design Decision Layer |
 | WEB | [queues/WEB.md](queues/WEB.md) | DAVE Exact Web Application Pipeline |

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/control-mode.schema.json",
+  "title": "ControlMode",
+  "description": "Payload for session approval mode transition commands and state update events",
+  "type": "object",
+  "required": [
+    "session_id",
+    "previous_mode",
+    "current_mode",
+    "control_revision",
+    "actor_ref",
+    "actor_role",
+    "updated_at"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Tenant-scoped live session identifier"
+    },
+    "previous_mode": {
+      "type": "string",
+      "enum": ["RECOMMEND_ONLY", "ASSISTED", "AUTONOMOUS", "NONE"],
+      "description": "Previous approval mode"
+    },
+    "current_mode": {
+      "type": "string",
+      "enum": ["RECOMMEND_ONLY", "ASSISTED", "AUTONOMOUS"],
+      "description": "Newly active approval mode"
+    },
+    "control_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing control-plane revision"
+    },
+    "actor_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Actor identity initiating the mode transition"
+    },
+    "actor_role": {
+      "type": "string",
+      "enum": ["host", "live_ops", "admin"],
+      "description": "Authorized role of the actor"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp of mode transition"
+    },
+    "updated_at_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Exact integer epoch milliseconds (Article V zero-float invariant)"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Optional rationale for mode transition"
+    }
+  },
+  "additionalProperties": false
+}

@@ -79,20 +79,20 @@ domain/application layer and adapters are injected at the boundary.
 |---|---|---|
 | UI | Next.js App Router + TypeScript | `PROPOSED`; secure reads server-side, live interaction client-side |
 | Public API | HTTPS REST + OpenAPI 3.1 | `FROZEN` contract shape; schema compatibility must pass |
-| HTTP framework | NestJS Node adapter on Node.js LTS | `PROPOSED`; transport concerns stay outside the domain core |
-| HTTP validation | NestJS `ValidationPipe` with `class-validator` and `class-transformer` | `PROPOSED`; boundary validation must pass before use-case execution |
+| HTTP framework | NestJS Node adapter on Node.js LTS | `FROZEN` for the current implementation wave; transport concerns stay outside the domain core |
+| HTTP validation | NestJS `ValidationPipe` with `class-validator` and `class-transformer` | `FROZEN` for the current implementation wave; boundary validation must pass before use-case execution |
 | Edge | KrakenD or equivalent stateless gateway | `PROPOSED`; security and latency evidence required |
-| Core/domain services | Node.js LTS, NestJS, TypeScript | `PROPOSED`; service ownership and failure boundaries required |
-| PostgreSQL access | `pg` + Kysely repositories | `PROPOSED`; explicit transactions, outbox, RLS, and audit lineage required |
+| Core/domain services | Node.js LTS, NestJS, TypeScript | `FROZEN` for the current implementation wave; service ownership and failure boundaries required |
+| PostgreSQL access | `pg` + Kysely repositories | `FROZEN` for the current implementation wave; explicit transactions, outbox, RLS, and audit lineage required |
 | Event validation | Ajv + versioned JSON Schema | `PROPOSED`; incompatible versions must fail closed |
-| Internal messaging | NATS request/reply + JetStream | `PROPOSED`; durable consumer/replay/DLQ evidence required |
+| Internal messaging | NATS request/reply + JetStream | `FROZEN` for the current implementation wave; durable consumer/replay/DLQ evidence required |
 | Durable workflows | Temporal | `PROPOSED`; only for timers, approvals, compensation, and reconciliation |
 | Primary data | PostgreSQL | `FROZEN` source-of-truth direction; migrations, RLS, backup/restore required |
 | Ephemeral coordination | Redis | `PROPOSED`; reconstructable cache/dedup/rate-limit only |
 | Evidence archive | Append-only PostgreSQL + S3-compatible object storage | `FROZEN` audit direction; encryption and retention required |
 | Identity | OIDC provider + service-layer authorization | `TBD` provider and operational ownership |
 | Observability | OpenTelemetry, Prometheus, Grafana, centralized logs | `PROPOSED`; SLO dashboards and alert runbooks required |
-| Backend testing | Jest, Supertest, fast-check, real persistence/messaging fixtures | `PROPOSED`; contract, adversarial, replay, and failure evidence required |
+| Backend testing | Jest, Supertest, fast-check, real persistence/messaging fixtures | `FROZEN` for the current implementation wave; contract, adversarial, replay, and failure evidence required |
 | Runtime | Containers on Kubernetes with GitOps equivalent | `PROPOSED`; deployment, rollback, DR, and credential isolation required |
 
 No new Kafka, ClickHouse, OpenSearch, service mesh, or extra microservice is

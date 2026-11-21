@@ -1,8 +1,4 @@
-# G-CORE-070: Worktree and Verification Plan
+# G-CORE-070 Worktree Plan
 
-- Integration branch: epic/CORE.
-- Goal branch: feature/G-CORE-070.
-- Wave command: soda-os goal waves CORE.
-- Parallel goals require pairwise-disjoint operational touch maps.
-- Verification: goal-template and architecture-design harnesses plus API/SOT checks and goal tests.
-- Stop condition: unresolved authority, failed security, or unverified unknown outcome.
+Single feature branch feature/G-CORE-070 with one bounded implementer session and no child subagents. Tests, evidence, and satellite specifications may be added only under the goal touch map. Stop on scope drift, missing SOT authority, failed security gate, or an unverifiable command.
+

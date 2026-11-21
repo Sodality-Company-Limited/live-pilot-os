@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-CORE-073",
+  "classification": "contract_repair",
+  "source_revision": "c561906629f088b3461e1c894873df3b7035a913",
+  "evidence_binding": "This receipt is valid only when the listed source-file hashes and verification exit codes match the current revision.",
+  "verification": [
+    {"command": "node scripts/architecture/check-sot.mjs", "exit_code": 0, "passed": true},
+    {"command": "node scripts/api/check-api-sot-traceability.mjs", "exit_code": 0, "passed": true},
+    {"command": "node scripts/contract-check/error-code-registry.mjs", "exit_code": 0, "passed": true}
+  ],
+  "source_files": [
+    {"path": "docs/03-architecture/api/services/catalog-service.md", "sha256": "ee2e1afc2576df2ce11806bd6c4139fa843a52d9c002f648afced939f38e0a59"},
+    {"path": "docs/03-architecture/api/schemas/catalog-product-read.schema.json", "sha256": "aefa37483a6af22841a749df4d035cbdbec2d5ef3620f2359ea8b324ea3485d5"},
+    {"path": "docs/03-architecture/api/nats-subject-catalog-sot.md", "sha256": "e02f025eb9a1a023607aec072590d72f3ab9ca4e1df3e4cc5284c0ade444fd68"},
+    {"path": "docs/03-architecture/api/error-codes.yaml", "sha256": "0a224fe4a5de7e2c459bd50de7b5e2252d1269c4330a15927983bdbe41906f8c"},
+    {"path": "docs/03-architecture/api/api-operation-catalog-sot.md", "sha256": "5a120cd809e950f14e0823ccf2d109ca368160f565b1ffa961240da6d1f7cbf2"},
+    {"path": "docs/03-architecture/contracts/flows/coverage.yaml", "sha256": "c7d97300441f051f46844ad503a8d08ffd786eefa34797b03c9be0055ff4b2b1"}
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-21T00:00:00.000Z"
+}

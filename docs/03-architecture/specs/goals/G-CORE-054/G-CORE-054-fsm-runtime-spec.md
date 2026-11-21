@@ -1,8 +1,6 @@
-# G-CORE-054: FSM Runtime Specification
+# G-CORE-054 FSM Runtime Specification
 
-| State | Trigger | Guard | Failure handling |
-|---|---|---|---|
-| accepted | valid contract input | scope/schema/idempotency valid | reject invalid input |
-| processing | bounded service/adapter call | deadline and capability valid | timeout becomes unknown |
-| completed | durable receipt/event | lineage and schema valid | append audit evidence |
-| deferred | stale/unavailable/low confidence | fail-closed policy | reconcile or request review |
+Canonical lifecycle states are created, active, paused, and ended. Invalid transitions are rejected, ended is terminal, and every accepted mutation increments the expected version exactly once.
+
+Timeout and dependency uncertainty become pending/unknown or a durable retry/DLQ outcome. They never become success without authoritative evidence.
+

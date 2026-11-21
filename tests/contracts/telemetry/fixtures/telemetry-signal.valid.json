@@ -1,0 +1,447 @@
+{
+  "schema_id": "https://schemas.livepilot.invalid/nats/telemetry-signal.schema.json",
+  "contract_id": "telemetry.signal.livepilot.v1",
+  "fixtures": [
+    {
+      "id": "valid-chat-confirmed-v1-0-0",
+      "category": "chat",
+      "description": "Audience live chat message signal with full W3C traceparent headers and SHA-256 payload digest.",
+      "signal": {
+        "signal_id": "sig_chat_01JCPZ0001",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "chat",
+        "state": "received",
+        "source": "tiktok-live-adapter",
+        "provider_event_id": "tt-chat-99881122",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:00:00.000Z",
+        "occurred_at_ms": 1795248000000,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0001-chat",
+        "idempotency_key": "idem-tenant-alpha-01-sig_chat_01JCPZ0001",
+        "mode": "CONFIRMED",
+        "payload_hash": "b5a974eb8548952c77315db310c1306f824cb0d166275360faaa669e05050237",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-chat-0001",
+          "X-Correlation-Id": "corr-01JCPZ0001-chat",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_chat_01JCPZ0001",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "text": "Price for SKU-101?",
+          "lang": "th",
+          "viewer_handle": "@alice"
+        }
+      }
+    },
+    {
+      "id": "valid-purchase-order-confirmed-v1-0-0",
+      "category": "purchase",
+      "description": "Purchase order completion signal using integer minor-unit Money representation.",
+      "signal": {
+        "signal_id": "sig_ord_01JCPZ0002",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "order",
+        "state": "persisted",
+        "source": "commerce-webhook",
+        "provider_event_id": "ord-evt-554433",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:01:00.000Z",
+        "occurred_at_ms": 1795248060000,
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0002-order",
+        "causation_id": "cause-01JCPZ0002-pay",
+        "idempotency_key": "idem-tenant-alpha-01-sig_ord_01JCPZ0002",
+        "mode": "CONFIRMED",
+        "payload_hash": "c2e31b2f7b6c064f00ebc6da4af29ee9fbfeb7af2bab024291fc03992325f20c",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-order-0002",
+          "X-Correlation-Id": "corr-01JCPZ0002-order",
+          "X-Causation-Id": "cause-01JCPZ0002-pay",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_ord_01JCPZ0002",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "core-bff",
+          "X-Traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-11f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "order_id": "ord-2026-0001",
+          "sku": "SKU-101",
+          "quantity": 2,
+          "total": {
+            "amount_minor": 199000,
+            "currency": "THB",
+            "scale": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "valid-purchase-payment-sandbox-v1-1-0",
+      "category": "purchase",
+      "description": "Purchase payment capture signal on additive minor schema_version 1.1.0.",
+      "signal": {
+        "signal_id": "sig_pay_01JCPZ0003",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "payment",
+        "state": "dispatched",
+        "source": "payment-gateway-adapter",
+        "provider_event_id": "pay-evt-887766",
+        "schema_version": "1.1.0",
+        "occurred_at": "2026-11-21T08:01:30.500Z",
+        "occurred_at_ms": 1795248090500,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0003-payment",
+        "causation_id": "cause-01JCPZ0003-chk",
+        "idempotency_key": "idem-tenant-alpha-01-sig_pay_01JCPZ0003",
+        "mode": "SANDBOX",
+        "payload_hash": "34c2336f34626b3df88648d40a8f6f49002af311f352dfeaea07d1344555995e",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-payment-0003",
+          "X-Correlation-Id": "corr-01JCPZ0003-payment",
+          "X-Causation-Id": "cause-01JCPZ0003-chk",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_pay_01JCPZ0003",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.1.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-5cf92f3577b34da6a3ce929d0e0e4736-22f067aa0ba902b7-01",
+          "X-Mode": "SANDBOX"
+        },
+        "payload": {
+          "payment_id": "pay-2026-0001",
+          "order_id": "ord-2026-0001",
+          "status": "captured",
+          "amount": {
+            "amount_minor": 199000,
+            "currency": "THB",
+            "scale": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "valid-purchase-checkout-v1-0-0",
+      "category": "purchase",
+      "description": "Purchase checkout initiation signal.",
+      "signal": {
+        "signal_id": "sig_chk_01JCPZ0004",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "checkout",
+        "state": "validated",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:02:00.000Z",
+        "occurred_at_ms": 1795248120000,
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0004-checkout",
+        "idempotency_key": "idem-tenant-alpha-01-sig_chk_01JCPZ0004",
+        "mode": "CONFIRMED",
+        "payload_hash": "c509b643aa5a390bdda41d1786042d1c285921fac8d71e9573055299b029a0d5",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-checkout-0004",
+          "X-Correlation-Id": "corr-01JCPZ0004-checkout",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_chk_01JCPZ0004",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "core-bff",
+          "X-Traceparent": "00-6df92f3577b34da6a3ce929d0e0e4736-33f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "checkout_id": "chk-2026-0001",
+          "cart_items": 2,
+          "subtotal": {
+            "amount_minor": 199000,
+            "currency": "THB",
+            "scale": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "valid-purchase-cart-add-simulated-v1-0-0",
+      "category": "purchase",
+      "description": "Purchase cart addition signal in SIMULATED mode.",
+      "signal": {
+        "signal_id": "sig_cart_01JCPZ0005",
+        "tenant_id": "tenant-beta-02",
+        "session_id": "sess-live-20261121-02",
+        "signal_type": "cart_add",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:03:00+07:00",
+        "occurred_at_ms": 1795222980000,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0005-cart",
+        "idempotency_key": "idem-tenant-beta-02-sig_cart_01JCPZ0005",
+        "mode": "SIMULATED",
+        "payload_hash": "494f7d282312887d792cd64b6e5849b60b75bafdc69a24071d24d68e609582ab",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-cart-0005",
+          "X-Correlation-Id": "corr-01JCPZ0005-cart",
+          "X-Idempotency-Key": "idem-tenant-beta-02-sig_cart_01JCPZ0005",
+          "X-Tenant-Id": "tenant-beta-02",
+          "X-Session-Id": "sess-live-20261121-02",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-7ef92f3577b34da6a3ce929d0e0e4736-44f067aa0ba902b7-00",
+          "X-Mode": "SIMULATED"
+        },
+        "payload": {
+          "sku": "SKU-101",
+          "quantity": 1,
+          "unit_price": {
+            "amount_minor": 99500,
+            "currency": "THB",
+            "scale": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "valid-purchase-voucher-v1-0-0",
+      "category": "purchase",
+      "description": "Purchase voucher redemption signal.",
+      "signal": {
+        "signal_id": "sig_vch_01JCPZ0006",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "voucher",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:04:00.000Z",
+        "occurred_at_ms": 1795248240000,
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0006-voucher",
+        "idempotency_key": "idem-tenant-alpha-01-sig_vch_01JCPZ0006",
+        "mode": "CONFIRMED",
+        "payload_hash": "ffaa50bb969d1339f37939af0544582065777badd1eba728f6797546cb744088",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-voucher-0006",
+          "X-Correlation-Id": "corr-01JCPZ0006-voucher",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_vch_01JCPZ0006",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "core-bff",
+          "X-Traceparent": "00-8ff92f3577b34da6a3ce929d0e0e4736-55f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "voucher_code": "LIVE50",
+          "discount": {
+            "amount_minor": 5000,
+            "currency": "THB",
+            "scale": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "valid-engagement-burst-v1-0-0",
+      "category": "engagement",
+      "description": "Audience engagement signal capturing likes/reactions window.",
+      "signal": {
+        "signal_id": "sig_eng_01JCPZ0007",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "engagement",
+        "state": "received",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:05:00.000Z",
+        "occurred_at_ms": 1795248300000,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0007-engage",
+        "idempotency_key": "idem-tenant-alpha-01-sig_eng_01JCPZ0007",
+        "mode": "CONFIRMED",
+        "payload_hash": "1ef8e87154b2bd30423f8a94942db222dd3949aedf5f380491ac39ebbe1d5211",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-engage-0007",
+          "X-Correlation-Id": "corr-01JCPZ0007-engage",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_eng_01JCPZ0007",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-9af92f3577b34da6a3ce929d0e0e4736-66f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "kind": "like_burst",
+          "count": 42,
+          "window_ms": 5000
+        }
+      }
+    },
+    {
+      "id": "valid-engagement-product-click-v1-2-0",
+      "category": "engagement",
+      "description": "Product click engagement signal with additive minor schema 1.2.0 payload metadata.",
+      "signal": {
+        "signal_id": "sig_clk_01JCPZ0008",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "product_click",
+        "schema_version": "1.2.0",
+        "occurred_at": "2026-11-21T08:06:00.000Z",
+        "occurred_at_ms": 1795248360000,
+        "producer": "core-bff",
+        "correlation_id": "corr-01JCPZ0008-click",
+        "idempotency_key": "idem-tenant-alpha-01-sig_clk_01JCPZ0008",
+        "mode": "CONFIRMED",
+        "payload_hash": "b74352b3c624edcc41c029caeacbb7af6181c27e4454e28caab98a3423635e36",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-click-0008",
+          "X-Correlation-Id": "corr-01JCPZ0008-click",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_clk_01JCPZ0008",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.2.0",
+          "X-Producer": "core-bff",
+          "X-Traceparent": "00-abf92f3577b34da6a3ce929d0e0e4736-77f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "sku": "SKU-101",
+          "position": 1,
+          "surface": "live_pinned_card",
+          "ab_variant": "v2"
+        }
+      }
+    },
+    {
+      "id": "valid-system-viewer-count-v1-0-0",
+      "category": "system",
+      "description": "System stream telemetry snapshot reporting concurrent viewer count.",
+      "signal": {
+        "signal_id": "sig_sys_01JCPZ0009",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "viewer_count",
+        "state": "dispatched",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:07:00.000Z",
+        "occurred_at_ms": 1795248420000,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0009-viewers",
+        "idempotency_key": "idem-tenant-alpha-01-sig_sys_01JCPZ0009",
+        "mode": "CONFIRMED",
+        "payload_hash": "6bf3af06182781a5ca2f113ddd77266e08de16b672df7a7bd709ca59db69bb21",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-viewers-0009",
+          "X-Correlation-Id": "corr-01JCPZ0009-viewers",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_sys_01JCPZ0009",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-bcf92f3577b34da6a3ce929d0e0e4736-88f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "concurrent_viewers": 1284,
+          "peak_viewers": 1500,
+          "region": "ap-southeast-1"
+        }
+      }
+    },
+    {
+      "id": "valid-system-stock-threshold-v1-0-0",
+      "category": "system",
+      "description": "System inventory stock threshold telemetry signal.",
+      "signal": {
+        "signal_id": "sig_sys_01JCPZ0010",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "stock",
+        "state": "persisted",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:08:00.000Z",
+        "occurred_at_ms": 1795248480000,
+        "producer": "platform-adapters",
+        "correlation_id": "corr-01JCPZ0010-stock",
+        "idempotency_key": "idem-tenant-alpha-01-sig_sys_01JCPZ0010",
+        "mode": "CONFIRMED",
+        "payload_hash": "0e49d1b1b42b88f0a5a2fb85100f4d85a339b43dcb1aaa4a1dd137d8ba8ad211",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-stock-0010",
+          "X-Correlation-Id": "corr-01JCPZ0010-stock",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_sys_01JCPZ0010",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "platform-adapters",
+          "X-Traceparent": "00-cdf92f3577b34da6a3ce929d0e0e4736-99f067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "sku": "SKU-101",
+          "available_units": 18,
+          "threshold_state": "low_stock"
+        }
+      }
+    },
+    {
+      "id": "valid-system-dlq-envelope-v1-0-0",
+      "category": "system",
+      "description": "System DLQ dead-lettered telemetry signal preserving dlq_metadata and telemetry-service replay ownership.",
+      "signal": {
+        "signal_id": "sig_dlq_01JCPZ0011",
+        "tenant_id": "tenant-alpha-01",
+        "session_id": "sess-live-20261121-01",
+        "signal_type": "order",
+        "state": "dead_lettered",
+        "schema_version": "1.0.0",
+        "occurred_at": "2026-11-21T08:09:00.000Z",
+        "occurred_at_ms": 1795248540000,
+        "producer": "telemetry-service",
+        "correlation_id": "corr-01JCPZ0011-dlq",
+        "causation_id": "cause-01JCPZ0011-retry5",
+        "idempotency_key": "idem-tenant-alpha-01-sig_dlq_01JCPZ0011",
+        "mode": "CONFIRMED",
+        "payload_hash": "87e054a567629695911c846248732ee3cea35c29f8ce1cd4951b610912aa877e",
+        "headers": {
+          "Nats-Msg-Id": "nats-msg-dlq-0011",
+          "X-Correlation-Id": "corr-01JCPZ0011-dlq",
+          "X-Causation-Id": "cause-01JCPZ0011-retry5",
+          "X-Idempotency-Key": "idem-tenant-alpha-01-sig_dlq_01JCPZ0011",
+          "X-Tenant-Id": "tenant-alpha-01",
+          "X-Session-Id": "sess-live-20261121-01",
+          "X-Schema-Version": "1.0.0",
+          "X-Producer": "telemetry-service",
+          "X-Traceparent": "00-def92f3577b34da6a3ce929d0e0e4736-aaf067aa0ba902b7-01",
+          "X-Mode": "CONFIRMED"
+        },
+        "payload": {
+          "order_id": "ord-2026-9999",
+          "sku": "SKU-999",
+          "quantity": 1,
+          "total": {
+            "amount_minor": 50000,
+            "currency": "THB",
+            "scale": 2
+          }
+        },
+        "dlq_metadata": {
+          "original_subject": "livepilot.v1.telemetry.signal.ingest",
+          "attempts": 5,
+          "failure_code": "LP12005",
+          "failure_detail": "Exhausted 5 exponential backoff attempts during downstream outage.",
+          "failed_at": "2026-11-21T08:09:05.000Z",
+          "replay_owner": "telemetry-service",
+          "replay_id": "replay-01JCPZ0011"
+        }
+      }
+    }
+  ]
+}

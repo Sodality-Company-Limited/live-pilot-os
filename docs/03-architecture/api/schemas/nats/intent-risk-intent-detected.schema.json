@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/nats/telemetry.intent.detected.v1.schema.json",
+  "title": "telemetry.intent.detected.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "event_type", "occurred_at", "live_session_id", "tenant_id", "correlation_id", "causation_id", "schema_version", "producer", "idempotency_key", "policy_version", "model_revision", "category", "confidence", "evidence", "redacted_evidence_ids", "propagation", "mode", "outcome"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 8, "maxLength": 128}, "event_type": {"const": "telemetry.intent.detected.v1"}, "occurred_at": {"type": "string", "format": "date-time"},
+    "live_session_id": {"type": "string", "minLength": 1, "maxLength": 128}, "tenant_id": {"type": "string", "minLength": 1, "maxLength": 128}, "correlation_id": {"type": "string", "minLength": 8, "maxLength": 128}, "causation_id": {"type": "string", "minLength": 8, "maxLength": 128}, "schema_version": {"const": "1"}, "producer": {"const": "intent-risk-service"}, "idempotency_key": {"type": "string", "minLength": 8, "maxLength": 256},
+    "policy_version": {"const": "risk-policy-pilot-v1"}, "model_revision": {"type": "string", "minLength": 1, "maxLength": 128}, "category": {"enum": ["SPAM", "TOXIC", "SCAM", "OFF_PLATFORM", "COORDINATED_BOT"]}, "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "evidence": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"type": "object", "additionalProperties": false, "required": ["evidence_id", "kind", "redacted"], "properties": {"evidence_id": {"type": "string", "minLength": 1, "maxLength": 128}, "kind": {"type": "string", "enum": ["message_hash", "pattern_ref", "signal_ref"]}, "redacted": {"const": true}, "summary": {"type": "string", "maxLength": 512, "pattern": "^[^\\r\\n]*$"}}}},
+    "redacted_evidence_ids": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"type": "string", "minLength": 1, "maxLength": 128}}, "propagation": {"type": "object", "additionalProperties": false, "required": ["traceparent"], "properties": {"traceparent": {"type": "string", "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-0[1-3]$"}}}, "mode": {"enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]}, "outcome": {"const": "DETECTED"}
+  }
+}

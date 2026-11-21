@@ -1,0 +1,21 @@
+# Orchestrator Dispatch: AUDI Epic Execution
+
+- **Target Epic:** AUDI
+- **Goals In Scope:** `G-AUDI-001` through `G-AUDI-008`
+- **Role:** Autonomous Orchestrator Supervisor
+- **Persona:** `Software Architect & Lead Systems Engineer`
+- **Primary Execution Target:** `G-AUDI-001` (Freeze the Audit service contract & error registry)
+- **Lifecycle Mode:** Sequential Autonomous Execution
+- **Touch Map Boundaries:**
+  - `docs/03-architecture/api/services/audit-service.md`
+  - `docs/03-architecture/api/asyncapi.yaml`
+  - `docs/03-architecture/api/schemas/nats/audit-receipt.schema.json`
+  - `docs/03-architecture/api/nats-subject-catalog-sot.md`
+  - `docs/03-architecture/api/error-codes.yaml`
+  - `docs/07-backlog/goals/G-AUDI-*.md`
+  - `docs/07-backlog/queues/AUDI.md`
+- **Verification Harness:**
+  - `node scripts/contract-check/error-code-registry.mjs`
+  - `node scripts/api/check-api-sot-traceability.mjs`
+  - `node scripts/architecture/check-sot.mjs`
+  - `node scripts/harness/goal-template-conformance-harness.mjs --file docs/07-backlog/goals/G-AUDI-001.md`
