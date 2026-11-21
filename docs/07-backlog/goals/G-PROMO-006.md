@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-006
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-006: Promotion policy approval inventory and execution integrations
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion policy approval inventory and execution integrations  
 **Epic:** PROMO  

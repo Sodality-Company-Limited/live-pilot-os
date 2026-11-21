@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-004
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-004: Promotion proposal lifecycle and idempotency
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion proposal lifecycle and idempotency  
 **Epic:** PROMO  

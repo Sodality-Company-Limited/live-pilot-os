@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-016
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-016: Promotion NATS adapter boundary
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion NATS adapter boundary  
 **Epic:** PROMO  

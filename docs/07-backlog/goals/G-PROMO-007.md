@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-007
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-007: Promotion reliability pause retry DLQ and audit
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion reliability pause retry DLQ and audit  
 **Epic:** PROMO  

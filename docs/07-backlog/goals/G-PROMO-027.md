@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-027
   version: 2
   kind: feature
-  status: planned
+  status: blocked
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-027: Promotion API architecture and release gates
 
-**Status:** planned  
+**Status:** blocked
 **Kind:** feature  
 **Atomic outcome:** Promotion API architecture and release gates  
 **Epic:** PROMO  

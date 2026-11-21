@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-026](../../07-backlog/goals/G-PROMO-026.md)  
 **Title:** Promotion service-level verification matrix  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion service-level verification matrix
 

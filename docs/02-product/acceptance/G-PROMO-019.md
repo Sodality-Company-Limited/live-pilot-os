@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-019](../../07-backlog/goals/G-PROMO-019.md)  
 **Title:** Promotion margin policy integration  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion margin policy integration
 

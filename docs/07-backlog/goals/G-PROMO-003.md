@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-003
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-003: Promotion persistence and transactional outbox
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion persistence and transactional outbox  
 **Epic:** PROMO  

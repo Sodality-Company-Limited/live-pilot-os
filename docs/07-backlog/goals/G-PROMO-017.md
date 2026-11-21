@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-017
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-017: Promotion proposal vertical slice
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion proposal vertical slice  
 **Epic:** PROMO  

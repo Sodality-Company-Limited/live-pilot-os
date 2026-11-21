@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-023](../../07-backlog/goals/G-PROMO-023.md)  
 **Title:** Promotion pause expiry cancellation workflow  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion pause expiry cancellation workflow
 

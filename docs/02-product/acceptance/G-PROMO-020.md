@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-020](../../07-backlog/goals/G-PROMO-020.md)  
 **Title:** Promotion approval control integration  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion approval control integration
 

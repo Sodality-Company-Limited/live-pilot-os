@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-022
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-022: Promotion execution safety integration
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion execution safety integration  
 **Epic:** PROMO  

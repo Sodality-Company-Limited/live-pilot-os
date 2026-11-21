@@ -2,7 +2,7 @@
 
 **Goal:** [G-PROMO-017](../../07-backlog/goals/G-PROMO-017.md)  
 **Title:** Promotion proposal vertical slice  
-**Status:** planned  
+**Status:** review
 **Assigned:** `aether_tester`  
 **Atomic Outcome:** Promotion proposal vertical slice
 

@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-013
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-013: Promotion authorization and idempotency boundary
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion authorization and idempotency boundary  
 **Epic:** PROMO  

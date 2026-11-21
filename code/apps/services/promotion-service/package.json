@@ -1,0 +1,34 @@
+{
+  "name": "@live-pilot/promotion-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Authoritative Promotion/Voucher lifecycle service runtime.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc src/main.ts --outDir dist --target ES2022 --module commonjs --moduleResolution node --esModuleInterop --experimentalDecorators --emitDecoratorMetadata --strict --skipLibCheck",
+    "start": "node dist/main.js",
+    "start:dev": "tsx src/main.ts",
+    "typecheck": "tsc src/main.ts --noEmit --target ES2022 --module commonjs --moduleResolution node --esModuleInterop --experimentalDecorators --emitDecoratorMetadata --strict --skipLibCheck"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "nats": "^2.29.3",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.10.9",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-008
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-008: Promotion service runtime health security and observability
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion service runtime health security and observability  
 **Epic:** PROMO  

@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-005
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-005: Promotion status read model and reconciliation projection
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion status read model and reconciliation projection  
 **Epic:** PROMO  

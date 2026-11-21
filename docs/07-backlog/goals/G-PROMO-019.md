@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-019
   version: 2
   kind: feature
-  status: planned
+  status: review
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-019: Promotion margin policy integration
 
-**Status:** planned  
+**Status:** review
 **Kind:** feature  
 **Atomic outcome:** Promotion margin policy integration  
 **Epic:** PROMO  

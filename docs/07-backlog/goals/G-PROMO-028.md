@@ -3,7 +3,7 @@ goal_contract:
   id: G-PROMO-028
   version: 2
   kind: feature
-  status: planned
+  status: blocked
   profiles:
     - core
   atomicity:
@@ -50,7 +50,7 @@ goal_contract:
 
 # G-PROMO-028: Promotion service DigitalOcean release
 
-**Status:** planned  
+**Status:** blocked
 **Kind:** feature  
 **Atomic outcome:** Promotion service DigitalOcean release  
 **Epic:** PROMO  
