@@ -187,6 +187,14 @@ window, revision, and freshness only when the window is complete. Missing
 threshold configuration, incomplete windows, and stale data remain explicit
 rejected/deferred/stale outcomes.
 
+### Incremental result: F01.P-FLOW-006
+
+No public OpenAPI path is generated for voucher attribution. The
+`purchase-projection` emits a voucher-correlated purchase signal only with
+voucher/order references, session/window scope, evidence, and attribution
+confidence. `VOUCHER_REF_MISSING`, `ORDER_LINK_UNAVAILABLE`, and duplicate
+voucher events remain explicit non-success outcomes.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
