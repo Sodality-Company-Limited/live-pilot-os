@@ -453,3 +453,15 @@ session/SKU measure with source event identity, idempotency, and revision
 evidence. `SKU_UNRESOLVED`, `SESSION_NOT_ACTIVE`, and duplicate commerce events
 remain explicit outcomes; the commerce/purchase event contract needs registry
 coverage.
+
+### F02 explicit flow coverage
+
+The grouped decisions above apply to each detailed flow ID explicitly:
+
+- `F02-FLOW-001`, `F02-FLOW-002`, `F02-FLOW-003`, `F02-FLOW-004`, `F02-FLOW-005`, `F02-FLOW-006`
+- `F02.1-FLOW-001`, `F02.1-FLOW-002`, `F02.1-FLOW-003`, `F02.1-FLOW-004`, `F02.1-FLOW-005`, `F02.1-FLOW-006`, `F02.1-FLOW-007`, `F02.1-FLOW-008`
+- `F02.2-FLOW-001`, `F02.2-FLOW-002`, `F02.2-FLOW-003`, `F02.2-FLOW-004`, `F02.2-FLOW-005`, `F02.2-FLOW-006`, `F02.2-FLOW-007`
+- `F02.3-FLOW-001`, `F02.3-FLOW-002`, `F02.3-FLOW-003`, `F02.3-FLOW-004`, `F02.3-FLOW-005`, `F02.3-FLOW-006`, `F02.3-FLOW-007`
+- `F02.4-FLOW-001`, `F02.4-FLOW-002`, `F02.4-FLOW-003`, `F02.4-FLOW-004`, `F02.4-FLOW-005`, `F02.4-FLOW-006`, `F02.4-FLOW-007`, `F02.4-FLOW-008`
+- `F02-SAFETY-001`, `F02-SAFETY-002`, `F02-SAFETY-003`, `F02-SAFETY-004`
+- `F02-INTEGRATION-001`, `F02-INTEGRATION-002`, `F02-INTEGRATION-003`
