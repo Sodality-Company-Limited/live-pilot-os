@@ -70,3 +70,11 @@ explicitly gives `telemetry-service` no public exposure; ingestion remains an
 adapter-to-NATS contract. The flow and NATS catalog still require reconciliation
 of command/event names and payload coverage before the async contract can be
 marked complete.
+
+### Incremental result: F01-FLOW-003
+
+No public OpenAPI path is generated for normalization. The operation is an
+internal telemetry-service transformation from an accepted source event to a
+canonical event. The flow's `telemetry.normalize.requested.v1` and
+`telemetry.normalized.v1` subjects are not present in the canonical NATS subject
+catalog yet, so the async schema/subject reconciliation remains open.
