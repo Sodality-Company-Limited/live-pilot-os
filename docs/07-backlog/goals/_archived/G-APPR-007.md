@@ -3,7 +3,7 @@ goal_contract:
   id: G-APPR-007
   version: 2
   kind: release
-  status: planned
+  status: done
   profiles: [core, backend]
   atomicity:
     outcome_count: 1
@@ -15,10 +15,11 @@ goal_contract:
   risk: {level: high, reasons: [production packaging, deployment configuration, operational health]}
   reversibility: {level: reversible}
   external_dependencies: []
-  lifecycle: {spec: planned, implementation: pending, verification: pending, evidence: pending, review: pending, release: unreleased}
+  lifecycle: {spec: ready, implementation: done, verification: done, evidence: done, review: approved, release: released}
 ---
 # G-APPR-007: Package Approval & Control service for DigitalOcean deployment with health probes and runbook
-**Status:** planned  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** release  
 **Spec stability:** clarify done | spec check done | analyze done  
 **Atomic outcome:** DigitalOcean deployment bundle, multi-stage Dockerfile, systemd/k8s manifests, health probes, and rollback runbook.  
@@ -26,12 +27,12 @@ goal_contract:
 **Depends on:** G-APPR-006  
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
-|:------:|:----:|:-------:|:------:|:------:|
-| **●** | ○ | ○ | ○ | ○ |
+|:------:|:----:|:-------:|:------:|:----:|
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Create container image, deployment manifests, health probes, and deployment runbook | pending |
+| 1 | Create container image, deployment manifests, health probes, and deployment runbook | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 Single worktree on feature/G-APPR-007; bounded implementer followed by independent Codex reviewer; no child agents.
@@ -58,7 +59,7 @@ Implement only the declared outcome using linked SOTs and approved architecture 
 - Live production cloud traffic cutover (requires human approval gate)
 
 ## Open questions
-- [ ] None; unresolved architectural decisions block promotion to ready.
+- [x] None; unresolved architectural decisions block promotion to ready.
 
 ## Knowledge links
 | Type | IDs |
@@ -107,15 +108,15 @@ When this goal is handed to Antigravity, return ordered atomic steps with allowe
 | Stack Authority | docs/03-architecture/technology-stack-sot.md |
 
 ## Spec checklist
-- [ ] Intent is WHAT/WHY only.
-- [ ] Touch map is real and bounded.
-- [ ] Acceptance criteria and verification command are executable.
-- [ ] Architecture and goal conformance harnesses pass.
+- [x] Intent is WHAT/WHY only.
+- [x] Touch map is real and bounded.
+- [x] Acceptance criteria and verification command are executable.
+- [x] Architecture and goal conformance harnesses pass.
 
 ## Acceptance criteria
-- [ ] Container runs as unprivileged user and includes liveness/readiness probes.
-- [ ] Deployment script supports automated rollback on healthcheck failure.
-- [ ] Release runbook provides clear operational procedures for DigitalOcean.
+- [x] Container runs as unprivileged user and includes liveness/readiness probes.
+- [x] Deployment script supports automated rollback on healthcheck failure.
+- [x] Release runbook provides clear operational procedures for DigitalOcean.
 
 ## Test plan
 - Positive unit and integration tests executing real operational code paths.

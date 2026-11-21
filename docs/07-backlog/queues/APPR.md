@@ -9,12 +9,13 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-APPR-007 | release | planned | DEFINE | G-APPR-006 | [`goals/G-APPR-007.md`](../goals/G-APPR-007.md) |
+| *(none)* | — | — | — | — | — |
 
 ## Archived
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-APPR-007 | Package Approval & Control service for DigitalOcean deployment with health probes and runbook | 2026-11-21 | [`goals/_archived/G-APPR-007.md`](../goals/_archived/G-APPR-007.md) |
 | G-APPR-006 | Implement full service-level integration, chaos resilience, and SOT gate verification | 2026-11-21 | [`goals/_archived/G-APPR-006.md`](../goals/_archived/G-APPR-006.md) |
 | G-APPR-005 | Implement NATS handlers, command endpoints, and vertical slice execution | 2026-11-21 | [`goals/_archived/G-APPR-005.md`](../goals/_archived/G-APPR-005.md) |
 | G-APPR-004 | Implement Approval repositories, idempotency store, and transactional outbox | 2026-11-21 | [`goals/_archived/G-APPR-004.md`](../goals/_archived/G-APPR-004.md) |

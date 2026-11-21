@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { EmergencyPauseHandler } from '../../src/reliability/EmergencyPauseHandler.ts';
-import { CircuitBreaker } from '../../src/reliability/CircuitBreaker.ts';
-import { RetryPolicy } from '../../src/reliability/RetryPolicy.ts';
-import { DlqPublisher, ReconciliationWorker } from '../../src/reliability/DlqReconciliation.ts';
-import { ExecutionRepository } from '../../src/infra/ExecutionRepository.ts';
-import { TransactionalBoundary } from '../../src/infra/TransactionalBoundary.ts';
-import { SimulatedPlatformAdapterClient } from '../../src/domain/PlatformAdapterClient.ts';
+import { EmergencyPauseHandler } from '../../dist/reliability/EmergencyPauseHandler.js';
+import { CircuitBreaker } from '../../dist/reliability/CircuitBreaker.js';
+import { RetryPolicy } from '../../dist/reliability/RetryPolicy.js';
+import { DlqPublisher, ReconciliationWorker } from '../../dist/reliability/DlqReconciliation.js';
+import { ExecutionRepository } from '../../dist/infra/ExecutionRepository.js';
+import { TransactionalBoundary } from '../../dist/infra/TransactionalBoundary.js';
+import { SimulatedPlatformAdapterClient } from '../../dist/domain/PlatformAdapterClient.js';
 
 class InMemoryDbExecutor {
   actions = new Map();

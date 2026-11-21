@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
-import { ExecutionRepository } from '../../src/infra/ExecutionRepository.ts';
-import { TransactionalBoundary } from '../../src/infra/TransactionalBoundary.ts';
-import { NatsExecutionClient } from '../../src/infra/NatsExecutionClient.ts';
+import { ExecutionRepository } from '../../dist/infra/ExecutionRepository.js';
+import { TransactionalBoundary } from '../../dist/infra/TransactionalBoundary.js';
+import { NatsExecutionClient } from '../../dist/infra/NatsExecutionClient.js';
 import {
   ExecutionDispatchService,
-} from '../../src/domain/ExecutionDispatchService.ts';
+} from '../../dist/domain/ExecutionDispatchService.js';
 import {
   SimulatedPlatformAdapterClient,
-} from '../../src/domain/PlatformAdapterClient.ts';
+} from '../../dist/domain/PlatformAdapterClient.js';
 
 class InMemoryDbExecutor {
   actions = new Map();

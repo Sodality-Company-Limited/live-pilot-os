@@ -18,7 +18,6 @@
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-APPR-007`](07-backlog/goals/G-APPR-007.md) | `planned` | Package Approval & Control service for DigitalOcean deployment with health probes and runbook |
 
 ## Constraints
 
