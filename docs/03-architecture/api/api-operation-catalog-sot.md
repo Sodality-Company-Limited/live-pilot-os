@@ -67,6 +67,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.1-FLOW-002` | None by design | `intent.classify.requested.v1 → telemetry.intent.detected.v1` | `intent-risk-service` | Product-question classification remains an internal signal with question entity, confidence, and SKU status; `UNSUPPORTED_QUESTION_TYPE` and unresolved catalog context remain explicit. |
 | `F01.1-FLOW-003` | None by design | `telemetry.intent.detected.v1` | `intent-risk-service` | Discount/voucher request classification emits a typed signal only; it does not create a promotion or voucher. `UNSUPPORTED_PROMOTION_TERM` and low confidence remain non-actionable outcomes. |
 | `F01.1-FLOW-004` | None by design | `telemetry.intent.detected.v1` | `intent-risk-service + catalog-service` | Stock/size intent emits `STOCK_QUERY` or `SIZE_QUERY` with SKU confidence; `SKU_UNRESOLVED`, `CATALOG_STALE`, and low confidence cannot trigger commerce action. |
+| `F01.1-FLOW-005` | None by design | `catalog.entity.resolve.requested.v1 → catalog.entity.resolved.v1` | `catalog-service` | Catalog-owned resolution returns one SKU, multiple candidates, or explicit unresolved state; catalog version and evidence are required, and no SKU may be invented. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

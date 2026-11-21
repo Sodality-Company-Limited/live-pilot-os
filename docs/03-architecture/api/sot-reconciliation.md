@@ -129,3 +129,11 @@ intent-risk and catalog boundaries jointly provide typed `STOCK_QUERY` or
 `SIZE_QUERY` context with SKU confidence. Unresolved SKU, stale catalog facts,
 and low confidence remain explicit non-actionable states; the event schema and
 consumer compatibility contract still require async registration.
+
+### Incremental result: F01.1-FLOW-005
+
+No public OpenAPI path is generated for product-entity resolution. The
+`catalog-service` owns the approved catalog and may return exactly one SKU,
+multiple candidates, or an explicit unresolved result with catalog version and
+evidence. `CATALOG_UNAVAILABLE`, `AMBIGUOUS_ENTITY`, and
+`CATALOG_VERSION_MISMATCH` must not be converted into an inferred product.
