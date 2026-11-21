@@ -46,6 +46,24 @@ variables:
     secret: false
     source: deployment
     reload: restart
+  - key: TIKTOK_LOGIN_ENABLED
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: TIKTOK_SHOP_ENABLED
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
+  - key: RESEND_ENABLED
+    type: boolean
+    required: true
+    secret: false
+    source: deployment
+    reload: restart
   - key: AI_PROVIDER
     type: enum
     allowed: [fixture, openai]

@@ -16,6 +16,13 @@ Each provider has an owner, environment scope, endpoint, secret names, rotation
 interval, data classification, timeout/retry policy, spend limit, and rollback plan.
 The sanitized templates in `infra/third-party/` are configuration examples only.
 
+For the current two-environment pilot, local binds `AI_PROVIDER=fixture` and
+`PLATFORM_ADAPTER_MODE=simulated`; DigitalOcean production binds
+`AI_PROVIDER=openai` only through the JEV provider port while keeping the two demo
+scenarios' frontend signal and backend product injection enabled. Production
+marketplace and notification credentials remain disabled until their provider
+gates are satisfied.
+
 Provider credentials must be isolated per environment. Local development uses disabled
 or fixture credentials; production uses separate approved credentials. No production
 secret is copied into local development.
