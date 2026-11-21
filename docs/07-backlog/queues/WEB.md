@@ -23,19 +23,7 @@
 | G-WEB-027 | Portal Promotion Decision Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-027.md`](../goals/G-WEB-027.md) |
 | G-WEB-028 | Portal Promotion Read Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-028.md`](../goals/G-WEB-028.md) |
 | G-WEB-029 | Portal Action Log Read Route | blocked | G-WEB-016, G-WEB-020 | [`goals/G-WEB-029.md`](../goals/G-WEB-029.md) |
-| G-WEB-030 | Host and Live Ops Login Screen | in_progress | G-WEB-016 | [`goals/G-WEB-030.md`](../goals/G-WEB-030.md) |
-| G-WEB-031 | Role-Scoped UI Access Gate | in_progress | G-WEB-016 | [`goals/G-WEB-031.md`](../goals/G-WEB-031.md) |
-| G-WEB-032 | Session Logout Control | in_progress | G-WEB-016 | [`goals/G-WEB-032.md`](../goals/G-WEB-032.md) |
-| G-WEB-033 | Bind Role Views to Session Overview | in_progress | G-WEB-016 | [`goals/G-WEB-033.md`](../goals/G-WEB-033.md) |
-| G-WEB-034 | Reconnect Session Events in the Browser | in_progress | G-WEB-016 | [`goals/G-WEB-034.md`](../goals/G-WEB-034.md) |
 | G-WEB-035 | Audience Topic Log Binding | blocked | G-WEB-016, G-WEB-020, G-WEB-021, G-WEB-033 | [`goals/G-WEB-035.md`](../goals/G-WEB-035.md) |
-| G-WEB-036 | Host Cue Binding | in_progress | G-WEB-016 | [`goals/G-WEB-036.md`](../goals/G-WEB-036.md) |
-| G-WEB-037 | Selected Product Detail Binding | in_progress | G-WEB-016 | [`goals/G-WEB-037.md`](../goals/G-WEB-037.md) |
-| G-WEB-039 | Live Ops Proposal Submission | in_progress | G-WEB-016 | [`goals/G-WEB-039.md`](../goals/G-WEB-039.md) |
-| G-WEB-040 | Live Ops Decision Submission | in_progress | G-WEB-016 | [`goals/G-WEB-040.md`](../goals/G-WEB-040.md) |
-| G-WEB-041 | Promotion Status for Both Roles | in_progress | G-WEB-016 | [`goals/G-WEB-041.md`](../goals/G-WEB-041.md) |
-| G-WEB-042 | Live Ops Decision Trace | in_progress | G-WEB-016 | [`goals/G-WEB-042.md`](../goals/G-WEB-042.md) |
-| G-WEB-043 | Simulated Live Stage and Chat | in_progress | G-WEB-016 | [`goals/G-WEB-043.md`](../goals/G-WEB-043.md) |
 | G-WEB-044 | Simulated Session Controls | blocked | G-WEB-016, G-WEB-020, G-WEB-021 | [`goals/G-WEB-044.md`](../goals/G-WEB-044.md) |
 | G-WEB-046 | Validate Host and Live Ops Integration Journey | blocked | G-WEB-016, G-WEB-020, G-WEB-021, G-WEB-030, G-WEB-031, G-WEB-033, G-WEB-034, G-WEB-035, G-WEB-036, G-WEB-037, G-WEB-038, G-WEB-039, G-WEB-040, G-WEB-041, G-WEB-043, G-WEB-044 | [`goals/G-WEB-046.md`](../goals/G-WEB-046.md) |
 
@@ -44,7 +32,19 @@
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
 | G-WEB-045 | Simulated Viewer Coupon Banner | 2026-11-21 | [`goals/_archived/G-WEB-045.md`](../goals/_archived/G-WEB-045.md) |
+| G-WEB-043 | Simulated Live Stage and Chat | 2026-11-21 | [`goals/_archived/G-WEB-043.md`](../goals/_archived/G-WEB-043.md) |
+| G-WEB-042 | Live Ops Decision Trace | 2026-11-21 | [`goals/_archived/G-WEB-042.md`](../goals/_archived/G-WEB-042.md) |
+| G-WEB-041 | Promotion Status for Both Roles | 2026-11-21 | [`goals/_archived/G-WEB-041.md`](../goals/_archived/G-WEB-041.md) |
+| G-WEB-040 | Live Ops Decision Submission | 2026-11-21 | [`goals/_archived/G-WEB-040.md`](../goals/_archived/G-WEB-040.md) |
+| G-WEB-039 | Live Ops Proposal Submission | 2026-11-21 | [`goals/_archived/G-WEB-039.md`](../goals/_archived/G-WEB-039.md) |
 | G-WEB-038 | Live Ops Offer Review | 2026-11-21 | [`goals/_archived/G-WEB-038.md`](../goals/_archived/G-WEB-038.md) |
+| G-WEB-037 | Selected Product Detail Binding | 2026-11-21 | [`goals/_archived/G-WEB-037.md`](../goals/_archived/G-WEB-037.md) |
+| G-WEB-036 | Host Cue Binding | 2026-11-21 | [`goals/_archived/G-WEB-036.md`](../goals/_archived/G-WEB-036.md) |
+| G-WEB-034 | Reconnect Session Events in the Browser | 2026-11-21 | [`goals/_archived/G-WEB-034.md`](../goals/_archived/G-WEB-034.md) |
+| G-WEB-033 | Bind Role Views to Session Overview | 2026-11-21 | [`goals/_archived/G-WEB-033.md`](../goals/_archived/G-WEB-033.md) |
+| G-WEB-032 | Session Logout Control | 2026-11-21 | [`goals/_archived/G-WEB-032.md`](../goals/_archived/G-WEB-032.md) |
+| G-WEB-031 | Role-Scoped UI Access Gate | 2026-11-21 | [`goals/_archived/G-WEB-031.md`](../goals/_archived/G-WEB-031.md) |
+| G-WEB-030 | Host and Live Ops Login Screen | 2026-11-21 | [`goals/_archived/G-WEB-030.md`](../goals/_archived/G-WEB-030.md) |
 | G-WEB-017 | Apply an Orange Accent to the Live OS Dark Theme | 2026-11-21 | [`goals/_archived/G-WEB-017.md`](../goals/_archived/G-WEB-017.md) |
 | G-WEB-016 | Live OS Frontend and Storybook Foundation | 2026-11-21 | [`goals/_archived/G-WEB-016.md`](../goals/_archived/G-WEB-016.md) |
 | G-WEB-015 | Interaction-State and Keyboard Path Verification | 2026-11-21 | [`goals/_archived/G-WEB-015.md`](../goals/_archived/G-WEB-015.md) |

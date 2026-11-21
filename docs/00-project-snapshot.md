@@ -17,7 +17,6 @@
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-CORE-094`](07-backlog/goals/G-CORE-094.md) | `draft` | Bootstrap adapter safety runtime |
 | [`G-CORE-095`](07-backlog/goals/G-CORE-095.md) | `draft` | Bootstrap F01 projection runtime |
 | [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
 | [`G-CORE-097`](07-backlog/goals/G-CORE-097.md) | `draft` | Wire local production-shaped Compose runtime |
@@ -54,7 +53,6 @@
 | [`G-PROMO-026`](07-backlog/goals/G-PROMO-026.md) | `review` | Promotion service-level verification matrix |
 | [`G-PROMO-027`](07-backlog/goals/G-PROMO-027.md) | `blocked` | Promotion API architecture and release gates |
 | [`G-PROMO-028`](07-backlog/goals/G-PROMO-028.md) | `blocked` | Promotion service DigitalOcean release |
-| [`G-CORE-094`](07-backlog/goals/G-CORE-094.md) | `draft` | Bootstrap adapter safety runtime |
 | [`G-CORE-095`](07-backlog/goals/G-CORE-095.md) | `draft` | Bootstrap F01 projection runtime |
 | [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
 | [`G-CORE-097`](07-backlog/goals/G-CORE-097.md) | `draft` | Wire local production-shaped Compose runtime |
@@ -75,19 +73,7 @@
 | [`G-WEB-027`](07-backlog/goals/G-WEB-027.md) | `blocked` | Portal Promotion Decision Route |
 | [`G-WEB-028`](07-backlog/goals/G-WEB-028.md) | `blocked` | Portal Promotion Read Route |
 | [`G-WEB-029`](07-backlog/goals/G-WEB-029.md) | `blocked` | Portal Action Log Read Route |
-| [`G-WEB-030`](07-backlog/goals/G-WEB-030.md) | `in_progress` | Host and Live Ops Login Screen |
-| [`G-WEB-031`](07-backlog/goals/G-WEB-031.md) | `in_progress` | Role-Scoped UI Access Gate |
-| [`G-WEB-032`](07-backlog/goals/G-WEB-032.md) | `in_progress` | Session Logout Control |
-| [`G-WEB-033`](07-backlog/goals/G-WEB-033.md) | `in_progress` | Bind Role Views to Session Overview |
-| [`G-WEB-034`](07-backlog/goals/G-WEB-034.md) | `in_progress` | Reconnect Session Events in the Browser |
 | [`G-WEB-035`](07-backlog/goals/G-WEB-035.md) | `blocked` | Audience Topic Log Binding |
-| [`G-WEB-036`](07-backlog/goals/G-WEB-036.md) | `in_progress` | Host Cue Binding |
-| [`G-WEB-037`](07-backlog/goals/G-WEB-037.md) | `in_progress` | Selected Product Detail Binding |
-| [`G-WEB-039`](07-backlog/goals/G-WEB-039.md) | `in_progress` | Live Ops Proposal Submission |
-| [`G-WEB-040`](07-backlog/goals/G-WEB-040.md) | `in_progress` | Live Ops Decision Submission |
-| [`G-WEB-041`](07-backlog/goals/G-WEB-041.md) | `in_progress` | Promotion Status for Both Roles |
-| [`G-WEB-042`](07-backlog/goals/G-WEB-042.md) | `in_progress` | Live Ops Decision Trace |
-| [`G-WEB-043`](07-backlog/goals/G-WEB-043.md) | `in_progress` | Simulated Live Stage and Chat |
 | [`G-WEB-044`](07-backlog/goals/G-WEB-044.md) | `blocked` | Simulated Session Controls |
 | [`G-WEB-046`](07-backlog/goals/G-WEB-046.md) | `blocked` | Validate Host and Live Ops Integration Journey |
 

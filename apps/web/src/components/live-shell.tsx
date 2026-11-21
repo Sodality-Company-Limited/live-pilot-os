@@ -121,7 +121,7 @@ export function LiveShell({ role }: { role: Role }) {
           <LiveStage />
           <EmptyPanel className="topic-card" title={enUS.topicsTitle} note={enUS.topicsEmpty} />
           <Signals />
-          {!isHost ? (
+          {!isHost && (
             <>
               <Guardrails />
               <DisabledControls />

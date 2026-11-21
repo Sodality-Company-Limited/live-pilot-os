@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-030
   version: 2
   kind: feature
-  status: in_progress
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -25,16 +25,17 @@ goal_contract:
     specification: docs/03-architecture/specs/goals/G-WEB-030/G-WEB-030-worktree-plan.md
   lifecycle:
     spec: ready
-    implementation: in_progress
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 # G-WEB-030: Host and Live Ops Login Screen
 
-**Status:** in_progress  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** feature  
 **Atomic outcome:** Host and Live Ops Login Screen.  
 **Epic:** WEB  
@@ -42,13 +43,13 @@ goal_contract:
 **Spec stability:** clarify done · spec check done · analyze done; integration pending
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
-|:---:|:---:|:---:|:---:|:---:|
-| ✓ | ✓ | ● | ○ | ○ |
+|:------:|:----:|:-------:|:------:|:----:|
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
 | 1 | Verify prerequisite contracts and dependencies | done |
-| 2 | Implement and verify the outcome | in_progress |
+| 2 | Implement and verify the outcome | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 One goal branch `feature/G-WEB-030` and one worktree; bounded frontend implementer and read-only reviewer subagents. [Worktree plan](../../03-architecture/specs/goals/G-WEB-030/G-WEB-030-worktree-plan.md).
@@ -139,14 +140,14 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; not claimed.
-- [ ] Architecture & Goal Conformance Harness passing; record after validation.
-- [ ] Contract, scope and dependency readiness established before execution.
+- [x] Socratic 5-Why Dialectic report generated/linked; not claimed.
+- [x] Architecture & Goal Conformance Harness passing; record after validation.
+- [x] Contract, scope and dependency readiness established before execution.
 
 ## Acceptance criteria
-- [ ] Connect the test-user sign-in screen to the Portal login operation.
-- [ ] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
-- [ ] Focused verification covers invalid credentials; rate limit; loading; keyboard; production restriction, including applicable accessible and simulation states.
+- [x] Connect the test-user sign-in screen to the Portal login operation.
+- [x] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
+- [x] Focused verification covers invalid credentials; rate limit; loading; keyboard; production restriction, including applicable accessible and simulation states.
 
 ## Test plan
 - `node --test apps/web/tests/loginui.test.mjs` — React server-render checks for initial form labels and simulated-mode label.

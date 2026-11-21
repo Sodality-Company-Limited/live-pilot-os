@@ -14,8 +14,19 @@ const compile = (path) => ts.transpileModule(readFileSync(new URL(path, import.m
 }).outputText;
 const messagesModule = { exports: {} };
 vm.runInNewContext(compile("../src/messages/en-US.ts"), { exports: messagesModule.exports, module: messagesModule });
-const sessionModule = { exports: {} };
-vm.runInNewContext(compile("../src/components/session-overview.tsx"), { module: sessionModule, exports: sessionModule.exports, require });
+const componentCache = new Map();
+function loadComponent(name) {
+  if (componentCache.has(name)) return componentCache.get(name).exports;
+  const mod = { exports: {} };
+  componentCache.set(name, mod);
+  vm.runInNewContext(compile(`../src/components/${name}.tsx`), {
+    module: mod,
+    exports: mod.exports,
+    require: (dep) => dep.startsWith("./") ? loadComponent(dep.slice(2)) : dep === "../messages/en-US" ? messagesModule.exports : require(dep),
+  });
+  return mod.exports;
+}
+const sessionModule = { exports: loadComponent("session-overview") };
 const contractModule = { exports: {} };
 vm.runInNewContext(compile("../src/lib/login-contract.ts"), {
   module: contractModule, exports: contractModule.exports,

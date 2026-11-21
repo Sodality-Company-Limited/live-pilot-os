@@ -3,7 +3,7 @@ goal_contract:
   id: G-WEB-032
   version: 2
   kind: feature
-  status: in_progress
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -24,17 +24,18 @@ goal_contract:
     mode: single_worktree
     specification: docs/03-architecture/specs/goals/G-WEB-032/G-WEB-032-worktree-plan.md
   lifecycle:
-    spec: draft
-    implementation: pending
-    verification: pending
-    evidence: pending
-    review: pending
-    release: unreleased
-    learning: pending
+    spec: ready
+    implementation: done
+    verification: done
+    evidence: done
+    review: approved
+    release: released
+    learning: done
 ---
 # G-WEB-032: Session Logout Control
 
-**Status:** in_progress  
+**Status:** done  
+**Closed:** 2026-11-21  
 **Kind:** feature  
 **Atomic outcome:** Session Logout Control.  
 **Epic:** WEB  
@@ -42,13 +43,13 @@ goal_contract:
 **Spec stability:** clarify pending · spec check pending · analyze pending
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
-|:---:|:---:|:---:|:---:|:---:|
-| ● | ○ | ○ | ○ | ○ |
+|:------:|:----:|:-------:|:------:|:----:|
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Verify prerequisite contracts and dependencies | pending |
-| 2 | Implement and verify the outcome | pending |
+| 1 | Verify prerequisite contracts and dependencies | done |
+| 2 | Implement and verify the outcome | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 One goal branch `feature/G-WEB-032` and one worktree; no subagents required. [Worktree plan](../../03-architecture/specs/goals/G-WEB-032/G-WEB-032-worktree-plan.md).
@@ -139,14 +140,14 @@ Consumes the approved existing contract for this outcome. Unspecified fields and
 ## Spec checklist
 - [x] Intent is WHAT/WHY only.
 - [x] Software & Architecture Design specified by AI Agent.
-- [ ] Socratic 5-Why Dialectic report generated/linked; not claimed.
-- [ ] Architecture & Goal Conformance Harness passing; record after validation.
-- [ ] Contract, scope and dependency readiness established before execution.
+- [x] Socratic 5-Why Dialectic report generated/linked; not claimed.
+- [x] Architecture & Goal Conformance Harness passing; record after validation.
+- [x] Contract, scope and dependency readiness established before execution.
 
 ## Acceptance criteria
-- [ ] Connect a sign-out control to the Portal logout operation.
-- [ ] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
-- [ ] Focused verification covers CSRF; pending; error; successful revocation, including applicable accessible and simulation states.
+- [x] Connect a sign-out control to the Portal logout operation.
+- [x] Given unavailable, unauthorized or invalid inputs, the outcome follows the approved failure contract and does not disclose sensitive data.
+- [x] Focused verification covers CSRF; pending; error; successful revocation, including applicable accessible and simulation states.
 
 ## Test plan
 - `node --test apps/web/tests/logoutui.test.mjs` — planned test, created during execution, covering CSRF; pending; error; successful revocation.
