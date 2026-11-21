@@ -77,6 +77,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.2-FLOW-004` | None by design | `telemetry.risk.detected.v1` | `intent-risk-service` | Coordinated-bot detection emits an aggregate risk signal keyed by session/window/fingerprint; invalid windows, unavailable fingerprints, and aggregation lag remain explicit stale/deferred states. |
 | `F01.2-FLOW-005` | None by design | `risk.severity.ranked.v1` | `intent-risk-service` | Risk ranking produces severity and recommended handling from a versioned policy; missing policy, out-of-range scores, or missing context cannot produce a trusted severity. |
 | `F01.2-FLOW-006` | None by design | `moderation.case.created.v1` | `moderation-case-service` | Moderator escalation creates a traceable case only after severity/evidence authorization; case-create failure, evidence unavailability, and forbidden actor context remain explicit failures. |
+| `F01.2-FLOW-007` | None by design | `audit.moderation.recorded.v1` | `audit-service` | Moderation evidence is appended immutably with actor context, source event, policy/model versions, hashes, and correlation lineage; hash mismatch or missing actor context never overwrites history. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

@@ -211,3 +211,11 @@ No public OpenAPI path is generated for moderator escalation. The internal
 context, severity, redacted evidence, and source lineage. `CASE_CREATE_FAILED`,
 `EVIDENCE_UNAVAILABLE`, and forbidden actor context remain explicit failure or
 deferred states; case creation requires async contract registration.
+
+### Incremental result: F01.2-FLOW-007
+
+No public OpenAPI path is generated for moderation audit persistence. The
+`audit-service` owns append-only receipts linking actor, source event, policy and
+model versions, evidence hashes, and correlation/causation. `AUDIT_WRITE_FAILED`,
+`ACTOR_CONTEXT_MISSING`, and `HASH_MISMATCH` remain visible failures; historical
+records are never overwritten and the audit event requires registry coverage.
