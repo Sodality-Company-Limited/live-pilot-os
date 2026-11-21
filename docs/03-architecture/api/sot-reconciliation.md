@@ -220,6 +220,14 @@ revision, window, freshness, and explicit stale/deferred state for product
 interest metrics. `PROJECTION_INPUT_LAG`, invalid windows, and source
 unavailability cannot be represented as healthy empty metrics.
 
+### Incremental result: F01.3-FLOW-002
+
+This flow is covered by `getLiveSessionOverview`; no new public path is added.
+The DTO must preserve separate behavioral measures and their definitions,
+source revision, freshness, and evidence. `METRIC_DEFINITION_MISSING`,
+`COUNTER_CONFLICT`, and `SOURCE_REVISION_STALE` remain explicit degraded or
+error states rather than silently combined counts.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The

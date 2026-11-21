@@ -87,6 +87,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.P-FLOW-007` | None by design | `product.interest.updated.v1` | `purchase-projection` | Product purchase-interest ranking emits SKU-ranked scores with component evidence, scoring/config version, session scope, and freshness; unresolved SKU or stale projection is not a trusted rank. |
 | `F01.P-FLOW-008` | None by design | `purchase.signal.updated.v1` | `telemetry-service + purchase-projection` | Purchase counts remain stable across replay by enforcing source-event identity, stage separation, provider revision, dedup key, and monotonic projection revision; mismatched fingerprints never overwrite facts. |
 | `F01.3-FLOW-001` | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | `projection-worker` | Dashboard projection exposes product-interest, question, purchase, engagement, sentiment, freshness, and revision; input lag, invalid window, or unavailable source is marked stale/deferred rather than empty success. |
+| `F01.3-FLOW-002` | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | `projection-worker` | Behavioral metrics remain separately defined and sourced; counter conflict or stale source revision is surfaced explicitly and never merged into a misleading aggregate. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
