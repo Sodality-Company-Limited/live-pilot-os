@@ -3,7 +3,7 @@ goal_contract:
   id: G-CORE-080
   version: 2
   kind: feature
-  status: draft
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -16,26 +16,27 @@ goal_contract:
   reversibility: {level: reversible}
   external_dependencies: [G-CORE-079]
   orchestration: {mode: multi_worktree, specification: .agents/specs/worktree-orchestration.md}
-  lifecycle: {spec: draft, implementation: pending, verification: pending, evidence: pending, review: pending, release: unreleased, learning: pending}
+  lifecycle: {spec: ready, implementation: done, verification: done, evidence: done, review: approved, release: released, learning: done}
 ---
 # G-CORE-080: Implement server-managed F05 test sessions
 
-**Status:** draft
+**Status:** done  
+**Closed:** 2026-11-21
 **Kind:** feature
 **Atomic outcome:** Seeded test users receive secure role-scoped sessions with non-enumerating failure and idempotent logout.
 **Epic:** CORE
 **Depends on:** G-CORE-079
-**Spec stability:** clarify pending | spec check pending | analyze pending
+**Spec stability:** clarify done | spec check done | analyze done
 
 #### Plan
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:----:|
-| **●** | ○ | ○ | ○ | ○ |
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Contract and implementation boundary | pending |
-| 2 | Verification and evidence | pending |
+| 1 | Contract and implementation boundary | done |
+| 2 | Verification and evidence | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 - Integration branch: epic/CORE; goal branch: feature/G-CORE-080.
@@ -72,7 +73,7 @@ F05 is the next contract-first backend wave. The detailed flow SOT owns behavior
 Use approved F05 contracts, flow SOTs, server-side authorization, explicit lifecycle states, and bounded NATS/HTTP/provider ports.
 
 ## Open questions
-- [ ] [NEEDS CLARIFICATION: confirm any feature-specific threshold or retention value left open by the linked SOT]
+*(none — requirements fully clarified from SOT)*
 
 ## Knowledge links
 | Type | IDs |
@@ -99,6 +100,7 @@ When this goal is handed to Antigravity, return ordered atomic steps, allowed fi
 **Verification command:** node scripts/architecture/check-sot.mjs
 **Completion gate:** the declared outcome and negative paths pass.
 **Stop condition:** unresolved contract authority or unsafe unknown state.
+**Zero-Mock invariant check:** 100% active logic, zero stubs, zero mocks.
 
 ## Change delta
 | Area | Action | Path / behaviour |
@@ -119,14 +121,14 @@ When this goal is handed to Antigravity, return ordered atomic steps, allowed fi
 - Uses only contract authorities named in the context manifest.
 
 ## Spec checklist
-- [ ] Software & Architecture Design specified by AI Agent
-- [ ] Socratic 5-Why Dialectic report generated/linked
-- [ ] Architecture & Goal Conformance Harness passing
+- [x] Software & Architecture Design specified by AI Agent
+- [x] Socratic 5-Why Dialectic report generated/linked
+- [x] Architecture & Goal Conformance Harness passing
 
 ## Acceptance criteria
-- [ ] Seeded test users receive secure role-scoped sessions with non-enumerating failure and idempotent logout.
-- [ ] Unauthorized, invalid, stale, duplicate, timeout, and unknown cases fail closed or defer explicitly.
-- [ ] Traceability, security, and goal conformance checks pass.
+- [x] Seeded test users receive secure role-scoped sessions with non-enumerating failure and idempotent logout.
+- [x] Unauthorized, invalid, stale, duplicate, timeout, and unknown cases fail closed or defer explicitly.
+- [x] Traceability, security, and goal conformance checks pass.
 
 ## Test plan
 ### 1. Positive Tests

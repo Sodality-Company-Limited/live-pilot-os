@@ -17,7 +17,6 @@
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-CORE-080`](07-backlog/goals/G-CORE-080.md) | `draft` | Implement server-managed F05 test sessions |
 | [`G-CORE-081`](07-backlog/goals/G-CORE-081.md) | `draft` | Enforce F05 test-mode and credential isolation |
 | [`G-CORE-082`](07-backlog/goals/G-CORE-082.md) | `draft` | Bootstrap Core BFF service runtime |
 | [`G-CORE-083`](07-backlog/goals/G-CORE-083.md) | `draft` | Wire Core BFF HTTP transport and route registry |

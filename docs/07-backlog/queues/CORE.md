@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-080 | feature | draft | DEFINE | G-CORE-079 | [`goals/G-CORE-080.md`](../goals/G-CORE-080.md) |
 | G-CORE-081 | security | draft | DEFINE | G-CORE-079, G-CORE-080 | [`goals/G-CORE-081.md`](../goals/G-CORE-081.md) |
 | G-CORE-082 | feature | draft | DEFINE | G-CORE-052, G-CORE-053, G-CORE-054 | [`goals/G-CORE-082.md`](../goals/G-CORE-082.md) |
 | G-CORE-083 | feature | draft | DEFINE | G-CORE-082, G-CORE-070, G-CORE-073, G-CORE-076, G-CORE-079 | [`goals/G-CORE-083.md`](../goals/G-CORE-083.md) |
@@ -38,6 +37,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-080 | Implement server-managed F05 test sessions | 2026-11-21 | [`goals/_archived/G-CORE-080.md`](../goals/_archived/G-CORE-080.md) |
 | G-CORE-079 | Reconcile F05 test-authentication HTTP contract | 2026-11-21 | [`goals/_archived/G-CORE-079.md`](../goals/_archived/G-CORE-079.md) |
 | G-CORE-078 | Establish the NestJS session-service scaffold | 2026-11-21 | [`goals/_archived/G-CORE-078.md`](../goals/_archived/G-CORE-078.md) |
 | G-CORE-077 | Deploy Catalog service to DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-077.md`](../goals/_archived/G-CORE-077.md) |
