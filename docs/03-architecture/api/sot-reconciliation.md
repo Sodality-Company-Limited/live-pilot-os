@@ -96,3 +96,12 @@ telemetry source fact remains immutable; `occurred_at` drives event-time metrics
 projection revision. The flow's `telemetry.late.received.v1` and
 `projection.reconciled.v1` contracts are not yet registered in the canonical
 NATS catalog, so async schema generation remains open.
+
+### Incremental result: F01.1-FLOW-001
+
+No public OpenAPI path is generated for product-interest classification. The
+`intent-risk-service` owns the signal, persists taxonomy/model/policy evidence,
+and publishes only after durable commit. `PRODUCT_INTEREST` may include an
+optional SKU, but low-confidence output is reviewable UI context only and cannot
+trigger commerce mutation. The flow's intent command/event pair is not yet
+registered in the canonical NATS catalog.
