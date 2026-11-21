@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-096 | operations | draft | DEFINE | G-CORE-082, G-CORE-090, G-CORE-091, G-CORE-092, G-CORE-093, G-CORE-094, G-CORE-095 | [`goals/G-CORE-096.md`](../goals/G-CORE-096.md) |
 | G-CORE-097 | operations | draft | DEFINE | G-CORE-096, G-CORE-088 | [`goals/G-CORE-097.md`](../goals/G-CORE-097.md) |
 | G-CORE-098 | qa | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-096 | [`goals/G-CORE-098.md`](../goals/G-CORE-098.md) |
 | G-CORE-099 | qa | draft | DEFINE | G-CORE-097, G-CORE-098, G-CORE-079 | [`goals/G-CORE-099.md`](../goals/G-CORE-099.md) |
@@ -22,6 +21,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-096 | Containerize Core BFF and dependent services | 2026-11-21 | [`goals/_archived/G-CORE-096.md`](../goals/_archived/G-CORE-096.md) |
 | G-CORE-095 | Bootstrap F01 projection runtime | 2026-11-21 | [`goals/_archived/G-CORE-095.md`](../goals/_archived/G-CORE-095.md) |
 | G-CORE-094 | Bootstrap adapter safety runtime | 2026-11-21 | [`goals/_archived/G-CORE-094.md`](../goals/_archived/G-CORE-094.md) |
 | G-CORE-093 | Bootstrap F05 identity session runtime | 2026-11-21 | [`goals/_archived/G-CORE-093.md`](../goals/_archived/G-CORE-093.md) |
