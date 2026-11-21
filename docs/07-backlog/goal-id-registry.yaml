@@ -22,7 +22,7 @@ epics:
     reserved: []
   PROMO:
     name: Promotion Service
-    next_seq: 1
+    next_seq: 2
     reserved: []
   PROOF:
     name: DAVE Mathematical Invariant & Assurance Proofs
