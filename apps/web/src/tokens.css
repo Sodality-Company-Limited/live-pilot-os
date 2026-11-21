@@ -1,0 +1,88 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Noto Sans Thai", system-ui, sans-serif;
+
+  /* Warm Shopee dark theme */
+  --color-bg: hsl(30 8% 5%);
+  --color-surface: hsl(24 11% 9%);
+  --color-surface-raised: hsl(22 12% 13%);
+  --color-surface-inset: hsl(30 10% 4%);
+  --color-border: hsl(23 8% 42%);
+  --color-border-strong: hsl(23 10% 50%);
+  --color-text: hsl(30 25% 94%);
+  --color-text-muted: hsl(23 11% 69%);
+  --color-text-subtle: hsl(26 11% 61%);
+  --color-muted: var(--color-text-muted);
+  --color-primary: #ee4d2d;
+  --color-primary-hover: hsl(10 100% 70%);
+  --color-primary-pressed: hsl(10 85% 50%);
+  --color-primary-soft: hsl(10 40% 15%);
+  --color-primary-fg: hsl(30 8% 5%);
+  --color-success: hsl(147 48% 60%);
+  --color-success-soft: hsl(147 28% 14%);
+  --color-warning: hsl(37 75% 64%);
+  --color-warning-soft: hsl(37 34% 14%);
+  --color-danger: hsl(4 79% 69%);
+  --color-danger-soft: hsl(4 32% 14%);
+  --color-info: hsl(213 78% 75%);
+  --color-info-soft: hsl(213 31% 15%);
+  --color-focus: hsl(10 100% 70%);
+
+  --font-body: Inter, "Noto Sans Thai", system-ui, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --line-tight: 1.25;
+  --line-normal: 1.5;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+  --shadow-none: none;
+  --shadow-sm: 0 2px 8px hsl(0 0% 0% / 18%);
+  --shadow-md: 0 8px 24px hsl(0 0% 0% / 22%);
+  --shadow-lg: 0 20px 25px hsl(0 0% 0% / 35%), 0 8px 10px hsl(0 0% 0% / 24%);
+  --shadow-tile: var(--shadow-md);
+  --shadow-dialog: var(--shadow-lg);
+  --focus-ring: 0 0 0 3px hsl(10 100% 70% / 35%);
+
+  --duration-fast: 150ms;
+  --duration-standard: 200ms;
+  --ease-standard: cubic-bezier(0, 0, 0.2, 1);
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --layout-gap: var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

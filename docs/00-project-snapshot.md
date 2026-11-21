@@ -17,13 +17,6 @@
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
-| [`G-CORE-097`](07-backlog/goals/G-CORE-097.md) | `draft` | Wire local production-shaped Compose runtime |
-| [`G-CORE-098`](07-backlog/goals/G-CORE-098.md) | `draft` | Add Core BFF contract and integration CI gates |
-| [`G-CORE-099`](07-backlog/goals/G-CORE-099.md) | `draft` | Add end-to-end Core BFF smoke evidence |
-| [`G-CORE-100`](07-backlog/goals/G-CORE-100.md) | `draft` | Prepare DigitalOcean deployment configuration |
-| [`G-CORE-101`](07-backlog/goals/G-CORE-101.md) | `draft` | Verify deployment rollback and recovery |
-| [`G-CORE-102`](07-backlog/goals/G-CORE-102.md) | `draft` | Complete Core BFF production-readiness evidence |
 | [`G-PROMO-001`](07-backlog/goals/G-PROMO-001.md) | `review` | Promotion service contract and SOT |
 | [`G-PROMO-002`](07-backlog/goals/G-PROMO-002.md) | `review` | Promotion event schemas and NATS compatibility |
 | [`G-PROMO-003`](07-backlog/goals/G-PROMO-003.md) | `review` | Promotion persistence and transactional outbox |
@@ -52,16 +45,8 @@
 | [`G-PROMO-026`](07-backlog/goals/G-PROMO-026.md) | `review` | Promotion service-level verification matrix |
 | [`G-PROMO-027`](07-backlog/goals/G-PROMO-027.md) | `blocked` | Promotion API architecture and release gates |
 | [`G-PROMO-028`](07-backlog/goals/G-PROMO-028.md) | `blocked` | Promotion service DigitalOcean release |
-| [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
-| [`G-CORE-097`](07-backlog/goals/G-CORE-097.md) | `draft` | Wire local production-shaped Compose runtime |
-| [`G-CORE-098`](07-backlog/goals/G-CORE-098.md) | `draft` | Add Core BFF contract and integration CI gates |
-| [`G-CORE-099`](07-backlog/goals/G-CORE-099.md) | `draft` | Add end-to-end Core BFF smoke evidence |
-| [`G-CORE-100`](07-backlog/goals/G-CORE-100.md) | `draft` | Prepare DigitalOcean deployment configuration |
-| [`G-CORE-101`](07-backlog/goals/G-CORE-101.md) | `draft` | Verify deployment rollback and recovery |
-| [`G-CORE-102`](07-backlog/goals/G-CORE-102.md) | `draft` | Complete Core BFF production-readiness evidence |
 | [`G-WEB-018`](07-backlog/goals/G-WEB-018.md) | `blocked` | Serve an Authorized Session Overview through Portal BFF |
 | [`G-WEB-019`](07-backlog/goals/G-WEB-019.md) | `blocked` | Render Host Product Signals from a Validated Snapshot |
-| [`G-WEB-020`](07-backlog/goals/G-WEB-020.md) | `blocked` | Server-derived Portal Session Context |
 | [`G-WEB-021`](07-backlog/goals/G-WEB-021.md) | `blocked` | Trusted Portal-to-Gateway Transport |
 | [`G-WEB-022`](07-backlog/goals/G-WEB-022.md) | `blocked` | Portal Login Route |
 | [`G-WEB-023`](07-backlog/goals/G-WEB-023.md) | `blocked` | Portal Session Read Route |

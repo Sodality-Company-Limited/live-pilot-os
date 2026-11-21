@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProductDetails } from "./product-details";
+import { ProductDetails, type StockStatus } from "./product-details";
 import { HostCue } from "./host-cue";
 import { SessionEvents } from "./session-events";
 import { DecisionTrace } from "./decision-trace";
@@ -9,7 +9,7 @@ import { DecisionTrace } from "./decision-trace";
 type Overview = {
   session_id: string;
   status: "scheduled" | "live" | "ended" | "paused";
-  top_products: { product_id: string; name: string; interest_count: number; stock_status: string }[];
+  top_products: { product_id: string; name: string; interest_count: number; stock_status: StockStatus }[];
   host_alerts: { alert_id: string; severity: string; message: string }[];
   copilot: { suggestion_id: string; text: string; status: string };
 };
