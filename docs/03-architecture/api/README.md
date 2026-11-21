@@ -23,6 +23,9 @@ See [.agents/skills/soda-rest-api/SKILL.md](../../../.agents/skills/soda-rest-ap
 | [portal-bff/openapi.yaml](portal-bff/openapi.yaml) | Browser same-origin `/api/*` contract | Portal BFF |
 | [core-bff/openapi.yaml](core-bff/openapi.yaml) | Private `/internal/v1/core/*` orchestration contract | Core BFF |
 | [services/README.md](services/README.md) | Microservice ownership and NATS contract boundary | Domain services |
+| [asyncapi.yaml](asyncapi.yaml) | NATS JetStream subjects and messages | Internal service contracts |
+| [sdk/livepilot-contracts.ts](sdk/livepilot-contracts.ts) | Typed consumer model surface | UI/BFF/services |
+| [contract-validation-report.md](contract-validation-report.md) | Contract gate results and release blocker | API governance |
 | [authentication.md](authentication.md) | Test-mode login, session, and logout contract | REQ-LP-017 |
 | [route-prefixing-and-boundary-invariant.md](route-prefixing-and-boundary-invariant.md) | Canonical route topology and prefixes | Architecture baseline |
 | [NATS subject/message template](nats-subject-message-template.md) | Canonical async contract template | Architecture baseline |

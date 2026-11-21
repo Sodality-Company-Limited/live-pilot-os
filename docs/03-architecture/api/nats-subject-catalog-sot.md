@@ -2,9 +2,8 @@
 
 > **Status:** Required async inventory; use the [NATS template](nats-subject-message-template.md).
 
-> **Current state:** Pilot subject inventory is defined below. AsyncAPI generation
-> remains blocked until schema hashes and producer/consumer compatibility tests are
-> checked in.
+> **Current state:** Pilot subject inventory and AsyncAPI artifact are checked in.
+> Producer/consumer compatibility tests remain a release gate.
 
 ## Pilot subject inventory
 
