@@ -13,6 +13,9 @@ infra/.env
 infra/.env.local
 infra/third-party/prod.env
 infra/third-party/local.env
+# Any future untemplated provider secret files in this directory
+infra/third-party/*.env
+infra/third-party/*.secret
 
 # Dependencies & build output (anywhere in repo)
 node_modules/
