@@ -203,3 +203,11 @@ No public OpenAPI path is generated for risk-severity ranking. The
 recommended handling, score evidence, and lineage only after validation.
 `POLICY_NOT_FOUND`, `SCORE_OUT_OF_RANGE`, and `CONTEXT_MISSING` remain explicit
 rejected/deferred outcomes; the ranking event requires NATS catalog coverage.
+
+### Incremental result: F01.2-FLOW-006
+
+No public OpenAPI path is generated for moderator escalation. The internal
+`moderation-case-service` creates a traceable case only with authorized actor
+context, severity, redacted evidence, and source lineage. `CASE_CREATE_FAILED`,
+`EVIDENCE_UNAVAILABLE`, and forbidden actor context remain explicit failure or
+deferred states; case creation requires async contract registration.
