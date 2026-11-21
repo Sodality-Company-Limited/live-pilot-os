@@ -36,8 +36,9 @@ test("returns 200 with principal when valid session cookie provided", async () =
     sessionId: "sess-1",
     liveSessionId: "live-1",
     mode: "local",
+    issuedAt: Date.now(),
     expiresAt: Date.now() + 60000,
-  });
+  }, "livepilot-local-dev-session-secret-01");
 
   const req = new Request("http://localhost/api/auth/session", {
     headers: { cookie: `livepilot_session=${cookie}` },
