@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/api/action-receipt.schema.json",
+  "title": "LivePilot Action Receipt",
+  "type": "object",
+  "required": ["action_id", "aggregate_id", "status", "correlation_id", "occurred_at", "mode"],
+  "properties": {
+    "action_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "aggregate_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "status": {"type": "string", "enum": ["requested", "accepted", "pending", "succeeded", "failed", "unknown", "reconciled"]},
+    "correlation_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "actor_ref": {"type": ["string", "null"], "maxLength": 128},
+    "policy_revision": {"type": ["string", "null"], "maxLength": 128},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]},
+    "evidence_id": {"type": ["string", "null"], "maxLength": 128}
+  },
+  "additionalProperties": false
+}

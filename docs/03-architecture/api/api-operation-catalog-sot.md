@@ -74,6 +74,24 @@ Their repeated `OPEN-001` route decisions are resolved here as “internal
 contract unless explicitly listed as a public operation”; payload and subject
 schemas still require the NATS catalog before AsyncAPI generation.
 
+### Exact flow traceability for the public operations
+
+| Operation | Requirement / detailed flow authorities |
+|---|---|
+| `loginTestUser` | `REQ-LP-017`; `F05.1-FLOW-001`, `F05.1-FLOW-002` |
+| `getCurrentAuthSession` | `REQ-LP-017`; `F05.1-FLOW-003` |
+| `logoutTestUser` | `REQ-LP-017`; `F05.1-FLOW-004` |
+| `getLiveSessionOverview` | `REQ-LP-003`, `REQ-LP-004`, `REQ-LP-006`, `REQ-LP-016`; `F01.3-FLOW-001` through `F01.3-FLOW-006`; `F02-FLOW-001`, `F02-FLOW-003`, `F02.3-FLOW-001` through `F02.3-FLOW-007`; `F03-FLOW-001` through `F03-FLOW-004` |
+| `streamLiveSessionEvents` | `REQ-LP-003`, `REQ-LP-004`, `REQ-LP-016`; `F01-INTEGRATION-001` through `F01-INTEGRATION-005`; `F02-FLOW-002`, `F02-FLOW-004`, `F02-FLOW-005`, `F02-INTEGRATION-001`, `F02-INTEGRATION-003`; `F04.1-FLOW-003` |
+| `proposePromotion` | `REQ-LP-008`, `REQ-LP-009`, `REQ-LP-013`; `F03.2-FLOW-001` through `F03.2-FLOW-008`; `F03.3-FLOW-001` through `F03.3-FLOW-008`; `F04.1-FLOW-001`, `F04.1-FLOW-002` |
+| `decidePromotion` | `REQ-LP-013`; `F03.3-FLOW-002` through `F03.3-FLOW-005`; `F02.4-FLOW-005` through `F02.4-FLOW-008`; `F04.2-FLOW-001` through `F04.2-FLOW-006`; `F04.3-FLOW-004`, `F04.3-FLOW-008`, `F04.3-FLOW-009` |
+| `getPromotion` | `REQ-LP-008`, `REQ-LP-009`, `REQ-LP-010`, `REQ-LP-013`; `F03-WORKFLOW-001` through `F03-WORKFLOW-006`; `F03.2-FLOW-002` through `F03.2-FLOW-008`; `F03.4-FLOW-001` through `F03.4-FLOW-008`; `F04.5-FLOW-004` through `F04.5-FLOW-006` |
+| `getActionLog` | `REQ-LP-012` (future/full audit) and selected promotion evidence; `F04.1-FLOW-001` through `F04.1-FLOW-007`; `F04.6-FLOW-001` through `F04.6-FLOW-005`; `F03-WORKFLOW-006` |
+
+F01 classifier, F02 JEV, F03 workflow, and F04 control flows that are not listed
+as public operations are covered by the NATS subjects in the subject catalog and
+must not be exposed through browser-originated routes.
+
 ### `POST /v1/auth/login` — `loginTestUser`
 
 - **Does:** creates a server-managed test session for the selected pilot user.

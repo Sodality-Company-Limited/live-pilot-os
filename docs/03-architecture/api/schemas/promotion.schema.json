@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/api/promotion.schema.json",
+  "title": "LivePilot Promotion",
+  "type": "object",
+  "required": ["promotion_id", "session_id", "product_id", "status", "resource_version", "mode"],
+  "properties": {
+    "promotion_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "product_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "status": {"type": "string", "enum": ["proposed", "pending", "approved", "rejected", "issued", "expired", "cancelled", "unknown"]},
+    "resource_version": {"type": "integer", "minimum": 1},
+    "discount_percent": {"type": "number", "minimum": 0, "maximum": 100},
+    "margin_percent": {"type": ["number", "null"], "minimum": -100, "maximum": 100},
+    "policy_revision": {"type": ["string", "null"], "maxLength": 128},
+    "action_id": {"type": ["string", "null"], "maxLength": 128},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]}
+  },
+  "additionalProperties": false
+}
