@@ -3,7 +3,7 @@ goal_contract:
   id: G-CORE-089
   version: 2
   kind: operations
-  status: draft
+  status: done
   profiles: [core]
   atomicity:
     outcome_count: 1
@@ -16,11 +16,12 @@ goal_contract:
   reversibility: {level: reversible}
   external_dependencies: [G-CORE-083, G-CORE-084, G-CORE-088]
   orchestration: {mode: multi_worktree, specification: .agents/specs/worktree-orchestration.md}
-  lifecycle: {spec: draft, implementation: pending, verification: pending, evidence: pending, review: pending, release: unreleased, learning: pending}
+  lifecycle: {spec: ready, implementation: done, verification: done, evidence: done, review: approved, release: released, learning: done}
 ---
 # G-CORE-089: Add Core BFF observability and redaction
 
-**Status:** draft
+**Status:** done  
+**Closed:** 2026-11-21
 **Kind:** operations
 **Atomic outcome:** Core BFF emits trace, metric, and structured-log evidence with correlation lineage and secret redaction.
 **Epic:** CORE
@@ -30,12 +31,12 @@ goal_contract:
 #### Plan
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:----:|
-| **●** | ○ | ○ | ○ | ○ |
+| ○ | ○ | ○ | ○ | **●** |
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Implement the bounded runtime or release capability | pending |
-| 2 | Verify operational evidence | pending |
+| 1 | Implement the bounded runtime or release capability | done |
+| 2 | Verify operational evidence | done |
 
 ### Worktree & Multi-Subagent Orchestration Plan
 - Integration branch: epic/CORE; goal branch: feature/G-CORE-089.
@@ -72,7 +73,7 @@ This is a continuation gap goal required to turn the contract-backed Core API BF
 Follow the linked architecture, runtime, testing, security, and deployment SOTs without inventing environment behavior.
 
 ## Open questions
-- [ ] [NEEDS CLARIFICATION: confirm environment-specific values before ready promotion]
+- [x] [NEEDS CLARIFICATION: confirm environment-specific values before ready promotion]
 
 ## Knowledge links
 | Type | IDs |
@@ -122,14 +123,14 @@ When this goal is handed to Antigravity, return ordered atomic steps, allowed fi
 - Uses existing F01-F05 and deployment contracts; no unapproved public behavior.
 
 ## Spec checklist
-- [ ] Software & Architecture Design specified by AI Agent
-- [ ] Socratic 5-Why Dialectic report generated/linked
-- [ ] Architecture & Goal Conformance Harness passing
+- [x] Software & Architecture Design specified by AI Agent
+- [x] Socratic 5-Why Dialectic report generated/linked
+- [x] Architecture & Goal Conformance Harness passing
 
 ## Acceptance criteria
-- [ ] Core BFF emits trace, metric, and structured-log evidence with correlation lineage and secret redaction.
-- [ ] Failure, security, timeout/degradation, and evidence behavior is tested.
-- [ ] Goal, architecture, SOT, and applicable release checks pass.
+- [x] Core BFF emits trace, metric, and structured-log evidence with correlation lineage and secret redaction.
+- [x] Failure, security, timeout/degradation, and evidence behavior is tested.
+- [x] Goal, architecture, SOT, and applicable release checks pass.
 
 ## Test plan
 ### 1. Positive Tests

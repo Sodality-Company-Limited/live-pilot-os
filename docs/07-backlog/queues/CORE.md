@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-089 | operations | draft | DEFINE | G-CORE-083, G-CORE-084, G-CORE-088 | [`goals/G-CORE-089.md`](../goals/G-CORE-089.md) |
 | G-CORE-090 | operations | draft | DEFINE | G-CORE-071, G-CORE-082 | [`goals/G-CORE-090.md`](../goals/G-CORE-090.md) |
 | G-CORE-091 | operations | draft | DEFINE | G-CORE-075, G-PROMO-008 | [`goals/G-CORE-091.md`](../goals/G-CORE-091.md) |
 | G-CORE-092 | operations | draft | DEFINE | G-CORE-077, G-CORE-078 | [`goals/G-CORE-092.md`](../goals/G-CORE-092.md) |
@@ -29,6 +28,7 @@
 
 | Goal | Title | Closed | File |
 |------|-------|--------|------|
+| G-CORE-089 | Add Core BFF observability and redaction | 2026-11-21 | [`goals/_archived/G-CORE-089.md`](../goals/_archived/G-CORE-089.md) |
 | G-CORE-088 | Add Core BFF health and graceful shutdown | 2026-11-21 | [`goals/_archived/G-CORE-088.md`](../goals/_archived/G-CORE-088.md) |
 | G-CORE-087 | Validate Core BFF configuration and secrets | 2026-11-21 | [`goals/_archived/G-CORE-087.md`](../goals/_archived/G-CORE-087.md) |
 | G-CORE-086 | Implement Core BFF timeout and reconciliation policy | 2026-11-21 | [`goals/_archived/G-CORE-086.md`](../goals/_archived/G-CORE-086.md) |
