@@ -6,8 +6,9 @@
 |---|---|---|---|
 | local | deterministic development and contract tests | local containers | disabled/simulated |
 | CI | repeatable validation and image creation | ephemeral | disabled |
-| DigitalOcean staging | integrated smoke, rehearsal, and performance evidence | isolated Droplets/project | sandbox or simulated only |
-| DigitalOcean production | approved live runtime | isolated project/network | allowed only after approval |
+| DigitalOcean production | approved deployed runtime | isolated Droplet/project/network | simulated only until live integration approval |
+
+The current environment ladder intentionally has two environments only: local development and DigitalOcean production. CI validates changes but is not treated as a deployed environment.
 
 Promotion is immutable image + versioned migrations + versioned configuration. Rebuilding an image between environments is prohibited.
 

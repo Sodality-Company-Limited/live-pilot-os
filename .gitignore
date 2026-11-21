@@ -10,6 +10,7 @@ scripts/clickup.config.json
 !.env.example
 .bundle/
 infra/.env
+infra/.env.local
 
 # Dependencies & build output (anywhere in repo)
 node_modules/
