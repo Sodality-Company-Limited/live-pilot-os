@@ -585,3 +585,15 @@ authoritative pause path. Risk evidence is redacted, versioned, immutable,
 session-scoped, and linked to source/correlation/causation. Repeated source
 fingerprints produce one escalation; stale or conflicting case updates fail
 closed without erasing the original evidence.
+
+### F04.5 Platform Adapter Safety
+
+F04.5-FLOW-001 through F04.5-FLOW-007 reuse promotion status and action-log
+projections; validation, dispatch, retry, reconciliation, and credential
+isolation remain internal `adapter-safety-service` contracts. Commands require
+session/capability scope, approval and pause checks, allowlisted schema,
+policy/control revision, idempotency, and a durable receipt. Only classified
+transient failures may retry with the same key. Unknown outcomes reconcile
+against authoritative observed state before any retry or success claim;
+non-retryable failures remain explicit and credential material never crosses
+the adapter boundary.
