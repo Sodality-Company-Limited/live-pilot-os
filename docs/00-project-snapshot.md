@@ -12,13 +12,11 @@
 | ID | Status | Summary |
 |----|--------|---------|
 | [`G-OPS-002`](07-backlog/goals/G-OPS-002.md) | `planned` | Deploy identity/session service to DigitalOcean |
-| [`G-SEC-002`](07-backlog/goals/G-SEC-002.md) | `ready` | Identity/session persistence contract |
 | [`G-SEC-003`](07-backlog/goals/G-SEC-003.md) | `planned` | Local credential verification |
 | [`G-SEC-004`](07-backlog/goals/G-SEC-004.md) | `planned` | Server-managed session lifecycle |
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-CORE-071`](07-backlog/goals/G-CORE-071.md) | `draft` | Produce grounded F02 host copilot suggestions |
 | [`G-CORE-072`](07-backlog/goals/G-CORE-072.md) | `draft` | Enforce F02 guidance freshness, redaction, and withdrawal |
 | [`G-CORE-079`](07-backlog/goals/G-CORE-079.md) | `draft` | Reconcile F05 test-authentication HTTP contract |
 | [`G-CORE-080`](07-backlog/goals/G-CORE-080.md) | `draft` | Implement server-managed F05 test sessions |

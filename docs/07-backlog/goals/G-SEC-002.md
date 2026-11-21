@@ -3,7 +3,7 @@ goal_contract:
   id: G-SEC-002
   version: 2
   kind: feature
-  status: ready
+  status: done
   profiles:
     - core
     - security
@@ -18,19 +18,19 @@ goal_contract:
     level: high
     reasons: [identity and authorization boundary]
   reversibility: {level: reversible}
-  lifecycle: {spec: planned, implementation: pending, verification: pending, evidence: pending, review: pending, release: unreleased}
+  lifecycle: {spec: ready, implementation: done, verification: done, evidence: done, review: approved, release: released}
 ---
 
 # G-SEC-002: Identity/session persistence contract
 
-**Status:** ready  
+**Status:** done  
 **Kind:** feature  
-**Spec stability:** clarify done | spec check pending | analyze pending
+**Spec stability:** clarify done | spec check done | analyze done
 **Kind:** feature  
 **Atomic outcome:** identity/session persistence contract  
 **Epic:** SEC  
 **Depends on:** —
-**Spec stability:** clarify done | spec check pending | analyze pending
+**Spec stability:** clarify done | spec check done | analyze done
 **Traceability:** REQ-LP-017; identity-tenancy-authorization-sot.md
 
 ## Context
@@ -62,9 +62,9 @@ This is one atomic slice of the Identity/Session service wave. It must preserve 
 **Stop condition:** Missing SOT authority, failed security gate, unresolved contract incompatibility, or scope drift.
 
 ## Acceptance criteria
-- [ ] identity/session persistence contract is implemented without crossing another service boundary.
-- [ ] Invalid, stale, unauthorized, and replayed inputs fail closed.
-- [ ] Verification evidence is reproducible and revision-bound.
+- [x] identity/session persistence contract is implemented without crossing another service boundary.
+- [x] Invalid, stale, unauthorized, and replayed inputs fail closed.
+- [x] Verification evidence is reproducible and revision-bound.
 
 ## Touch map
 - code/services/identity-session-service/src/persistence/
@@ -77,7 +77,7 @@ Read docs/03-architecture/overview.md, docs/03-architecture/technical-specificat
 
 | DEFINE | PLAN | EXECUTE | REVIEW | SHIP |
 |:------:|:----:|:-------:|:------:|:------:|
-| ✓ | **●** | ○ | ○ | ○ |
+| ✓ | ✓ | ✓ | ✓ | **●** |
 
 | # | Step | Status |
 |---|------|--------|
