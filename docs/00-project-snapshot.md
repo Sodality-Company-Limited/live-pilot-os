@@ -17,7 +17,6 @@
 | [`G-SEC-005`](07-backlog/goals/G-SEC-005.md) | `planned` | Authorization context resolution |
 | [`G-SEC-006`](07-backlog/goals/G-SEC-006.md) | `planned` | Identity/session service contracts |
 | [`G-SEC-007`](07-backlog/goals/G-SEC-007.md) | `planned` | Identity/session security evidence |
-| [`G-CORE-093`](07-backlog/goals/G-CORE-093.md) | `draft` | Bootstrap F05 identity session runtime |
 | [`G-CORE-094`](07-backlog/goals/G-CORE-094.md) | `draft` | Bootstrap adapter safety runtime |
 | [`G-CORE-095`](07-backlog/goals/G-CORE-095.md) | `draft` | Bootstrap F01 projection runtime |
 | [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
@@ -55,7 +54,6 @@
 | [`G-PROMO-026`](07-backlog/goals/G-PROMO-026.md) | `review` | Promotion service-level verification matrix |
 | [`G-PROMO-027`](07-backlog/goals/G-PROMO-027.md) | `blocked` | Promotion API architecture and release gates |
 | [`G-PROMO-028`](07-backlog/goals/G-PROMO-028.md) | `blocked` | Promotion service DigitalOcean release |
-| [`G-CORE-093`](07-backlog/goals/G-CORE-093.md) | `draft` | Bootstrap F05 identity session runtime |
 | [`G-CORE-094`](07-backlog/goals/G-CORE-094.md) | `draft` | Bootstrap adapter safety runtime |
 | [`G-CORE-095`](07-backlog/goals/G-CORE-095.md) | `draft` | Bootstrap F01 projection runtime |
 | [`G-CORE-096`](07-backlog/goals/G-CORE-096.md) | `draft` | Containerize Core BFF and dependent services |
