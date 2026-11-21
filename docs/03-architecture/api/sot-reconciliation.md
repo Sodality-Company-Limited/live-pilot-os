@@ -219,3 +219,12 @@ No public OpenAPI path is generated for moderation audit persistence. The
 model versions, evidence hashes, and correlation/causation. `AUDIT_WRITE_FAILED`,
 `ACTOR_CONTEXT_MISSING`, and `HASH_MISMATCH` remain visible failures; historical
 records are never overwritten and the audit event requires registry coverage.
+
+### Incremental result: F01.P-FLOW-001
+
+No public OpenAPI path is generated for cart-add telemetry ingestion. The
+commerce adapter and purchase projection preserve cart-add as a separate
+session/SKU measure with source event identity, idempotency, and revision
+evidence. `SKU_UNRESOLVED`, `SESSION_NOT_ACTIVE`, and duplicate commerce events
+remain explicit outcomes; the commerce/purchase event contract needs registry
+coverage.
