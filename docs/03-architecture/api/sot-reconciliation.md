@@ -163,6 +163,14 @@ state, preserving order/cart reference, event identity, session scope, and
 revision evidence. Missing order reference, duplicate commerce event, and
 inactive session remain explicit failure/deferred outcomes.
 
+### Incremental result: F01.P-FLOW-003
+
+No public OpenAPI path is generated for payment/order-state ingestion. The
+`purchase-projection` owns only the read projection and consumes versioned order
+facts; it does not become the order source of truth. `ORDER_STATE_INVALID`,
+`STALE_ORDER_REVISION`, and `ORDER_NOT_FOUND` remain explicit outcomes and must
+not be rendered as a successful payment state.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
