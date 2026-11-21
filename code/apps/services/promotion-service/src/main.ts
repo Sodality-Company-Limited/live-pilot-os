@@ -14,6 +14,7 @@ interface RuntimeConfiguration {
   readonly port: number;
   readonly databaseUrl: string;
   readonly natsUrl: string;
+  readonly natsToken?: string;
 }
 
 interface ProbeResponse {
@@ -49,6 +50,7 @@ function loadRuntimeConfiguration(): RuntimeConfiguration {
     port: parsePort(requiredEnvironment('PROMOTION_HTTP_PORT')),
     databaseUrl: requiredEnvironment('PROMOTION_DATABASE_URL'),
     natsUrl: requiredEnvironment('PROMOTION_NATS_URL'),
+    natsToken: process.env.PROMOTION_NATS_TOKEN?.trim() || undefined,
   };
 }
 
@@ -109,6 +111,7 @@ class RuntimeHealthService implements OnModuleInit, OnModuleDestroy {
     }
     this.natsConnection = await connect({
       servers: this.configuration.natsUrl,
+      token: this.configuration.natsToken,
       timeout: 5_000,
       name: `${this.configuration.serviceName}:${this.configuration.releaseId}`,
     });
