@@ -10,7 +10,6 @@
 
 | Goal | Kind | Goal status | Collaboration phase | Depends on | File |
 |------|------|-------------|---------------------|------------|------|
-| G-CORE-072 | feature | draft | DEFINE | G-CORE-070, G-CORE-071 | [`goals/G-CORE-072.md`](../goals/G-CORE-072.md) |
 | G-CORE-079 | api | draft | DEFINE | G-CORE-050, G-CORE-055 | [`goals/G-CORE-079.md`](../goals/G-CORE-079.md) |
 | G-CORE-080 | feature | draft | DEFINE | G-CORE-079 | [`goals/G-CORE-080.md`](../goals/G-CORE-080.md) |
 | G-CORE-081 | security | draft | DEFINE | G-CORE-079, G-CORE-080 | [`goals/G-CORE-081.md`](../goals/G-CORE-081.md) |
@@ -46,6 +45,7 @@
 | G-CORE-075 | G-CORE-075 | 2026-11-21 | [`goals/_archived/G-CORE-075.md`](../goals/_archived/G-CORE-075.md) |
 | G-CORE-074 | Catalog persistence and RLS | 2026-11-21 | [`goals/_archived/G-CORE-074.md`](../goals/_archived/G-CORE-074.md) |
 | G-CORE-073 | Catalog service contract | 2026-11-21 | [`goals/_archived/G-CORE-073.md`](../goals/_archived/G-CORE-073.md) |
+| G-CORE-072 | Enforce F02 guidance freshness, redaction, and withdrawal | 2026-11-21 | [`goals/_archived/G-CORE-072.md`](../goals/_archived/G-CORE-072.md) |
 | G-CORE-071 | Produce grounded F02 host copilot suggestions | 2026-11-21 | [`goals/_archived/G-CORE-071.md`](../goals/_archived/G-CORE-071.md) |
 | G-CORE-070 | Verify the Intent/Risk service release on DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-070.md`](../goals/_archived/G-CORE-070.md) |
 | G-CORE-069 | Package the Intent/Risk service for DigitalOcean | 2026-11-21 | [`goals/_archived/G-CORE-069.md`](../goals/_archived/G-CORE-069.md) |
