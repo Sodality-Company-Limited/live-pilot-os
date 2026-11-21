@@ -79,6 +79,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.2-FLOW-006` | None by design | `moderation.case.created.v1` | `moderation-case-service` | Moderator escalation creates a traceable case only after severity/evidence authorization; case-create failure, evidence unavailability, and forbidden actor context remain explicit failures. |
 | `F01.2-FLOW-007` | None by design | `audit.moderation.recorded.v1` | `audit-service` | Moderation evidence is appended immutably with actor context, source event, policy/model versions, hashes, and correlation lineage; hash mismatch or missing actor context never overwrites history. |
 | `F01.P-FLOW-001` | None by design | `commerce.cart_added.v1 → purchase.signal.updated.v1` | `telemetry-service + purchase-projection` | Cart-add remains a distinct, session/SKU-scoped purchase-interest fact; unresolved SKU, inactive session, and duplicate commerce event do not create a false increment. |
+| `F01.P-FLOW-002` | None by design | `commerce.checkout_completed.v1 → purchase.signal.updated.v1` | `telemetry-service + purchase-projection` | Checkout completion is a distinct durable funnel fact with order/cart reference, session/SKU scope, source evidence, and idempotent replay behavior. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

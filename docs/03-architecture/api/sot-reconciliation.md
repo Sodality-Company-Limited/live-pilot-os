@@ -155,6 +155,14 @@ input, invalid windows, or model unavailability remain rejected/deferred states;
 the `chat.question.clustered.v1` event schema still needs canonical registry
 coverage.
 
+### Incremental result: F01.P-FLOW-002
+
+No public OpenAPI path is generated for checkout telemetry ingestion. The
+purchase projection records checkout separately from cart-add and payment/order
+state, preserving order/cart reference, event identity, session scope, and
+revision evidence. Missing order reference, duplicate commerce event, and
+inactive session remain explicit failure/deferred outcomes.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
