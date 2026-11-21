@@ -64,6 +64,7 @@ source-fact persistence inside the telemetry owner.
 | `F01-FLOW-004` | None by design | `telemetry.duplicate.detected.v1` (internal deduplication fact) | `telemetry-service` | Deduplication is an atomic no-op/receipt decision inside the telemetry owner; the flow subject and duplicate-result schema are not yet registered in the NATS catalog. |
 | `F01-FLOW-005` | None by design | `telemetry.late.received.v1 → projection.reconciled.v1` (internal reconciliation contract) | `telemetry-service + projection-worker` | Late events update a monotonic projection revision without rewriting immutable source history; the subject pair and reconciliation schema are not yet registered in the NATS catalog. |
 | `F01.1-FLOW-001` | None by design | `intent.classify.requested.v1 → telemetry.intent.detected.v1` | `intent-risk-service` | Classification is an internal, confidence-aware signal; low confidence cannot trigger commerce mutation and the subject/schema pair is not yet registered in the canonical NATS catalog. |
+| `F01.1-FLOW-002` | None by design | `intent.classify.requested.v1 → telemetry.intent.detected.v1` | `intent-risk-service` | Product-question classification remains an internal signal with question entity, confidence, and SKU status; `UNSUPPORTED_QUESTION_TYPE` and unresolved catalog context remain explicit. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in

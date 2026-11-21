@@ -105,3 +105,11 @@ and publishes only after durable commit. `PRODUCT_INTEREST` may include an
 optional SKU, but low-confidence output is reviewable UI context only and cannot
 trigger commerce mutation. The flow's intent command/event pair is not yet
 registered in the canonical NATS catalog.
+
+### Incremental result: F01.1-FLOW-002
+
+No public OpenAPI path is generated for product-question classification. The
+internal signal carries the question entity, confidence, catalog/SKU status,
+correlation lineage, and evidence. Low confidence, unresolved catalog context,
+and `UNSUPPORTED_QUESTION_TYPE` remain explicit outcomes; the shared intent
+command/event pair still requires NATS catalog registration.
