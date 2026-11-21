@@ -187,3 +187,11 @@ risk signal preserves pattern version, redacted evidence, confidence, and
 correlation lineage. `PATTERN_VERSION_MISMATCH`, model unavailability, and
 `EVIDENCE_REDACTION_FAILED` remain explicit rejected/deferred outcomes and never
 become a clean-content assertion.
+
+### Incremental result: F01.2-FLOW-004
+
+No public OpenAPI path is generated for coordinated-bot detection. The internal
+moderation aggregate is bounded by live session, time window, and fingerprint
+version, with redacted evidence and correlation lineage. `WINDOW_INVALID`,
+`FINGERPRINT_UNAVAILABLE`, and `AGGREGATION_LAG` must remain visible as
+rejected/deferred/stale states rather than being silently treated as no risk.
