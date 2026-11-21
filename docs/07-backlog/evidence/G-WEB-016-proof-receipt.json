@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "goal_id": "G-WEB-016",
+  "classification": "executable_invariant",
+  "source_revision": "18fcddf085346e392c027a85e50258926ed23473",
+  "invariants": [
+    {
+      "id": "016-INV-AA",
+      "statement": "Both role shells satisfy approved WCAG 2.2 AA contrast and have zero Storybook axe violations at reviewed sizes.",
+      "verification_command": "Storybook axe: Host 1440x1024, Live Ops 390x896; app lint/build/Storybook build and token/SOT/governance harnesses",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "id": "016-INV-KEYBOARD",
+      "statement": "Scrollable panels are keyboard-focusable with visible focus styling.",
+      "verification_command": "Manual keyboard navigation and visible focus review in Storybook",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "source_files": [
+    {
+      "path": "apps/web/src/components/live-shell.tsx",
+      "sha256": "9f56d1a10b383c1bc5c772fad21b580b88ea7771ccf01895d3263ce3230c687b"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "1aa7eef13898c367b9dd9f1711c3c87e6e3c87f63784b00d826c29cf0a12e93e"
+    },
+    {
+      "path": "docs/02-product/design/live-os-ui-specification.md",
+      "sha256": "f339df8915abc2ea39cbc163e25dd1e7dd0b0702dd14c445984b5b1cd9cb48f1"
+    },
+    {
+      "path": "docs/03-architecture/localization-sot.md",
+      "sha256": "79006e954eeddb91a48df0ba7f86abd54c10e99f8c8ae1a3d41d290173697204"
+    },
+    {
+      "path": "docs/03-architecture/ux/live-os-design-tokens.md",
+      "sha256": "d09fd8e2a53c8e1bdb2ced7ac4f8eb964fe466035ac6cce05edf12f475cdb612"
+    },
+    {
+      "path": "docs/07-backlog/goals/G-WEB-016.md",
+      "sha256": "24c4375cc63ddbc9a22923eb7558cd888b6196ceab233f67e9f541acbebe70fa"
+    },
+    {
+      "path": "docs/02-product/acceptance/G-WEB-016.md",
+      "sha256": "c45527bec266190e109f17478a4cff64f557882ffec5fd0bdec6091664f64912"
+    },
+    {
+      "path": "docs/03-architecture/specs/goals/G-WEB-016/design.md",
+      "sha256": "fc2795b5473f1b6a068f58bae887c8a8ee63323cc990de010b0f22f554771aef"
+    }
+  ],
+  "certification": "PASS",
+  "generated_at": "2026-11-21T08:04:43.177Z"
+}

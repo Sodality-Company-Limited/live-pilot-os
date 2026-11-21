@@ -1,10 +1,10 @@
 # Live OS design tokens
 
-**Status:** Draft · single dark theme.<br>
+**Status:** Dark theme with orange accent requested on 2026-11-21.<br>
 **Source of truth:** [`src/tokens.css`](../../../src/tokens.css)<br>
 **Design references:** [Live OS UX flow](live-os-ux-flow.md) · [UI specification](../../02-product/design/live-os-ui-specification.md)
 
-This is a Live OS product layer. It preserves the existing Soda OS token contract and its global reference; it does not replace `docs/03-architecture/design-tokens.md`. Live OS intentionally uses one warm dark theme, with Shopee orange as its accent.
+This is a Live OS product layer. It preserves the existing Soda OS token contract and its global reference; it does not replace `docs/03-architecture/design-tokens.md`. Live OS uses a warm dark theme with Shopee orange (`#EE4D2D`) for primary accents and headings, as requested on 2026-11-21. A lighter orange is used for focus. Semantic success, warning, danger, and info colors keep their existing meanings.
 
 ## Token contract
 
@@ -20,16 +20,22 @@ This is a Live OS product layer. It preserves the existing Soda OS token contrac
 
 ## Contrast check
 
-Ratios below are calculated from the CSS colors using the WCAG relative-luminance formula. Core foreground pairs meet AA for normal text; the Shopee-orange button uses near-black foreground.
+Ratios below are calculated from the CSS colors using the WCAG relative-luminance formula. Shopee orange text on the surface meets AA; the requested exact brand color does not meet AAA for normal text on this surface. Primary fills use near-black foreground and meet AA.
 
 | Pair | Contrast |
 |---|---:|
 | Text / canvas | 17.10:1 |
 | Muted / canvas | 8.95:1 |
 | Subtle / canvas | 7.10:1 |
-| Shopee accent / canvas | 5.26:1 |
-| Primary foreground / primary fill | 5.26:1 |
+| Text / raised surface | 14.16:1 |
+| Muted / raised surface | 7.41:1 |
+| Orange primary / canvas | 5.31:1 |
+| Orange primary / surface | 4.90:1 |
+| Lighter orange / surface | 7.26:1 |
+| Primary foreground / primary fill | 5.31:1 |
+| Primary foreground / hover fill | 7.88:1 |
+| Primary foreground / pressed fill | 4.74:1 |
 | Text / surface | 15.77:1 |
 | Border / surface | 3.37:1 |
 
-Recheck any new foreground/background pairing when adding components. Shopee orange is not used with white text on the bright dark-theme orange; the dark-theme button foreground is near-black.
+Recheck any new foreground/background pairing when adding components. Use the near-black primary foreground on orange fills; do not place normal-sized white text on the orange primary, hover, or pressed fills.

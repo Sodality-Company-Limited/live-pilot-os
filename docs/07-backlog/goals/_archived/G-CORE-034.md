@@ -37,7 +37,7 @@ goal_contract:
   learning: done
 ---
 
-# G-PAY-001: [Title]
+# G-CORE-034: Implement principle-to-decision attribution ledger and validator
 
 **Status:** done  
 **Closed:** 2026-10-25  

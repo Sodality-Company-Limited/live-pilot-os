@@ -45,16 +45,16 @@ extract_goals() {
 diff_name_only() {
   local base_ref="${1:-}"
 
+  if [[ "${GITHUB_EVENT_NAME:-}" == "push" && -n "${GITHUB_EVENT_BEFORE:-}" ]]; then
+    if git rev-parse "${GITHUB_EVENT_BEFORE}^{commit}" >/dev/null 2>&1; then
+      git diff --name-only "${GITHUB_EVENT_BEFORE}" HEAD 2>/dev/null && return
+    fi
+  fi
+
   if [[ -n "$base_ref" ]]; then
     git fetch origin "$base_ref" 2>/dev/null || true
     if git rev-parse "origin/${base_ref}" >/dev/null 2>&1; then
       git diff --name-only "origin/${base_ref}...HEAD" 2>/dev/null && return
-    fi
-  fi
-
-  if [[ "${GITHUB_EVENT_NAME:-}" == "push" && -n "${GITHUB_EVENT_BEFORE:-}" ]]; then
-    if git rev-parse "${GITHUB_EVENT_BEFORE}" >/dev/null 2>&1; then
-      git diff --name-only "${GITHUB_EVENT_BEFORE}" HEAD 2>/dev/null && return
     fi
   fi
 
@@ -162,7 +162,9 @@ check_commit_messages() {
 
   git fetch origin "$base_ref" 2>/dev/null || true
   local range
-  if git rev-parse "origin/${base_ref}" >/dev/null 2>&1; then
+  if [[ "${GITHUB_EVENT_NAME:-}" == "push" && -n "${GITHUB_EVENT_BEFORE:-}" ]] && git rev-parse "${GITHUB_EVENT_BEFORE}^{commit}" >/dev/null 2>&1; then
+    range="${GITHUB_EVENT_BEFORE}..HEAD"
+  elif git rev-parse "origin/${base_ref}" >/dev/null 2>&1; then
     range="origin/${base_ref}..HEAD"
   else
     range="HEAD~10..HEAD"
@@ -282,7 +284,10 @@ check_goal_id_integrity() {
 }
 
 main() {
-  local base_ref="${GITHUB_BASE_REF:-main}"
+  local default_base
+  default_base="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)"
+  default_base="${default_base#origin/}"
+  local base_ref="${GITHUB_BASE_REF:-${GOVERNANCE_DEFAULT_BRANCH:-${default_base:-main}}}"
   local title="${PR_TITLE:-}"
   local body="${PR_BODY:-}"
   local combined="$title $body"

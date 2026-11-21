@@ -37,7 +37,7 @@ goal_contract:
   learning: done
 ---
 
-# G-PAY-001: [Title]
+# G-CORE-037: Implement historical design archeology miner
 
 **Status:** done  
 **Closed:** 2026-10-25  

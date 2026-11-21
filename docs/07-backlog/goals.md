@@ -9,6 +9,7 @@ Goal rows do **not** live on this page. Each epic has its own queue so `main` an
 | Epic | Queue | Notes |
 |------|-------|-------|
 | CORE | [queues/CORE.md](queues/CORE.md) | Core / unscoped |
+| AG | [queues/AG.md](queues/AG.md) | Agent Runtime and Subagent Governance |
 | DAVE | [queues/DAVE.md](queues/DAVE.md) | DAVE Decision System & Governance |
 | ML | [queues/ML.md](queues/ML.md) | Machine Learning & Cognitive Calibration |
 | OPS | [queues/OPS.md](queues/OPS.md) | DAVE Operations & Deployment Governance |

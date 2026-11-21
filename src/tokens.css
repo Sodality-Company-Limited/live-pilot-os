@@ -13,10 +13,10 @@
   --color-text-muted: hsl(23 11% 69%);
   --color-text-subtle: hsl(26 11% 61%);
   --color-muted: var(--color-text-muted);
-  --color-primary: hsl(10 85% 55%);
-  --color-primary-hover: hsl(12 100% 65%);
-  --color-primary-pressed: hsl(10 73% 47%);
-  --color-primary-soft: hsl(13 38% 15%);
+  --color-primary: #ee4d2d;
+  --color-primary-hover: hsl(10 100% 70%);
+  --color-primary-pressed: hsl(10 85% 50%);
+  --color-primary-soft: hsl(10 40% 15%);
   --color-primary-fg: hsl(30 8% 5%);
   --color-success: hsl(147 48% 60%);
   --color-success-soft: hsl(147 28% 14%);
@@ -26,7 +26,7 @@
   --color-danger-soft: hsl(4 32% 14%);
   --color-info: hsl(213 78% 75%);
   --color-info-soft: hsl(213 31% 15%);
-  --color-focus: hsl(10 85% 55%);
+  --color-focus: hsl(10 100% 70%);
 
   --font-body: Inter, "Noto Sans Thai", system-ui, sans-serif;
   --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -64,7 +64,7 @@
   --shadow-lg: 0 20px 25px hsl(0 0% 0% / 35%), 0 8px 10px hsl(0 0% 0% / 24%);
   --shadow-tile: var(--shadow-md);
   --shadow-dialog: var(--shadow-lg);
-  --focus-ring: 0 0 0 3px hsl(10 85% 55% / 35%);
+  --focus-ring: 0 0 0 3px hsl(10 100% 70% / 35%);
 
   --duration-fast: 150ms;
   --duration-standard: 200ms;
