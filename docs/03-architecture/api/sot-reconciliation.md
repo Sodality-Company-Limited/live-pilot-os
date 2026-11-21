@@ -489,3 +489,46 @@ no standalone margin endpoint is generated. All money fields use integer minor
 units with explicit currency and scale. Margin verdicts preserve policy version,
 economic inputs, evidence, actor separation, idempotency, and re-evaluation on
 changed economics; loss-making or unknown outcomes fail closed.
+
+### F03.4 Stock Reservation and Order State
+
+F03.4-FLOW-001 through F03.4-FLOW-008 remain internal inventory/order contracts;
+the existing promotion, overview, SSE, and action-log reads expose only the
+safe projection of reservation/order state and evidence. Inventory is the sole
+authoritative writer: reservations are atomic, quantity/version checked,
+idempotent, expiry-released, and reconciled against authoritative payment/order
+observations. Insufficient, stale, divergent, or unknown state blocks adapter
+execution and is never represented as successful stock commitment.
+
+### F03.5 Scenario Automation
+
+F03.5-FLOW-001 through F03.5-FLOW-007 are internal, versioned scenario-policy
+contracts. Any resulting proposal is represented through the existing
+`proposePromotion`/`getPromotion` surfaces, while trigger facts and policy
+evaluation remain service-owned. Repeated-question, engagement, margin-floor,
+and low-stock rules require bounded windows, policy revisions, deduplication,
+safe disablement, and loop guards; a scenario cannot recursively create an
+unbounded chain of proposals.
+
+### F03 durable promotion workflow, platform, and audit
+
+F03-WORKFLOW-001 through F03-WORKFLOW-006 map to the existing promotion
+proposal/decision/status and action-log operations plus internal workflow and
+adapter contracts. The workflow checks Feature 04 approval and Emergency Pause
+before commit, records requested versus observed state, classifies retryable
+versus non-retryable failures, reconciles unknown adapter outcomes before
+retry, and sends non-retryable failures to a durable dead-letter path. Every
+step retains correlation, causation, idempotency, policy, simulated-mode, and
+audit evidence; no direct browser-to-platform route is generated.
+
+### F03 explicit flow coverage
+
+The grouped decisions above apply to each detailed flow ID explicitly:
+
+- `F03-FLOW-001`, `F03-FLOW-002`, `F03-FLOW-003`, `F03-FLOW-004`
+- `F03.1-FLOW-001`, `F03.1-FLOW-002`, `F03.1-FLOW-003`, `F03.1-FLOW-004`, `F03.1-FLOW-005`, `F03.1-FLOW-006`, `F03.1-FLOW-007`
+- `F03.2-FLOW-001`, `F03.2-FLOW-002`, `F03.2-FLOW-003`, `F03.2-FLOW-004`, `F03.2-FLOW-005`, `F03.2-FLOW-006`, `F03.2-FLOW-007`, `F03.2-FLOW-008`
+- `F03.3-FLOW-001`, `F03.3-FLOW-002`, `F03.3-FLOW-003`, `F03.3-FLOW-004`, `F03.3-FLOW-005`, `F03.3-FLOW-006`, `F03.3-FLOW-007`, `F03.3-FLOW-008`
+- `F03.4-FLOW-001`, `F03.4-FLOW-002`, `F03.4-FLOW-003`, `F03.4-FLOW-004`, `F03.4-FLOW-005`, `F03.4-FLOW-006`, `F03.4-FLOW-007`, `F03.4-FLOW-008`
+- `F03.5-FLOW-001`, `F03.5-FLOW-002`, `F03.5-FLOW-003`, `F03.5-FLOW-004`, `F03.5-FLOW-005`, `F03.5-FLOW-006`, `F03.5-FLOW-007`
+- `F03-WORKFLOW-001`, `F03-WORKFLOW-002`, `F03-WORKFLOW-003`, `F03-WORKFLOW-004`, `F03-WORKFLOW-005`, `F03-WORKFLOW-006`
