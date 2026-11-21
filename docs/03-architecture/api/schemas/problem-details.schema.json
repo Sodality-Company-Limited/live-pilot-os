@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/api/problem-details.schema.json",
+  "title": "LivePilot ProblemDetails",
+  "type": "object",
+  "required": ["type", "title", "status", "code", "message_key", "correlation_id", "retryable", "field_errors"],
+  "properties": {
+    "type": {"type": "string", "format": "uri"},
+    "title": {"type": "string", "maxLength": 120},
+    "status": {"type": "integer", "minimum": 400, "maximum": 599},
+    "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+    "message_key": {"type": "string", "pattern": "^errors\\.[a-z0-9_.-]+$"},
+    "detail": {"type": "string", "maxLength": 500},
+    "correlation_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "retryable": {"type": "boolean"},
+    "retry_after_seconds": {"type": ["integer", "null"], "minimum": 0},
+    "field_errors": {"type": "array", "maxItems": 50, "items": {"type": "object", "required": ["field", "code"], "properties": {"field": {"type": "string", "maxLength": 128}, "code": {"type": "string", "maxLength": 64}}, "additionalProperties": false}},
+    "evidence_id": {"type": ["string", "null"], "maxLength": 128}
+  },
+  "additionalProperties": false
+}

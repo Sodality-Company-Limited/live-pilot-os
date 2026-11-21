@@ -146,6 +146,34 @@ contracts:
     producers: [portal-bff]
     consumers: [host-ui, live-ops-ui]
     verification: "test -f docs/03-architecture/api/openapi.yaml"
+  - id: nats.subjects.livepilot.v1
+    owner: api-contracts-and-domain-architecture
+    source: ../../api/nats-subject-catalog-sot.md
+    status: pilot_inventory_schema_tests_pending
+    producers: [core-bff, telemetry-ingress, intent-risk-service, jev-copilot-service, promotion-service, approval-control-service, execution-service, audit-service, control-plane]
+    consumers: [session-service, telemetry-service, intent-risk-service, copilot-service, promotion-service, policy-service, inventory-service, execution-service, audit-service, portal-bff]
+    verification: "test -f docs/03-architecture/api/nats-subject-catalog-sot.md && test -d docs/03-architecture/api/schemas/nats"
+  - id: http.portal-bff.livepilot.v1
+    owner: portal-bff
+    source: ../../api/portal-bff/openapi.yaml
+    status: pilot_contract
+    producers: [portal-bff]
+    consumers: [host-ui, live-ops-ui, browser]
+    verification: "test -f docs/03-architecture/api/portal-bff/openapi.yaml"
+  - id: http.core-bff.livepilot.internal.v1
+    owner: core-bff
+    source: ../../api/core-bff/openapi.yaml
+    status: internal_contract
+    producers: [core-bff]
+    consumers: [portal-bff, edge-gateway, internal-mesh]
+    verification: "test -f docs/03-architecture/api/core-bff/openapi.yaml"
+  - id: deployment.service-runtime-mapping.livepilot.v1
+    owner: platform-engineering-and-architecture
+    source: ../../deployment/service-runtime-mapping-sot.md
+    status: foundation_deployed_application_runtime_pending
+    producers: [platform-engineering, architecture]
+    consumers: [deployment, api-contracts, services, sre]
+    verification: "test -f docs/03-architecture/deployment/service-runtime-mapping-sot.md"
   - id: http.authentication.test-mode.v1
     owner: identity-and-session-access
     source: ../../api/authentication.md
