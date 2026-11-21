@@ -247,8 +247,7 @@ goal drafting.
 
 Codex must inspect the repository SOTs directly, generate a LivePilot-specific
 context artifact, create atomic goals and their required satellite specifications,
-run the goal-template and architecture conformance checks, and commit changes to
-the `mart` branch.
+and run the goal-template and architecture conformance checks.
 
 For the current implementation wave, goals are limited to microservices,
 PostgreSQL migrations, Redis usage, NATS producers/consumers, and the JEV/OpenAI
