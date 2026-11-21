@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.livepilot.invalid/api/realtime-event.schema.json",
+  "title": "LivePilot Realtime Event",
+  "type": "object",
+  "required": ["event_id", "event_type", "schema_version", "session_id", "correlation_id", "sequence", "occurred_at", "mode", "data"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "event_type": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"},
+    "schema_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "correlation_id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "sequence": {"type": "integer", "minimum": 1},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "mode": {"type": "string", "enum": ["SIMULATED", "SANDBOX", "CONFIRMED"]},
+    "data": {"type": "object", "additionalProperties": true}
+  },
+  "additionalProperties": false
+}

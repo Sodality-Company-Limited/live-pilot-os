@@ -1,6 +1,6 @@
 # Identity, Tenancy, and Authorization SOT
 
-> **Status:** Production-readiness target; unresolved provider decisions block certification.
+> **Status:** Pilot contract frozen; named OIDC vendor remains a deployment decision.
 > **Consumers:** OpenAPI, internal routes, NATS context, audit, UI session boundary.
 
 ## Authority model
@@ -44,7 +44,27 @@ the authorization decision revision. Missing or stale context fails closed.
 - Propagate signed user context internally; re-authorize at the domain owner.
 - Record actor, tenant, resource, capability, decision, policy revision, and correlation.
 
-## Open decisions
+## Frozen pilot contract
 
-OIDC provider, claim mapping, tenant authority, service identity, role/capability
-registry, session expiry, token rotation, and operational owner remain `[NEEDS CLARIFICATION]`.
+Production uses an external OIDC-compatible issuer configured by deployment
+(`OIDC_ISSUER`, `OIDC_AUDIENCE`, and approved JWKS source). The issuer vendor is
+intentionally not embedded in the API contract. A deployment cannot start in
+production unless issuer, audience, JWKS refresh, owner, and rotation evidence are
+present. Local and simulated pilot mode may use the seeded Argon2id adapter only.
+
+| Contract | Frozen rule |
+|---|---|
+| Claims | `sub` is the immutable principal ID; `tenant_id`, `workspace_id`, and role/capability claims are accepted only after issuer/audience/signature validation and server-side membership lookup |
+| Session | Browser receives a Secure, HttpOnly, SameSite=Lax opaque session cookie; raw OIDC tokens never reach browser JavaScript or API responses |
+| TTL | Access assertion max 5 minutes; server session idle timeout 30 minutes and absolute timeout 8 hours; exact values are deployment policy and audited |
+| Rotation | JWKS refresh on cache expiry and unknown key ID; key rollover accepts old/new keys only during bounded overlap |
+| Service identity | mTLS/workload identity between internal nodes; user context is signed and re-authorized by each domain owner |
+| Roles | `HOST`, `LIVE_OPS`, `AUDITOR`, `PLATFORM_OPERATOR`; capabilities are server-side registry entries, never browser-supplied |
+| Failure | missing issuer/audience/signature/membership/capability fails closed; no resource-existence disclosure across tenant boundaries |
+| Audit | login, logout, authorization decision, denial, token-key change, and privileged action record actor reference, tenant, policy revision, correlation, and result |
+
+## Remaining deployment decision
+
+Select and record the named OIDC vendor/owner in the production deployment SOT.
+The API contract does not change when the vendor changes, provided this contract
+and the issuer/audience/JWKS evidence remain valid.

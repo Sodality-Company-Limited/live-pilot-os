@@ -137,6 +137,110 @@ paths:
         '500':
           $ref: '#/components/responses/Internal'
 
+  /v1/live-sessions/{session_id}/events:
+    get:
+      tags: [Live Sessions]
+      summary: Stream authorized live-session events over SSE
+      operationId: streamLiveSessionEvents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: Last-Event-ID
+          in: header
+          required: false
+          schema: {type: string, maxLength: 128}
+      responses:
+        '200':
+          description: Server-sent event stream
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/RealtimeEvent'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409':
+          description: Replay cursor expired
+          content: {application/problem+json: {schema: {$ref: '#/components/schemas/ProblemDetails'}}}
+
+  /v1/promotions/{promotion_id}/decision:
+    post:
+      tags: [Promotions]
+      summary: Approve or reject a pending promotion
+      operationId: decidePromotion
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: promotion_id
+          in: path
+          required: true
+          schema: {type: string, minLength: 1}
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/PromotionDecisionRequest'}
+      responses:
+        '202':
+          description: Decision committed; simulated execution is asynchronous
+          content: {application/json: {schema: {$ref: '#/components/schemas/PromotionDecisionResponse'}}}
+        '400': {$ref: '#/components/responses/ValidationError'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/PolicyRejected'}
+        '503': {$ref: '#/components/responses/Internal'}
+
+  /v1/promotions/{promotion_id}:
+    get:
+      tags: [Promotions]
+      summary: Read promotion and simulated execution state
+      operationId: getPromotion
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: promotion_id
+          in: path
+          required: true
+          schema: {type: string, minLength: 1}
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Promotion state
+          content: {application/json: {schema: {$ref: '#/components/schemas/Promotion'}}}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '500': {$ref: '#/components/responses/Internal'}
+
+  /v1/live-sessions/{session_id}/actions:
+    get:
+      tags: [Live Sessions]
+      summary: Read the authorized immutable action log
+      operationId: getActionLog
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: cursor
+          in: query
+          required: false
+          schema: {type: string, maxLength: 512}
+        - name: limit
+          in: query
+          required: false
+          schema: {type: integer, minimum: 1, maximum: 100, default: 50}
+      responses:
+        '200':
+          description: Ordered action receipts
+          content: {application/json: {schema: {$ref: '#/components/schemas/ActionLogPage'}}}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '500': {$ref: '#/components/responses/Internal'}
+
 components:
   securitySchemes:
     bearerAuth:
@@ -342,6 +446,50 @@ components:
           type: integer
           minimum: 0
       additionalProperties: false
+    RealtimeEvent:
+      $ref: './schemas/realtime-event.schema.json'
+    Promotion:
+      $ref: './schemas/promotion.schema.json'
+    PromotionDecisionRequest:
+      type: object
+      required: [decision, expected_resource_version, reason]
+      properties:
+        decision:
+          type: string
+          enum: [approve, reject]
+        expected_resource_version:
+          type: integer
+          minimum: 1
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+      additionalProperties: false
+    PromotionDecisionResponse:
+      type: object
+      required: [promotion_id, decision_id, status, resource_version, action_id]
+      properties:
+        promotion_id: {type: string}
+        decision_id: {type: string}
+        status:
+          type: string
+          enum: [approved, rejected, pending, unknown]
+        resource_version: {type: integer, minimum: 1}
+        action_id: {type: [string, 'null']}
+      additionalProperties: false
+    ActionReceipt:
+      $ref: './schemas/action-receipt.schema.json'
+    ActionLogPage:
+      type: object
+      required: [items, next_cursor]
+      properties:
+        items:
+          type: array
+          maxItems: 100
+          items: {$ref: '#/components/schemas/ActionReceipt'}
+        next_cursor:
+          type: [string, 'null']
+      additionalProperties: false
     InvalidParam:
       type: object
       required:
@@ -411,6 +559,12 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
     Unauthorized:
       description: Authentication is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Forbidden:
+      description: Authenticated but not authorized
       content:
         application/problem+json:
           schema:

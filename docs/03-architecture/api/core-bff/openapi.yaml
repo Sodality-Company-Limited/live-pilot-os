@@ -1,0 +1,13 @@
+openapi: 3.1.0
+info:
+  title: LivePilot Core BFF Internal API
+  version: 1.0.0
+  description: Private mTLS/workload-identity orchestration contract. Never expose publicly.
+paths:
+  /internal/v1/core/auth/context: {post: {operationId: resolveAuthContext, responses: {'200': {description: Signed context}, '401': {description: Invalid service identity}}}}
+  /internal/v1/core/live-sessions/{session_id}/overview: {get: {operationId: readSessionOverview, responses: {'200': {description: Read model}, '403': {description: Scope denied}, '503': {description: Dependency unavailable}}}}
+  /internal/v1/core/live-sessions/{session_id}/events: {get: {operationId: subscribeSessionEvents, responses: {'200': {description: SSE stream}, '403': {description: Scope denied}}}}
+  /internal/v1/core/live-sessions/{session_id}/promotions: {post: {operationId: requestPromotionProposal, responses: {'202': {description: Pending proposal}, '409': {description: Idempotency/version conflict}}}}
+  /internal/v1/core/promotions/{promotion_id}/decision: {post: {operationId: recordPromotionDecision, responses: {'202': {description: Pending/unknown action}, '403': {description: Capability denied}, '409': {description: Conflict}}}}
+  /internal/v1/core/promotions/{promotion_id}: {get: {operationId: readPromotion, responses: {'200': {description: Promotion}, '404': {description: Not found}}}}
+  /internal/v1/core/live-sessions/{session_id}/actions: {get: {operationId: readActionLog, responses: {'200': {description: Audit projection}, '403': {description: Capability denied}}}}
