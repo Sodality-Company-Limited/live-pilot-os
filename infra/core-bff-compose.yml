@@ -1,0 +1,45 @@
+# Core BFF & Microservice Fleet Local Production-Shaped Compose Topology
+version: '3.8'
+
+services:
+  nats:
+    image: nats:2.10-alpine
+    container_name: livepilot-nats
+    ports:
+      - '4222:4222'
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:8222/healthz']
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: livepilot-redis
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  core-bff:
+    build:
+      context: ../code/apps/core-bff
+      dockerfile: Dockerfile
+    container_name: livepilot-core-bff
+    ports:
+      - '4000:4000'
+    env_file:
+      - core-bff.env.example
+    depends_on:
+      nats:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:4000/health']
+      interval: 5s
+      timeout: 3s
+      retries: 3
