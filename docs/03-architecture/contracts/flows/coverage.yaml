@@ -142,7 +142,7 @@ contracts:
     owner: api-contracts
     source: ../../api/openapi.yaml
     sha256: 96d2db184895f031de32ee8ed52bc13ffaf8f22a3da534c82ab385ac14ce2de2
-    status: canonical
+    status: draft_generation_blocked
     producers: [portal-bff]
     consumers: [host-ui, live-ops-ui]
     verification: "test -f docs/03-architecture/api/openapi.yaml"

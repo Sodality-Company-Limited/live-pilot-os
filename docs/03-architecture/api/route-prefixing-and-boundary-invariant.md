@@ -10,6 +10,10 @@ This document is the canonical route-prefixing contract for the six-node topolog
 It standardizes which boundary owns cookies, bearer authentication, public routing,
 internal routing, domain policy, persistence, and message transport.
 
+The six nodes are the logical boundary model. The current DigitalOcean deployment
+is a constrained Docker Compose bridge; it must preserve these route and ownership
+boundaries even when multiple logical nodes share one host.
+
 ## 1. Six-node topology
 
 ```text

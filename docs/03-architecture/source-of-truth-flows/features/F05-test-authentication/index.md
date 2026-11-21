@@ -11,7 +11,7 @@
 | BRD | [Feature 05 BRD](../../../../02-product/brd/feature-05-test-authentication-access-gate.md) | Business authority |
 | BDD | [Feature 05 BDD](../../../../02-product/bdd/feature-05-test-authentication-access-gate.md) | Behavior authority |
 | API contract | [authentication.md](../../../api/authentication.md) | Login/session/logout HTTP contract |
-| OpenAPI | [openapi.yaml](../../../api/openapi.yaml) | Canonical transport schema |
+| OpenAPI | [openapi.yaml](../../../api/openapi.yaml) | Draft transport schema pending catalog reconciliation |
 | Identity SOT | [identity-tenancy-authorization-sot.md](../../../api/identity-tenancy-authorization-sot.md) | Identity and authorization authority |
 | Architecture | [overview.md](../../../overview.md) | UI/BFF/service boundaries |
 

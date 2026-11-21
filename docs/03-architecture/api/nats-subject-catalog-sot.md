@@ -2,6 +2,10 @@
 
 > **Status:** Required async inventory; use the [NATS template](nats-subject-message-template.md).
 
+> **Current state:** No subject is approved yet. AsyncAPI generation is blocked
+> until producers, consumers, schemas, delivery, retry/DLQ, retention, replay
+> ownership, and compatibility verification are registered for each subject.
+
 Each subject requires a catalog row before implementation:
 
 | Field | Example |
