@@ -283,6 +283,15 @@ version, severity, actor/source lineage, and correlation/causation.
 `COMPLIANCE_UNAVAILABLE`, `EVIDENCE_REDACTION_FAILED`, and
 `POLICY_VERSION_MISSING` remain explicit failure/deferred states.
 
+### Incremental result: F01-INTEGRATION-004
+
+No new public OpenAPI path is generated. The overview/SSE surfaces may expose
+only the safe stock-aware projection; the internal `product.interest.stock-aware.v1`
+contract links ranked purchase interest to SKU, inventory state, snapshot
+freshness, and lineage. `STOCK_SNAPSHOT_STALE`, `SKU_UNRESOLVED`, and
+`INVENTORY_UNAVAILABLE` remain explicit unknown/deferred states and cannot
+authorize promotion.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
