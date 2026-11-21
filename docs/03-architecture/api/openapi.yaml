@@ -10,9 +10,66 @@ info:
     transport schemas, auth, correlation, idempotency, and public error semantics.
 tags:
   - name: Authentication
+  - name: Live Session Lifecycle
   - name: Live Sessions
   - name: Promotions
 paths:
+  /v1/live-sessions:
+    post:
+      tags: [Live Session Lifecycle]
+      summary: Initialize an authorized live session
+      description: >-
+        Creates the authoritative LiveSession boundary for downstream telemetry.
+        This operation does not ingest raw chat or commerce payloads, invoke JEV,
+        mutate a marketplace, or claim that telemetry has arrived. Source
+        readiness is returned explicitly per source.
+      operationId: createLiveSession
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/Locale'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLiveSessionRequest'
+      responses:
+        '200':
+          description: Idempotent replay of an already committed live session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSessionStartResponse'
+        '201':
+          description: Live session committed and source registration receipt returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveSessionStartResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ChannelNotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnsupportedSessionMode'
+        '424':
+          $ref: '#/components/responses/ChannelNotReady'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/Internal'
+        '503':
+          $ref: '#/components/responses/DependencyUnavailable'
+
   /v1/auth/login:
     post:
       tags: [Authentication]
@@ -266,6 +323,14 @@ components:
       schema:
         type: string
         minLength: 1
+    Locale:
+      name: X-Locale
+      in: header
+      required: false
+      schema:
+        type: string
+        enum: [th, en]
+        default: en
     IdempotencyKey:
       name: Idempotency-Key
       in: header
@@ -274,6 +339,64 @@ components:
         type: string
         minLength: 8
   schemas:
+    CreateLiveSessionRequest:
+      type: object
+      required: [platform, channel_ref, mode, requested_at]
+      properties:
+        platform:
+          type: string
+          enum: [tiktok, simulator]
+        channel_ref:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Server-resolved platform channel reference; never a credential.
+        mode:
+          type: string
+          enum: [live]
+        requested_at:
+          type: string
+          format: date-time
+      additionalProperties: false
+    LiveSessionStartResponse:
+      type: object
+      required: [live_session_id, status, platform, channel_ref, source_readiness, correlation_id, schema_version]
+      properties:
+        live_session_id:
+          type: string
+          minLength: 1
+        status:
+          type: string
+          enum: [live]
+        platform:
+          type: string
+          enum: [tiktok, simulator]
+        channel_ref:
+          type: string
+        source_readiness:
+          $ref: '#/components/schemas/SourceReadiness'
+        correlation_id:
+          type: string
+        schema_version:
+          type: integer
+          const: 1
+      additionalProperties: false
+    SourceReadiness:
+      type: object
+      required: [chat, commerce, engagement]
+      properties:
+        chat:
+          $ref: '#/components/schemas/ReadinessState'
+        commerce:
+          $ref: '#/components/schemas/ReadinessState'
+        engagement:
+          $ref: '#/components/schemas/ReadinessState'
+        stock:
+          $ref: '#/components/schemas/ReadinessState'
+      additionalProperties: false
+    ReadinessState:
+      type: string
+      enum: [pending, ready, degraded, unavailable]
     LoginRequest:
       type: object
       required: [email, password]
@@ -595,6 +718,30 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
     Internal:
       description: Unexpected internal error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ChannelNotFound:
+      description: Platform channel reference is not known
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    UnsupportedSessionMode:
+      description: Requested session mode is not supported by the pilot
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ChannelNotReady:
+      description: Adapter cannot prove required source readiness
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    DependencyUnavailable:
+      description: Required dependency unavailable and session was not committed
       content:
         application/problem+json:
           schema:
