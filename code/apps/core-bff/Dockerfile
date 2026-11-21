@@ -1,14 +1,14 @@
 # Multi-stage Containerfile for Core BFF Service
-# Security invariants: Alpine base, non-root user (livepilot:livepilot), dumb-init process reaper.
-
 FROM node:20-alpine AS builder
 
 WORKDIR /build
 
 COPY package.json tsconfig.json ./
+RUN npm install --ignore-scripts
 COPY src/ ./src/
+COPY test/ ./test/
 
-RUN npm install -g typescript && tsc -b
+RUN npx tsc -b
 
 FROM node:20-alpine AS runner
 
@@ -24,10 +24,10 @@ COPY --from=builder --chown=livepilot:livepilot /build/dist ./dist
 USER livepilot:livepilot
 
 ENV NODE_ENV=production
-ENV PORT=4000
+ENV PORT=8080
 ENV HOST=0.0.0.0
 
-EXPOSE 4000
+EXPOSE 8080
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["node", "dist/src/main.js"]
