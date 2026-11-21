@@ -6,7 +6,7 @@ schema_version: "1"
 epics:
   CORE:
     name: Core / unscoped
-    next_seq: 79
+    next_seq: 103
     reserved: []
   APPR:
     name: Approval and Control Service
@@ -59,6 +59,10 @@ epics:
   OPS:
     name: DAVE Operations & Deployment Governance
     next_seq: 4
+    reserved: []
+  PROMO:
+    name: PROMO
+    next_seq: 29
     reserved: []
   PROOF:
     name: DAVE Mathematical Invariant & Assurance Proofs

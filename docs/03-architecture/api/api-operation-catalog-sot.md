@@ -258,9 +258,9 @@ until the unresolved identity, realtime, and event decisions in
 | `logoutTestUser` | `POST /v1/auth/logout` | authenticated principal | identity/session; session revoked | control |
 | `getLiveSessionOverview` | `GET /v1/live-sessions/{session_id}/overview` | Host or Live Ops with session visibility | session/campaign read model | safe read |
 | `streamLiveSessionEvents` | `GET /v1/live-sessions/{session_id}/events` | Host or Live Ops with session visibility | realtime projection; no direct writer | realtime read |
-| `proposePromotion` | `POST /v1/live-sessions/{session_id}/promotions` | Live Ops or approved decision service | promotion service; `proposed → pending` | proposal |
+| `proposePromotion` | `POST /v1/live-sessions/{session_id}/promotions` | Authenticated Live Ops or internal decision service with `promotion.propose`; server-derived tenant/session scope; Host cannot approve | promotion-service; `proposed → pending` | proposal |
 | `decidePromotion` | `POST /v1/promotions/{promotion_id}/decision` | Live Ops approval capability only | approval-control; `pending → approved/rejected` | approval |
-| `getPromotion` | `GET /v1/promotions/{promotion_id}` | Host/Live Ops with session visibility | promotion service read model | safe read |
+| `getPromotion` | `GET /v1/promotions/{promotion_id}` | Authenticated Host/Live Ops with server-verified tenant/session visibility; sensitive fields require Live Ops capability | promotion-service read model; ETag from `resource_version` | safe read |
 | `getActionLog` | `GET /v1/live-sessions/{session_id}/actions` | Live Ops audit capability | audit service projection | safe read |
 
 ### Flow-to-boundary reconciliation
@@ -311,7 +311,7 @@ must not be exposed through browser-originated routes.
 | `logoutTestUser` | — | `AUTHENTICATION_REQUIRED` | — | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
 | `getLiveSessionOverview` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` / privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | partial fields marked stale/unknown |
 | `streamLiveSessionEvents` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` / privacy-safe not found | `REPLAY_WINDOW_EXPIRED` | — | `RATE_LIMITED` | `DEPENDENCY_TIMEOUT` | disconnected/stale event |
-| `proposePromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` | `IDEMPOTENCY_KEY_CONFLICT` / `RESOURCE_VERSION_CONFLICT` | `POLICY_REJECTED` / `APPROVAL_REQUIRED` | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | `ACTION_PENDING` |
+| `proposePromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | `SESSION_SCOPE_DENIED` | `IDEMPOTENCY_KEY_CONFLICT` / `IDEMPOTENCY_PAYLOAD_MISMATCH` / `RESOURCE_VERSION_CONFLICT` | `POLICY_REJECTED` / `APPROVAL_REQUIRED` | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | `ACTION_PENDING` |
 | `decidePromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | capability denial / privacy-safe not found | `IDEMPOTENCY_KEY_CONFLICT` / `RESOURCE_VERSION_CONFLICT` | `POLICY_REJECTED` | `RATE_LIMITED` | `DEPENDENCY_TIMEOUT` | `ACTION_PENDING` / `ACTION_UNKNOWN` |
 | `getPromotion` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | linked state marked unknown |
 | `getActionLog` | `REQUEST_INVALID` | `AUTHENTICATION_REQUIRED` | capability denial / privacy-safe not found | — | — | `RATE_LIMITED` | `DEPENDENCY_UNAVAILABLE` | — |
@@ -413,20 +413,34 @@ the error registry's `LP` code, localization key, retry policy, and correlation 
 - **Caller:** authenticated Live Ops or an internal decision service with proposal
   capability; Host cannot approve through this operation.
 - **Request:** product ID, promotion type, proposed discount, claim limit, reason,
-  policy context version, correlation ID, and required `Idempotency-Key`; reject
-  client-supplied margin/stock verdicts and unknown fields.
-- **Response:** `202` proposal ID, status `pending`, policy evaluation reference,
-  resource version, and audit reference.
+  policy context version, correlation ID, and required `Idempotency-Key`. The
+  server derives tenant, actor, capability, and session scope from the
+  authenticated session. Reject client-supplied margin/stock/approval verdicts,
+  credentials, provider payloads, and unknown fields. The canonical fingerprint
+  binds tenant, session, operation, payload, policy revision, expected version,
+  and actor; its SHA-256 hash is retained as safe audit metadata.
+- **Response:** `202` proposal ID, status `proposed` or `pending`, policy
+  revision, monotonic `resource_version`, `ETag`, correlation/causation lineage,
+  audit receipt ID, explicit `mode=SIMULATED`, and next action. A same-key,
+  same-fingerprint replay returns `200` with the one durable result.
 - **Owner/state:** promotion service; `proposed → pending`; catalog/inventory are
   read authorities, never written by this endpoint.
+- **Lifecycle / concurrency:** the atomic promotion-service transaction inserts
+  the inbox outcome, aggregate transition audit, and outbox event together.
+  `proposed → pending` is the only proposal-side transition; later states are
+  guarded by policy, approval, pause, inventory, and observed-execution facts.
+  `resource_version` increments exactly once and stale compare-and-set fails
+  with no outbox or aggregate mutation; `ETag` represents that version.
 - **Approval/rejection/timeout/failure:** invalid product/stock/policy → stable
   `422`; policy refusal → `422`; evaluation timeout → `202` with `pending`, never
-  auto-approve; persistence/outbox failure → `503` with no partial mutation.
+  auto-approve; unauthorized or stale session → `403`; persistence/outbox or
+  required-dependency failure → `503` with no partial mutation.
 - **Events/jobs:** transactionally emits `promotion.proposed` and enqueues policy
   evaluation after commit; outbox retry is safe.
-- **Duplicates:** idempotency fingerprint binds tenant, session, product, payload,
-  and actor; same key/same fingerprint returns original result; same key/different
-  fingerprint → `409`; retention is defined by the idempotency SOT.
+- **Duplicates:** same key/same fingerprint returns the original durable result;
+  same key/different fingerprint → `409 IDEMPOTENCY_PAYLOAD_MISMATCH`; a stale
+  resource version → `409 RESOURCE_VERSION_CONFLICT`. Duplicate concurrent
+  requests cannot create a second aggregate transition or outbox event.
 - **Proof:** margin-floor, catalog binding, idempotency, outbox, timeout, and no-
   execution-before-approval integration tests.
 
@@ -458,13 +472,21 @@ the error registry's `LP` code, localization key, retry policy, and correlation 
   reservation, and current action status.
 - **Caller:** Host or Live Ops with session visibility; sensitive margin/COGS fields
   are restricted to Live Ops capability.
-- **Request:** promotion ID, correlation ID, optional bounded `include=details`.
-- **Response:** `200` versioned resource with explicit status and `unknown` external
-  effect; redacted representation for Host.
+- **Request:** promotion ID and correlation ID. The service resolves the
+  promotion's tenant/session scope from authoritative state; caller-supplied
+  tenant or actor headers cannot broaden visibility. Optional details remain
+  capability-gated and bounded.
+- **Response:** `200` versioned resource with explicit lifecycle status,
+  `resource_version`, strong `ETag`, correlation/causation and audit metadata,
+  explicit `mode=SIMULATED`, and `unknown` external effect when observation is
+  absent; redacted representation for Host. No credentials or raw provider
+  payloads are returned.
 - **Owner/state:** promotion service owns promotion state; action and inventory
   statuses are linked read projections.
-- **Approval/rejection/timeout/failure:** inaccessible → privacy-safe `404`; stale
-  projection includes freshness; unavailable linked service → marked `unknown`.
+- **Approval/rejection/timeout/failure:** missing authentication → `401`;
+  inaccessible or cross-session resource → privacy-safe `404`/`403` according to
+  the identity policy; stale projection includes freshness; unavailable linked
+  service → marked `unknown` rather than inferred success.
 - **Events/jobs:** none.
 - **Duplicates:** safe read; authorization-scoped cache only.
 - **Proof:** redaction, state-transition, freshness, tenant isolation, and unknown
