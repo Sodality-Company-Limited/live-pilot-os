@@ -3,8 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "src/server.ts",
   "scripts": {
-    "test": "node test/verify-migrations.mjs"
+    "build": "tsc --noEmit",
+    "test": "node test/verify-migrations.mjs && node --experimental-strip-types --test test/**/*.test.mjs test/**/*.test.ts",
+    "test:migrations": "node test/verify-migrations.mjs",
+    "test:unit": "node --experimental-strip-types --test test/**/*.test.mjs test/**/*.test.ts",
+    "start": "node --experimental-strip-types src/server.ts"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "pg": "^8.13.1"
