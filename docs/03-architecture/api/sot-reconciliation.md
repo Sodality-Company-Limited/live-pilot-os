@@ -316,6 +316,15 @@ may expose only authorized pause state and propagation receipt. `FORBIDDEN`,
 `PAUSE_PROPAGATION_TIMEOUT`, and `PAUSE_STATE_CONFLICT` remain explicit failure
 or reconciliation states, while telemetry and audit continue safely.
 
+### Incremental result: F01-SAFETY-003
+
+This flow is covered by the existing `getActionLog` and redacted overview
+surfaces; no new public path is added. Internal `audit.decision_trace.recorded.v1`
+receipts must link source event, classification/signal, recommendation, action
+outcome, actor, correlation/causation, hashes, and evidence without overwriting
+history. `TRACE_LINK_MISSING`, `AUDIT_WRITE_FAILED`, and
+`INTEGRITY_CHECK_FAILED` remain explicit audit failures.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The
