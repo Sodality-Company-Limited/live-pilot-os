@@ -171,6 +171,14 @@ facts; it does not become the order source of truth. `ORDER_STATE_INVALID`,
 `STALE_ORDER_REVISION`, and `ORDER_NOT_FOUND` remain explicit outcomes and must
 not be rendered as a successful payment state.
 
+### Incremental result: F01.P-FLOW-004
+
+No public OpenAPI path is generated for conversion calculation. The projection
+exposes numerator, denominator, window, revision, and freshness, while preserving
+cart and checkout as separate source measures. Invalid windows, undefined
+division, and stale projection data remain explicit rejected/deferred/stale
+states rather than fabricated zero or success values.
+
 ### Incremental result: F01.1-FLOW-008
 
 No public OpenAPI path is generated for uncertain-intent escalation. The

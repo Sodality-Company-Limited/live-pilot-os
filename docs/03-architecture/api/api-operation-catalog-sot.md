@@ -81,6 +81,7 @@ source-fact persistence inside the telemetry owner.
 | `F01.P-FLOW-001` | None by design | `commerce.cart_added.v1 → purchase.signal.updated.v1` | `telemetry-service + purchase-projection` | Cart-add remains a distinct, session/SKU-scoped purchase-interest fact; unresolved SKU, inactive session, and duplicate commerce event do not create a false increment. |
 | `F01.P-FLOW-002` | None by design | `commerce.checkout_completed.v1 → purchase.signal.updated.v1` | `telemetry-service + purchase-projection` | Checkout completion is a distinct durable funnel fact with order/cart reference, session/SKU scope, source evidence, and idempotent replay behavior. |
 | `F01.P-FLOW-003` | None by design | `commerce.order_updated.v1 → purchase.signal.updated.v1` | `purchase-projection` | Payment/order state is reconciled as a versioned projection; invalid state, stale revision, or missing order never overwrites the source order authority. |
+| `F01.P-FLOW-004` | None by design | `purchase.signal.updated.v1` | `purchase-projection` | Cart-to-checkout conversion is a derived, windowed metric exposing numerator, denominator, window, projection revision, and freshness without changing source counts. |
 
 These are the recommended LivePilot pilot operations. They are contract proposals
 until the unresolved identity, realtime, and event decisions in
