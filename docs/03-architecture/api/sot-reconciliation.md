@@ -552,3 +552,24 @@ and AUTONOMOUS are server-side capabilities, not UI states. Every consequential
 commit checks actor capability, mode/control revision, policy, pause state,
 expiry, idempotency, and audit propagation. Unauthorized, expired, replayed,
 conflicting, or unknown mode changes fail closed and remain auditable.
+
+### F04.3 Emergency Pause
+
+F04.3-FLOW-001 through F04.3-FLOW-009 reuse the existing overview, SSE,
+promotion-status, and action-log projections; pause activation, propagation,
+release, and resume gating remain internal `emergency-control-service`
+contracts. A manual or CRITICAL-risk activation creates one revisioned,
+idempotent control fact and blocks consequential product pinning, voucher
+issuance, stock reservation, scenario automation, and adapter commits. Pause
+does not stop telemetry, safe read projections, reconciliation, or append-only
+audit. Release is not equivalent to readiness: risk clearance, propagation,
+approval, adapter, and reconciliation prerequisites must be known and current;
+otherwise resume fails closed with explicit evidence.
+
+### F04 explicit flow coverage
+
+The grouped decisions above apply to each detailed flow ID explicitly:
+
+- `F04.1-FLOW-001`, `F04.1-FLOW-002`, `F04.1-FLOW-003`, `F04.1-FLOW-004`, `F04.1-FLOW-005`, `F04.1-FLOW-006`, `F04.1-FLOW-007`
+- `F04.2-FLOW-001`, `F04.2-FLOW-002`, `F04.2-FLOW-003`, `F04.2-FLOW-004`, `F04.2-FLOW-005`, `F04.2-FLOW-006`, `F04.2-FLOW-007`
+- `F04.3-FLOW-001`, `F04.3-FLOW-002`, `F04.3-FLOW-003`, `F04.3-FLOW-004`, `F04.3-FLOW-005`, `F04.3-FLOW-006`, `F04.3-FLOW-007`, `F04.3-FLOW-008`, `F04.3-FLOW-009`
